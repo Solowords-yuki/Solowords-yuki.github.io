@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>ソロワーズ パズル</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .flex-container { 
+            display: flex; 
+            max-width: 1200px; 
+            margin: 30px auto; 
+            position: relative;
+            touch-action: pan-x pan-y pinch-zoom;
+        }
+        
+        .sidebar { 
+            width: 220px; 
+            background: #fff; 
+            padding: 20px; 
+            border-radius: 10px; 
+            margin-right: 20px; 
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            /* スクロール連動機能を削除し、通常の静的配置に戻す */
+        }
+        
+        /* メインエリア */
+        .main-area { 
+            flex: 1; 
+            background: #fff; 
+            padding: 20px; 
+            border-radius: 10px; 
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            touch-action: pan-x pan-y pinch-zoom;
+        }
+        
+        .map-area { display: flex; flex-direction: column; align-items: center; }
+        .section-title { font-weight: bold; margin-top: 20px; color: #333; }
+        .hidden { display: none; }
+        
+        .piece { 
+            display: inline-block; 
+            width: 40px; 
+            height: 40px; 
+            border: 2px solid #333; 
+            margin: 4px; 
+            text-align: center; 
+            line-height: 36px; 
+            cursor: pointer; 
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 14px;
+            color: #000;
+            box-shadow: 
+                0 2px 4px rgba(0,0,0,0.2),
+                inset 0 1px 2px rgba(255,255,255,0.3);
+            transition: all 0.2s ease;
+        }
+        
+        .piece:hover {
+            transform: translateY(-2px);
+            box-shadow: 
+                0 4px 8px rgba(0,0,0,0.3),
+                inset 0 1px 2px rgba(255,255,255,0.3);
+        }
+        
+        .timer-settings { margin-top: 20px; }
+        .timer-display { font-size: 1.5rem; font-weight: bold; margin: 10px 0; }
+        .game-info { display: flex; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 20px; }
+        .game-info div { font-size: 1.2rem; font-weight: bold; }
+        .small-button { background: #e74c3c; color: #fff; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }
+        canvas { 
+            border: 3px solid #333; 
+            border-radius: 12px; 
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); 
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            touch-action: pan-x pan-y pinch-zoom;
+        }
+        #timerDisplay {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            padding: 12px 24px;
+            border-radius: 25px;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+            box-shadow: 
+                0 4px 15px rgba(52, 152, 219, 0.3),
+                inset 0 1px 3px rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            min-width: 120px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="flex-container">
+        <div class="sidebar">
+            <!-- サイドバーの内容はそのまま -->
+            <div>
+                <label>サイズ: 
+                    <select id="inputSize">
+                        <option value="3">3×3</option>
+                        <option value="4">4×4</option>
+                        <option value="5" selected>5×5</option>
+                        <option value="6">6×6</option>
+                        <option value="7">7×7</option>
+                        <option value="8">8×8</option>
+                        <option value="9">9×9</option>
+                        <option value="10">10×10</option>
+                        <option value="11">11×11</option>
+                        <option value="12">12×12</option>
+                        <option value="13">13×13</option>
+                        <option value="14">14×14</option>
+                        <option value="15">15×15</option>
+                    </select>
+                </label><br>
+                <label>色なし（グレー）: <input type="checkbox" id="inputColorRandom"></label><br>
+                <div class="section-title">保存先選択</div>
+                <label>保存先: 
+                    <select id="saveSlot">
+                        <option value="create1">Create1</option>
+                        <option value="create2">Create2</option>
+                        <option value="create3">Create3</option>
+                    </select>
+                </label><br>
+                <button id="loadMapBtn" style="margin-top: 8px; background: #3498db; color: white; padding: 6px 12px; border: none; border-radius: 4px; cursor: pointer; font-size: 12px;">選択したマップを読み込み</button>
+            </div>
+            <div class="timer-settings">
+                <div class="section-title">タイマー設定</div>
+                <label><input type="radio" name="timerMode" value="none" checked> タイマーなし</label><br>
+                <label><input type="radio" name="timerMode" value="countUp"> 時間のカウント</label><br>
+                <label><input type="radio" name="timerMode" value="countDown"> 制限時間</label><br>
+                <div id="countDownInput" class="hidden">
+                    <label>制限時間 (秒): <input type="number" id="inputCountDown" min="10" value="60"></label>
+                </div>
+            </div>
+            <div class="section-title">モード切り替え</div>
+            <button id="moveModeBtn" style="margin-bottom: 10px; background: #9b59b6; color: white; padding: 8px 16px; border: none; border-radius: 5px; cursor: pointer; width: 100%;">駒入れ替えモード</button>
+            <button id="colorModeBtn" style="margin-bottom: 10px; background: #ecf0f1; color: #2c3e50; padding: 8px 16px; border: none; border-radius: 5px; cursor: pointer; width: 100%;">色変更モード</button>
+            
+            <div class="section-title">駒リスト</div>
+            <button id="addPieceBtn" style="margin-bottom: 10px; background: #3498db; color: white; padding: 8px 16px; border: none; border-radius: 5px; cursor: pointer; width: 100%;">ランダム配置</button>
+            <div id="pieceList"></div>
+            
+            <div id="colorList" class="hidden"></div>
+            
+            <button id="checkIsolatedBtn" style="margin-top: 10px; background: #3498db; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; width: 100%;">孤立駒確認</button>
+        </div>
+        <div class="main-area">
+            <!-- メインエリアの内容はそのまま -->
+            <div class="map-area">
+                <div class="game-info">
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <button id="saveButton" class="small-button" style="background: #e67e22;">💾 保存</button>
+                        <button id="backToGameButton" class="small-button" style="background: #3498db;">🎮 ゲームに戻る</button>
+                    </div>
+                    <div id="modeDisplay" style="
+                        background: linear-gradient(135deg, #27ae60, #2ecc71);
+                        color: white;
+                        font-size: 16px;
+                        font-weight: bold;
+                        padding: 10px 20px;
+                        border-radius: 20px;
+                        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+                        box-shadow: 
+                            0 3px 10px rgba(46, 204, 113, 0.3),
+                            inset 0 1px 2px rgba(255, 255, 255, 0.2);
+                        border: 2px solid rgba(255, 255, 255, 0.2);
+                        min-width: 140px;
+                        text-align: center;
+                    ">🎯 駒配置モード</div>
+                </div>
+                <canvas id="mainMap" width="500" height="700"></canvas>
+            </div>
+        </div>
+    </div>
+    <script src="create.js"></script>
+</body>
+</html>

@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>ソロワーズ - 無料パズルゲーム</title>
+    <meta name="description" content="無料で遊べるダイヤモンド型パズルゲーム。同じ数字を隣接させてクリアを目指そう！">
+    <!-- メインメニュー <meta name="keywords" content="パズルゲーム,無料ゲーム,ブラウザゲーム,数字パズル,ソロワーズ">-->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 年齢層選択画面 -->
+    <div id="ageSelectScreen" class="screen active">
+        <div class="age-select-container">
+            <div class="title-container">
+                <h1 class="game-title">ソロワーズ</h1>
+            </div>
+            
+            <div class="age-select-content">
+                <h2>🎯 ユーザー層を選択してください</h2>
+                <p class="age-description">あなたの年齢層に適したゲーム体験を提供します</p>
+                
+                <div class="age-button-container">
+                    <button id="seniorChildButton" class="age-button senior-child">
+                        <div class="age-icon">👶👴</div>
+                        <div class="age-title">シニア・お子様</div>
+                        <div class="age-subtitle">広告なしで安心</div>
+                    </button>
+                    
+                    <button id="adultButton" class="age-button adult">
+                        <div class="age-icon">👨‍💼👩‍💼</div>
+                        <div class="age-title">成人</div>
+                        <div class="age-subtitle">広告表示して応援する</div>
+                    </button>
+                </div>
+                
+                <!-- ★タイマー設定を追加 -->
+                <div class="timer-setting">
+                    <h3>⏰ タイマー設定</h3>
+                    <div class="timer-toggle-container">
+                        <label class="timer-toggle">
+                            <input type="checkbox" id="timerEnabled" checked>
+                            <span class="toggle-slider"></span>
+                            <span class="toggle-text">タイマー表示</span>
+                        </label>
+                        <p class="timer-description">ゲーム中のタイマー表示をON/OFFできます</p>
+                    </div>
+                </div>
+                
+                <div class="age-note">
+                    <p>💡 この設定は保存され、次回以降は自動的に適用されます</p>
+                    <p>いつでも設定画面から変更可能です</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- メインメニュー -->
+    <div id="mainMenu" class="screen">
+        <div class="title-container">
+            <h1 class="game-title">ソロワーズ</h1>
+        </div>
+        
+        <!-- ★広告エリア1: タイトル下 -->
+        <div class="ad-container top-ad">
+            <div class="pc-ad">
+                <script src="https://adm.shinobi.jp/s/db820e3569c5931e561a75d7ff744f3d"></script>
+            </div>
+            <div class="mobile-ad">
+                <script src="https://adm.shinobi.jp/s/0e6d7385b6ec7bccb6126179119a8338"></script>
+            </div>
+        </div>
+        
+        <div class="menu-content">
+            <h2>Level</h2>
+            <select id="levelSelect">
+                <option value="create1">Create1</option>
+                <option value="create2">Create2</option>
+                <option value="create3">Create3</option>
+                <option value="0" selected>1</option>
+                <option value="1">2</option>
+                <option value="2">3</option>
+                <option value="3">4</option>
+                <option value="4">5</option>
+                <option value="5">6</option>
+                <option value="6">7</option>
+                <option value="7">8</option>
+                <option value="8">9</option>
+                <option value="9">10</option>
+            </select>
+            <div class="settings">
+                <label>
+                    <input type="checkbox" id="colorMode" checked>
+                    色付き駒
+                </label>
+            </div>
+            <div class="button-container">
+                <button id="playButton" class="menu-button">プレイ</button>
+                <button id="createButton" class="menu-button">🎨 クリエイト</button>
+                <button id="rulesButton" class="menu-button">ルール</button>
+                <button id="recordsButton" class="menu-button">📊 記録</button>
+                <button id="settingsButton" class="menu-button settings-btn">⚙️ 設定</button>
+            </div>
+            
+            <div class="copyright-notice">
+                <p>このゲームをパクらないで</p>
+                <p>作成日: 2025/7/5</p>
+                <p>公開開始日: 2025/7/29</p>
+                <p>クリエイター: Yaminion</p>
+                <p>
+                    <a href="privacy.html" style="color: #40CFFF;">プライバシーポリシー</a> | 
+                    <a href="terms.html" style="color: #40CFFF;">利用規約</a>
+                </p>
+            </div>
+        </div>
+        
+        <!-- ★広告エリア2: メニュー下部 -->
+        <div class="ad-container menu-bottom-ad">
+            <div class="pc-ad">
+                <script src="https://adm.shinobi.jp/s/db820e3569c5931e561a75d7ff744f3d"></script>
+            </div>
+            <div class="mobile-ad">
+                <script src="https://adm.shinobi.jp/s/0e6d7385b6ec7bccb6126179119a8338"></script>
+            </div>
+        </div>
+    </div>
+
+    <!-- ルール画面 -->
+    <div id="rulesScreen" class="screen">
+        <div class="rules-content">
+            <button id="closeRulesButton" class="menu-button">戻る</button>
+            <div class="rules-text">
+                <h1>ゲームルール</h1>
+                <h2>１. 同じ数字の駒を全て隣接させてゲームクリアを目指そう!</h2>
+                <h2>２. 数字の駒は斜め方向に移動可能!</h2>
+                
+                <h2>３. 同じ数字の駒が隣接した時、その駒はその場で固定（光る）!</h2>
+                
+                <p>※駒は直線上の空きマスに一気に移動可能。</p>
+                <p>※他の駒は飛び越えれない</p>
+                <p>※ゲームマップが大きい場合は、スマホではピンチ操作（二本指で拡大）またはダブルタップで拡大してご使用ください。また色付き駒をOFFにすると反応速度が上がります。</p>
+                <p> </p>
+                <h1>操作方法</h1>
+                <h2>移動させたい駒を押す！空きマスの上でもう一回押すだけ！</h2>
+            </div>
+        </div>
+    </div>
+
+    <!-- ゲーム画面 -->
+    <div id="gameScreen" class="screen">
+        <div class="game-info">
+            <div id="timer">Time: 0s</div>
+            <button id="gameRulesButton" class="small-button" style="display: none;">ルール</button>
+            <button id="retireButton" class="small-button">詰み.リタイア</button>
+        </div>
+        <canvas id="gameCanvas"></canvas>
+        
+        <!-- ★広告エリア3: ゲーム下 -->
+        <div class="ad-container game-bottom-ad">
+            <div class="pc-ad">
+                <script src="https://adm.shinobi.jp/s/db820e3569c5931e561a75d7ff744f3d"></script>
+            </div>
+            <div class="mobile-ad">
+                <script src="https://adm.shinobi.jp/s/0e6d7385b6ec7bccb6126179119a8338"></script>
+            </div>
+        </div>
+        
+        <!-- ★広告エリア4: ゲーム下追加 -->
+        <div class="ad-container game-bottom-ad-2">
+            <div class="pc-ad">
+                <script src="https://adm.shinobi.jp/s/db820e3569c5931e561a75d7ff744f3d"></script>
+            </div>
+            <div class="mobile-ad">
+                <script src="https://adm.shinobi.jp/s/0e6d7385b6ec7bccb6126179119a8338"></script>
+            </div>
+        </div>
+    </div>
+
+    <!-- 終了画面 -->
+    <div id="endScreen" class="screen">
+        <div class="end-content">
+            <h2>おめでとう！</h2>
+            <div id="levelClearInfo">Level 1 クリア！</div>
+            
+            <!-- ★広告エリア5: クリア後 -->
+            <div class="ad-container clear-ad">
+                <div class="pc-ad">
+                    <script src="https://adm.shinobi.jp/s/db820e3569c5931e561a75d7ff744f3d"></script>
+                </div>
+                <div class="mobile-ad">
+                    <script src="https://adm.shinobi.jp/s/0e6d7385b6ec7bccb6126179119a8338"></script>
+                </div>
+            </div>
+            
+            <!-- ★広告エリア6: クリア後追加 -->
+            <div class="ad-container clear-ad-2">
+                <div class="pc-ad">
+                    <script src="https://adm.shinobi.jp/s/db820e3569c5931e561a75d7ff744f3d"></script>
+                </div>
+                <div class="mobile-ad">
+                    <script src="https://adm.shinobi.jp/s/0e6d7385b6ec7bccb6126179119a8338"></script>
+                </div>
+            </div>
+            
+            <div class="stats-container">
+                <div class="stat-item">
+                    <span class="stat-value" id="clearTime">Time: 0s</span>
+                    <span class="stat-label">クリア時間</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="clearMoves">Moves: 0</span>
+                    <span class="stat-label">手数</span>
+                </div>
+            </div>
+            <button id="backToMenuButton" class="menu-button">メニューに戻る</button>
+        </div>
+    </div>
+
+    <!-- 記録表画面 -->
+    <div id="recordsScreen" class="screen">
+        <div class="records-content">
+            <h2>📊 プレイ記録</h2>
+            <div class="records-table-container">
+                <table class="records-table">
+                    <thead>
+                        <tr>
+                            <th>レベル</th>
+                            <th>クリア人数</th>
+                            <th>ベストタイム/手数</th>
+                        </tr>
+                    </thead>
+                    <tbody id="recordsTableBody">
+                        <!-- JavaScriptで動的生成 -->
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- ★広告エリア7: 記録表下 -->
+            <div class="ad-container records-bottom-ad">
+                <div class="pc-ad">
+                    <script src="https://adm.shinobi.jp/s/db820e3569c5931e561a75d7ff744f3d"></script>
+                </div>
+                <div class="mobile-ad">
+                    <script src="https://adm.shinobi.jp/s/0e6d7385b6ec7bccb6126179119a8338"></script>
+                </div>
+            </div>
+            
+            <div class="records-buttons">
+                <button id="clearRecordsButton" class="danger-button">記録をリセット</button>
+                <button id="backToMenuFromRecords" class="menu-button">メニューに戻る</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 詰んだ確認画面 -->
+    <div id="retireConfirmScreen" class="screen">
+        <div class="rules-content">
+            <h2>リタイヤしますか？</h2>
+            
+            <div class="button-container">
+                <button id="confirmRetireYes" class="menu-button">YES</button>
+                <button id="confirmRetireNo" class="menu-button">NO</button>
+            </div>
+            
+            <!-- ★広告エリア8: YESNOボタンの下に配置 -->
+            <div class="ad-container retire-ad">
+                <div class="pc-ad">
+                    <!--script src="https://adm.shinobi.jp/s/db820e3569c5931e561a75d7ff744f3d"></script-->
+                    <script src="https://adm.shinobi.jp/s/0cf40a834e34d70d995978d006a1516a"></script>
+                </div>
+                <div class="mobile-ad">
+                    <script src="https://adm.shinobi.jp/s/0e6d7385b6ec7bccb6126179119a8338"></script>
+                </div>
+            </div>
+            
+            <!-- ★広告エリア9: YESNOボタンの下に配置 -->
+            <div class="ad-container retire-ad">
+                <div class="pc-ad">
+                    <script src="https://adm.shinobi.jp/s/0cf40a834e34d70d995978d006a1516a"></script>
+                </div>
+                <div class="mobile-ad">
+                    <script src="https://adm.shinobi.jp/s/0e6d7385b6ec7bccb6126179119a8338"></script>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 詰んだ確認画面2 -->
+    <div id="stuckConfirmScreen" class="screen">
+        <div class="rules-content">
+            <h2>えっ 詰んだのw？？？</h2>
+            
+            <div class="button-container">
+                <button id="confirmStuckYes" class="menu-button">YES</button>
+                <button id="confirmStuckNo" class="menu-button">NO</button>
+            </div>
+            
+            <!-- ★広告エリア10: YESNOボタンの下に配置 -->
+            <div class="ad-container stuck-ad">
+                <div class="pc-ad">
+                    <script src="https://adm.shinobi.jp/s/0cf40a834e34d70d995978d006a1516a"></script>
+                </div>
+                <div class="mobile-ad">
+                    <script src="https://adm.shinobi.jp/s/0e6d7385b6ec7bccb6126179119a8338"></script>
+                </div>
+            </div>
+            
+            <!-- ★広告エリア11: YESNOボタンの下に配置 -->
+            <div class="ad-container stuck-ad-2">
+                <div class="pc-ad">
+                    <script src="https://adm.shinobi.jp/s/0cf40a834e34d70d995978d006a1516a"></script>
+                </div>
+                <div class="mobile-ad">
+                    <script src="https://adm.shinobi.jp/s/0e6d7385b6ec7bccb6126179119a8338"></script>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="game3.js"></script>
+</body>
+</html>

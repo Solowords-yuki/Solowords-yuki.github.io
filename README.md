@@ -27,7 +27,7 @@
 
 インストール不要、URLをクリックするだけですぐに遊べます。
 
-[GitHubリンク](https://github.com/your-repo-url)
+[GitHubリンク](https://github.com/Solowords-yuki/Solowords)
 
 ## 利用に関するお願い
 
@@ -60,7 +60,7 @@
 ## 作者
 
 * **発案・設計**: Yuki  
-* **連絡先**: https://x.com/solowords_yuki
+* **連絡先**: [Xリンク](https://x.com/solowords_yuki)
 * **公開日**: 2025年7月29日
 
 ## フィードバック
@@ -76,4 +76,4 @@
 
 このゲームの開発背景や拡張構想については、noteにて記事を公開しています。興味のある方はぜひご覧ください。
 
-[noteで詳しく読む](https://note.com/your-note-url)
+[noteで詳しく読む]

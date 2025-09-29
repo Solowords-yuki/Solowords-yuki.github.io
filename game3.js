@@ -798,7 +798,7 @@ class DOGame {
         this.ctx.textAlign = "left";
         this.ctx.fillText("このゲームをパクらないで", 10, this.canvas.height - 50);
         this.ctx.fillText("作成日: 2025/7/29", 10, this.canvas.height - 35);
-        this.ctx.fillText("クリエイター: Yaminion", 10, this.canvas.height - 20);
+        this.ctx.fillText("クリエイター: Yuki", 10, this.canvas.height - 20);
         this.ctx.restore();
 
         // ★クリア時の表示（上部に配置）
@@ -1536,4 +1536,5 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.removeItem('selectedLevel');
     }
 });
+
 

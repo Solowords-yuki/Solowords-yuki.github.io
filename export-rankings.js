@@ -1,18 +1,23 @@
 #!/usr/bin/env node
 
 /**
- * Firebaseランキングデータエクスポートスクリプト
+ * 統合型Firebaseランキングデータエクスポートスクリプト
  * 
  * このスクリプトは以下を実行します:
- * 1. Firebaseからランキングデータを取得
- * 2. JSON形式でファイルに保存
- * 3. GitHubリポジトリにコミット（GitHub Actionsと連携）
+ * 1. Firebaseから全スコアデータを取得
+ * 2. レベル別・タイプ別にランキング生成
+ * 3. 1つのJSONファイル(rankings.json)に統合
+ * 4. GitHubリポジトリにコミット
  */
 
 const admin = require('firebase-admin');
 const fs = require('fs');
 const fsPromises = fs.promises;
 const path = require('path');
+
+// 設定
+const LEVELS = 10; // レベル数
+const TOP_COUNT = 100; // 各ランキングのTOP表示数
 
 // Firebase Admin SDK初期化
 // サービスアカウントキーは環境変数またはファイルから読み込み
@@ -45,94 +50,92 @@ function initializeFirebase() {
     }
 }
 
-// タイムランキングを取得
-async function getTimeRanking(db, level, limit = 10) {
+// 全スコアを取得してレベル別・タイプ別にランキング生成
+async function generateRankings(db) {
     try {
-        const levelStr = `level${level}`;
-        const snapshot = await db.collection('scores')
-            .where('level', '==', levelStr)
-            .orderBy('time', 'asc')
-            .limit(limit)
-            .get();
-
-        const rankings = [];
-        for (const doc of snapshot.docs) {
-            const data = doc.data();
-            
-            // ユーザー情報を取得
-            const userDoc = await db.collection('users').doc(data.uid).get();
-            const userData = userDoc.exists ? userDoc.data() : {};
-            
-            rankings.push({
-                uid: data.uid,
-                nickname: userData.nickname || 'ゲスト',
-                time: data.time,
-                moves: data.moves,
-                createdAt: data.createdAt ? data.createdAt.toDate().toISOString() : null
-            });
-        }
-
-        return rankings;
-    } catch (error) {
-        console.error(`❌ Level ${level} タイムランキング取得エラー:`, error);
-        return [];
-    }
-}
-
-// 手数ランキングを取得
-async function getMovesRanking(db, level, limit = 10) {
-    try {
-        const levelStr = `level${level}`;
-        const snapshot = await db.collection('scores')
-            .where('level', '==', levelStr)
-            .orderBy('moves', 'asc')
-            .limit(limit)
-            .get();
-
-        const rankings = [];
-        for (const doc of snapshot.docs) {
-            const data = doc.data();
-            
-            // ユーザー情報を取得
-            const userDoc = await db.collection('users').doc(data.uid).get();
-            const userData = userDoc.exists ? userDoc.data() : {};
-            
-            rankings.push({
-                uid: data.uid,
-                nickname: userData.nickname || 'ゲスト',
-                time: data.time,
-                moves: data.moves,
-                createdAt: data.createdAt ? data.createdAt.toDate().toISOString() : null
-            });
-        }
-
-        return rankings;
-    } catch (error) {
-        console.error(`❌ Level ${level} 手数ランキング取得エラー:`, error);
-        return [];
-    }
-}
-
-// レベル統計を取得
-async function getLevelStats(db, level) {
-    try {
-        const levelStr = `level${level}`;
-        const doc = await db.collection('levelStats').doc(levelStr).get();
+        console.log('📊 全スコアデータを取得中...');
         
-        if (doc.exists) {
+        // ユーザー情報を先に全件取得（効率化）
+        const usersSnapshot = await db.collection('users').get();
+        const usersMap = {};
+        usersSnapshot.forEach(doc => {
+            usersMap[doc.id] = doc.data();
+        });
+        console.log(`✅ ユーザー情報取得: ${Object.keys(usersMap).length}件`);
+
+        // 全スコアを取得
+        const scoresSnapshot = await db.collection('scores').get();
+        console.log(`✅ スコアデータ取得: ${scoresSnapshot.size}件`);
+
+        // レベル別にスコアを分類
+        const levelScores = {};
+        for (let i = 1; i <= LEVELS; i++) {
+            levelScores[`level${i}`] = [];
+        }
+
+        scoresSnapshot.forEach(doc => {
             const data = doc.data();
-            return {
-                clearCount: data.clearCount || 0,
-                fastestTime: data.fastestTime || null,
-                fewestMoves: data.fewestMoves || null,
-                updatedAt: data.updatedAt ? data.updatedAt.toDate().toISOString() : null
+            const level = data.level;
+            
+            if (levelScores[level]) {
+                const userData = usersMap[data.uid] || {};
+                levelScores[level].push({
+                    uid: data.uid,
+                    nickname: userData.nickname || 'ゲスト',
+                    time: data.time,
+                    moves: data.moves,
+                    timestamp: data.createdAt ? data.createdAt.toDate().toISOString() : new Date().toISOString()
+                });
+            }
+        });
+
+        // 統合データ構造を作成
+        const rankings = {
+            lastUpdated: new Date().toISOString(),
+            levels: {}
+        };
+
+        // レベルごとにランキング生成
+        for (let i = 1; i <= LEVELS; i++) {
+            const levelKey = `level${i}`;
+            const scores = levelScores[levelKey];
+            
+            console.log(`📈 Level ${i} ランキング生成中... (${scores.length}件)`);
+
+            // タイムランキング（昇順）
+            const timeRanking = [...scores]
+                .sort((a, b) => a.time - b.time)
+                .slice(0, TOP_COUNT)
+                .map((score, index) => ({
+                    rank: index + 1,
+                    ...score
+                }));
+
+            // 手数ランキング（昇順）
+            const movesRanking = [...scores]
+                .sort((a, b) => a.moves - b.moves)
+                .slice(0, TOP_COUNT)
+                .map((score, index) => ({
+                    rank: index + 1,
+                    ...score
+                }));
+
+            rankings.levels[levelKey] = {
+                name: `Level ${i}`,
+                totalClears: scores.length,
+                rankings: {
+                    time: timeRanking,
+                    moves: movesRanking
+                }
             };
+
+            console.log(`✅ Level ${i} 完了 (タイム: ${timeRanking.length}件, 手数: ${movesRanking.length}件)`);
         }
-        
-        return null;
+
+        return rankings;
     } catch (error) {
-        console.error(`❌ Level ${level} 統計取得エラー:`, error);
-        return null;
+        console.error('❌ ランキング生成エラー:', error);
+        throw error;
     }
 }
 
@@ -146,79 +149,42 @@ async function saveToFile(filename, data) {
             await fsPromises.access(dir);
         } catch {
             await fsPromises.mkdir(dir, { recursive: true });
+            console.log(`✅ ディレクトリ作成: ${dir}`);
         }
         
         const filepath = path.join(dir, filename);
         await fsPromises.writeFile(filepath, JSON.stringify(data, null, 2), 'utf8');
         
-        console.log(`✅ 保存成功: ${filename}`);
+        const sizeKB = (JSON.stringify(data).length / 1024).toFixed(2);
+        console.log(`✅ 保存成功: ${filename} (${sizeKB} KB)`);
     } catch (error) {
         console.error(`❌ 保存失敗 (${filename}):`, error);
+        throw error;
     }
 }
 
 // メイン処理
 async function main() {
-    console.log('🚀 ランキングデータエクスポート開始');
+    console.log('🚀 統合型ランキングデータエクスポート開始');
     console.log('📅 実行時刻:', new Date().toISOString());
+    console.log('📊 対象レベル数:', LEVELS);
+    console.log('🏆 各ランキングTOP:', TOP_COUNT);
     console.log('');
 
     const db = initializeFirebase();
     
-    // レベル1〜10までのデータを取得
-    for (let level = 1; level <= 10; level++) {
-        console.log(`📊 Level ${level} 処理中...`);
-        
-        // タイムランキング
-        const timeRanking = await getTimeRanking(db, level);
-        await saveToFile(`time-ranking-level${level}.json`, {
-            level: level,
-            type: 'time',
-            rankings: timeRanking,
-            exportedAt: new Date().toISOString()
-        });
-        
-        // 手数ランキング
-        const movesRanking = await getMovesRanking(db, level);
-        await saveToFile(`moves-ranking-level${level}.json`, {
-            level: level,
-            type: 'moves',
-            rankings: movesRanking,
-            exportedAt: new Date().toISOString()
-        });
-        
-        // レベル統計
-        const stats = await getLevelStats(db, level);
-        await saveToFile(`level-stats-level${level}.json`, {
-            level: level,
-            stats: stats,
-            exportedAt: new Date().toISOString()
-        });
-        
-        console.log(`✅ Level ${level} 完了\n`);
-    }
+    // 統合ランキングデータを生成
+    const rankings = await generateRankings(db);
     
-    // 全体統計を作成
-    console.log('📈 全体統計を作成中...');
-    const summary = {
-        totalLevels: 10,
-        exportedAt: new Date().toISOString(),
-        levels: []
-    };
-    
-    for (let level = 1; level <= 10; level++) {
-        const stats = await getLevelStats(db, level);
-        summary.levels.push({
-            level: level,
-            stats: stats
-        });
-    }
-    
-    await saveToFile('summary.json', summary);
+    // 1つのJSONファイルに保存
+    console.log('');
+    console.log('💾 統合ランキングファイルを保存中...');
+    await saveToFile('rankings.json', rankings);
     
     console.log('');
     console.log('🎉 エクスポート完了！');
-    console.log('📂 データ保存先: ./ranking-data/');
+    console.log('📂 データ保存先: ./ranking-data/rankings.json');
+    console.log('🌐 公開URL: https://solowords-yuki.github.io/ranking-data/rankings.json');
 }
 
 // エラーハンドリング

@@ -1,4 +1,4 @@
-// GitHub経由でランキングデータを取得するクラス
+// 統合型ランキングキャッシュクラス
 class RankingCache {
     constructor() {
         // ✅ あなたのGitHub PagesのURL（Solowords-yuki用に設定済み）
@@ -9,162 +9,181 @@ class RankingCache {
         
         // メモリキャッシュ
         this.cache = {
-            rankings: {},
-            levelStats: {},
-            timestamps: {}
+            allRankings: null,  // 統合ランキングデータ全体
+            timestamp: null
         };
     }
 
-    // ランキングデータをGitHubから取得
+    // 統合ランキングデータを取得（全レベル・全タイプ）
+    async getAllRankings() {
+        // キャッシュチェック
+        if (this.isCacheValid()) {
+            console.log('📦 キャッシュから統合ランキングを取得');
+            return this.cache.allRankings;
+        }
+
+        try {
+            console.log('🌐 GitHubから統合ランキングを取得');
+            const url = `${this.githubBaseUrl}rankings.json`;
+            const response = await fetch(url);
+            
+            if (!response.ok) {
+                throw new Error(`データ取得失敗: ${response.status}`);
+            }
+            
+            const data = await response.json();
+            
+            // キャッシュに保存
+            this.cache.allRankings = data;
+            this.cache.timestamp = Date.now();
+            
+            console.log('✅ 統合ランキングデータ読み込み成功');
+            return data;
+        } catch (error) {
+            console.error('❌ GitHubからのデータ取得エラー:', error);
+            
+            // フォールバック: Firebaseから直接取得
+            console.log('🔄 Firebaseから直接取得（フォールバック）');
+            return await this.getFallbackFromFirebase();
+        }
+    }
+
+    // タイムランキング取得
     async getTimeRanking(level, limit = 10) {
-        const cacheKey = `time_${level}`;
-        
-        // キャッシュチェック
-        if (this.isCacheValid(cacheKey)) {
-            console.log('📦 キャッシュからランキングを取得:', cacheKey);
-            return this.cache.rankings[cacheKey] || [];
-        }
-
         try {
-            console.log('🌐 GitHubからランキングを取得:', cacheKey);
-            const url = `${this.githubBaseUrl}time-ranking-level${level}.json`;
-            const response = await fetch(url);
+            const allData = await this.getAllRankings();
+            const levelKey = `level${level}`;
             
-            if (!response.ok) {
-                throw new Error('データ取得失敗');
+            if (allData && allData.levels && allData.levels[levelKey]) {
+                const rankings = allData.levels[levelKey].rankings.time || [];
+                return rankings.slice(0, limit);
             }
             
-            const data = await response.json();
-            
-            // キャッシュに保存
-            this.cache.rankings[cacheKey] = data.rankings || [];
-            this.cache.timestamps[cacheKey] = Date.now();
-            
-            return data.rankings || [];
+            return [];
         } catch (error) {
-            console.error('❌ GitHubからのデータ取得エラー:', error);
-            
-            // フォールバック: Firebaseから直接取得
-            console.log('🔄 Firebaseから直接取得（フォールバック）');
-            return await this.getFallbackFromFirebase('time', level, limit);
+            console.error('❌ タイムランキング取得エラー:', error);
+            return [];
         }
     }
 
-    // 手数ランキングをGitHubから取得
+    // 手数ランキング取得
     async getMovesRanking(level, limit = 10) {
-        const cacheKey = `moves_${level}`;
-        
-        // キャッシュチェック
-        if (this.isCacheValid(cacheKey)) {
-            console.log('📦 キャッシュからランキングを取得:', cacheKey);
-            return this.cache.rankings[cacheKey] || [];
-        }
-
         try {
-            console.log('🌐 GitHubからランキングを取得:', cacheKey);
-            const url = `${this.githubBaseUrl}moves-ranking-level${level}.json`;
-            const response = await fetch(url);
+            const allData = await this.getAllRankings();
+            const levelKey = `level${level}`;
             
-            if (!response.ok) {
-                throw new Error('データ取得失敗');
+            if (allData && allData.levels && allData.levels[levelKey]) {
+                const rankings = allData.levels[levelKey].rankings.moves || [];
+                return rankings.slice(0, limit);
             }
             
-            const data = await response.json();
-            
-            // キャッシュに保存
-            this.cache.rankings[cacheKey] = data.rankings || [];
-            this.cache.timestamps[cacheKey] = Date.now();
-            
-            return data.rankings || [];
+            return [];
         } catch (error) {
-            console.error('❌ GitHubからのデータ取得エラー:', error);
-            
-            // フォールバック: Firebaseから直接取得
-            console.log('🔄 Firebaseから直接取得（フォールバック）');
-            return await this.getFallbackFromFirebase('moves', level, limit);
+            console.error('❌ 手数ランキング取得エラー:', error);
+            return [];
         }
     }
 
-    // レベル統計をGitHubから取得
+    // レベル統計取得
     async getLevelStats(level) {
-        const cacheKey = `stats_${level}`;
-        
-        // キャッシュチェック
-        if (this.isCacheValid(cacheKey)) {
-            console.log('📦 キャッシュから統計を取得:', cacheKey);
-            return this.cache.levelStats[cacheKey] || null;
-        }
-
         try {
-            console.log('🌐 GitHubから統計を取得:', cacheKey);
-            const url = `${this.githubBaseUrl}level-stats-level${level}.json`;
-            const response = await fetch(url);
+            const allData = await this.getAllRankings();
+            const levelKey = `level${level}`;
             
-            if (!response.ok) {
-                throw new Error('データ取得失敗');
+            if (allData && allData.levels && allData.levels[levelKey]) {
+                return {
+                    clearCount: allData.levels[levelKey].totalClears || 0,
+                    name: allData.levels[levelKey].name || `Level ${level}`
+                };
             }
             
-            const data = await response.json();
-            
-            // キャッシュに保存
-            this.cache.levelStats[cacheKey] = data.stats || null;
-            this.cache.timestamps[cacheKey] = Date.now();
-            
-            return data.stats || null;
+            return { clearCount: 0, name: `Level ${level}` };
         } catch (error) {
-            console.error('❌ GitHubからのデータ取得エラー:', error);
-            
-            // フォールバック: Firebaseから直接取得
-            console.log('🔄 Firebaseから直接取得（フォールバック）');
-            if (typeof firebaseDB !== 'undefined') {
-                return await firebaseDB.getLevelStats(level);
-            }
-            return null;
+            console.error('❌ レベル統計取得エラー:', error);
+            return { clearCount: 0, name: `Level ${level}` };
         }
     }
 
-    // キャッシュの有効性チェック
-    isCacheValid(key) {
-        if (!this.cache.timestamps[key]) {
+    // キャッシュが有効かチェック
+    isCacheValid() {
+        if (!this.cache.timestamp || !this.cache.allRankings) {
             return false;
         }
         
-        const age = Date.now() - this.cache.timestamps[key];
-        return age < this.cacheExpiry;
-    }
-
-    // Firebaseから直接取得（フォールバック用）
-    async getFallbackFromFirebase(type, level, limit) {
-        if (typeof firebaseDB === 'undefined') {
-            return [];
-        }
-        
-        try {
-            if (type === 'time') {
-                return await firebaseDB.getTimeRanking(level, limit);
-            } else {
-                return await firebaseDB.getMovesRanking(level, limit);
-            }
-        } catch (error) {
-            console.error('Firebaseフォールバックエラー:', error);
-            return [];
-        }
+        const elapsed = Date.now() - this.cache.timestamp;
+        return elapsed < this.cacheExpiry;
     }
 
     // キャッシュをクリア
     clearCache() {
-        this.cache = {
-            rankings: {},
-            levelStats: {},
-            timestamps: {}
-        };
+        this.cache.allRankings = null;
+        this.cache.timestamp = null;
         console.log('🗑️ キャッシュをクリアしました');
     }
 
-    // GitHub URLを設定（リポジトリが決まったら呼び出す）
-    setGitHubUrl(username, repo) {
-        this.githubBaseUrl = `https://${username}.github.io/${repo}/ranking-data/`;
-        console.log('✅ GitHub URL設定:', this.githubBaseUrl);
+    // フォールバック: Firebaseから直接取得
+    async getFallbackFromFirebase() {
+        try {
+            if (typeof firebaseDB === 'undefined') {
+                console.error('❌ Firebase DBが利用できません');
+                return null;
+            }
+
+            console.log('� Firebaseから全データを取得中...');
+            
+            // レベル1〜10の全データを取得
+            const levels = {};
+            for (let i = 1; i <= 10; i++) {
+                const levelKey = `level${i}`;
+                
+                // タイムランキング
+                const timeRanking = await firebaseDB.getTimeRanking(i, 100);
+                
+                // 手数ランキング
+                const movesRanking = await firebaseDB.getMovesRanking(i, 100);
+                
+                levels[levelKey] = {
+                    name: `Level ${i}`,
+                    totalClears: timeRanking.length,
+                    rankings: {
+                        time: timeRanking.map((item, index) => ({
+                            rank: index + 1,
+                            ...item
+                        })),
+                        moves: movesRanking.map((item, index) => ({
+                            rank: index + 1,
+                            ...item
+                        }))
+                    }
+                };
+            }
+
+            const fallbackData = {
+                lastUpdated: new Date().toISOString(),
+                levels: levels
+            };
+
+            // フォールバックデータもキャッシュ
+            this.cache.allRankings = fallbackData;
+            this.cache.timestamp = Date.now();
+
+            console.log('✅ Firebaseフォールバックデータ取得成功');
+            return fallbackData;
+        } catch (error) {
+            console.error('❌ Firebaseフォールバックエラー:', error);
+            return null;
+        }
+    }
+
+    // 最終更新日時を取得
+    async getLastUpdated() {
+        try {
+            const allData = await this.getAllRankings();
+            return allData ? allData.lastUpdated : null;
+        } catch (error) {
+            console.error('❌ 最終更新日時取得エラー:', error);
+            return null;
+        }
     }
 }
 

@@ -63,7 +63,7 @@ class FirebaseDB {
             // ユーザーデータ更新
             await userRef.update(updateData);
 
-            // スコアコレクションに保存
+            // スコアコレクションに保存（シンプル化）
             await this.db.collection('scores').add({
                 uid: uid,
                 level: levelStr,
@@ -72,53 +72,11 @@ class FirebaseDB {
                 createdAt: firebase.firestore.FieldValue.serverTimestamp()
             });
 
-            // レベル統計更新
-            await this.updateLevelStats(levelStr, time, moves);
-
             console.log('✅ スコア保存成功:', { level: levelStr, time, moves, isNewRecord });
             return isNewRecord;
         } catch (error) {
             console.error('❌ スコア保存失敗:', error);
             throw error;
-        }
-    }
-
-    // レベル統計更新
-    async updateLevelStats(level, time, moves) {
-        try {
-            const statsRef = this.db.collection('levelStats').doc(level);
-            const doc = await statsRef.get();
-
-            if (doc.exists) {
-                const data = doc.data();
-                const updateData = {
-                    clearCount: firebase.firestore.FieldValue.increment(1),
-                    updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-                };
-
-                // 最速タイム更新
-                if (!data.fastestTime || time < data.fastestTime) {
-                    updateData.fastestTime = time;
-                }
-
-                // 最少手数更新
-                if (!data.fewestMoves || moves < data.fewestMoves) {
-                    updateData.fewestMoves = moves;
-                }
-
-                await statsRef.update(updateData);
-            } else {
-                // 初回データ作成
-                await statsRef.set({
-                    clearCount: 1,
-                    fastestTime: time,
-                    fewestMoves: moves,
-                    createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-                    updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-                });
-            }
-        } catch (error) {
-            console.error('❌ レベル統計更新失敗:', error);
         }
     }
 

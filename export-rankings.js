@@ -10,7 +10,8 @@
  */
 
 const admin = require('firebase-admin');
-const fs = require('fs').promises;
+const fs = require('fs');
+const fsPromises = fs.promises;
 const path = require('path');
 
 // Firebase Admin SDK初期化
@@ -24,7 +25,7 @@ function initializeFirebase() {
                 credential: admin.credential.cert(serviceAccount)
             });
         } else if (fs.existsSync('./firebase-service-account.json')) {
-            // ローカルファイルから読み込み（開発環境用）
+            // ローカルファイルから読み込み(開発環境用)
             const serviceAccount = require('./firebase-service-account.json');
             admin.initializeApp({
                 credential: admin.credential.cert(serviceAccount)
@@ -142,13 +143,13 @@ async function saveToFile(filename, data) {
         
         // ディレクトリが存在しない場合は作成
         try {
-            await fs.access(dir);
+            await fsPromises.access(dir);
         } catch {
-            await fs.mkdir(dir, { recursive: true });
+            await fsPromises.mkdir(dir, { recursive: true });
         }
         
         const filepath = path.join(dir, filename);
-        await fs.writeFile(filepath, JSON.stringify(data, null, 2), 'utf8');
+        await fsPromises.writeFile(filepath, JSON.stringify(data, null, 2), 'utf8');
         
         console.log(`✅ 保存成功: ${filename}`);
     } catch (error) {

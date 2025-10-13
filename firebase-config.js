@@ -1,13 +1,14 @@
 // Firebase設定ファイル
-// TODO: Firebaseコンソールから取得した設定情報を記入してください
+// Firebaseコンソールから取得した設定情報
 
 const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_PROJECT_ID.appspot.com",
-    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-    appId: "YOUR_APP_ID"
+    apiKey: "AIzaSyCE7ADGJ8wrZuQTOVAlXaX4fj-acXKb1kA",
+    authDomain: "solowords-yuki.firebaseapp.com",
+    projectId: "solowords-yuki",
+    storageBucket: "solowords-yuki.firebasestorage.app",
+    messagingSenderId: "926674538415",
+    appId: "1:926674538415:web:80ae88094485078f63e95a",
+    measurementId: "G-GSBH2P2ZW1"
 };
 
 // Firebase初期化

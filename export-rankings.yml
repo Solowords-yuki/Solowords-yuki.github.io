@@ -1,0 +1,72 @@
+name: Export Rankings to GitHub
+
+on:
+  # 定期実行: 1時間ごと
+  schedule:
+    - cron: '0 * * * *'  # 毎時0分に実行
+  
+  # 手動実行も可能
+  workflow_dispatch:
+  
+  # プッシュ時にも実行（テスト用）
+  push:
+    branches:
+      - main
+    paths:
+      - 'export-rankings.js'
+      - '.github/workflows/export-rankings.yml'
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    
+    steps:
+      # リポジトリをチェックアウト
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      
+      # Node.jsをセットアップ
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      
+      # 依存関係をインストール
+      - name: Install dependencies
+        run: npm install
+      
+      # Firebaseからランキングデータをエクスポート
+      - name: Export rankings from Firebase
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+        run: npm run export
+      
+      # Git設定
+      - name: Configure Git
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+      
+      # 変更をコミット
+      - name: Commit ranking data
+        run: |
+          git add ranking-data/
+          git diff --quiet && git diff --staged --quiet || (git commit -m "🤖 ランキングデータ自動更新 $(date +'%Y-%m-%d %H:%M:%S')")
+      
+      # GitHubにプッシュ
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
+      
+      # 完了通知
+      - name: Success notification
+        if: success()
+        run: echo "✅ ランキングデータのエクスポートが完了しました"
+      
+      - name: Failure notification
+        if: failure()
+        run: echo "❌ ランキングデータのエクスポートに失敗しました"

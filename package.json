@@ -1,0 +1,22 @@
+{
+  "name": "solowords-ranking-exporter",
+  "version": "1.0.0",
+  "description": "Firebaseからランキングデータを取得してGitHubにエクスポートするスクリプト",
+  "main": "export-rankings.js",
+  "scripts": {
+    "export": "node export-rankings.js",
+    "export:auto": "node export-rankings.js --auto",
+    "test": "node export-rankings.js --test"
+  },
+  "keywords": [
+    "firebase",
+    "ranking",
+    "github",
+    "cache"
+  ],
+  "author": "Yuki",
+  "license": "MIT",
+  "dependencies": {
+    "firebase-admin": "^11.10.1"
+  }
+}

@@ -36,10 +36,15 @@ class FirebaseDB {
             }
 
             const levelStr = `level${level}`;
-            let isNewRecord = false;
+            let isNewTimeRecord = false;
+            let isNewMovesRecord = false;
             let updateData = {
                 updatedAt: firebase.firestore.FieldValue.serverTimestamp()
             };
+
+            // クリア回数をカウント
+            const currentClearCount = userData.clearCounts?.[levelStr] || 0;
+            updateData[`clearCounts.${levelStr}`] = currentClearCount + 1;
 
             // クリア済みレベルに追加
             if (!userData.clearedLevels || !userData.clearedLevels.includes(levelStr)) {
@@ -50,30 +55,40 @@ class FirebaseDB {
             const currentBestTime = userData.bestTimes?.[levelStr];
             if (!currentBestTime || time < currentBestTime) {
                 updateData[`bestTimes.${levelStr}`] = time;
-                isNewRecord = true;
+                isNewTimeRecord = true;
             }
 
             // ベスト手数更新チェック
             const currentBestMoves = userData.bestMoves?.[levelStr];
             if (!currentBestMoves || moves < currentBestMoves) {
                 updateData[`bestMoves.${levelStr}`] = moves;
-                isNewRecord = true;
+                isNewMovesRecord = true;
             }
 
-            // ユーザーデータ更新
+            // ユーザーデータ更新（常に実行）
             await userRef.update(updateData);
 
-            // スコアコレクションに保存（シンプル化）
-            await this.db.collection('scores').add({
-                uid: uid,
-                level: levelStr,
-                time: time,
-                moves: moves,
-                createdAt: firebase.firestore.FieldValue.serverTimestamp()
-            });
+            // 記録更新時のみスコアコレクションに保存
+            if (isNewTimeRecord || isNewMovesRecord) {
+                await this.db.collection('scores').add({
+                    uid: uid,
+                    level: levelStr,
+                    time: time,
+                    moves: moves,
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                });
+            }
 
-            console.log('✅ スコア保存成功:', { level: levelStr, time, moves, isNewRecord });
-            return isNewRecord;
+            console.log('✅ スコア処理完了:', { 
+                level: levelStr, 
+                time, 
+                moves, 
+                isNewTimeRecord, 
+                isNewMovesRecord,
+                clearCount: currentClearCount + 1
+            });
+            
+            return { isNewTimeRecord, isNewMovesRecord };
         } catch (error) {
             console.error('❌ スコア保存失敗:', error);
             throw error;

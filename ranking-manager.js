@@ -318,24 +318,24 @@ class RankingManager {
             // ログイン済みの場合のみ自動保存
             if (firebaseAuth.isLoggedIn()) {
                 const uid = firebaseAuth.getCurrentUserId();
-                const isNewRecord = await firebaseDB.saveScore(uid, level, time, moves);
+                const result = await firebaseDB.saveScore(uid, level, time, moves);
                 
-                console.log(isNewRecord ? '🎉 新記録達成！' : '✅ 記録を保存しました');
+                // 記録更新時のみキャッシュクリア
+                if (result.isNewTimeRecord || result.isNewMovesRecord) {
+                    this.clearCache();
+                }
                 
-                // ★スコア保存後はキャッシュをクリア（最新データを表示するため）
-                this.clearCache();
+                // クリア画面のUI更新（NEW表示用）
+                this.updateClearScreenRankingUI(firebaseAuth.currentUser, result);
                 
-                // クリア画面のUI更新
-                this.updateClearScreenRankingUI(firebaseAuth.currentUser);
-                
-                return isNewRecord;
+                return result;
             }
             
             // 未ログインの場合は何もしない（クリア画面でログインを促す）
-            return false;
+            return { isNewTimeRecord: false, isNewMovesRecord: false };
         } catch (error) {
             console.error('スコア保存エラー:', error);
-            return false;
+            return { isNewTimeRecord: false, isNewMovesRecord: false };
         }
     }
 
@@ -388,10 +388,12 @@ class RankingManager {
     }
 
     // クリア画面のランキングUI更新
-    updateClearScreenRankingUI(user) {
+    async updateClearScreenRankingUI(user, result = null) {
         const rankingPrompt = document.getElementById('rankingPrompt');
         const rankingSaved = document.getElementById('rankingSaved');
         const savedUserNickname = document.getElementById('savedUserNickname');
+        const newRecordBadge = document.getElementById('newRecordBadge');
+        const clearCountDisplay = document.getElementById('clearCountDisplay');
 
         if (!rankingPrompt || !rankingSaved) return;
 
@@ -399,8 +401,28 @@ class RankingManager {
             // ログイン済み：保存完了メッセージを表示
             rankingPrompt.style.display = 'none';
             rankingSaved.style.display = 'block';
+            
+            // ニックネーム表示
             if (savedUserNickname) {
                 savedUserNickname.textContent = firebaseAuth.getNickname();
+            }
+            
+            // NEW表記を追加
+            if (newRecordBadge) {
+                if (result && (result.isNewTimeRecord || result.isNewMovesRecord)) {
+                    newRecordBadge.innerHTML = ' <span style="color: #ff6b6b; font-weight: bold; margin-left: 8px;">NEW</span>';
+                } else {
+                    newRecordBadge.innerHTML = '';
+                }
+            }
+            
+            // クリア回数を表示
+            if (clearCountDisplay && this.game.selectedLevel) {
+                const uid = firebaseAuth.getCurrentUserId();
+                const userData = await firebaseDB.getUserData(uid);
+                const levelStr = `level${this.game.selectedLevel}`;
+                const clearCount = userData?.clearCounts?.[levelStr] || 0;
+                clearCountDisplay.textContent = clearCount;
             }
         } else {
             // 未ログイン：ログイン促進メッセージを表示

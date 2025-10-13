@@ -1,5 +1,10 @@
 {
   "level": 1,
-  "stats": null,
-  "exportedAt": "2025-10-13T11:27:55.234Z"
+  "stats": {
+    "clearCount": 1,
+    "fastestTime": 9,
+    "fewestMoves": 4,
+    "updatedAt": "2025-10-13T12:03:32.957Z"
+  },
+  "exportedAt": "2025-10-13T12:04:24.662Z"
 }

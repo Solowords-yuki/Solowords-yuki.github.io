@@ -1,10 +1,15 @@
 {
   "totalLevels": 10,
-  "exportedAt": "2025-10-13T11:28:07.411Z",
+  "exportedAt": "2025-10-13T12:04:35.824Z",
   "levels": [
     {
       "level": 1,
-      "stats": null
+      "stats": {
+        "clearCount": 1,
+        "fastestTime": 9,
+        "fewestMoves": 4,
+        "updatedAt": "2025-10-13T12:03:32.957Z"
+      }
     },
     {
       "level": 2,

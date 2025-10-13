@@ -203,4 +203,4 @@ if (require.main === module) {
         });
 }
 
-module.exports = { main, getTimeRanking, getMovesRanking, getLevelStats };
+

@@ -12,6 +12,17 @@
     <link rel="stylesheet" href="style.css">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7962386569403379"
      crossorigin="anonymous"></script>
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    
+    <!-- Firebase設定 -->
+    <script src="firebase-config.js"></script>
+    <script src="firebase-auth.js"></script>
+    <script src="firebase-db.js"></script>
+    <script src="ranking-cache.js"></script>
 </head>
 <body>
     <!-- 年齢層選択画面 -->
@@ -229,6 +240,47 @@
                     <span class="stat-label">手数</span>
                 </div>
             </div>
+            
+            <!-- ★ランキング参加促進エリア -->
+            <div id="rankingPrompt" class="ranking-prompt">
+                <div class="ranking-prompt-content">
+                    <div class="ranking-prompt-icon">🏆</div>
+                    <h3>ランキングに参加しよう！</h3>
+                    <p class="ranking-prompt-text">
+                        ログインして記録を保存すると、<br>
+                        全国のプレイヤーとスコアを競えます！
+                    </p>
+                    <div class="ranking-prompt-buttons">
+                        <button id="clearLoginButton" class="ranking-login-button">
+                            <span class="button-icon">🔐</span>
+                            ログインしてランキングに参加
+                        </button>
+                        <button id="viewRankingButton" class="ranking-view-button">
+                            <span class="button-icon">📊</span>
+                            ランキングを見る
+                        </button>
+                    </div>
+                    <p class="ranking-prompt-note">
+                        💡 匿名ログインまたはGoogleアカウントでログインできます
+                    </p>
+                </div>
+            </div>
+            
+            <!-- ★ログイン済みの場合の表示 -->
+            <div id="rankingSaved" class="ranking-saved" style="display: none;">
+                <div class="ranking-saved-content">
+                    <div class="ranking-saved-icon">✅</div>
+                    <h3>記録を保存しました！</h3>
+                    <p class="ranking-saved-text">
+                        <span id="savedUserNickname">ユーザー名</span> として記録されました
+                    </p>
+                    <button id="viewRankingButton2" class="ranking-view-button">
+                        <span class="button-icon">📊</span>
+                        ランキングを確認する
+                    </button>
+                </div>
+            </div>
+            
             <button id="backToMenuButton" class="menu-button">メニューに戻る</button>
         </div>
     </div>
@@ -237,19 +289,109 @@
     <div id="recordsScreen" class="screen">
         <div class="records-content">
             <h2>📊 プレイ記録</h2>
-            <div class="records-table-container">
-                <table class="records-table">
-                    <thead>
-                        <tr>
-                            <th>レベル</th>
-                            <th>クリア人数</th>
-                            <th>ベストタイム/手数</th>
-                        </tr>
-                    </thead>
-                    <tbody id="recordsTableBody">
-                        <!-- JavaScriptで動的生成 -->
-                    </tbody>
-                </table>
+            
+            <!-- タブ切り替え -->
+            <div class="records-tabs">
+                <button class="tab-button active" data-tab="local">ローカル記録</button>
+                <button class="tab-button" data-tab="ranking">オンラインランキング</button>
+            </div>
+            
+            <!-- ローカル記録タブ -->
+            <div id="localRecordsTab" class="tab-content active">
+                <div class="records-table-container">
+                    <table class="records-table">
+                        <thead>
+                            <tr>
+                                <th>レベル</th>
+                                <th>クリア人数</th>
+                                <th>ベストタイム/手数</th>
+                            </tr>
+                        </thead>
+                        <tbody id="recordsTableBody">
+                            <!-- JavaScriptで動的生成 -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="records-buttons">
+                    <button id="clearRecordsButton" class="danger-button">記録をリセット</button>
+                </div>
+            </div>
+            
+            <!-- オンラインランキングタブ -->
+            <div id="rankingTab" class="tab-content">
+                <!-- ログイン状態表示 -->
+                <div class="login-status">
+                    <div id="loginInfo" class="login-info">
+                        <span id="userNicknameDisplay">未ログイン</span>
+                        <button id="loginButton" class="small-button">ログイン</button>
+                        <button id="logoutButton" class="small-button" style="display: none;">ログアウト</button>
+                    </div>
+                    <div id="nicknameEdit" class="nickname-edit" style="display: none;">
+                        <input type="text" id="nicknameInput" placeholder="ニックネーム" maxlength="20">
+                        <button id="saveNicknameButton" class="small-button">保存</button>
+                    </div>
+                </div>
+                
+                <!-- レベル選択 -->
+                <div class="ranking-level-select">
+                    <label>ランキングレベル:</label>
+                    <select id="rankingLevelSelect">
+                        <option value="1">Level 1</option>
+                        <option value="2">Level 2</option>
+                        <option value="3">Level 3</option>
+                        <option value="4">Level 4</option>
+                        <option value="5">Level 5</option>
+                        <option value="6">Level 6</option>
+                        <option value="7">Level 7</option>
+                        <option value="8">Level 8</option>
+                        <option value="9">Level 9</option>
+                        <option value="10">Level 10</option>
+                    </select>
+                </div>
+                
+                <!-- ランキングタイプ切り替え -->
+                <div class="ranking-type-tabs">
+                    <button class="ranking-type-button active" data-type="time">タイムランキング</button>
+                    <button class="ranking-type-button" data-type="moves">手数ランキング</button>
+                </div>
+                
+                <!-- レベル統計 -->
+                <div class="level-stats">
+                    <div class="stat-box">
+                        <div class="stat-label">クリア人数</div>
+                        <div class="stat-value" id="levelClearCount">-</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">最速タイム</div>
+                        <div class="stat-value" id="levelFastestTime">-</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">最少手数</div>
+                        <div class="stat-value" id="levelFewestMoves">-</div>
+                    </div>
+                </div>
+                
+                <!-- ランキングテーブル -->
+                <div class="ranking-table-container">
+                    <table class="ranking-table">
+                        <thead>
+                            <tr>
+                                <th>順位</th>
+                                <th>プレイヤー</th>
+                                <th id="rankingValueHeader">タイム</th>
+                            </tr>
+                        </thead>
+                        <tbody id="rankingTableBody">
+                            <!-- JavaScriptで動的生成 -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="ranking-note">
+                    <p>💡 ログインして記録を保存すると、ランキングに参加できます</p>
+                    <p>⚠️ 匿名ログインは端末変更時に記録がリセットされます</p>
+                </div>
             </div>
             
             <!-- ★広告エリア7: 記録表下 -->
@@ -265,7 +407,6 @@
             </div>
             
             <div class="records-buttons">
-                <button id="clearRecordsButton" class="danger-button">記録をリセット</button>
                 <button id="backToMenuFromRecords" class="menu-button">メニューに戻る</button>
             </div>
         </div>
@@ -344,6 +485,7 @@
     </div>
 
     <script src="game3.js"></script>
+    <script src="ranking-manager.js"></script>
 </body>
 </html>
 

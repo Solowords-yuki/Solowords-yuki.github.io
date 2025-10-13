@@ -1377,11 +1377,25 @@ class DOGame {
         const currentLevel = this.selectedLevel + 1; // selectedLevel=0はレベル1なので+1
         this.elements.levelClearInfo.textContent = `Level ${currentLevel} クリア！`;
         
-        // ★記録を保存
+        // ★記録を保存（ローカル）
         const isNewRecord = this.saveRecord(currentLevel, this.clearTimeSeconds || 0, this.moveCount);
         if (isNewRecord) {
             // 新記録アニメーション（オプション）
            // console.log('🎉 新記録達成！');
+        }
+        
+        // ★オンラインランキングに保存（通常レベルのみ）
+        if (typeof this.selectedLevel === 'number' && typeof rankingManager !== 'undefined' && rankingManager) {
+            // 非同期でランキングに保存（エラーが出ても続行）
+            rankingManager.saveGameScore(currentLevel, this.clearTimeSeconds || 0, this.moveCount)
+                .catch(err => console.log('ランキング保存スキップ:', err));
+            
+            // クリア画面のランキングUI更新
+            setTimeout(() => {
+                if (typeof firebaseAuth !== 'undefined') {
+                    rankingManager.updateClearScreenRankingUI(firebaseAuth.currentUser);
+                }
+            }, 100);
         }
         
         // 自動レベルアップ（通常レベルのみ）
@@ -1508,7 +1522,10 @@ class DOGame {
 }
 
 document.addEventListener('DOMContentLoaded', () => { 
-    const game = new DOGame(); 
+    const game = new DOGame();
+    
+    // ★グローバルに公開（ランキングマネージャーから参照するため）
+    window.game = game;
     
     // カスタムパズルまたはCreateレベルが選択された場合
     const selectedLevel = localStorage.getItem('selectedLevel');

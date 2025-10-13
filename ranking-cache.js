@@ -2,7 +2,7 @@
 class RankingCache {
     constructor() {
         // GitHub PagesのURLを設定（実際のリポジトリURLに置き換えてください）
-        this.githubBaseUrl = 'https://YOUR_USERNAME.github.io/YOUR_REPO/ranking-data/';
+        this.githubBaseUrl = 'https://github.com/Solowords-yuki/Solowords-yuki.github.io/ranking-data/';
         
         // キャッシュの有効期限（ミリ秒）- デフォルト10分
         this.cacheExpiry = 10 * 60 * 1000;
@@ -170,3 +170,4 @@ class RankingCache {
 
 // グローバルインスタンス
 const rankingCache = new RankingCache();
+

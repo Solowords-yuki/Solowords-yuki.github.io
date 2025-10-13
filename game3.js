@@ -167,6 +167,10 @@ class DOGame {
             // ★タイマー設定の要素
             timerEnabled: document.getElementById('timerEnabled'),
             
+            // ★アカウント設定の要素
+            accountInfo: document.getElementById('accountInfo'),
+            logoutButton: document.getElementById('logoutButton'),
+            
             levelSelect: document.getElementById('levelSelect'),
             playButton: document.getElementById('playButton'),
             createButton: document.getElementById('createButton'),
@@ -227,12 +231,27 @@ class DOGame {
         });
         
         this.elements.settingsButton.addEventListener('click', () => {
+            this.updateAccountDisplay();
             this.showAgeSelection();
         });
         
         // ★タイマー設定のイベントリスナー
         this.elements.timerEnabled.addEventListener('change', (e) => {
             this.setTimerEnabled(e.target.checked);
+        });
+        
+        // ★ログアウトボタンのイベントリスナー
+        this.elements.logoutButton.addEventListener('click', async () => {
+            if (confirm('ログアウトしますか？\n※匿名アカウントでログアウトすると、データが失われる可能性があります。')) {
+                try {
+                    await firebaseAuth.signOut();
+                    this.updateAccountDisplay();
+                    alert('✅ ログアウトしました');
+                } catch (error) {
+                    console.error('ログアウトエラー:', error);
+                    alert('❌ ログアウトに失敗しました');
+                }
+            }
         });
         
         this.elements.playButton.addEventListener('click', () => this.startGame());
@@ -1518,6 +1537,44 @@ class DOGame {
     // クリエイトページを開く
     openCreatePage() {
         window.open('create.html', '_blank');
+    }
+    
+    // ★アカウント表示を更新
+    updateAccountDisplay() {
+        if (!this.elements.accountInfo || !this.elements.logoutButton) return;
+        
+        if (typeof firebaseAuth !== 'undefined' && firebaseAuth.currentUser) {
+            const user = firebaseAuth.currentUser;
+            const isAnonymous = user.isAnonymous;
+            const displayName = firebaseAuth.userNickname || user.displayName || `ユーザー${user.uid.substring(0, 6)}`;
+            
+            // アカウント情報を表示
+            this.elements.accountInfo.innerHTML = `
+                <p class="account-status logged-in">
+                    ${isAnonymous ? '🎭 匿名ログイン中' : '✅ Googleアカウント連携中'}
+                </p>
+                <p class="account-status">
+                    ニックネーム: ${displayName}
+                </p>
+                <p class="account-status" style="font-size: 0.8rem; opacity: 0.7;">
+                    UID: ${user.uid.substring(0, 10)}...
+                </p>
+            `;
+            
+            // ログアウトボタンを表示
+            this.elements.logoutButton.style.display = 'block';
+        } else {
+            // ログインしていない場合
+            this.elements.accountInfo.innerHTML = `
+                <p class="account-status">ログインしていません</p>
+                <p class="account-status" style="font-size: 0.9rem; opacity: 0.7;">
+                    ランキングに参加するにはログインしてください
+                </p>
+            `;
+            
+            // ログアウトボタンを非表示
+            this.elements.logoutButton.style.display = 'none';
+        }
     }
 }
 

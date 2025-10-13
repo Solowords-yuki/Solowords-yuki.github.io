@@ -261,11 +261,11 @@ class RankingManager {
         const fewestMovesEl = document.getElementById('levelFewestMoves');
 
         if (stats) {
-            clearCountEl.textContent = `${stats.clearCount || 0}人`;
+            clearCountEl.textContent = `${stats.clearCount || 0}回`;
             fastestTimeEl.textContent = stats.fastestTime ? `${stats.fastestTime}秒` : '-';
             fewestMovesEl.textContent = stats.fewestMoves ? `${stats.fewestMoves}手` : '-';
         } else {
-            clearCountEl.textContent = '0人';
+            clearCountEl.textContent = '0回';
             fastestTimeEl.textContent = '-';
             fewestMovesEl.textContent = '-';
         }

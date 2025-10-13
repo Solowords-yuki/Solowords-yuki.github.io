@@ -1,0 +1,135 @@
+{
+  "lastUpdated": "2025-10-13T12:38:23.698Z",
+  "levels": {
+    "level1": {
+      "name": "Level 1",
+      "totalClears": 3,
+      "rankings": {
+        "time": [
+          {
+            "rank": 1,
+            "uid": "vDtywdzADuSzhOUVRMlxZP1CYIo1",
+            "nickname": "E TH",
+            "time": 7,
+            "moves": 4,
+            "timestamp": "2025-10-13T11:58:49.474Z"
+          },
+          {
+            "rank": 2,
+            "uid": "vDtywdzADuSzhOUVRMlxZP1CYIo1",
+            "nickname": "E TH",
+            "time": 9,
+            "moves": 4,
+            "timestamp": "2025-10-13T12:03:32.759Z"
+          },
+          {
+            "rank": 3,
+            "uid": "vDtywdzADuSzhOUVRMlxZP1CYIo1",
+            "nickname": "E TH",
+            "time": 9,
+            "moves": 4,
+            "timestamp": "2025-10-13T11:41:35.421Z"
+          }
+        ],
+        "moves": [
+          {
+            "rank": 1,
+            "uid": "vDtywdzADuSzhOUVRMlxZP1CYIo1",
+            "nickname": "E TH",
+            "time": 9,
+            "moves": 4,
+            "timestamp": "2025-10-13T12:03:32.759Z"
+          },
+          {
+            "rank": 2,
+            "uid": "vDtywdzADuSzhOUVRMlxZP1CYIo1",
+            "nickname": "E TH",
+            "time": 7,
+            "moves": 4,
+            "timestamp": "2025-10-13T11:58:49.474Z"
+          },
+          {
+            "rank": 3,
+            "uid": "vDtywdzADuSzhOUVRMlxZP1CYIo1",
+            "nickname": "E TH",
+            "time": 9,
+            "moves": 4,
+            "timestamp": "2025-10-13T11:41:35.421Z"
+          }
+        ]
+      }
+    },
+    "level2": {
+      "name": "Level 2",
+      "totalClears": 0,
+      "rankings": {
+        "time": [],
+        "moves": []
+      }
+    },
+    "level3": {
+      "name": "Level 3",
+      "totalClears": 0,
+      "rankings": {
+        "time": [],
+        "moves": []
+      }
+    },
+    "level4": {
+      "name": "Level 4",
+      "totalClears": 0,
+      "rankings": {
+        "time": [],
+        "moves": []
+      }
+    },
+    "level5": {
+      "name": "Level 5",
+      "totalClears": 0,
+      "rankings": {
+        "time": [],
+        "moves": []
+      }
+    },
+    "level6": {
+      "name": "Level 6",
+      "totalClears": 0,
+      "rankings": {
+        "time": [],
+        "moves": []
+      }
+    },
+    "level7": {
+      "name": "Level 7",
+      "totalClears": 0,
+      "rankings": {
+        "time": [],
+        "moves": []
+      }
+    },
+    "level8": {
+      "name": "Level 8",
+      "totalClears": 0,
+      "rankings": {
+        "time": [],
+        "moves": []
+      }
+    },
+    "level9": {
+      "name": "Level 9",
+      "totalClears": 0,
+      "rankings": {
+        "time": [],
+        "moves": []
+      }
+    },
+    "level10": {
+      "name": "Level 10",
+      "totalClears": 0,
+      "rankings": {
+        "time": [],
+        "moves": []
+      }
+    }
+  }
+}

@@ -1,9 +1,9 @@
 {
-  "lastUpdated": "2025-10-13T12:38:23.698Z",
+  "lastUpdated": "2025-10-13T13:27:57.911Z",
   "levels": {
     "level1": {
       "name": "Level 1",
-      "totalClears": 3,
+      "totalClears": 5,
       "rankings": {
         "time": [
           {
@@ -16,11 +16,11 @@
           },
           {
             "rank": 2,
-            "uid": "vDtywdzADuSzhOUVRMlxZP1CYIo1",
-            "nickname": "E TH",
-            "time": 9,
-            "moves": 4,
-            "timestamp": "2025-10-13T12:03:32.759Z"
+            "uid": "X2Vc6TcOQ1QQ3npeaR29hio6oQd2",
+            "nickname": "Yuki",
+            "time": 8,
+            "moves": 5,
+            "timestamp": "2025-10-13T13:12:15.537Z"
           },
           {
             "rank": 3,
@@ -28,7 +28,23 @@
             "nickname": "E TH",
             "time": 9,
             "moves": 4,
+            "timestamp": "2025-10-13T12:03:32.759Z"
+          },
+          {
+            "rank": 4,
+            "uid": "vDtywdzADuSzhOUVRMlxZP1CYIo1",
+            "nickname": "E TH",
+            "time": 9,
+            "moves": 4,
             "timestamp": "2025-10-13T11:41:35.421Z"
+          },
+          {
+            "rank": 5,
+            "uid": "X2Vc6TcOQ1QQ3npeaR29hio6oQd2",
+            "nickname": "Yuki",
+            "time": 15,
+            "moves": 5,
+            "timestamp": "2025-10-13T12:55:56.026Z"
           }
         ],
         "moves": [
@@ -55,6 +71,22 @@
             "time": 9,
             "moves": 4,
             "timestamp": "2025-10-13T11:41:35.421Z"
+          },
+          {
+            "rank": 4,
+            "uid": "X2Vc6TcOQ1QQ3npeaR29hio6oQd2",
+            "nickname": "Yuki",
+            "time": 8,
+            "moves": 5,
+            "timestamp": "2025-10-13T13:12:15.537Z"
+          },
+          {
+            "rank": 5,
+            "uid": "X2Vc6TcOQ1QQ3npeaR29hio6oQd2",
+            "nickname": "Yuki",
+            "time": 15,
+            "moves": 5,
+            "timestamp": "2025-10-13T12:55:56.026Z"
           }
         ]
       }

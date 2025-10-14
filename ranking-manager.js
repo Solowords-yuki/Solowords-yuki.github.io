@@ -164,15 +164,12 @@ class RankingManager {
 
         if (user) {
             // ログイン済み
-            userNicknameDisplay.textContent = `👤 ${firebaseAuth.getNickname()}`;
+            const nickname = firebaseAuth.getNickname();
+            const anonymousLabel = firebaseAuth.isAnonymous() ? ' (匿名)' : '';
+            userNicknameDisplay.textContent = `👤 ${nickname}${anonymousLabel} - ログイン中`;
             loginButton.style.display = 'none';
             logoutButton.style.display = 'inline-block';
             nicknameEdit.style.display = 'flex';
-
-            // 匿名ユーザーの場合、アップグレードボタンを表示
-            if (firebaseAuth.isAnonymous()) {
-                userNicknameDisplay.textContent += ' (匿名)';
-            }
         } else {
             // 未ログイン
             userNicknameDisplay.textContent = '未ログイン';
@@ -192,9 +189,9 @@ class RankingManager {
         });
         document.querySelector(`[data-type="${type}"]`).classList.add('active');
 
-        // ヘッダーテキスト変更
+        // ヘッダーテキスト変更（タイム/手数 形式）
         const header = document.getElementById('rankingValueHeader');
-        header.textContent = type === 'time' ? 'タイム' : '手数';
+        header.textContent = 'タイム / 手数';
 
         // ランキング再読み込み
         this.loadRanking();
@@ -237,15 +234,31 @@ class RankingManager {
 
             // レベル統計読み込み（GitHubキャッシュ経由）
             console.log(`📊 ランキング読み込み: Level ${level} (${this.currentRankingType})`);
+            
+            // タイムランキングと手数ランキングの両方を取得
+            const timeRankings = await rankingCache.getTimeRanking(level, 10);
+            const movesRankings = await rankingCache.getMovesRanking(level, 10);
+            
+            // 最速タイムと最小手数を取得（各ランキングの1位から）
+            const fastestTime = timeRankings.length > 0 ? timeRankings[0].time : null;
+            const fewestMoves = movesRankings.length > 0 ? movesRankings[0].moves : null;
+            
+            // クリア回数を取得
             const stats = await rankingCache.getLevelStats(level);
-            this.updateLevelStats(stats);
+            
+            // 統計情報を更新
+            this.updateLevelStats({
+                clearCount: stats.clearCount,
+                fastestTime: fastestTime,
+                fewestMoves: fewestMoves
+            });
 
-            // ランキング読み込み（GitHubキャッシュ経由）
+            // ランキング読み込み（現在選択されているタイプに応じて）
             let rankings;
             if (this.currentRankingType === 'time') {
-                rankings = await rankingCache.getTimeRanking(level, 10);
+                rankings = timeRankings;
             } else {
-                rankings = await rankingCache.getMovesRanking(level, 10);
+                rankings = movesRankings;
             }
 
             this.updateRankingTable(rankings);
@@ -302,13 +315,11 @@ class RankingManager {
             const playerCell = row.insertCell(1);
             playerCell.textContent = ranking.nickname;
 
-            // スコア
+            // スコア（タイム/手数 形式で表示）
             const valueCell = row.insertCell(2);
-            if (this.currentRankingType === 'time') {
-                valueCell.textContent = `${ranking.time}秒`;
-            } else {
-                valueCell.textContent = `${ranking.moves}手`;
-            }
+            const time = ranking.time || '-';
+            const moves = ranking.moves || '-';
+            valueCell.textContent = `${time}秒 / ${moves}手`;
         });
     }
 

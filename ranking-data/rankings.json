@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2025-10-14T13:44:00.354Z",
+  "lastUpdated": "2025-10-14T14:48:25.533Z",
   "levels": {
     "level1": {
       "name": "Level 1",
@@ -141,7 +141,7 @@
     },
     "level2": {
       "name": "Level 2",
-      "totalClears": 1,
+      "totalClears": 3,
       "rankings": {
         "time": [
           {
@@ -151,11 +151,43 @@
             "time": 21,
             "moves": 19,
             "timestamp": "2025-10-14T06:04:27.083Z"
+          },
+          {
+            "rank": 2,
+            "uid": "X2Vc6TcOQ1QQ3npeaR29hio6oQd2",
+            "nickname": "Yuki",
+            "time": 23,
+            "moves": 12,
+            "timestamp": "2025-10-14T14:12:28.945Z"
+          },
+          {
+            "rank": 3,
+            "uid": "X2Vc6TcOQ1QQ3npeaR29hio6oQd2",
+            "nickname": "Yuki",
+            "time": 30,
+            "moves": 14,
+            "timestamp": "2025-10-14T14:11:32.446Z"
           }
         ],
         "moves": [
           {
             "rank": 1,
+            "uid": "X2Vc6TcOQ1QQ3npeaR29hio6oQd2",
+            "nickname": "Yuki",
+            "time": 23,
+            "moves": 12,
+            "timestamp": "2025-10-14T14:12:28.945Z"
+          },
+          {
+            "rank": 2,
+            "uid": "X2Vc6TcOQ1QQ3npeaR29hio6oQd2",
+            "nickname": "Yuki",
+            "time": 30,
+            "moves": 14,
+            "timestamp": "2025-10-14T14:11:32.446Z"
+          },
+          {
+            "rank": 3,
             "uid": "B9pPRRCLOBYqKxJ7AUn24XwAGYj2",
             "nickname": "ICHIYAMA",
             "time": 21,
@@ -167,15 +199,33 @@
     },
     "level3": {
       "name": "Level 3",
-      "totalClears": 0,
+      "totalClears": 1,
       "rankings": {
-        "time": [],
-        "moves": []
+        "time": [
+          {
+            "rank": 1,
+            "uid": "X2Vc6TcOQ1QQ3npeaR29hio6oQd2",
+            "nickname": "Yuki",
+            "time": 85,
+            "moves": 41,
+            "timestamp": "2025-10-14T14:14:40.536Z"
+          }
+        ],
+        "moves": [
+          {
+            "rank": 1,
+            "uid": "X2Vc6TcOQ1QQ3npeaR29hio6oQd2",
+            "nickname": "Yuki",
+            "time": 85,
+            "moves": 41,
+            "timestamp": "2025-10-14T14:14:40.536Z"
+          }
+        ]
       }
     },
     "level4": {
       "name": "Level 4",
-      "totalClears": 1,
+      "totalClears": 2,
       "rankings": {
         "time": [
           {
@@ -185,6 +235,14 @@
             "time": 92,
             "moves": 78,
             "timestamp": "2025-10-14T06:09:27.624Z"
+          },
+          {
+            "rank": 2,
+            "uid": "X2Vc6TcOQ1QQ3npeaR29hio6oQd2",
+            "nickname": "Yuki",
+            "time": 271,
+            "moves": 101,
+            "timestamp": "2025-10-14T14:19:36.101Z"
           }
         ],
         "moves": [
@@ -195,6 +253,14 @@
             "time": 92,
             "moves": 78,
             "timestamp": "2025-10-14T06:09:27.624Z"
+          },
+          {
+            "rank": 2,
+            "uid": "X2Vc6TcOQ1QQ3npeaR29hio6oQd2",
+            "nickname": "Yuki",
+            "time": 271,
+            "moves": 101,
+            "timestamp": "2025-10-14T14:19:36.101Z"
           }
         ]
       }

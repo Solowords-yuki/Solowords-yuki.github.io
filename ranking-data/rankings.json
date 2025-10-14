@@ -1,13 +1,21 @@
 {
-  "lastUpdated": "2025-10-14T11:27:58.840Z",
+  "lastUpdated": "2025-10-14T13:44:00.354Z",
   "levels": {
     "level1": {
       "name": "Level 1",
-      "totalClears": 7,
+      "totalClears": 8,
       "rankings": {
         "time": [
           {
             "rank": 1,
+            "uid": "X2Vc6TcOQ1QQ3npeaR29hio6oQd2",
+            "nickname": "Yuki",
+            "time": 4,
+            "moves": 3,
+            "timestamp": "2025-10-14T13:31:24.248Z"
+          },
+          {
+            "rank": 2,
             "uid": "B9pPRRCLOBYqKxJ7AUn24XwAGYj2",
             "nickname": "ICHIYAMA",
             "time": 7,
@@ -15,7 +23,7 @@
             "timestamp": "2025-10-14T06:03:41.154Z"
           },
           {
-            "rank": 2,
+            "rank": 3,
             "uid": "vDtywdzADuSzhOUVRMlxZP1CYIo1",
             "nickname": "E TH",
             "time": 7,
@@ -23,7 +31,7 @@
             "timestamp": "2025-10-13T11:58:49.474Z"
           },
           {
-            "rank": 3,
+            "rank": 4,
             "uid": "X2Vc6TcOQ1QQ3npeaR29hio6oQd2",
             "nickname": "Yuki",
             "time": 8,
@@ -31,7 +39,7 @@
             "timestamp": "2025-10-13T13:12:15.537Z"
           },
           {
-            "rank": 4,
+            "rank": 5,
             "uid": "X2Vc6TcOQ1QQ3npeaR29hio6oQd2",
             "nickname": "Yuki",
             "time": 8,
@@ -39,7 +47,7 @@
             "timestamp": "2025-10-13T14:31:14.937Z"
           },
           {
-            "rank": 5,
+            "rank": 6,
             "uid": "vDtywdzADuSzhOUVRMlxZP1CYIo1",
             "nickname": "E TH",
             "time": 9,
@@ -47,7 +55,7 @@
             "timestamp": "2025-10-13T12:03:32.759Z"
           },
           {
-            "rank": 6,
+            "rank": 7,
             "uid": "vDtywdzADuSzhOUVRMlxZP1CYIo1",
             "nickname": "E TH",
             "time": 9,
@@ -55,7 +63,7 @@
             "timestamp": "2025-10-13T11:41:35.421Z"
           },
           {
-            "rank": 7,
+            "rank": 8,
             "uid": "X2Vc6TcOQ1QQ3npeaR29hio6oQd2",
             "nickname": "Yuki",
             "time": 15,
@@ -74,6 +82,14 @@
           },
           {
             "rank": 2,
+            "uid": "X2Vc6TcOQ1QQ3npeaR29hio6oQd2",
+            "nickname": "Yuki",
+            "time": 4,
+            "moves": 3,
+            "timestamp": "2025-10-14T13:31:24.248Z"
+          },
+          {
+            "rank": 3,
             "uid": "vDtywdzADuSzhOUVRMlxZP1CYIo1",
             "nickname": "E TH",
             "time": 9,
@@ -81,7 +97,7 @@
             "timestamp": "2025-10-13T12:03:32.759Z"
           },
           {
-            "rank": 3,
+            "rank": 4,
             "uid": "B9pPRRCLOBYqKxJ7AUn24XwAGYj2",
             "nickname": "ICHIYAMA",
             "time": 7,
@@ -89,7 +105,7 @@
             "timestamp": "2025-10-14T06:03:41.154Z"
           },
           {
-            "rank": 4,
+            "rank": 5,
             "uid": "vDtywdzADuSzhOUVRMlxZP1CYIo1",
             "nickname": "E TH",
             "time": 7,
@@ -97,7 +113,7 @@
             "timestamp": "2025-10-13T11:58:49.474Z"
           },
           {
-            "rank": 5,
+            "rank": 6,
             "uid": "vDtywdzADuSzhOUVRMlxZP1CYIo1",
             "nickname": "E TH",
             "time": 9,
@@ -105,7 +121,7 @@
             "timestamp": "2025-10-13T11:41:35.421Z"
           },
           {
-            "rank": 6,
+            "rank": 7,
             "uid": "X2Vc6TcOQ1QQ3npeaR29hio6oQd2",
             "nickname": "Yuki",
             "time": 8,
@@ -113,7 +129,7 @@
             "timestamp": "2025-10-13T13:12:15.537Z"
           },
           {
-            "rank": 7,
+            "rank": 8,
             "uid": "X2Vc6TcOQ1QQ3npeaR29hio6oQd2",
             "nickname": "Yuki",
             "time": 15,

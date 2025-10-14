@@ -97,6 +97,11 @@ class RankingManager {
             document.getElementById('localRecordsTab').classList.add('active');
         } else if (tabName === 'ranking') {
             document.getElementById('rankingTab').classList.add('active');
+            // ★ランキングタブを開いた時にログイン状態を確実に更新
+            setTimeout(() => {
+                const currentUser = firebaseAuth?.currentUser || null;
+                this.updateLoginStatus(currentUser);
+            }, 100);
             this.loadRanking();
         }
     }
@@ -161,6 +166,7 @@ class RankingManager {
         const loginButton = document.getElementById('loginButton');
         const logoutButton = document.getElementById('logoutButton');
         const nicknameEdit = document.getElementById('nicknameEdit');
+        const nicknameInput = document.getElementById('nicknameInput');
 
         if (user) {
             // ログイン済み
@@ -170,6 +176,12 @@ class RankingManager {
             loginButton.style.display = 'none';
             logoutButton.style.display = 'inline-block';
             nicknameEdit.style.display = 'flex';
+            
+            // ニックネーム入力欄に現在のニックネームを設定
+            if (nicknameInput) {
+                nicknameInput.value = nickname;
+                nicknameInput.placeholder = 'ニックネームを入力';
+            }
         } else {
             // 未ログイン
             userNicknameDisplay.textContent = '未ログイン';

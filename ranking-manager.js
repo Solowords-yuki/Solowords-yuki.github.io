@@ -12,7 +12,12 @@ class RankingManager {
         };
         this.CACHE_DURATION = 5 * 60 * 1000; // 5分間キャッシュ
         
+        // ★自動更新タイマー
+        this.autoUpdateInterval = null;
+        this.AUTO_UPDATE_DURATION = 30 * 60 * 1000; // 30分ごとに更新
+        
         this.setupEventListeners();
+        this.startAutoUpdate();
     }
 
     setupEventListeners() {
@@ -239,6 +244,70 @@ class RankingManager {
         console.log('🗑️ キャッシュをクリアしました');
     }
 
+    // 自動更新開始
+    startAutoUpdate() {
+        // 既存のタイマーをクリア
+        if (this.autoUpdateInterval) {
+            clearInterval(this.autoUpdateInterval);
+        }
+        
+        // 30分ごとに更新
+        this.autoUpdateInterval = setInterval(() => {
+            console.log('🔄 ランキング自動更新を実行');
+            // GitHubキャッシュをクリアして再取得
+            if (typeof rankingCache !== 'undefined') {
+                rankingCache.clearCache();
+            }
+            this.clearCache();
+            
+            // 現在ランキングタブが表示されている場合のみ再読み込み
+            const rankingTab = document.getElementById('rankingTab');
+            if (rankingTab && rankingTab.classList.contains('active')) {
+                this.loadRanking();
+            }
+        }, this.AUTO_UPDATE_DURATION);
+        
+        console.log(`✅ 自動更新タイマー開始 (${this.AUTO_UPDATE_DURATION / 60000}分ごと)`);
+    }
+
+    // 自動更新停止
+    stopAutoUpdate() {
+        if (this.autoUpdateInterval) {
+            clearInterval(this.autoUpdateInterval);
+            this.autoUpdateInterval = null;
+            console.log('⏹️ 自動更新タイマー停止');
+        }
+    }
+
+    // 更新時間を表示
+    updateLastUpdateTime(timestamp) {
+        const lastUpdateEl = document.getElementById('rankingLastUpdate');
+        if (!lastUpdateEl) return;
+        
+        if (!timestamp) {
+            lastUpdateEl.textContent = '📅 最終更新: 不明';
+            return;
+        }
+        
+        const date = new Date(timestamp);
+        const now = new Date();
+        const diffMs = now - date;
+        const diffMinutes = Math.floor(diffMs / 60000);
+        
+        let timeText;
+        if (diffMinutes < 1) {
+            timeText = 'たった今';
+        } else if (diffMinutes < 60) {
+            timeText = `${diffMinutes}分前`;
+        } else {
+            const diffHours = Math.floor(diffMinutes / 60);
+            timeText = `${diffHours}時間前`;
+        }
+        
+        const dateStr = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()} ${date.getHours()}:${String(date.getMinutes()).padStart(2, '0')}`;
+        lastUpdateEl.textContent = `📅 最終更新: ${dateStr} (${timeText})`;
+    }
+
     // ランキング読み込み（GitHubキャッシュ優先）
     async loadRanking() {
         try {
@@ -274,8 +343,13 @@ class RankingManager {
             }
 
             this.updateRankingTable(rankings);
+            
+            // 更新時間を表示
+            const lastUpdated = await rankingCache.getLastUpdated();
+            this.updateLastUpdateTime(lastUpdated);
         } catch (error) {
             console.error('ランキング読み込みエラー:', error);
+            this.updateLastUpdateTime(null);
         }
     }
 

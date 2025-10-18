@@ -80,7 +80,8 @@ async function generateRankings(db) {
             if (levelScores[level]) {
                 const userData = usersMap[data.uid] || {};
                 levelScores[level].push({
-                    uid: data.uid,
+                    // UID を公開しない（セキュリティ向上）
+                    // uid: data.uid,  // ← 削除
                     nickname: userData.nickname || 'ゲスト',
                     time: data.time,
                     moves: data.moves,

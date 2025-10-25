@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2025-10-25T14:17:15.238Z",
+  "lastUpdated": "2025-10-25T15:18:14.922Z",
   "levels": {
     "level1": {
       "name": "Level 1",
@@ -347,10 +347,26 @@
     },
     "level6": {
       "name": "Level 6",
-      "totalClears": 0,
+      "totalClears": 1,
       "rankings": {
-        "time": [],
-        "moves": []
+        "time": [
+          {
+            "rank": 1,
+            "nickname": "NAKAPOKA",
+            "time": 410,
+            "moves": 241,
+            "timestamp": "2025-10-25T14:46:05.794Z"
+          }
+        ],
+        "moves": [
+          {
+            "rank": 1,
+            "nickname": "NAKAPOKA",
+            "time": 410,
+            "moves": 241,
+            "timestamp": "2025-10-25T14:46:05.794Z"
+          }
+        ]
       }
     },
     "level7": {

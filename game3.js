@@ -539,9 +539,67 @@ class DOGame {
         upperPos.forEach(([x, y], idx) => { this.mapData[y][x] = upperVals[idx]; });
         lowerPos.forEach(([x, y], idx) => { this.mapData[y][x] = lowerVals[idx]; });
         
+        // ★Level 2のコンテスト問題回避処理
+        if (this.selectedLevel === 1 && N === 4) { // Level 2 (selectedLevel=1, サイズ4)
+            if (this.isContestPuzzle()) {
+                console.log('⚠️ コンテスト問題と同じ配置を検出。位置5と6を入れ替えます。');
+                this.swapPositions5and6();
+            }
+        }
+        
         // ★countPieceを設定
         this.countPiece = upperPos.length + lowerPos.length;
         //console.log('通常レベルのピース数を設定:', this.countPiece);
+    }
+    
+    // ★コンテスト問題と同じ配置かチェック
+    isContestPuzzle() {
+        // コンテストの配置パターン（日本パズル連盟出題問題）
+        // 行1: 1, 3, 6, 999 (999=空)
+        // 行2: 2, 5, 999, 6
+        // 行3: 4, 999, 5, 3
+        // 行4: 999, 4, 2, 1
+        const contestPattern = [
+            [1, 3, 6, 999],
+            [2, 5, 999, 6],
+            [4, 999, 5, 3],
+            [999, 4, 2, 1]
+        ];
+        
+        // 現在のマップと比較
+        for (let y = 0; y < 4; y++) {
+            for (let x = 0; x < 4; x++) {
+                if (this.mapData[y][x] !== contestPattern[y][x]) {
+                    return false; // 一致しない
+                }
+            }
+        }
+        
+        return true; // 完全一致
+    }
+    
+    // ★位置5と6を入れ替える
+    swapPositions5and6() {
+        // マップ全体から5と6の位置を探して入れ替え
+        let pos5 = null;
+        let pos6 = null;
+        
+        for (let y = 0; y < this.mapData.length; y++) {
+            for (let x = 0; x < this.mapData[y].length; x++) {
+                if (this.mapData[y][x] === 5) {
+                    pos5 = { x, y };
+                } else if (this.mapData[y][x] === 6) {
+                    pos6 = { x, y };
+                }
+            }
+        }
+        
+        // 入れ替え
+        if (pos5 && pos6) {
+            this.mapData[pos5.y][pos5.x] = 6;
+            this.mapData[pos6.y][pos6.x] = 5;
+            console.log(`✅ 位置を入れ替えました: (${pos5.x},${pos5.y})の5 ⇔ (${pos6.x},${pos6.y})の6`);
+        }
     }
     
     loadCustomPuzzle(puzzleData) {

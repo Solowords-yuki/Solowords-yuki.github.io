@@ -554,7 +554,7 @@ class DOGame {
     
     // ★コンテスト問題と同じ配置かチェック
     isContestPuzzle() {
-        // コンテストの配置パターン（日本パズル連盟出題問題）
+        // コンテストの配置パターン（日本パズル連盟コンテスト応募の為、除外）
         // 行1: 1, 3, 6, 999 (999=空)
         // 行2: 2, 5, 999, 6
         // 行3: 4, 999, 5, 3
@@ -1668,5 +1668,6 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.removeItem('selectedLevel');
     }
 });
+
 
 

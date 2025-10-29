@@ -327,10 +327,19 @@ body {
 
 /* 設定ボタンのスタイル */
 .settings-btn {
-    background: linear-gradient(135deg, #9b59b6, #8e44ad) !important;
+    background: linear-gradient(135deg, #40CFFF, #5555FF) !important;
 }
 
 .settings-btn:hover {
+    background: linear-gradient(135deg, #5555FF, #40CFFF) !important;
+}
+
+/* ゲーム紹介ボタンのスタイル */
+.guide-btn {
+    background: linear-gradient(135deg, #9b59b6, #8e44ad) !important;
+}
+
+.guide-btn:hover {
     background: linear-gradient(135deg, #8e44ad, #7d3c98) !important;
 }
 

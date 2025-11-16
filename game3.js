@@ -261,6 +261,37 @@ class DOGame {
         this.elements.gameRulesButton.addEventListener('click', () => this.showRules());
         this.elements.retireButton.addEventListener('click', () => this.showRetireConfirm());
         this.elements.backToMenuButton.addEventListener('click', () => this.showMainMenu());
+        
+        // フッター「メニューに戻る」ボタン
+        const footerBackToMenu = document.getElementById('footerBackToMenu');
+        if (footerBackToMenu) {
+            footerBackToMenu.addEventListener('click', () => {
+                this.showMainMenu();
+            });
+        }
+        
+        // フッター「ゲームをプレイ」ボタン
+        const footerPlayButton = document.getElementById('footerPlayButton');
+        if (footerPlayButton) {
+            footerPlayButton.addEventListener('click', () => {
+                // ユーザー層が選択済みかチェック
+                if (this.ageGroup) {
+                    // 既に選択済みの場合はメインメニューへ直行
+                    this.showMainMenu();
+                } else {
+                    // 未選択の場合はユーザー層選択画面へ誘導
+                    this.showScreen('ageSelect');
+                    // スクロールしてユーザー層選択セクションへ
+                    setTimeout(() => {
+                        const ageSelectContent = document.querySelector('.age-select-content');
+                        if (ageSelectContent) {
+                            ageSelectContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+                    }, 100);
+                }
+            });
+        }
+        
         this.elements.levelSelect.addEventListener('change', (e) => {
             const value = e.target.value;
             if (value === 'custom') {
@@ -367,10 +398,16 @@ class DOGame {
             this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         }
         
+        // ★画面切り替え時にスクロールを一番上にリセット
+        window.scrollTo(0, 0);
+        
         // ★画面切り替え時に広告制御を実行（年齢選択画面以外）
         if (this.ageGroup && screenName !== 'ageSelect') {
             this.controlAdDisplay();
         }
+        
+        // フッター表示制御
+        this.updateFooter(screenName);
     }
     
     // ★メインメニューを表示（年齢選択後）
@@ -403,6 +440,42 @@ class DOGame {
     showRecords() {
         this.updateRecordsTable();
         this.showScreen('records');
+    }
+
+    // フッター表示制御
+    updateFooter(screenName) {
+        const footer = document.getElementById('globalFooter');
+        const backButton = document.getElementById('footerBackToMenu');
+        const guideLink = document.getElementById('footerGuide');
+        const playButton = document.getElementById('footerPlayButton');
+        
+        if (!footer) {
+            console.warn('グローバルフッターが見つかりません');
+            return;
+        }
+        
+        // ゲーム画面、リタイア確認、詰んだ確認では非表示
+        if (screenName === 'game' || screenName === 'retireConfirm' || screenName === 'stuckConfirm') {
+            footer.style.display = 'none';
+        } else {
+            // それ以外の画面では常に表示（基本形）
+            footer.style.display = 'block';
+            
+            // 年齢選択画面でのみ「ゲームをプレイ」ボタンを表示
+            if (playButton) {
+                playButton.style.display = screenName === 'ageSelect' ? 'block' : 'none';
+            }
+            
+            // メインメニューと年齢選択画面では「遊び方ガイド」を表示、「メニューに戻る」は非表示
+            if (screenName === 'mainMenu' || screenName === 'ageSelect') {
+                if (backButton) backButton.style.display = 'none';
+                if (guideLink) guideLink.style.display = 'flex';
+            } else {
+                // その他の画面では「メニューに戻る」を表示、「遊び方ガイド」は非表示
+                if (backButton) backButton.style.display = 'flex';
+                if (guideLink) guideLink.style.display = 'none';
+            }
+        }
     }
 
     startGame() {

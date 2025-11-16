@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>攻略のコツとヒント - ソロワーズ | 無料パズルゲーム</title>
+    <meta name="description" content="ソロワーズをもっと上手にプレイするための攻略法とヒントをご紹介。初心者から上級者まで役立つテクニックを分かりやすく解説します。">
+    <meta name="keywords" content="ソロワーズ,攻略,コツ,ヒント,テクニック,戦略,パズルゲーム">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', 'Yu Gothic', 'Hiragino Sans', sans-serif;
+            line-height: 1.8;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            padding: 20px;
+            margin: 0;
+        }
+
+        .tips-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        .page-title {
+            text-align: center;
+            font-size: 2.5em;
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .page-subtitle {
+            text-align: center;
+            font-size: 1.1em;
+            color: #666;
+            margin-bottom: 40px;
+        }
+
+        .tips-category {
+            margin-bottom: 50px;
+        }
+
+        .category-title {
+            font-size: 1.8em;
+            color: #667eea;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .tip-item {
+            background: #f8f9ff;
+            border-left: 4px solid #764ba2;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .tip-title {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #764ba2;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .tip-icon {
+            font-size: 1.5em;
+            margin-right: 10px;
+        }
+
+        .tip-content {
+            font-size: 1.05em;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        .tip-content ul {
+            margin-top: 10px;
+            margin-left: 20px;
+        }
+
+        .tip-content li {
+            margin: 8px 0;
+        }
+
+        .level-box {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .level-beginner {
+            background: #4caf50;
+            color: white;
+        }
+
+        .level-intermediate {
+            background: #ff9800;
+            color: white;
+        }
+
+        .level-advanced {
+            background: #f44336;
+            color: white;
+        }
+
+        .important-note {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 10px;
+        }
+
+        .important-note strong {
+            color: #856404;
+        }
+
+        .strategy-box {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border: 2px solid #667eea;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 10px;
+        }
+
+        .back-button {
+            display: block;
+            width: 200px;
+            margin: 40px auto 0;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .back-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        @media (max-width: 768px) {
+            .tips-container {
+                padding: 25px;
+            }
+
+            .page-title {
+                font-size: 2em;
+            }
+
+            .tip-title {
+                font-size: 1.2em;
+            }
+        }
+    </style>
+    <script>
+        // ページ読み込み時に一番上にスクロール
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+        window.scrollTo(0, 0);
+    </script>
+</head>
+<body>
+    <div class="tips-container">
+        <h1 class="page-title">💡 攻略のコツとヒント</h1>
+        <p class="page-subtitle">レベルアップのための実践テクニック</p>
+
+        <!-- 初心者向け -->
+        <div class="tips-category">
+            <h2 class="category-title">🌱 初心者向けのコツ</h2>
+            <p style="margin-bottom: 20px;">まずはこれらの基本テクニックをマスターしましょう！</p>
+
+            <div class="tip-item">
+                <div class="tip-title">
+                    <span class="tip-icon">👀</span>
+                    <span class="level-box level-beginner">初級</span>
+                    全体を見渡してから始める
+                </div>
+                <div class="tip-content">
+                    最初に盤面全体を確認し、どこにどの数字があるかを把握しましょう。<br>
+                    焦らず、まずは状況を理解することが大切です。
+                    <ul>
+                        <li>同じ数字のペアがどこにあるか確認</li>
+                        <li>近くにあるペアから順番に考える</li>
+                        <li>移動経路をイメージしてみる</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tip-item">
+                <div class="tip-title">
+                    <span class="tip-icon">🎯</span>
+                    <span class="level-box level-beginner">初級</span>
+                    近いペアから揃える
+                </div>
+                <div class="tip-content">
+                    最初は、既に近くにある数字のペアから揃えていくのがおすすめです。<br>
+                    簡単なものから順番にクリアすると、成功体験を積みながら上達できます。
+                </div>
+            </div>
+
+            <div class="tip-item">
+                <div class="tip-title">
+                    <span class="tip-icon">🎨</span>
+                    <span class="level-box level-beginner">初級</span>
+                    色付き駒を活用する
+                </div>
+                <div class="tip-content">
+                    メニューの設定で「色付き駒」をONにすると、同じ数字が同じ色になります。<br>
+                    どの駒とどの駒がペアなのか、一目でわかりやすくなるのでおすすめです。
+                </div>
+            </div>
+
+            <div class="tip-item">
+                <div class="tip-title">
+                    <span class="tip-icon">🔄</span>
+                    <span class="level-box level-beginner">初級</span>
+                    失敗を恐れずに挑戦
+                </div>
+                <div class="tip-content">
+                    詰まっても大丈夫！リタイアボタンで何度でもやり直せます。<br>
+                    試行錯誤を繰り返すことで、最適な手順が見えてきます。
+                    <ul>
+                        <li>1回目：盤面を理解する</li>
+                        <li>2回目：色々な手順を試す</li>
+                        <li>3回目：最適な解法を見つける</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tip-item">
+                <div class="tip-title">
+                    <span class="tip-icon">⏰</span>
+                    <span class="level-box level-beginner">初級</span>
+                    タイマーを気にしない
+                </div>
+                <div class="tip-content">
+                    最初はタイマーをOFFにして、自分のペースでじっくり考えましょう。<br>
+                    クリアできるようになってから、スピードを上げていけばOKです。
+                </div>
+            </div>
+        </div>
+
+        <!-- 中級者向け -->
+        <div class="tips-category">
+            <h2 class="category-title">🔥 中級者向けのコツ</h2>
+            <p style="margin-bottom: 20px;">基本をマスターしたら、次のステップへ！</p>
+
+            <div class="tip-item">
+                <div class="tip-title">
+                    <span class="tip-icon">🧩</span>
+                    <span class="level-box level-intermediate">中級</span>
+                    2〜3手先を読む
+                </div>
+                <div class="tip-content">
+                    「この駒を動かすと、次にどうなるか」を常に考えましょう。<br>
+                    先を読む力が付くと、詰まる前に回避できます。
+                    <ul>
+                        <li>移動後の盤面をイメージする</li>
+                        <li>他の駒の移動経路を塞いでいないか確認</li>
+                        <li>固定される駒の位置を予測する</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tip-item">
+                <div class="tip-title">
+                    <span class="tip-icon">🚫</span>
+                    <span class="level-box level-intermediate">中級</span>
+                    道を塞がないように注意
+                </div>
+                <div class="tip-content">
+                    駒を固定する順番を間違えると、他の駒が動けなくなることがあります。<br>
+                    固定する前に、「この駒を固定しても大丈夫か？」と考えましょう。
+                </div>
+            </div>
+
+            <div class="tip-item">
+                <div class="tip-title">
+                    <span class="tip-icon">🎲</span>
+                    <span class="level-box level-intermediate">中級</span>
+                    固定の順番を考える
+                </div>
+                <div class="tip-content">
+                    どのペアから固定していくかが重要です。<br>
+                    一般的に、盤面の端や角にある駒から固定していくと、詰まりにくくなります。
+                </div>
+            </div>
+
+            <div class="tip-item">
+                <div class="tip-title">
+                    <span class="tip-icon">🔍</span>
+                    <span class="level-box level-intermediate">中級</span>
+                    空きマスを意識する
+                </div>
+                <div class="tip-content">
+                    空きマスは駒が通る道です。<br>
+                    どの駒がどの空きマスを使うか、経路を計画的に考えましょう。
+                </div>
+            </div>
+
+            <div class="tip-item">
+                <div class="tip-title">
+                    <span class="tip-icon">📊</span>
+                    <span class="level-box level-intermediate">中級</span>
+                    手数を記録する
+                </div>
+                <div class="tip-content">
+                    同じレベルを何度もプレイして、手数を減らす工夫をしましょう。<br>
+                    効率的な手順を見つけることで、ランキング上位を目指せます。
+                </div>
+            </div>
+        </div>
+
+        <!-- 上級者向け -->
+        <div class="tips-category">
+            <h2 class="category-title">⚡ 上級者向けのコツ</h2>
+            <p style="margin-bottom: 20px;">ランキング上位を狙うための高度なテクニック</p>
+
+            <div class="tip-item">
+                <div class="tip-title">
+                    <span class="tip-icon">🎯</span>
+                    <span class="level-box level-advanced">上級</span>
+                    逆算思考を使う
+                </div>
+                <div class="tip-content">
+                    クリア状態から逆算して、どの順番で固定すれば最短でクリアできるかを考えます。<br>
+                    最終形から逆向きに手順を組み立てることで、最適解が見えてきます。
+                </div>
+            </div>
+
+            <div class="tip-item">
+                <div class="tip-title">
+                    <span class="tip-icon">🧠</span>
+                    <span class="level-box level-advanced">上級</span>
+                    複数の解法を比較する
+                </div>
+                <div class="tip-content">
+                    1つの解法だけでなく、複数のクリア方法を試して比較しましょう。<br>
+                    最も効率的な手順を見つけることで、手数やタイムを大幅に短縮できます。
+                </div>
+            </div>
+
+            <div class="tip-item">
+                <div class="tip-title">
+                    <span class="tip-icon">⚡</span>
+                    <span class="level-box level-advanced">上級</span>
+                    操作スピードを上げる
+                </div>
+                <div class="tip-content">
+                    手順がわかったら、素早く正確に操作しましょう。<br>
+                    タイムランキング上位を狙うには、思考だけでなく操作速度も重要です。
+                    <ul>
+                        <li>同じレベルを繰り返し練習する</li>
+                        <li>手順を完全に暗記する</li>
+                        <li>無駄な動きを減らす</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tip-item">
+                <div class="tip-title">
+                    <span class="tip-icon">🎨</span>
+                    <span class="level-box level-advanced">上級</span>
+                    クリエイトモードで練習
+                </div>
+                <div class="tip-content">
+                    クリエイトモードで自分専用の練習マップを作りましょう。<br>
+                    特定のパターンを繰り返し練習することで、応用力が身につきます。
+                </div>
+            </div>
+        </div>
+
+        <!-- レベル別攻略 -->
+        <div class="tips-category">
+            <h2 class="category-title">🎮 レベル別攻略ポイント</h2>
+
+            <div class="strategy-box">
+                <h3 style="color: #667eea; margin-bottom: 15px;">Level 1-3（初心者向け）</h3>
+                <p><strong>特徴：</strong> マスが少なく、駒の種類も少ない</p>
+                <p><strong>攻略法：</strong></p>
+                <ul>
+                    <li>すべての駒の位置を把握する</li>
+                    <li>一番近いペアから順番に揃える</li>
+                    <li>焦らず、じっくり考えて動かす</li>
+                </ul>
+            </div>
+
+            <div class="strategy-box">
+                <h3 style="color: #667eea; margin-bottom: 15px;">Level 4-6（中級者向け）</h3>
+                <p><strong>特徴：</strong> マスが増え、移動経路が複雑になる</p>
+                <p><strong>攻略法：</strong></p>
+                <ul>
+                    <li>2〜3手先を読む習慣をつける</li>
+                    <li>固定する順番を慎重に考える</li>
+                    <li>空きマスの使い方を意識する</li>
+                    <li>詰まったら別の手順を試す</li>
+                </ul>
+            </div>
+
+            <div class="strategy-box">
+                <h3 style="color: #667eea; margin-bottom: 15px;">Level 7-10（上級者向け）</h3>
+                <p><strong>特徴：</strong> 駒が多く、高度な戦略が必要</p>
+                <p><strong>攻略法：</strong></p>
+                <ul>
+                    <li>クリア状態から逆算して手順を組み立てる</li>
+                    <li>全体の流れを把握してから動き始める</li>
+                    <li>複数の解法を試して最適解を探す</li>
+                    <li>何度も挑戦して最短手順を見つける</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ランキング攻略 -->
+        <div class="tips-category">
+            <h2 class="category-title">🏆 ランキング攻略法</h2>
+
+            <div class="tip-item">
+                <div class="tip-title">
+                    <span class="tip-icon">⏱️</span>
+                    タイムランキング攻略
+                </div>
+                <div class="tip-content">
+                    <strong>重要なのはスピード！</strong>
+                    <ul>
+                        <li>手順を完全に暗記する</li>
+                        <li>迷わず素早く操作する</li>
+                        <li>同じレベルを繰り返し練習</li>
+                        <li>無駄な動きを徹底的に削る</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tip-item">
+                <div class="tip-title">
+                    <span class="tip-icon">🎯</span>
+                    手数ランキング攻略
+                </div>
+                <div class="tip-content">
+                    <strong>重要なのは効率！</strong>
+                    <ul>
+                        <li>最短経路を徹底的に研究</li>
+                        <li>無駄な移動を1手でも減らす</li>
+                        <li>複数の解法を比較検討</li>
+                        <li>理論上の最小手数を目指す</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- よくある失敗 -->
+        <div class="tips-category">
+            <h2 class="category-title">⚠️ よくある失敗と対策</h2>
+
+            <div class="tip-item">
+                <div class="tip-title">
+                    <span class="tip-icon">❌</span>
+                    早すぎる固定で詰む
+                </div>
+                <div class="tip-content">
+                    <strong>原因：</strong> 駒を固定する順番を間違えて、他の駒が動けなくなる<br>
+                    <strong>対策：</strong> 固定する前に、「この駒を固定しても他の駒が動けるか？」を確認
+                </div>
+            </div>
+
+            <div class="tip-item">
+                <div class="tip-title">
+                    <span class="tip-icon">❌</span>
+                    移動経路を塞いでしまう
+                </div>
+                <div class="tip-content">
+                    <strong>原因：</strong> 他の駒が通る必要がある空きマスを塞いでしまう<br>
+                    <strong>対策：</strong> 全体の移動計画を立ててから動き始める
+                </div>
+            </div>
+
+            <div class="tip-item">
+                <div class="tip-title">
+                    <span class="tip-icon">❌</span>
+                    焦って操作ミス
+                </div>
+                <div class="tip-content">
+                    <strong>原因：</strong> タイムを気にして慌ててしまう<br>
+                    <strong>対策：</strong> 最初はタイマーOFFで練習し、慣れてからタイムを意識
+                </div>
+            </div>
+        </div>
+
+        <div class="important-note">
+            <strong>🎓 上達のコツ：</strong><br>
+            同じレベルを繰り返しプレイすることで、パターンが見えてきます。<br>
+            最初はクリアを目指し、慣れたら手数やタイムの短縮に挑戦しましょう！
+        </div>
+    </div>
+
+    <!-- フッターナビゲーション（コンテンツページ用） -->
+    <footer class="footer-nav content-footer">
+        <div class="footer-links">
+            <a href="how-to-play-advanced.html" class="footer-link">
+                <span class="footer-icon">📖</span>
+                <span class="footer-text">遊び方ガイド</span>
+            </a>
+            <a href="index.html" class="footer-link footer-link-primary">
+                <span class="footer-icon">🏠</span>
+                <span class="footer-text">メニューに戻る</span>
+            </a>
+            <a href="faq.html" class="footer-link">
+                <span class="footer-icon">❓</span>
+                <span class="footer-text">FAQ</span>
+            </a>
+        </div>
+    </footer>
+</body>
+</html>

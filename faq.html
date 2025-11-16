@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>よくある質問（FAQ） - ソロワーズ | 無料パズルゲーム</title>
+    <meta name="description" content="ソロワーズに関するよくある質問をまとめました。操作方法、ゲームルール、トラブルシューティングなど、プレイヤーの疑問にお答えします。">
+    <meta name="keywords" content="ソロワーズ,FAQ,よくある質問,ヘルプ,操作方法,トラブルシューティング">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', 'Yu Gothic', 'Hiragino Sans', sans-serif;
+            line-height: 1.8;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            padding: 20px;
+            margin: 0;
+        }
+
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        .page-title {
+            text-align: center;
+            font-size: 2.5em;
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .page-subtitle {
+            text-align: center;
+            font-size: 1.1em;
+            color: #666;
+            margin-bottom: 40px;
+        }
+
+        .faq-category {
+            margin-bottom: 50px;
+        }
+
+        .category-title {
+            font-size: 1.8em;
+            color: #667eea;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .faq-item {
+            background: #f8f9ff;
+            border-left: 4px solid #764ba2;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .faq-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .faq-question {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .faq-question::before {
+            content: "Q.";
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 5px;
+            margin-right: 10px;
+            font-size: 0.9em;
+        }
+
+        .faq-answer {
+            font-size: 1.05em;
+            color: #555;
+            line-height: 1.8;
+            padding-left: 45px;
+        }
+
+        .faq-answer::before {
+            content: "A.";
+            display: inline-block;
+            background: #764ba2;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 5px;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        .back-button {
+            display: block;
+            width: 200px;
+            margin: 40px auto 0;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .back-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        .important-box {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+
+        .important-box strong {
+            color: #856404;
+        }
+
+        @media (max-width: 768px) {
+            .faq-container {
+                padding: 25px;
+            }
+
+            .page-title {
+                font-size: 2em;
+            }
+
+            .faq-question {
+                font-size: 1.1em;
+            }
+
+            .faq-answer {
+                padding-left: 0;
+                margin-top: 10px;
+            }
+        }
+    </style>
+    <script>
+        // ページ読み込み時に一番上にスクロール
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+        window.scrollTo(0, 0);
+    </script>
+</head>
+<body>
+    <div class="faq-container">
+        <h1 class="page-title">❓ よくある質問（FAQ）</h1>
+        <p class="page-subtitle">ソロワーズについての疑問にお答えします</p>
+
+        <!-- 基本操作 -->
+        <div class="faq-category">
+            <h2 class="category-title">🎮 基本操作について</h2>
+
+            <div class="faq-item">
+                <div class="faq-question">駒を動かす方法は？</div>
+                <div class="faq-answer">
+                    1. 動かしたい駒をタップ（またはクリック）して選択します。<br>
+                    2. 移動先の空きマスをもう一度タップすると駒が移動します。<br>
+                    選択を解除したい場合は、同じ駒をもう一度タップしてください。
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">駒が動かせなくなりました</div>
+                <div class="faq-answer">
+                    駒が「固定」されている可能性があります。同じ数字の駒が隣接すると、その駒は光って固定され、それ以降動かせなくなります。これはゲームのルールです。
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">駒はどの方向に動かせますか？</div>
+                <div class="faq-answer">
+                    駒は<strong>斜め方向（4方向）</strong>に動かせます。直線上の空きマスであれば、一気に遠くまで移動できます。ただし、他の駒を飛び越えることはできません。
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">スマホで画面が小さくて見にくい</div>
+                <div class="faq-answer">
+                    ピンチ操作（2本指で拡大・縮小）またはダブルタップで画面を拡大できます。また、メニューで「色付き駒」をOFFにすると、動作が軽くなり見やすくなります。
+                </div>
+            </div>
+        </div>
+
+        <!-- ゲームルール -->
+        <div class="faq-category">
+            <h2 class="category-title">📖 ゲームルールについて</h2>
+
+            <div class="faq-item">
+                <div class="faq-question">クリアの条件は何ですか？</div>
+                <div class="faq-answer">
+                    すべての駒を、同じ数字同士で隣接させることがクリア条件です。例えば、「1」と「1」、「2」と「2」のように、すべてのペアを隣り合わせにすればクリアです。
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">詰んでしまった場合はどうすればいい？</div>
+                <div class="faq-answer">
+                    画面上の「詰み.リタイア」ボタンを押すと、最初からやり直せます。何度でも挑戦できるので、安心してください。試行錯誤しながら最適な手順を見つけましょう！
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">レベルの難易度の違いは？</div>
+                <div class="faq-answer">
+                    <strong>Level 1-3</strong>: マスが少なく、初心者でもすぐにクリアできます。<br>
+                    <strong>Level 4-6</strong>: マスが増え、少し考える必要があります。<br>
+                    <strong>Level 7-10</strong>: 上級者向けで、高い集中力と戦略性が必要です。
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">タイマーを消すことはできますか？</div>
+                <div class="faq-answer">
+                    はい、できます。最初の年齢層選択画面またはメニューの設定画面で、タイマーのON/OFFを切り替えられます。自分のペースでゆっくり楽しみたい方は、タイマーをOFFにするのがおすすめです。
+                </div>
+            </div>
+        </div>
+
+        <!-- アカウント・ランキング -->
+        <div class="faq-category">
+            <h2 class="category-title">👤 アカウント・ランキングについて</h2>
+
+            <div class="faq-item">
+                <div class="faq-question">ログインしないと遊べませんか？</div>
+                <div class="faq-answer">
+                    いいえ、ログインしなくても十分に楽しめます。ログインすると、記録をオンラインランキングに登録したり、複数の端末で記録を共有できます。
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">匿名ログインとGoogleログインの違いは？</div>
+                <div class="faq-answer">
+                    <strong>匿名ログイン</strong>: 簡単にランキングに参加できますが、端末を変更するとアカウントが変わります。<br>
+                    <strong>Googleログイン</strong>: 端末を変更しても同じアカウントでログインでき、オンラインランキングの記録（タイム、手数、ニックネーム、クリア回数）を引き継げます。
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">ニックネームは変更できますか？</div>
+                <div class="faq-answer">
+                    はい、できます。記録画面のランキングタブから、いつでもニックネームを変更できます。変更すると、過去のランキング記録のニックネームもすべて更新されます。
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">ランキングはどのくらいの頻度で更新されますか？</div>
+                <div class="faq-answer">
+                    ランキングは<strong>1時間ごとに自動更新</strong>されます。自分の記録がランキングに反映されるまで、最大1時間程度かかる場合があります。
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">ローカル記録とオンラインランキングの違いは？</div>
+                <div class="faq-answer">
+                    <strong>ローカル記録</strong>: 端末のブラウザに保存される個人的な記録。ログインなしでも記録されますが、端末変更やブラウザデータ削除で消えます。<br>
+                    <strong>オンラインランキング</strong>: ログインすることでFirebaseに保存される記録。ランキングに表示され、Googleログインなら端末を変更しても引き継がれます（タイム、手数、ニックネーム、クリア回数）。
+                </div>
+            </div>
+        </div>
+
+        <!-- 広告・設定 -->
+        <div class="faq-category">
+            <h2 class="category-title">⚙️ 広告・設定について</h2>
+
+            <div class="faq-item">
+                <div class="faq-question">広告を消すことはできますか？</div>
+                <div class="faq-answer">
+                    はい。最初の年齢層選択画面で「シニア・お子様」を選ぶと、広告なしで遊べます。設定画面からいつでも変更できます。
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">年齢層の設定を後から変更できますか？</div>
+                <div class="faq-answer">
+                    はい、できます。メニューの「⚙️ 設定」ボタンから、いつでも年齢層の設定を変更できます。
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">「色付き駒」とは何ですか？</div>
+                <div class="faq-answer">
+                    同じ数字の駒を同じ色で表示する機能です。ONにすると、どの駒が同じペアかが一目でわかりやすくなります。スマホの場合、OFFにすると動作が軽くなります。
+                </div>
+            </div>
+        </div>
+
+        <!-- クリエイトモード -->
+        <div class="faq-category">
+            <h2 class="category-title">🎨 クリエイトモードについて</h2>
+
+            <div class="faq-item">
+                <div class="faq-question">クリエイトモードとは何ですか？</div>
+                <div class="faq-answer">
+                    自分でオリジナルのパズルマップを作成できるモードです。メニューから「🎨 クリエイト」を選んで、自由にマップをデザインできます。
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">作成したマップを保存できますか？</div>
+                <div class="faq-answer">
+                    はい。作成したマップはエクスポート機能でデータとして保存できます。後で再度読み込んで遊ぶことも可能です。
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">マップのサイズに制限はありますか？</div>
+                <div class="faq-answer">
+                    クリエイトモードでは、3×3から大きなサイズまで自由に設定できます。ただし、大きすぎるとスマホでは操作しにくくなる場合があります。
+                </div>
+            </div>
+        </div>
+
+        <!-- トラブルシューティング -->
+        <div class="faq-category">
+            <h2 class="category-title">🔧 トラブルシューティング</h2>
+
+            <div class="faq-item">
+                <div class="faq-question">ゲームが重い・動作が遅い</div>
+                <div class="faq-answer">
+                    以下の対処法をお試しください：<br>
+                    • 「色付き駒」をOFFにする<br>
+                    • ブラウザのキャッシュをクリアする<br>
+                    • 他のタブやアプリを閉じる<br>
+                    • ブラウザを最新版に更新する
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">記録が保存されません</div>
+                <div class="faq-answer">
+                    ブラウザのプライベートモード（シークレットモード）を使用している場合、記録が保存されません。通常モードでご利用ください。また、Cookieを有効にする必要があります。
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">音が出ません</div>
+                <div class="faq-answer">
+                    現在のバージョンでは、効果音や音楽機能は実装されていません。静かに楽しめるパズルゲームとして設計されています。
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">端末を変えたらデータが消えました</div>
+                <div class="faq-answer">
+                    <strong>ローカル記録（記録画面の「ローカル記録」タブ）</strong>: 端末のブラウザに保存されるため、端末を変更すると消えます。<br>
+                    <strong>オンラインランキングの記録</strong>: <br>
+                    • 匿名ログイン：端末ごとに別アカウントになります<br>
+                    • Googleログイン：同じアカウントでログインすれば、どの端末でもランキング記録（タイム、手数、ニックネーム、クリア回数）を見られます<br>
+                    <br>
+                    💡 ヒント：複数の端末でランキング記録を共有したい場合は、Googleログインをご利用ください。
+                </div>
+            </div>
+        </div>
+
+        <!-- その他 -->
+        <div class="faq-category">
+            <h2 class="category-title">💬 その他</h2>
+
+            <div class="faq-item">
+                <div class="faq-question">紙とペンでも遊べますか？</div>
+                <div class="faq-answer">
+                    はい！ソロワーズは紙とペンでも完全に再現できます。ひし形のマス目を描いて、数字を配置すれば、アナログでも楽しめます。詳しくは「ゲーム紹介」ページをご覧ください。
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">このゲームは無料ですか？</div>
+                <div class="faq-answer">
+                    はい、完全無料で遊べます。課金要素は一切ありません。広告表示を選択することで、無料でゲームを楽しみながら開発を応援できます。
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">友達と一緒に遊べますか？</div>
+                <div class="faq-answer">
+                    現在は1人プレイ専用ですが、将来的に対戦モードや協力プレイの追加を検討しています。今は、作成したマップを友達に共有して挑戦してもらうのがおすすめです！
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">バグを見つけたら報告できますか？</div>
+                <div class="faq-answer">
+                    はい、ぜひお願いします。お問い合わせは、プライバシーポリシーページに記載の連絡先までお願いします。皆様のフィードバックが、ゲームをより良くします！
+                </div>
+            </div>
+        </div>
+
+        <div class="important-box">
+            <strong>💡 ヒント：</strong> さらに詳しい遊び方を知りたい方は、<a href="how-to-play-advanced.html" style="color: #667eea;">「遊び方ガイド」</a>をご覧ください。
+        </div>
+    </div>
+
+    <!-- フッターナビゲーション（コンテンツページ用） -->
+    <footer class="footer-nav content-footer">
+        <div class="footer-links">
+            <a href="tips.html" class="footer-link">
+                <span class="footer-icon">�</span>
+                <span class="footer-text">攻略ガイド</span>
+            </a>
+            <a href="how-to-play-advanced.html" class="footer-link">
+                <span class="footer-icon">�</span>
+                <span class="footer-text">遊び方ガイド</span>
+            </a>
+            <a href="index.html" class="footer-link footer-link-primary">
+                <span class="footer-icon">🏠</span>
+                <span class="footer-text">メニューに戻る</span>
+            </a>
+        </div>
+    </footer>
+</body>
+</html>

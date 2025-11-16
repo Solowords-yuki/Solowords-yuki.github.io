@@ -190,6 +190,33 @@ body {
     opacity: 0.9;
 }
 
+/* 年齢選択画面のゲームをプレイボタン */
+.age-select-play-button {
+    width: 100%;
+    max-width: 400px;
+    margin: 30px auto 0;
+    display: block;
+    padding: 16px 32px;
+    background: linear-gradient(135deg, #4ADE80, #60A5FA);
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(74, 222, 128, 0.4);
+}
+
+.age-select-play-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(74, 222, 128, 0.5);
+}
+
+.age-select-play-button:active {
+    transform: translateY(0);
+}
+
 /* タイマー設定エリア */
 .timer-setting {
     background: rgba(255, 255, 255, 0.1);
@@ -341,6 +368,373 @@ body {
 
 .guide-btn:hover {
     background: linear-gradient(135deg, #8e44ad, #7d3c98) !important;
+}
+
+.contact-btn {
+    background: linear-gradient(135deg, #667eea, #764ba2) !important;
+}
+
+.contact-btn:hover {
+    background: linear-gradient(135deg, #5568d3, #6a3f8e) !important;
+}
+
+/* ========================================
+   ようこそセクションのスタイル
+   ======================================== */
+
+.welcome-section {
+    margin: 30px 0;
+    width: 100%;
+}
+
+.welcome-title {
+    color: #40CFFF;
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 25px;
+    text-shadow: 0 0 20px rgba(64, 207, 255, 0.5);
+}
+
+.welcome-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* 特徴ボックス */
+.feature-box {
+    background: rgba(64, 207, 255, 0.1);
+    border: 2px solid rgba(64, 207, 255, 0.3);
+    border-radius: 15px;
+    padding: 20px;
+    backdrop-filter: blur(5px);
+}
+
+.feature-box h3 {
+    color: #40CFFF;
+    font-size: 1.5rem;
+    margin: 0 0 15px 0;
+    text-align: center;
+}
+
+.feature-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.feature-list li {
+    color: rgba(255, 255, 255, 0.95);
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin: 10px 0;
+    padding-left: 10px;
+}
+
+.feature-list strong {
+    color: #FFD700;
+}
+
+/* 遊び方ボックス */
+.howto-box {
+    background: rgba(255, 215, 0, 0.1);
+    border: 2px solid rgba(255, 215, 0, 0.3);
+    border-radius: 15px;
+    padding: 20px;
+    backdrop-filter: blur(5px);
+}
+
+.howto-box h3 {
+    color: #FFD700;
+    font-size: 1.5rem;
+    margin: 0 0 15px 0;
+    text-align: center;
+}
+
+.step-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.step-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 12px 15px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.step-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(5px);
+}
+
+.step-number {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #FFD700;
+    min-width: 35px;
+}
+
+.step-text {
+    color: rgba(255, 255, 255, 0.95);
+    font-size: 1.1rem;
+}
+
+/* おすすめボックス */
+.recommend-box {
+    background: rgba(147, 51, 234, 0.1);
+    border: 2px solid rgba(147, 51, 234, 0.3);
+    border-radius: 15px;
+    padding: 20px;
+    backdrop-filter: blur(5px);
+}
+
+.recommend-box h3 {
+    color: #C084FC;
+    font-size: 1.5rem;
+    margin: 0 0 15px 0;
+    text-align: center;
+}
+
+.recommend-text {
+    color: rgba(255, 255, 255, 0.95);
+    font-size: 1.05rem;
+    line-height: 1.8;
+    text-align: center;
+}
+
+/* ミニFAQボックス */
+.mini-faq-box {
+    background: rgba(34, 197, 94, 0.1);
+    border: 2px solid rgba(34, 197, 94, 0.3);
+    border-radius: 15px;
+    padding: 20px;
+    backdrop-filter: blur(5px);
+}
+
+.mini-faq-box h3 {
+    color: #4ADE80;
+    font-size: 1.5rem;
+    margin: 0 0 15px 0;
+    text-align: center;
+}
+
+.faq-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.faq-item {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.faq-item strong {
+    color: #4ADE80;
+    font-size: 0.95rem;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.faq-item p {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+/* その他の特徴 */
+.extra-features {
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    padding: 15px;
+    text-align: center;
+}
+
+.extra-features p {
+    color: rgba(255, 255, 255, 0.95);
+    font-size: 1.05rem;
+    margin: 8px 0;
+}
+
+/* クリエイトモードボックス */
+.create-mode-box {
+    background: linear-gradient(135deg, rgba(74, 222, 128, 0.15), rgba(59, 130, 246, 0.15));
+    border: 2px solid rgba(74, 222, 128, 0.3);
+    border-radius: 15px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.create-mode-box h3 {
+    color: #4ADE80;
+    font-size: 1.3rem;
+    margin: 0 0 15px 0;
+    text-align: center;
+}
+
+.create-intro {
+    color: rgba(255, 255, 255, 0.95);
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.create-intro strong {
+    color: #4ADE80;
+}
+
+.create-rules {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    padding: 15px;
+    margin: 15px 0;
+}
+
+.rules-title {
+    color: #60A5FA;
+    font-size: 1.05rem;
+    font-weight: bold;
+    margin: 0 0 12px 0;
+    text-align: center;
+}
+
+.rule-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.rule-step {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+}
+
+.rule-number {
+    background: #60A5FA;
+    color: #000;
+    font-weight: bold;
+    font-size: 0.9rem;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.rule-text {
+    color: rgba(255, 255, 255, 0.95);
+    font-size: 1rem;
+}
+
+.rules-note {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin: 0;
+    text-align: center;
+}
+
+.create-feature {
+    color: rgba(255, 255, 255, 0.95);
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 15px 0 0 0;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    border-left: 4px solid #4ADE80;
+}
+
+.create-feature strong {
+    color: #4ADE80;
+}
+
+/* お問い合わせボタン */
+.contact-box {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.contact-button {
+    display: inline-block;
+    padding: 14px 28px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    text-decoration: none;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.contact-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.contact-button:active {
+    transform: translateY(0);
+}
+
+
+/* ゲームサブタイトル */
+.game-subtitle {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.1rem;
+    text-align: center;
+    margin-top: 10px;
+    font-weight: 400;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    .welcome-title {
+        font-size: 1.6rem;
+    }
+    
+    .feature-box h3,
+    .howto-box h3,
+    .recommend-box h3,
+    .mini-faq-box h3 {
+        font-size: 1.3rem;
+    }
+    
+    .feature-list li {
+        font-size: 1rem;
+    }
+    
+    .step-text {
+        font-size: 1rem;
+    }
+    
+    .recommend-text {
+        font-size: 0.95rem;
+    }
+    
+    .faq-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .game-subtitle {
+        font-size: 0.95rem;
+    }
 }
 
 /* レスポンシブ対応 */
@@ -613,19 +1007,7 @@ body {
     height: 100%;
     background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
     background-size: 50px 50px;
-    animation: float 20s linear infinite;
     background-position: center center;
-}
-
-@keyframes float {
-    0% { 
-        transform: translateY(0px) translateX(0px) rotate(0deg);
-        background-position: center center;
-    }
-    100% { 
-        transform: translateY(-50px) translateX(0px) rotate(360deg);
-        background-position: center center;
-    }
 }
 
 .title-container {
@@ -702,7 +1084,8 @@ body {
         transform-origin: top center; /* ★倍率の基準点を画面上部中央に設定 */
     }
     
-    .title-container {
+    /* メインメニューのタイトルのみ固定 */
+    #mainMenu .title-container {
         position: fixed !important;
         top: 10px !important; /* ★タイトルを画面上部から10pxに配置（約1cm） */
         left: 50% !important;
@@ -721,6 +1104,15 @@ body {
         margin-right: 0 !important;
         /* タイトル全体が収まるように */
         min-width: 280px !important;
+    }
+    
+    /* 年齢選択画面のタイトルは固定しない */
+    #ageSelectScreen .title-container {
+        position: relative !important;
+        top: auto !important;
+        left: auto !important;
+        transform: none !important;
+        margin-bottom: 20px !important;
     }
     
     .game-title {
@@ -987,13 +1379,13 @@ body {
 
 .rules-content h2 {
     color: #40CFFF;
-    font-size: 2.5rem;
-    margin-bottom: 30px;
+    font-size: 1.3rem;
+    margin-bottom: 20px;
     text-shadow: 0 0 20px rgba(64, 207, 255, 0.5);
 }
 
 .rules-text p {
-    font-size: 1.1rem;
+    font-size: 0.95rem;
     line-height: 1.6;
     margin: 15px 0;
     color: rgba(255, 255, 255, 0.9);
@@ -2754,5 +3146,227 @@ body {
     
     .ranking-saved-content h3 {
         font-size: 1.4rem;
+    }
+}
+
+/* ========================================
+   グローバルフッターナビゲーション
+   ======================================== */
+
+.footer-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(52, 73, 94, 0.95));
+    backdrop-filter: blur(10px);
+    border-top: 2px solid rgba(64, 207, 255, 0.5);
+    padding: 12px 20px;
+    z-index: 2000;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* フッターのゲームをプレイボタン */
+.footer-play-button {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto 10px;
+    display: block;
+    padding: 14px 28px;
+    background: linear-gradient(135deg, #4ADE80, #60A5FA);
+    color: white;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(74, 222, 128, 0.3);
+}
+
+.footer-play-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(74, 222, 128, 0.4);
+}
+
+.footer-play-button:active {
+    transform: translateY(0);
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-link {
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    font-size: 0.95rem;
+    padding: 8px 15px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.footer-link:hover {
+    background: rgba(64, 207, 255, 0.2);
+    border-color: rgba(64, 207, 255, 0.5);
+    color: #40CFFF;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(64, 207, 255, 0.3);
+}
+
+.footer-icon {
+    font-size: 1.1rem;
+}
+
+.footer-text {
+    font-weight: 500;
+}
+
+.footer-link-primary {
+    background: linear-gradient(135deg, #40CFFF, #5555FF);
+    border-color: #40CFFF;
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(64, 207, 255, 0.4);
+}
+
+.footer-link-primary:hover {
+    background: linear-gradient(135deg, #5555FF, #40CFFF);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(64, 207, 255, 0.6);
+}
+
+/* フッター非表示時 */
+.footer-nav.hidden {
+    display: none;
+}
+
+/* モバイル対応 */
+@media (max-width: 768px) {
+    .footer-nav {
+        padding: 10px 15px;
+    }
+    
+    .footer-links {
+        gap: 10px;
+    }
+    
+    .footer-link {
+        font-size: 0.85rem;
+        padding: 6px 12px;
+    }
+    
+    .footer-icon {
+        font-size: 1rem;
+    }
+    
+    .footer-text {
+        font-size: 0.85rem;
+    }
+    
+    /* クリエイトモードボックス - モバイル対応 */
+    .create-mode-box {
+        padding: 15px;
+    }
+    
+    .create-mode-box h3 {
+        font-size: 1.15rem;
+    }
+    
+    .create-intro {
+        font-size: 0.95rem;
+    }
+    
+    .rules-title {
+        font-size: 1rem;
+    }
+    
+    .rule-step {
+        padding: 8px;
+    }
+    
+    .rule-number {
+        width: 26px;
+        height: 26px;
+        font-size: 0.85rem;
+    }
+    
+    .rule-text {
+        font-size: 0.95rem;
+    }
+    
+    .rules-note {
+        font-size: 0.85rem;
+    }
+    
+    .create-feature {
+        font-size: 0.95rem;
+    }
+}
+
+/* 超小型デバイス対応 */
+@media (max-width: 480px) {
+    .footer-nav {
+        padding: 8px 10px;
+    }
+    
+    .footer-links {
+        gap: 8px;
+    }
+    
+    .footer-link {
+        font-size: 0.8rem;
+        padding: 5px 10px;
+    }
+    
+    .footer-icon {
+        font-size: 0.9rem;
+    }
+    
+    .footer-text {
+        font-size: 0.8rem;
+    }
+    
+    /* クリエイトモードボックス - 超小型デバイス対応 */
+    .create-mode-box {
+        padding: 12px;
+    }
+    
+    .create-mode-box h3 {
+        font-size: 1.05rem;
+    }
+    
+    .create-intro {
+        font-size: 0.9rem;
+    }
+    
+    .rule-steps {
+        gap: 8px;
+    }
+    
+    .rule-step {
+        padding: 6px;
+        gap: 10px;
+    }
+    
+    .rule-number {
+        width: 24px;
+        height: 24px;
+        font-size: 0.8rem;
+    }
+    
+    .rule-text {
+        font-size: 0.9rem;
     }
 }

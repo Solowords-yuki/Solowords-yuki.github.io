@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>クリエイトモードで遊ぼう - ソロワーズ</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        // ページ読み込み時に一番上にスクロール
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+        window.scrollTo(0, 0);
+    </script>
+</head>
+<body>
+    <div class="guide-container">
+        <div class="guide-header">
+            <h1 class="guide-title">🎨 クリエイトモードで遊ぼう</h1>
+            <p class="guide-subtitle">あなたもマップクリエイターになれる！</p>
+        </div>
+
+        <div class="guide-content">
+            <!-- クリエイトモードとは -->
+            <section class="guide-section">
+                <h2 class="section-title">✨ クリエイトモードとは？</h2>
+                <div class="simple-box">
+                    <p style="font-size: 1.2rem; line-height: 1.8;">
+                        自分だけのオリジナルマップを作って遊べるモードです。<br>
+                        <strong style="color: #4ADE80;">マリオメーカーのような感覚</strong>で、誰でも簡単にパズルを作れます！
+                    </p>
+                </div>
+            </section>
+
+            <!-- マップの作り方 -->
+            <section class="guide-section">
+                <h2 class="section-title">📐 マップの作り方（3ステップ）</h2>
+                <div class="step-box">
+                    <div class="step-item-guide">
+                        <span class="step-number-guide">①</span>
+                        <div class="step-content">
+                            <strong>マップサイズを選ぶ</strong>
+                            <p>3×3から好きなサイズを選択</p>
+                        </div>
+                    </div>
+                    <div class="step-item-guide">
+                        <span class="step-number-guide">②</span>
+                        <div class="step-content">
+                            <strong>同じ数字を2つ配置</strong>
+                            <p>上部と下部に分けて置く</p>
+                        </div>
+                    </div>
+                    <div class="step-item-guide">
+                        <span class="step-number-guide">③</span>
+                        <div class="step-content">
+                            <strong>保存して遊ぶ</strong>
+                            <p>作ったマップをエクスポート・プレイ！</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 配置のコツ -->
+            <section class="guide-section">
+                <h2 class="section-title">💡 配置のコツ</h2>
+                <div class="simple-box">
+                    <div style="margin-bottom: 20px;">
+                        <h3 style="color: #4ADE80; margin-bottom: 10px;">基本ルール</h3>
+                        <ul class="numbered-list">
+                            <li>同じ数字を必ず2つ配置する</li>
+                            <li>上部と下部に分けて置く</li>
+                            <li>中央は空きマスにする（境界線）</li>
+                        </ul>
+                    </div>
+                    <p class="note-text">💡 このルールを守れば、必ずゲームとして成立します！</p>
+                </div>
+            </section>
+
+            <!-- 自由なアレンジ -->
+            <section class="guide-section">
+                <h2 class="section-title">🎨 自由にアレンジしよう</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🎯</div>
+                        <strong>難易度調整</strong>
+                        <p>配置を工夫して難しくしたり簡単にしたり</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🎨</div>
+                        <strong>芸術作品</strong>
+                        <p>数字の配置で絵や模様を描く</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <strong>特殊配置</strong>
+                        <p>ルールを破って独自の制約を作る</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">👫</div>
+                        <strong>友達と共有（近日）</strong>
+                        <p>エクスポートして挑戦してもらう</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- マップサイズと駒数 -->
+            <section class="guide-section">
+                <h2 class="section-title">📊 マップサイズと駒数</h2>
+                <div class="simple-box">
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <thead>
+                            <tr style="background: rgba(74, 222, 128, 0.2);">
+                                <th style="padding: 12px; border: 1px solid rgba(255,255,255,0.2); color: #4ADE80;">サイズ</th>
+                                <th style="padding: 12px; border: 1px solid rgba(255,255,255,0.2); color: #4ADE80;">駒の種類</th>
+                                <th style="padding: 12px; border: 1px solid rgba(255,255,255,0.2); color: #4ADE80;">配置数</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding: 10px; border: 1px solid rgba(255,255,255,0.1); text-align: center;">3×3</td>
+                                <td style="padding: 10px; border: 1px solid rgba(255,255,255,0.1); text-align: center;">3種類</td>
+                                <td style="padding: 10px; border: 1px solid rgba(255,255,255,0.1); text-align: center;">6個</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 10px; border: 1px solid rgba(255,255,255,0.1); text-align: center;">4×4</td>
+                                <td style="padding: 10px; border: 1px solid rgba(255,255,255,0.1); text-align: center;">6種類</td>
+                                <td style="padding: 10px; border: 1px solid rgba(255,255,255,0.1); text-align: center;">12個</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 10px; border: 1px solid rgba(255,255,255,0.1); text-align: center;">5×5</td>
+                                <td style="padding: 10px; border: 1px solid rgba(255,255,255,0.1); text-align: center;">10種類</td>
+                                <td style="padding: 10px; border: 1px solid rgba(255,255,255,0.1); text-align: center;">20個</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 10px; border: 1px solid rgba(255,255,255,0.1); text-align: center;">6×6</td>
+                                <td style="padding: 10px; border: 1px solid rgba(255,255,255,0.1); text-align: center;">15種類</td>
+                                <td style="padding: 10px; border: 1px solid rgba(255,255,255,0.1); text-align: center;">30個</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p class="note-text">💡 計算式: N×(N-1)÷2 = 駒の種類数</p>
+                </div>
+            </section>
+
+            <!-- エクスポート・インポート -->
+            <section class="guide-section">
+                <h2 class="section-title">💾 エクスポート・インポート（近日実装予定）</h2>
+                <div class="simple-box">
+                    <div style="margin-bottom: 20px;">
+                        <h3 style="color: #60A5FA; margin-bottom: 10px;">📤 エクスポート</h3>
+                        <p>作ったマップをテキストデータとして保存できます</p>
+                    </div>
+                    <div>
+                        <h3 style="color: #60A5FA; margin-bottom: 10px;">📥 インポート</h3>
+                        <p>保存したデータを読み込んで、友達のマップで遊べます</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 紙でも作れる -->
+            <section class="guide-section">
+                <div class="digital-link-box">
+                    <h3>📝 紙とペンでも作れます！</h3>
+                    <p>デジタルだけでなく、紙に描いても同じようにマップを作れます</p>
+                    <a href="paper-version.html" class="digital-button">紙で遊ぶ方法を見る</a>
+                </div>
+            </section>
+
+            <!-- ゲームに戻る -->
+            <section class="guide-section">
+                <div class="digital-link-box" style="background: linear-gradient(135deg, rgba(64, 207, 255, 0.2), rgba(118, 75, 162, 0.2)); border-color: #40CFFF;">
+                    <h3>🎮 さあ、作ってみよう！</h3>
+                    <p>メニューから「🎨 クリエイト」を選んで、あなただけのマップを作成しましょう</p>
+                    <a href="index.html" class="digital-button" style="background: linear-gradient(135deg, #40CFFF, #764ba2);">ゲームに戻る</a>
+                </div>
+            </section>
+        </div>
+
+        <!-- フッター -->
+        <footer id="globalFooter" class="footer-nav">
+            <div class="footer-links">
+                <a href="tips.html" class="footer-link">
+                    <span class="footer-icon">💡</span>
+                    <span class="footer-text">攻略ガイド</span>
+                </a>
+                <a href="index.html" class="footer-link footer-link-primary">
+                    <span class="footer-icon">🏠</span>
+                    <span class="footer-text">メニューに戻る</span>
+                </a>
+                <a href="faq.html" class="footer-link">
+                    <span class="footer-icon">❓</span>
+                    <span class="footer-text">FAQ</span>
+                </a>
+            </div>
+        </footer>
+    </div>
+
+    <style>
+        .guide-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            padding-bottom: 100px;
+        }
+
+        .guide-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .guide-title {
+            font-size: 2.5rem;
+            color: #40CFFF;
+            margin-bottom: 10px;
+        }
+
+        .guide-subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .guide-content {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 30px;
+        }
+
+        .guide-section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: #4ADE80;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(74, 222, 128, 0.3);
+        }
+
+        .simple-box {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .step-box {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .step-item-guide {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+        }
+
+        .step-number-guide {
+            background: #60A5FA;
+            color: #000;
+            font-weight: bold;
+            font-size: 1.2rem;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-content strong {
+            color: #4ADE80;
+            font-size: 1.2rem;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .step-content p {
+            color: rgba(255, 255, 255, 0.8);
+            margin: 0;
+        }
+
+        .numbered-list {
+            padding-left: 25px;
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            list-style: none;
+        }
+
+        .numbered-list li {
+            margin: 10px 0;
+            position: relative;
+            padding-left: 10px;
+        }
+
+        .numbered-list li:before {
+            content: "▸";
+            position: absolute;
+            left: -15px;
+            color: #4ADE80;
+        }
+
+        .note-text {
+            margin-top: 15px;
+            color: #60A5FA;
+            font-weight: bold;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .feature-card strong {
+            color: #4ADE80;
+            font-size: 1.1rem;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .feature-card p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.95rem;
+            margin: 0;
+        }
+
+        .digital-link-box {
+            background: linear-gradient(135deg, rgba(74, 222, 128, 0.2), rgba(64, 207, 255, 0.2));
+            border: 2px solid #4ADE80;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .digital-link-box h3 {
+            color: #4ADE80;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .digital-link-box p {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 20px;
+        }
+
+        .digital-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #4ADE80, #60A5FA);
+            color: #000;
+            padding: 12px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .digital-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(74, 222, 128, 0.4);
+        }
+
+        table {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        @media (max-width: 768px) {
+            .guide-title {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .feature-grid {
+                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            }
+
+            .guide-content {
+                padding: 20px;
+            }
+        }
+    </style>
+</body>
+</html>

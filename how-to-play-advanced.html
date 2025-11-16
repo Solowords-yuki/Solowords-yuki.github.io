@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ソロワーズの遊び方 - 詳細ガイド</title>
+    <title>ソロワーズの遊び方 - 初心者向けガイド | 無料パズルゲーム</title>
+    <meta name="description" content="ソロワーズの基本的な遊び方を分かりやすく解説。初心者でもすぐに楽しめる操作方法やクリアのコツをご紹介します。">
+    <meta name="keywords" content="ソロワーズ,遊び方,初心者ガイド,パズルゲーム,攻略,コツ">
     <style>
         * {
             margin: 0;
@@ -267,345 +269,289 @@
                 font-size: 1.5em;
             }
         }
+
+        /* フッターナビゲーション */
+        .footer-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+            padding: 8px 0;
+            z-index: 1000;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 10px;
+        }
+
+        .footer-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #667eea;
+            font-size: 0.75rem;
+            padding: 5px 10px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            min-width: 50px;
+        }
+
+        .footer-link:hover,
+        .footer-link:active {
+            background: rgba(102, 126, 234, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .footer-link-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-weight: 600;
+            min-width: 80px;
+            padding: 8px 12px;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+        }
+
+        .footer-link-primary:hover,
+        .footer-link-primary:active {
+            background: linear-gradient(135deg, #5568d3 0%, #65408b 100%);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .footer-link-primary .footer-text {
+            font-weight: 600;
+        }
+
+        .footer-icon {
+            font-size: 1.3rem;
+            margin-bottom: 2px;
+        }
+
+        .footer-text {
+            font-size: 0.7rem;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        /* コンテンツの下余白を追加してフッターと重ならないように */
+        .how-to-play-container {
+            margin-bottom: 80px;
+        }
+
+        @media (max-width: 768px) {
+            .footer-link {
+                padding: 4px 6px;
+                min-width: 45px;
+            }
+
+            .footer-link-primary {
+                min-width: 70px;
+                padding: 6px 10px;
+            }
+
+            .footer-icon {
+                font-size: 1.2rem;
+            }
+
+            .footer-text {
+                font-size: 0.65rem;
+            }
+        }
     </style>
+    <script>
+        // ページ読み込み時に一番上にスクロール
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+        window.scrollTo(0, 0);
+    </script>
 </head>
 <body>
     <div class="how-to-play-container">
-        <h1 class="page-title">🎮 ソロワーズ完全ガイド</h1>
-        <p class="page-subtitle">新ジャンル誕生 - ダイヤモンド型数字パズルの世界へ</p>
+        <h1 class="page-title">🎮 ソロワーズの遊び方</h1>
+        <p class="page-subtitle">初心者でもすぐに楽しめる！簡単ガイド</p>
 
-        <!-- ゲームの行先 -->
+        <!-- 基本ルール -->
         <section class="section">
-            <div class="vision-box">
-                <h3>🌟 このゲームの行先</h3>
-                <p style="font-size: 1.2em;">目指せ国民的ゲーム。そして、パズルゲームの歴史に新たな1ページを。</p>
-                <p style="margin-top: 20px; font-size: 1.15em; font-weight: bold;">正解のないゲーム</p>
-                <p style="margin-top: 10px;">未知との遭遇を楽しみ、どこまでやって、どこに戻って、どこから考え直すか。</p>
-                <p style="margin-top: 10px;">試行錯誤の中で、自然と論理的思考力が磨かれていく。</p>
-            </div>
-        </section>
-
-        <!-- 新ジャンル誕生 -->
-        <section class="section">
-            <h2 class="section-title">⚡ ゲームルール × 配置ルール = 新ジャンル誕生</h2>
+            <h2 class="section-title">📖 基本ルール</h2>
             
-            <div class="genius-note">
-                <h3>🎯 ゲームルール（ゲームメカニクス）</h3>
-                <p><strong>1. 同じ数字の駒を全て隣接させてゲームクリアを目指そう!</strong></p>
-                <p><strong>2. 数字の駒は斜め方向に移動可能!</strong></p>
-                <p><strong>3. 同じ数字の駒が隣接した時、その駒はその場で固定（光る）!</strong></p>
-                
-                <h4 style="margin-top: 20px; color: #764ba2;">操作方法</h4>
-                <p>1. 移動させたい駒を押す</p>
-                <p>2. 空きマスの上でもう一回押す</p>
-                
-                <h4 style="margin-top: 20px; color: #764ba2;">移動ルール</h4>
-                <ul style="margin-left: 20px;">
-                    <li>駒は直線上の空きマスに一気に移動可能（ひとマスずつ動かすでも良いです）</li>
-                    <li>他の駒は飛び越えれない</li>
-                </ul>
-            </div>
-
-            <div class="genius-note">
-                <h3>📐 配置ルール（マップ生成理論）</h3>
-                <p>菱形マップ内には、<strong>同じ数字の駒が必ず2つ存在</strong>（上部1つ、下部1つ）。</p>
-                <p>菱形マップを上部と下部に分け、<strong>中央の境目（空きマス）以外</strong>の箇所に駒を配置。</p>
-            </div>
-
-            <div class="important-note">
-                <h3>🎮 誰でもゲームが作れる！（実は凄い）</h3>
-                <p style="font-size: 1.15em; font-weight: bold;">マリオメーカーのような感覚で、誰でも自分だけのパズルを作成可能！</p>
-                <p><strong>激押しポイント1️⃣</strong>: <strong>配置ルールさえ理解すれば、誰でも簡単にすぐ作れる</strong></p>
-                <p><strong>激押しポイント2️⃣</strong>: <strong>紙に書いてもこのゲームができる！</strong> デジタル限定ではなく、アナログでも完全再現可能！</p>
-            </div>
-        </section>
-
-        <!-- 数学的基礎 -->
-        <section class="section">
-            <h2 class="section-title">📐 マップサイズと駒数の数学的関係</h2>
-            
-            <div class="formula-box">
-                <h3 style="color: #667eea; margin-bottom: 20px;">📊 マップ生成の数式</h3>
-                <div class="formula">(N × (N - 1)) ÷ 2 = M</div>
-                <div class="formula-explanation">
-                    <strong>N</strong>: マップのマス数（一辺のマス目数）<br>
-                    <strong>M</strong>: 駒の種類数<br>
-                    <strong>M × 2</strong>: マップ内に配置される駒の総数
-                </div>
+            <div class="rule-box">
+                <h3>🎯 ゲームの目的</h3>
+                <p style="font-size: 1.2em; font-weight: bold;">同じ数字の駒をすべて隣接させてクリアしよう！</p>
+                <p style="margin-top: 10px;">例：「1」と「1」、「2」と「2」のように、同じ数字のペアを隣り合わせにします。</p>
             </div>
 
             <div class="rule-box">
-                <h3>📝 例題：4×4マスの場合</h3>
-                <p style="font-size: 1.15em; margin: 15px 0;">
-                    <strong>4 × 3 ÷ 2 = 6種類</strong>の駒を使用！<br>
-                    上下で<strong>6 × 2セット</strong>でマップ内に<strong>12個配置</strong>します！
-                </p>
-                <p style="margin-top: 10px;">つまり、駒1〜6までの数字が、上部に各1個、下部に各1個ずつ配置されます。</p>
+                <h3>🕹️ 操作方法</h3>
+                <ol style="font-size: 1.1em;">
+                    <li><strong>移動させたい駒をタップ</strong>（またはクリック）</li>
+                    <li><strong>移動先の空きマスをもう一度タップ</strong></li>
+                </ol>
+                <p style="margin-top: 15px; color: #667eea; font-weight: bold;">たったこれだけ！とっても簡単です。</p>
             </div>
 
-            <div class="genius-note">
-                <h3>🌍 マップサイズのオープンワールド化</h3>
-                <p>マップサイズを上げることは、<strong>このマップの中でのオープンワールド状態</strong>。</p>
-                <p>綺麗に揃えたり、絵を描いたり、遊び方は色々。</p>
-                <p style="font-weight: bold; margin-top: 10px;">しかも<strong>無限大まで大きくしてもこのゲームが成り立つ</strong>という美しさ。</p>
-            </div>
-
-            <h3 class="subsection-title">📊 マップサイズと駒数の対応表</h3>
-            
-            <table>
-                <thead>
-                    <tr>
-                        <th>マップサイズ</th>
-                        <th>駒の種類数</th>
-                        <th>配置数（×2セット）</th>
-                        <th>総マス数</th>
-                        <th>難易度目安</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>3×3</strong></td>
-                        <td>3種類</td>
-                        <td>6個</td>
-                        <td>9マス</td>
-                        <td>🟢 入門</td>
-                    </tr>
-                    <tr>
-                        <td><strong>4×4</strong></td>
-                        <td>6種類</td>
-                        <td>12個</td>
-                        <td>16マス</td>
-                        <td>🟢 初級</td>
-                    </tr>
-                    <tr>
-                        <td><strong>5×5</strong></td>
-                        <td>10種類</td>
-                        <td>20個</td>
-                        <td>25マス</td>
-                        <td>🟡 中級</td>
-                    </tr>
-                    <tr>
-                        <td><strong>6×6</strong></td>
-                        <td>15種類</td>
-                        <td>30個</td>
-                        <td>36マス</td>
-                        <td>🟡 中上級</td>
-                    </tr>
-                    <tr>
-                        <td><strong>7×7</strong></td>
-                        <td>21種類</td>
-                        <td>42個</td>
-                        <td>49マス</td>
-                        <td>🟠 上級</td>
-                    </tr>
-                    <tr>
-                        <td><strong>8×8</strong></td>
-                        <td>28種類</td>
-                        <td>56個</td>
-                        <td>64マス</td>
-                        <td>🔴 超上級</td>
-                    </tr>
-                    <tr>
-                        <td><strong>9×9</strong></td>
-                        <td>36種類</td>
-                        <td>72個</td>
-                        <td>81マス</td>
-                        <td>🔴 エキスパート</td>
-                    </tr>
-                    <tr>
-                        <td><strong>10×10</strong></td>
-                        <td>45種類</td>
-                        <td>90個</td>
-                        <td>100マス</td>
-                        <td>⚫ マスター</td>
-                    </tr>
-                    <tr>
-                        <td><strong>15×15</strong></td>
-                        <td>105種類</td>
-                        <td>210個</td>
-                        <td>225マス</td>
-                        <td>⚫ グランドマスター</td>
-                    </tr>
-                    <tr>
-                        <td><strong>20×20</strong></td>
-                        <td>190種類</td>
-                        <td>380個</td>
-                        <td>400マス</td>
-                        <td>⚫ レジェンド</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <div class="genius-note">
-                <h3>♾️ 無限のスケーラビリティ</h3>
-                <p>この数式は理論上、<strong>どこまでも大きなマップに適用可能</strong>。</p>
-                <p>50×50（1225種類）、100×100（4950種類）、さらにその先まで...</p>
-                <p>無限大まで拡張できる数学的な美しさを持つ。</p>
+            <div class="rule-box">
+                <h3>📐 移動のルール</h3>
+                <ul style="font-size: 1.05em;">
+                    <li>駒は<strong>斜め方向</strong>に移動できます</li>
+                    <li>空きマスなら<strong>一気に遠くまで</strong>移動できます</li>
+                    <li>他の駒は<strong>飛び越えられません</strong></li>
+                    <li>同じ数字が隣接すると、その駒は<strong>光って固定</strong>されます</li>
+                </ul>
             </div>
         </section>
 
-        <!-- 無限の組み合わせ -->
+        <!-- クリアのコツ -->
         <section class="section">
-            <h2 class="section-title">🎨 ゲームルール × 配置ルール × プレイスタイル</h2>
-            
-            <div class="vision-box">
-                <h3>無限の組み合わせによる難易度調整</h3>
-                <p>ゲームルール × 配置ルール × プレイスタイル = HARD から EASY まで自由自在</p>
-                <p style="margin-top: 15px; font-size: 1.3em;">しかもアナログでも実現可能！</p>
-            </div>
-
-            <h3 class="subsection-title">🏆 プレイスタイルのバリエーション</h3>
+            <h2 class="section-title">� クリアのコツ</h2>
             
             <ul class="strategy-list">
                 <li>
-                    <strong>⏱️ タイムアタック</strong><br>
-                    速さを競う競技性重視のプレイスタイル。反射神経と判断力が試される。<br>
-                    オンラインランキングでタイムを競い、世界トップを目指す。
+                    <strong>📍 まずは全体を見渡そう</strong><br>
+                    どの数字がどこにあるか、全体の配置を確認してから始めましょう。
                 </li>
                 <li>
-                    <strong>🎯 最小手数チャレンジ</strong><br>
-                    パズル性を極限まで追求。最も効率的な解法を探求する。<br>
-                    <strong>先読み力</strong>、<strong>論理力</strong>、<strong>多角的視点</strong>が必要。手数ランキングに名を刻む。
+                    <strong>🔢 簡単なペアから揃える</strong><br>
+                    近くにある数字のペアから順番に揃えていくと、クリアしやすくなります。
                 </li>
                 <li>
-                    <strong>🎨 自作マップ作成</strong><br>
-                    配置ルールに基づき、自分だけのマップを設計。<br>
-                    <strong>美しさを求めたり、答えが1通りしかないマップなど、創造力を鍛える。</strong><br>
-                    マリオメーカーのように、自分がクリエイターになる。
+                    <strong>🤔 詰まったら戻ってみよう</strong><br>
+                    うまくいかない時は、リタイアボタンで最初からやり直せます。何度でも挑戦できます！
                 </li>
                 <li>
-                    <strong>🔢 マイルール設定</strong><br>
-                    「特定の数字だけ残す」「○手以内にクリア」など独自の制約を設定。<br>
-                    プレイヤー自身がゲームデザイナーになる。
+                    <strong>🎨 色付き駒でわかりやすく</strong><br>
+                    メニューの設定で「色付き駒」をONにすると、同じ数字が同じ色になって見分けやすくなります。
                 </li>
             </ul>
         </section>
 
-        <!-- レベルシステム -->
+        <!-- レベルについて -->
         <section class="section">
-            <h2 class="section-title">📊 レベルシステムとモード</h2>
+            <h2 class="section-title">🏆 レベルについて</h2>
             
             <div class="rule-box">
-                <h3>🎮 通常モード（Level 1-10）</h3>
-                <p><strong>Level 1-3</strong>: 基本操作習得。マップサイズ3×3〜4×4。</p>
-                <p><strong>Level 4-6</strong>: 中級者向け。集中力が試される。マップサイズ5×5〜6×6。</p>
-                <p><strong>Level 7-10</strong>: 上級者向け。高い集中力と戦略性が必要。マップサイズ7×7〜10×10。</p>
+                <h3>難易度の違い</h3>
+                <p><strong>Level 1-3</strong>：初心者向け。マスが少なく、すぐにクリアできます。</p>
+                <p><strong>Level 4-6</strong>：中級者向け。少し考える必要があります。</p>
+                <p><strong>Level 7-10</strong>：上級者向け。じっくり考えて挑戦しましょう！</p>
             </div>
 
-            <div class="rule-box">
-                <h3>🛠️ クリエイトモード</h3>
-                <p>自分でマップを作成し、エクスポート可能。</p>
-                <ul>
-                    <li>ボードサイズ自由設定（3×3 〜 理論上無限大）</li>
-                    <li>駒の配置を完全カスタマイズ</li>
-                    <li>作成したマップをデータとして保存</li>
-                </ul>
-                <p style="font-weight: bold; margin-top: 15px;">自分だけの最高難度マップを作り上げ、極める。</p>
-            </div>
-        </section>
-
-        <!-- 上級テクニック -->
-        <section class="section">
-            <h2 class="section-title">🔥 上級戦略とテクニック</h2>
-            
-            <div class="rule-box">
-                <h3>1️⃣ 先読みと予測</h3>
-                <p>どの駒を消すと、どのグループが形成されるかを事前に計算。</p>
-                <p>3手先、5手先を読む能力が上級者への第一歩。</p>
-            </div>
-
-            <div class="rule-box">
-                <h3>2️⃣ マップ設計理論</h3>
-                <p>配置ルールの本質を理解し、戦略的なマップを設計。</p>
-                <p>どの配置が最も解きにくいか、または美しいかを研究する。</p>
-                <p>自分だけの特殊マップ、配置ルールの作製。</p>
-                <p>例：  1：5個 , 2：2個  , 3 : 2個   これもあり！</p>
-            </div>
-
-            <div class="rule-box">
-                <h3>3️⃣ 逆算思考</h3>
-                <p>最終的にどう配置すれば全て隣接するかから逆算して手順を構築。</p>
-                <p>ゴールから逆向きに考えることで、最適解が見えてくる。</p>
-            </div>
-
-            <div class="rule-box">
-                <h3>4️⃣ 手数最適化</h3>
-                <p>同じクリアでも、手数を減らすことでランキング上位を狙う。</p>
-                <p>無駄な手を削ぎ落とし、最短経路を追求する。</p>
-            </div>
-
-            <div class="genius-note">
-                <h3>💡 試行錯誤から生まれる発見</h3>
-                <p>どこまでやって、どこに戻って、どこから考え直すか。</p>
-                <p>未知との遭遇を楽しみ、試行錯誤を繰り返すことで真の実力が身につく。</p>
-                <p>正解のないゲームだからこそ、自分だけの攻略法が見つかる。</p>
-            </div>
-        </section>
-
-        <!-- アナログ対応 -->
-        <section class="section">
-            <h2 class="section-title">📝 アナログでの完全再現</h2>
-            
             <div class="important-note">
-                <h3>紙とペンだけでできます！（消しゴムも必要）</h3>
-                <p>デジタルゲームでありながら、<strong>配置ルールに則ればアナログで完全再現可能</strong>。</p>
-            </div>
-
-            <div class="rule-box">
-                <h3>アナログプレイの手順</h3>
-                <ol>
-                    <li>紙にダイヤモンド型（菱形）のマス目を描画</li>
-                    <li>配置ルールに従って数字を配置（上部と下部に分け、中央の境目以外に配置）</li>
-                    <li>同じ数字を2つずつ用意（上部1つ、下部1つ）</li>
-                    <li>自分だけの難しいマップを設計し、極める</li>
-                </ol>
+                <h3>⏰ タイマーについて</h3>
+                <p>設定画面でタイマーのON/OFFを切り替えられます。</p>
+                <p>急がず自分のペースで楽しみたい方は、タイマーをOFFにするのがおすすめです。</p>
             </div>
         </section>
 
         <!-- オンラインランキング -->
         <section class="section">
-            <h2 class="section-title">🏆 オンラインランキングシステム</h2>
+            <h2 class="section-title">� ランキングに挑戦</h2>
             
             <div class="rule-box">
-                <h3>世界中のプレイヤーと競争</h3>
-                <p>ログインすることで、記録がオンラインランキングに登録される。</p>
+                <h3>記録を競おう！</h3>
+                <p>ログインすると、自分の記録をオンラインランキングに登録できます。</p>
                 <ul>
-                    <li><strong>タイムランキング</strong>: 最速クリアタイムを競う</li>
-                    <li><strong>手数ランキング</strong>: 最小手数を競う</li>
-                    <li>各レベルごとに記録保存</li>
-                    <li>1時間ごとに自動更新</li>
+                    <li><strong>タイムランキング</strong>：誰が一番早くクリアできるか！</li>
+                    <li><strong>手数ランキング</strong>：最も少ない手数でクリアするのは誰だ！</li>
                 </ul>
-            </div>
-
-            <div class="important-note">
-                <p><strong>ログインなし</strong>: 個人で楽しむ！</p>
-                <p><strong>Googleログイン</strong>: ランキングに参加！世界に記録を！</p>
-                <p>※端末変更時にはローカルデータは消えます、、</p>
+                <p style="margin-top: 10px; font-weight: bold;">もちろん、ログインしなくても1人で楽しく遊べます。</p>
             </div>
         </section>
 
-        <!-- 最終メッセージ -->
+        <!-- クリエイトモード -->
+        <section class="section">
+            <h2 class="section-title">🎨 クリエイトモードで遊ぼう</h2>
+            
+            <div class="genius-note">
+                <h3>自分だけのマップを作ろう！</h3>
+                <p>メニューから「🎨 クリエイト」を選ぶと、自分でパズルマップを作れます。</p>
+                <p style="margin-top: 10px;">友達に挑戦してもらったり、自分だけの難問を作ってみましょう！</p>
+                
+                <!-- クリエイトモードガイドへのリンク -->
+                <a href="create-mode.html" style="display: inline-block; margin-top: 15px; padding: 12px 24px; background: linear-gradient(135deg, #4ADE80, #60A5FA); color: white; text-decoration: none; border-radius: 8px; font-weight: bold; transition: transform 0.2s;">
+                    🎨 クリエイトモードガイドを見る
+                </a>
+            </div>
+        </section>
+
+        <!-- よくある質問 -->
+        <section class="section">
+            <h2 class="section-title">❓ よくある質問</h2>
+            
+            <div class="rule-box">
+                <h3>Q. 駒が動かせなくなりました</h3>
+                <p>A. 駒を一度タップすると選択状態になります。もう一度同じ駒をタップすると選択解除できます。</p>
+            </div>
+
+            <div class="rule-box">
+                <h3>Q. 詰んでしまった場合はどうすればいい？</h3>
+                <p>A. 「詰み.リタイア」ボタンを押すと、最初からやり直せます。何度でも挑戦できるので、安心してください！</p>
+            </div>
+
+            <div class="rule-box">
+                <h3>Q. スマホで画面が小さくて見にくい</h3>
+                <p>A. ピンチ操作（2本指で拡大）またはダブルタップで画面を拡大できます。</p>
+            </div>
+
+            <div class="rule-box">
+                <h3>Q. 広告を消すことはできますか？</h3>
+                <p>A. 最初の年齢層選択で「シニア・お子様」を選ぶと、広告なしで遊べます。設定画面からいつでも変更できます。</p>
+            </div>
+        </section>
+
+        <!-- 紙で遊ぶ -->
+        <section class="section">
+            <h2 class="section-title">📝 紙とペンでも遊べる！</h2>
+            
+            <div class="important-note">
+                <h3>アナログでも楽しめる</h3>
+                <p>このゲームは紙とペンがあれば、デジタル版と同じように遊べます。</p>
+                <p>ひし形のマス目を描いて、数字を書き込むだけ。</p>
+                <p style="margin-top: 10px; font-weight: bold;">友達や家族と一緒に、いつでもどこでも楽しめます！</p>
+                <a href="paper-version.html" style="display: inline-block; margin-top: 15px; padding: 12px 25px; background: linear-gradient(135deg, #4ADE80, #60A5FA); color: #000; text-decoration: none; border-radius: 25px; font-weight: bold; transition: transform 0.2s;">📝 紙で遊ぶ方法を見る</a>
+            </div>
+        </section>
+
+        <!-- 最後のメッセージ -->
         <section class="section">
             <div class="vision-box">
-                <h3>🎉 新ジャンル誕生の瞬間</h3>
-                <p style="font-size: 1.15em; margin-top: 20px;">
-                    ゲームルール × 配置ルール × プレイスタイル = 無限の組み合わせ
+                <h3>🎉 さあ、ソロワーズを楽しもう！</h3>
+                <p style="margin-top: 20px; font-size: 1.15em;">
+                    シンプルなルールで、誰でもすぐに始められます。<br>
+                    でも奥が深くて、何度でも遊びたくなる！
                 </p>
-
-                <p style="margin-top: 20px;">
-                    マップサイズUPは、オープンワールド。
-                </p>
-                <p style="margin-top: 10px;">
-                    無限大まで拡張可能な数学的美しさ。
-                </p>
-                <p style="font-size: 1.4em; font-weight: bold; margin-top: 35px; color: #fff;">
-                    このゲームが歴史に名を残す瞬間はもうすぐ<br>
-                    
+                <p style="margin-top: 15px;">
+                    自分のペースで、気軽に挑戦してみてください。
                 </p>
             </div>
         </section>
-
-        <a href="index.html" class="back-button">🏠 ゲームに戻る</a>
     </div>
+
+    <!-- フッターナビゲーション（コンテンツページ用） -->
+    <footer class="footer-nav content-footer">
+        <div class="footer-links">
+            <a href="tips.html" class="footer-link">
+                <span class="footer-icon">💡</span>
+                <span class="footer-text">攻略ガイド</span>
+            </a>
+            <a href="index.html" class="footer-link footer-link-primary">
+                <span class="footer-icon">🏠</span>
+                <span class="footer-text">メニューに戻る</span>
+            </a>
+            <a href="faq.html" class="footer-link">
+                <span class="footer-icon">❓</span>
+                <span class="footer-text">FAQ</span>
+            </a>
+        </div>
+    </footer>
 </body>
 </html>

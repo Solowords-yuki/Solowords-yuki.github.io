@@ -1667,7 +1667,7 @@ class DOGame {
 
     // クリエイトページを開く
     openCreatePage() {
-        window.open('create.html', '_blank');
+        window.location.href = 'create.html';
     }
     
     // ★アカウント表示を更新

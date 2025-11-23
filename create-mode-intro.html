@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>クリエイトモード紹介</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            padding: 30px 20px;
+        }
+
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .levels-container {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .level-section {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .level-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        .level-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .level-number {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-right: 20px;
+            box-shadow: 0 4px 10px rgba(102, 126, 234, 0.4);
+        }
+
+        .level-title {
+            font-size: 2em;
+            color: #333;
+        }
+
+        .level-content {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .level-image {
+            flex: 0 0 50%;
+            max-width: 50%;
+        }
+
+        .level-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border: 3px solid #f0f0f0;
+        }
+
+        .level-description {
+            flex: 1;
+        }
+
+        .level-description h3 {
+            color: #667eea;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+
+        .level-description p {
+            color: #555;
+            line-height: 1.8;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+
+        .level-features {
+            list-style: none;
+            margin-top: 20px;
+        }
+
+        .level-features li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+            color: #444;
+            font-size: 1.05em;
+        }
+
+        .level-features li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1.3em;
+        }
+
+        .back-button {
+            display: block;
+            width: 200px;
+            margin: 40px auto;
+            padding: 15px 30px;
+            background: white;
+            color: #667eea;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 1.1em;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 7px 20px rgba(0,0,0,0.3);
+            background: #667eea;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .level-content {
+                flex-direction: column;
+            }
+
+            .level-image {
+                flex: 0 0 100%;
+                max-width: 100%;
+            }
+
+            .level-title {
+                font-size: 1.5em;
+            }
+
+            .level-number {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎨 クリエイトモード紹介</h1>
+            <p>各レベルの特徴と魅力をご紹介します</p>
+        </div>
+
+        <div class="levels-container">
+            <!-- レベル1 -->
+            <div class="level-section">
+                <div class="level-header">
+                    <div class="level-number">1</div>
+                    <h2 class="level-title">レベル1</h2>
+                </div>
+                <div class="level-content">
+                    <div class="level-image">
+                        <img src="images/level1.png" alt="レベル1の画像">
+                    </div>
+                    <div class="level-description">
+                        <h3>数字の1を右端に追加</h3>
+                        <p>クリエイトモードの基礎を学べるレベルです。シンプルな構成で、誰でも簡単に始められます。</p>
+                        <ul class="level-features">
+                            <li>分かりやすいチュートリアル</li>
+                            <li>基本的な操作方法の習得</li>
+                            <li>初めての方でも安心</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- レベル2 -->
+            <div class="level-section">
+                <div class="level-header">
+                    <div class="level-number">2</div>
+                    <h2 class="level-title">レベル2</h2>
+                </div>
+                <div class="level-content">
+                    <div class="level-image">
+                        <img src="images/level2.png" alt="レベル2の画像">
+                    </div>
+                    <div class="level-description">
+                        <h3>6と7の駒を消して、1と2を追加</h3>
+                        <p>基本をマスターした方向けの、より深い内容を学べるレベルです。</p>
+                        <ul class="level-features">
+                            <li>応用的な機能の活用</li>
+                            <li>より複雑な表現が可能</li>
+                            <li>創造性を発揮できる</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- レベル3 -->
+            <div class="level-section">
+                <div class="level-header">
+                    <div class="level-number">3</div>
+                    <h2 class="level-title">レベル3</h2>
+                </div>
+                <div class="level-content">
+                    <div class="level-image">
+                        <img src="images/level3.png" alt="レベル3の画像">
+                    </div>
+                    <div class="level-description">
+                        <h3>少し違うマップ形態</h3>
+                        <p>より高度なテクニックを駆使して、本格的な作品を作成できます。</p>
+                        <ul class="level-features">
+                            <li>高度な機能の組み合わせ</li>
+                            <li>独創的な作品作り</li>
+                            <li>スキルアップに最適</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- レベル4 -->
+            <div class="level-section">
+                <div class="level-header">
+                    <div class="level-number">4</div>
+                    <h2 class="level-title">レベル4</h2>
+                </div>
+                <div class="level-content">
+                    <div class="level-image">
+                        <img src="images/level4.png" alt="レベル4の画像">
+                    </div>
+                    <div class="level-description">
+                        <h3>長方形マップ</h3>
+                        <p>これまでの経験を活かして、プロフェッショナルな作品を作成できます。</p>
+                        <ul class="level-features">
+                            <li>プロレベルの技術習得</li>
+                            <li>複雑な構造の実現</li>
+                            <li>高い自由度での制作</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 最後のメッセージ -->
+            <div class="level-section" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                <div class="level-header" style="border-bottom: 3px solid white;">
+                    <h2 class="level-title" style="color: white; width: 100%;">🎨 自分だけのマップを作ろう！</h2>
+                </div>
+                <div class="level-description" style="text-align: center; padding: 20px 0;">
+                    <h3 style="color: white; font-size: 1.8em; margin-bottom: 25px;">自分だけのマップをどんどん共有しよう！</h3>
+                    <p style="color: white; font-size: 1.2em; line-height: 2; margin-bottom: 20px;">
+                        新しい解き方、配置を見つけては吸収し、<br>
+                        どんどん新しいマップを作ろう。
+                    </p>
+                    <p style="color: white; font-size: 1.1em; opacity: 0.9; margin-top: 30px;">
+                        （紙とペンでもできるので、暇な時に是非）
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- グローバルフッターナビゲーション -->
+    <footer id="globalFooter" class="footer-nav">
+        <!-- クリエイト画面に戻るボタン -->
+        <a href="create.html" class="footer-play-button" style="text-align: center;">
+            🎨 クリエイト画面に戻る
+        </a>
+    </footer>
+</body>
+</html>

@@ -825,6 +825,22 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
         
+        // 孤立駒チェック
+        isolatedPieces = findIsolatedPieces();
+        
+        if (isolatedPieces.length > 0) {
+            // 孤立駒がある場合、確認ダイアログ
+            const confirmWithIsolated = confirm(`孤立駒があります。このままではゲームクリアできません。\n孤立駒: ${isolatedPieces.map(p => p.value).join(', ')}\n\n保存しますか？\n\n「OK」を押すと保存して画面遷移します。\n「キャンセル」を押すと孤立駒が光ります。`);
+            
+            if (!confirmWithIsolated) {
+                // キャンセルの場合、孤立駒を光らせて画面遷移しない
+                showingIsolated = true;
+                drawDiamondMap();
+                return;
+            }
+            // OKの場合、そのまま保存処理を続行
+        }
+        
         const saveSlotValue = saveSlot.value;
         const slotDisplayName = saveSlotValue === 'create1' ? 'Create1' : 
                                saveSlotValue === 'create2' ? 'Create2' : 'Create3';

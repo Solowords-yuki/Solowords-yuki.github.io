@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>お問い合わせ - ソロワーズ | 無料パズルゲーム</title>
+    <meta name="description" content="ソロワーズに関するご質問、ご要望、バグ報告などお気軽にお問い合わせください。">
+    <meta name="keywords" content="ソロワーズ,お問い合わせ,サポート,バグ報告,要望">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', 'Yu Gothic', 'Hiragino Sans', sans-serif;
+            line-height: 1.8;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            padding: 20px;
+            margin: 0;
+        }
+
+        .contact-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            margin-bottom: 100px;
+        }
+
+        .page-title {
+            text-align: center;
+            font-size: 2.8em;
+            color: #667eea;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .page-subtitle {
+            text-align: center;
+            font-size: 1.2em;
+            color: #764ba2;
+            margin-bottom: 50px;
+        }
+
+        .contact-intro {
+            font-size: 1.1em;
+            color: #555;
+            margin-bottom: 40px;
+            line-height: 2;
+            text-align: center;
+        }
+
+        .contact-methods {
+            display: grid;
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .contact-method {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
+            border-radius: 15px;
+            padding: 30px;
+            border: 2px solid rgba(102, 126, 234, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .contact-method:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.2);
+        }
+
+        .contact-method h3 {
+            color: #667eea;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .contact-icon {
+            font-size: 1.5em;
+        }
+
+        .contact-method p {
+            font-size: 1.1em;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .contact-link {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .contact-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .google-form {
+            margin: 40px 0;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .google-form iframe {
+            width: 100%;
+            min-height: 800px;
+            border: none;
+        }
+
+        .info-box {
+            background: #f8f9fa;
+            border-left: 5px solid #667eea;
+            padding: 25px;
+            margin: 30px 0;
+            border-radius: 10px;
+        }
+
+        .info-box h4 {
+            color: #667eea;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+        }
+
+        .info-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .info-box ul li {
+            padding: 10px 0;
+            color: #666;
+        }
+
+        .info-box ul li::before {
+            content: "✓ ";
+            color: #667eea;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .back-link {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .menu-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 1.1em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .menu-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        /* フッターナビゲーション */
+        .footer-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            box-shadow: 0 -2px 20px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            padding: 10px 15px;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            min-width: 80px;
+        }
+
+        .footer-link:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #40CFFF;
+            transform: translateY(-2px);
+        }
+
+        .footer-link-primary {
+            background: rgba(64, 207, 255, 0.2);
+            color: #40CFFF;
+        }
+
+        .footer-icon {
+            font-size: 1.5rem;
+        }
+
+        .footer-text {
+            font-size: 0.75rem;
+            white-space: nowrap;
+        }
+
+        @media (max-width: 768px) {
+            .contact-container {
+                padding: 30px 20px;
+            }
+
+            .page-title {
+                font-size: 2em;
+            }
+
+            .google-form iframe {
+                min-height: 1000px;
+            }
+
+            .footer-link {
+                min-width: 60px;
+                padding: 8px 10px;
+            }
+
+            .footer-text {
+                font-size: 0.65rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="contact-container">
+        <h1 class="page-title">📞 お問い合わせ</h1>
+        <p class="page-subtitle">ご質問・ご要望・バグ報告など、お気軽にご連絡ください</p>
+
+        <p class="contact-intro">
+            ソロワーズをご利用いただき、ありがとうございます。<br>
+            ゲームに関するご質問、改善のご要望、バグ報告など、どんな内容でもお気軽にお問い合わせください。
+        </p>
+
+        <!-- お問い合わせ方法 -->
+        <div class="contact-methods">
+            <!-- X（旧Twitter） -->
+            <div class="contact-method">
+                <h3><span class="contact-icon">🐦</span>X（旧Twitter）</h3>
+                <p>最も早くご返信できる連絡方法です。DMまたはリプライでお気軽にどうぞ。</p>
+                <a href="https://x.com/solowords_yuki" target="_blank" rel="noopener noreferrer" class="contact-link">
+                    @solowords_yuki をフォロー
+                </a>
+            </div>
+
+            <!-- Googleフォーム -->
+            <div class="contact-method">
+                <h3><span class="contact-icon">📝</span>お問い合わせフォーム</h3>
+                <p>下記のフォームからもお問い合わせいただけます。</p>
+                <p style="margin-top: 10px; color: #666;">ご入力いただいたメールアドレス宛に返信いたします。<br>※すべてのご質問に回答できない場合がありますので、ご了承ください。</p>
+                <a href="https://forms.gle/nSXU7A6wzp5woCnD6" target="_blank" rel="noopener noreferrer" class="contact-link">
+                    📝 お問い合わせフォームを開く
+                </a>
+            </div>
+        </div>
+
+        <!-- お問い合わせ内容の例 -->
+        <div class="info-box">
+            <h4>💬 こんな内容でもOKです</h4>
+            <ul>
+                <li>ゲームの遊び方がわからない</li>
+                <li>バグを見つけた</li>
+                <li>新しい機能の要望</li>
+                <li>マップ作成のアドバイスが欲しい</li>
+                <li>攻略のコツを教えて欲しい</li>
+                <li>ソロワーズについてもっと知りたい</li>
+                <li>コラボや取材の依頼</li>
+            </ul>
+        </div>
+
+        <!-- 注意事項 -->
+        <div class="info-box">
+            <h4>⚠️ お問い合わせ前にご確認ください</h4>
+            <ul>
+                <li>よくある質問は<a href="faq.html" style="color: #667eea; text-decoration: underline;">FAQページ</a>をご確認ください</li>
+                <li>ご返信は1週間程度お時間をいただく場合があります</li>
+                <li>個人情報の取り扱いについては<a href="privacy.html" style="color: #667eea; text-decoration: underline;">プライバシーポリシー</a>をご確認ください</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- フッターナビゲーション -->
+    <footer id="globalFooter" class="footer-nav">
+        <!-- ゲームをプレイボタン -->
+        <button id="footerPlayButton" class="footer-play-button" onclick="window.location.href='index.html'">
+            🎮 ゲームをプレイ
+        </button>
+        
+        <div class="footer-links">
+            <a href="tips.html" class="footer-link">
+                <span class="footer-icon">💡</span>
+                <span class="footer-text">攻略ガイド</span>
+            </a>
+            <a href="how-to-play-advanced.html" class="footer-link footer-link-primary" id="footerGuide">
+                <span class="footer-icon">📖</span>
+                <span class="footer-text">遊び方ガイド</span>
+            </a>
+            <button class="footer-link footer-link-primary" id="footerBackToMenu" style="display: none;">
+                <span class="footer-icon">🏠</span>
+                <span class="footer-text">メニューに戻る</span>
+            </button>
+            <a href="faq.html" class="footer-link" id="footerFaq">
+                <span class="footer-icon">❓</span>
+                <span class="footer-text">FAQ</span>
+            </a>
+        </div>
+    </footer>
+</body>
+</html>

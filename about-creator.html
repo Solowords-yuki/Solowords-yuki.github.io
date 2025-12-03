@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>運営者情報 - ソロワーズ | 無料パズルゲーム</title>
+    <meta name="description" content="ソロワーズの運営者情報。開発者Yukiのプロフィール、開発の経緯、連絡先などをご紹介します。">
+    <meta name="keywords" content="ソロワーズ,運営者情報,開発者,Yuki,概要">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', 'Yu Gothic', 'Hiragino Sans', sans-serif;
+            line-height: 1.8;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            padding: 20px;
+            margin: 0;
+        }
+
+        .creator-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            margin-bottom: 100px;
+        }
+
+        .page-title {
+            text-align: center;
+            font-size: 2.8em;
+            color: #667eea;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .page-subtitle {
+            text-align: center;
+            font-size: 1.2em;
+            color: #764ba2;
+            margin-bottom: 50px;
+        }
+
+        .profile-section {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 40px;
+            border: 2px solid rgba(102, 126, 234, 0.2);
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .profile-icon {
+            font-size: 6em;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .profile-info h2 {
+            color: #667eea;
+            font-size: 2.2em;
+            margin-bottom: 10px;
+        }
+
+        .profile-info p {
+            color: #666;
+            font-size: 1.2em;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 2em;
+            color: #667eea;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .section-content {
+            font-size: 1.1em;
+            line-height: 2;
+            color: #555;
+        }
+
+        .section-content p {
+            margin-bottom: 20px;
+        }
+
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .info-table tr {
+            border-bottom: 1px solid #eee;
+        }
+
+        .info-table th {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            padding: 15px;
+            text-align: left;
+            font-weight: bold;
+            color: #667eea;
+            width: 30%;
+        }
+
+        .info-table td {
+            padding: 15px;
+            color: #666;
+        }
+
+        .info-table a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .info-table a:hover {
+            text-decoration: underline;
+        }
+
+        .mission-box {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            margin: 40px 0;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .mission-box h3 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .mission-box p {
+            font-size: 1.2em;
+            line-height: 2;
+            text-align: center;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+            margin: 30px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, #667eea, #764ba2);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -32px;
+            top: 5px;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: #667eea;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px #667eea;
+        }
+
+        .timeline-date {
+            font-weight: bold;
+            color: #667eea;
+            font-size: 1.2em;
+            margin-bottom: 5px;
+        }
+
+        .timeline-content {
+            color: #666;
+        }
+
+        .contact-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .contact-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .contact-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .back-link {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .menu-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 1.1em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .menu-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        /* フッターナビゲーション */
+        .footer-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            box-shadow: 0 -2px 20px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            padding: 10px 15px;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            min-width: 80px;
+        }
+
+        .footer-link:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #40CFFF;
+            transform: translateY(-2px);
+        }
+
+        .footer-link-primary {
+            background: rgba(64, 207, 255, 0.2);
+            color: #40CFFF;
+        }
+
+        .footer-icon {
+            font-size: 1.5rem;
+        }
+
+        .footer-text {
+            font-size: 0.75rem;
+            white-space: nowrap;
+        }
+
+        @media (max-width: 768px) {
+            .creator-container {
+                padding: 30px 20px;
+            }
+
+            .page-title {
+                font-size: 2em;
+            }
+
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .contact-buttons {
+                flex-direction: column;
+            }
+
+            .footer-link {
+                min-width: 60px;
+                padding: 8px 10px;
+            }
+
+            .footer-text {
+                font-size: 0.65rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="creator-container">
+        <h1 class="page-title">👤 運営者情報</h1>
+        <p class="page-subtitle">ソロワーズを運営・開発している情報をご紹介します</p>
+
+        <!-- プロフィールセクション -->
+        <div class="profile-section">
+            <div class="profile-header">
+                <div class="profile-icon">🎮</div>
+                <div class="profile-info">
+                    <h2>Yuki</h2>
+                    <p>ソロワーズ 考案者・開発者・運営者</p>
+                </div>
+            </div>
+            <div class="section-content">
+                <p>パズルゲームと論理的思考が好きな個人開発者。「誰でも楽しめて、誰でも作れる」をコンセプトに、ソロワーズを開発しました。</p>
+                <p>デジタルとアナログの両方で楽しめるゲームを通じて、多くの人に思考する楽しさを届けたいと考えています。</p>
+            </div>
+        </div>
+
+        <!-- サイト情報 -->
+        <section class="section">
+            <h2 class="section-title">📋 サイト情報</h2>
+            <table class="info-table">
+                <tr>
+                    <th>サイト名</th>
+                    <td>ソロワーズ（Solowords）</td>
+                </tr>
+                <tr>
+                    <th>URL</th>
+                    <td><a href="https://solowords-yuki.github.io/" target="_blank" rel="noopener noreferrer">https://solowords-yuki.github.io/</a></td>
+                </tr>
+                <tr>
+                    <th>運営者</th>
+                    <td>Yuki（Yaminion）</td>
+                </tr>
+                <tr>
+                    <th>開設日</th>
+                    <td>2025年7月29日</td>
+                </tr>
+                <tr>
+                    <th>サイト種別</th>
+                    <td>無料ブラウザパズルゲーム</td>
+                </tr>
+                <tr>
+                    <th>主なコンテンツ</th>
+                    <td>パズルゲーム、クリエイターモード、マップ作成機能、攻略ガイド</td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- 連絡先 -->
+        <section class="section">
+            <h2 class="section-title">📞 連絡先</h2>
+            <table class="info-table">
+                <tr>
+                    <th>X（旧Twitter）</th>
+                    <td><a href="https://x.com/solowords_yuki" target="_blank" rel="noopener noreferrer">@solowords_yuki</a></td>
+                </tr>
+                <tr>
+                    <th>お問い合わせフォーム</th>
+                    <td><a href="contact.html">お問い合わせページ</a></td>
+                </tr>
+                <tr>
+                    <th>対応時間</th>
+                    <td>平日 10:00-18:00（土日祝日は対応が遅れる場合があります）</td>
+                </tr>
+            </table>
+
+            <div class="contact-buttons">
+                <a href="https://x.com/solowords_yuki" target="_blank" rel="noopener noreferrer" class="contact-button">
+                    🐦 Xでフォロー
+                </a>
+                <a href="contact.html" class="contact-button">
+                    📝 お問い合わせフォーム
+                </a>
+            </div>
+        </section>
+
+        <!-- 開発の経緯 -->
+        <section class="section">
+            <h2 class="section-title">💡 開発の経緯</h2>
+            <div class="section-content">
+                <p>ソロワーズは、「パズルゲームをもっと簡単に、誰でもすぐ楽しめるように」という想いから生まれました。さらに、遊ぶだけでなく“作る楽しさ”を体験できる新しい形のパズルゲームです。</p>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">20XX年</div>
+                        <div class="timeline-content">パズルゲームのアイデア誕生。紙とペンで試作を開始。今後公開予定</div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-date">2025年4月-6月</div>
+                        <div class="timeline-content">Webアプリとして開発開始。クリエイトモード実装。</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2025年7月29日</div>
+                        <div class="timeline-content">ソロワーズ正式公開。無料で誰でも遊べるように。</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2025年11月</div>
+                        <div class="timeline-content">攻略ガイド、FAQ、紙版ガイドなどコンテンツ拡充。</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ミッション -->
+        <div class="mission-box">
+            <h3>🎯 私たちのミッション</h3>
+            <p>「プレイヤー全員がクリエイターになれる世界を作る」</p>
+            <p style="font-size: 1em; margin-top: 20px;">
+                ソロワーズを通じて、パズルを解く楽しさだけでなく、<br>
+                自分で問題を作り出す創造性を、すべての人に届けたい。
+            </p>
+        </div>
+
+        <!-- 今後の展望 -->
+        <section class="section">
+            <h2 class="section-title">🚀 今後の展望</h2>
+            <div class="section-content">
+                <p>ソロワーズは、これからも進化を続けます。現在、以下の機能を開発・企画中です：</p>
+                <ul style="list-style: none; padding-left: 0;">
+                    <li style="padding: 10px 0; border-bottom: 1px solid #eee;">✅ マップ共有機能（作成したマップを世界中と共有）</li>
+                    <li style="padding: 10px 0; border-bottom: 1px solid #eee;">✅ マルチプレイモード（友達と協力・対戦）</li>
+                    <li style="padding: 10px 0; border-bottom: 1px solid #eee;">✅ AI対戦モード（最適解を目指す）</li>
+                    
+                    <li style="padding: 10px 0; border-bottom: 1px solid #eee;">✅ コミュニティ機能（攻略情報の共有）</li>
+                </ul>
+                <p style="margin-top: 30px;">皆様のフィードバックを大切にしながら、より楽しく、より使いやすいゲームを目指します。</p>
+            </div>
+        </section>
+
+        <!-- 謝辞 -->
+        <section class="section">
+            <h2 class="section-title">🙏 謝辞</h2>
+            <div class="section-content">
+                <p>ソロワーズを遊んでくださる全てのプレイヤーの皆様に心から感謝いたします。</p>
+                <p>皆様からのフィードバックや応援の言葉が、開発の大きな励みとなっています。これからもより良いゲーム体験を提供できるよう、精一杯努力してまいります。</p>
+            </div>
+        </section>
+    </div>
+
+    <!-- フッターナビゲーション -->
+    <footer id="globalFooter" class="footer-nav">
+        <!-- ゲームをプレイボタン -->
+        <button id="footerPlayButton" class="footer-play-button" onclick="window.location.href='index.html'">
+            🎮 ゲームをプレイ
+        </button>
+        
+        <div class="footer-links">
+            <a href="tips.html" class="footer-link">
+                <span class="footer-icon">💡</span>
+                <span class="footer-text">攻略ガイド</span>
+            </a>
+            <a href="how-to-play-advanced.html" class="footer-link footer-link-primary" id="footerGuide">
+                <span class="footer-icon">📖</span>
+                <span class="footer-text">遊び方ガイド</span>
+            </a>
+            <button class="footer-link footer-link-primary" id="footerBackToMenu" style="display: none;">
+                <span class="footer-icon">🏠</span>
+                <span class="footer-text">メニューに戻る</span>
+            </button>
+            <a href="faq.html" class="footer-link" id="footerFaq">
+                <span class="footer-icon">❓</span>
+                <span class="footer-text">FAQ</span>
+            </a>
+        </div>
+    </footer>
+</body>
+</html>

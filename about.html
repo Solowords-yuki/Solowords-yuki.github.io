@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ソロワーズの歴史と誕生秘話 | 無料パズルゲーム</title>
+    <meta name="description" content="ソロワーズの誕生背景、パズルゲームの歴史、そして他のゲームとの違いについて詳しく解説します。なぜこのゲームが生まれたのか、開発秘話をご紹介。">
+    <meta name="keywords" content="ソロワーズ,歴史,開発秘話,パズルゲーム,誕生背景,独自性">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', 'Yu Gothic', 'Hiragino Sans', sans-serif;
+            line-height: 1.8;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            padding: 20px;
+            margin: 0;
+        }
+
+        .about-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            margin-bottom: 100px;
+        }
+
+        .page-title {
+            text-align: center;
+            font-size: 2.8em;
+            color: #667eea;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .page-subtitle {
+            text-align: center;
+            font-size: 1.2em;
+            color: #764ba2;
+            margin-bottom: 50px;
+            font-weight: bold;
+        }
+
+        .section {
+            margin-bottom: 50px;
+        }
+
+        .section-title {
+            font-size: 2em;
+            color: #667eea;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .section-content {
+            font-size: 1.1em;
+            line-height: 2;
+            color: #444;
+        }
+
+        .section-content p {
+            margin-bottom: 20px;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            border-left: 5px solid #667eea;
+            padding: 25px;
+            margin: 30px 0;
+            border-radius: 10px;
+        }
+
+        .highlight-box h3 {
+            color: #667eea;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+            margin: 30px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, #667eea, #764ba2);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -32px;
+            top: 5px;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: #667eea;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px #667eea;
+        }
+
+        .timeline-title {
+            font-size: 1.3em;
+            color: #667eea;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        }
+
+        .comparison-table th {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px;
+            font-size: 1.1em;
+            text-align: left;
+        }
+
+        .comparison-table td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .comparison-table tr:hover {
+            background: rgba(102, 126, 234, 0.05);
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .feature-list li {
+            padding: 15px;
+            margin: 10px 0;
+            background: rgba(102, 126, 234, 0.05);
+            border-left: 4px solid #667eea;
+            border-radius: 5px;
+        }
+
+        .feature-list li strong {
+            color: #667eea;
+            font-size: 1.2em;
+        }
+
+        .quote-box {
+            font-style: italic;
+            font-size: 1.2em;
+            color: #666;
+            padding: 30px;
+            margin: 30px 0;
+            background: #f8f9fa;
+            border-left: 5px solid #764ba2;
+            border-radius: 10px;
+        }
+
+        .back-link {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .menu-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 1.1em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .menu-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        /* フッターナビゲーション */
+        .footer-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            box-shadow: 0 -2px 20px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            padding: 10px 15px;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            min-width: 80px;
+        }
+
+        .footer-link:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #40CFFF;
+            transform: translateY(-2px);
+        }
+
+        .footer-link-primary {
+            background: rgba(64, 207, 255, 0.2);
+            color: #40CFFF;
+        }
+
+        .footer-icon {
+            font-size: 1.5rem;
+        }
+
+        .footer-text {
+            font-size: 0.75rem;
+            white-space: nowrap;
+        }
+
+        @media (max-width: 768px) {
+            .about-container {
+                padding: 30px 20px;
+            }
+
+            .page-title {
+                font-size: 2em;
+            }
+
+            .section-title {
+                font-size: 1.5em;
+            }
+
+            .footer-link {
+                min-width: 60px;
+                padding: 8px 10px;
+            }
+
+            .footer-text {
+                font-size: 0.65rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="about-container">
+        <h1 class="page-title">🎮 ソロワーズの歴史と誕生秘話</h1>
+        <p class="page-subtitle">～ パズルゲームの新たな挑戦 ～</p>
+
+        <!-- パズルゲームの歴史 -->
+        <section class="section">
+            <h2 class="section-title">📜 パズルゲームの歴史</h2>
+            <div class="section-content">
+                <p>パズルゲームの歴史は古く、紀元前から人々は知的な遊びを楽しんできました。現代のパズルゲームは、18世紀のジグソーパズル、19世紀の数独の原型、20世紀のルービックキューブなど、時代と共に進化してきました。</p>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-title">1700年代 - ジグソーパズルの誕生</div>
+                        <p>地図を教育目的で切り分けたのが始まり。視覚的なパズルの先駆け。</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-title">1800年代 - 数独の原型</div>
+                        <p>スイスの数学者が考案した「ラテン方陣」がルーツ。論理的思考を鍛える。</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-title">1970年代 - ルービックキューブ</div>
+                        <p>ハンガリーの建築学者が発明。世界中で4億個以上販売。</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-title">2000年代 - デジタルパズルゲームの普及</div>
+                        <p>スマートフォンの登場で、いつでもどこでも楽しめるように。</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-title">2025年 - ソロワーズの開発</div>
+                        <p>デジタルとアナログを融合し、誰でもクリエイターになれる新世代パズルゲーム。</p>
+                        <p><em>発案時期の詳細は今後公開予定。</em></p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ソロワーズの誕生背景 -->
+        <section class="section">
+            <h2 class="section-title">💡 ソロワーズの誕生背景</h2>
+            <div class="section-content">
+                <p>ソロワーズは、「誰でも気軽に楽しめて、奥深く、そして自分でも作れるパズルゲーム」というコンセプトのもと開発されました。</p>
+                
+                <div class="highlight-box">
+                    <h3>🎯 開発のきっかけ</h3>
+                    <p>既存のパズルゲームは「遊ぶ」ことに特化していましたが、「作る楽しさ」を体験できるゲームは少数でした。また、デジタルでしか遊べないゲームが増える中、紙とペンでも楽しめるシンプルさを持ったゲームの需要を感じていました。</p>
+                    <p>「プレイヤーがクリエイターになれる」というコンセプトで、誰もが自分だけのパズルを作り、共有できる環境を目指しました。</p>
+                </div>
+
+                <p>ソロワーズの名前の由来は、「Solo（一人で）」と「Words（言葉・数字）」を組み合わせたもの。一人でじっくり考え、数字を揃える楽しさを表現しています。</p>
+            </div>
+        </section>
+
+        <!-- 他のパズルゲームとの違い -->
+        <section class="section">
+            <h2 class="section-title">🆚 他のパズルゲームとの違い</h2>
+            <div class="section-content">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>特徴</th>
+                            <th>ソロワーズ</th>
+                            <th>数独</th>
+                            <th>倉庫番</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>ルール</strong></td>
+                            <td>同じ数字を隣接させる</td>
+                            <td>数字を配置する</td>
+                            <td>荷物を押して運ぶ</td>
+                        </tr>
+                        <tr>
+                            <td><strong>難易度調整</strong></td>
+                            <td>プレイスタイルで自動調整</td>
+                            <td>固定</td>
+                            <td>固定</td>
+                        </tr>
+                        <tr>
+                            <td><strong>作成機能</strong></td>
+                            <td>誰でも簡単に作れる</td>
+                            <td>難しい</td>
+                            <td>専門知識が必要</td>
+                        </tr>
+                        <tr>
+                            <td><strong>紙での再現</strong></td>
+                            <td>簡単</td>
+                            <td>可能</td>
+                            <td>やや難しい</td>
+                        </tr>
+                        <tr>
+                            <td><strong>拡張性</strong></td>
+                            <td>3×3から無限大まで</td>
+                            <td>9×9が基本</td>
+                            <td>マップ依存</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ソロワーズの独自性 -->
+        <section class="section">
+            <h2 class="section-title">✨ ソロワーズの独自性</h2>
+            <div class="section-content">
+                <ul class="feature-list">
+                    <li>
+                        <strong>🎯 超シンプルなルール</strong><br>
+                        子供からシニアまで、誰でもすぐに理解できる直感的なルール。説明書なしでも遊べます。
+                    </li>
+                    <li>
+                        <strong>🎮 奥深い戦略性</strong><br>
+                        シンプルながら、先読みと戦略が必要。〇×ゲームと将棋を融合したような思考が楽しめます。
+                    </li>
+                    <li>
+                        <strong>🌌 無限の拡張性</strong><br>
+                        3×3から理論上無限大まで対応。マップサイズを変えるだけで、全く異なる体験ができます。
+                    </li>
+                    <li>
+                        <strong>⚡ 難易度の自動調整</strong><br>
+                        プレイヤーの動き方によって難易度が変化。同じマップでも、遊び方次第で簡単にも難しくもなります。
+                    </li>
+                    <li>
+                        <strong>💥 プレイヤーがクリエイター</strong><br>
+                        クリエイトモードで誰でも簡単にオリジナルマップを作成可能。遊ぶだけでなく、作る楽しさも体験できます。
+                    </li>
+                    <li>
+                        <strong>📝 デジタルとアナログの融合</strong><br>
+                        ブラウザでもプレイでき、紙とペンでも全く同じゲーム体験が可能。電源不要でどこでも遊べます。
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- なぜ紙でも遊べるのか -->
+        <section class="section">
+            <h2 class="section-title">📝 なぜ紙でも遊べるのか</h2>
+            <div class="section-content">
+                <p>ソロワーズは、発案当初から「紙とペンでも遊べること」を重視して設計されました。デジタルゲームが主流の現代だからこそ、アナログでも楽しめる価値があると考えています。</p>
+                
+                <div class="highlight-box">
+                    <h3>📋 紙版の利点</h3>
+                    <ul>
+                        <li><strong>電源不要：</strong>バッテリー切れの心配なし</li>
+                        <li><strong>どこでも遊べる：</strong>待ち時間や移動中に最適</li>
+                        <li><strong>思考の可視化：</strong>消しゴムで試行錯誤しながら考えられる</li>
+                        <li><strong>コミュニケーション：</strong>友達とマップを交換して楽しめる</li>
+                        <li><strong>脳トレ効果：</strong>手書きすることで記憶に定着しやすい</li>
+                    </ul>
+                </div>
+
+                <p>デジタル版は即座にフィードバックが得られる利点がありますが、紙版はじっくり考える時間を楽しめます。両方を使い分けることで、より深くゲームを楽しめます。</p>
+            </div>
+        </section>
+
+        <!-- 今後の展望 -->
+        <section class="section">
+            <h2 class="section-title">🚀 今後の展望</h2>
+            <div class="section-content">
+                <p>ソロワーズは、まだ始まったばかりのプロジェクトです。今後は以下のような機能拡張を予定しています：</p>
+                
+                <ul class="feature-list">
+                    <li>
+                        <strong>マップ共有機能</strong><br>
+                        作成したマップをオンラインで共有し、世界中のプレイヤーと楽しめる機能
+                    </li>
+                    <li>
+                        <strong>マルチプレイモード</strong><br>
+                        友達と協力してパズルを解く協力モードや対戦モード
+                    </li>
+                    <li>
+                        <strong>対戦モード</strong><br>
+                        AIと競い合って最適解を目指すモード
+                    </li>
+                    <li>
+                        <strong>チュートリアル動画</strong><br>
+                        初心者向けの詳しい解説動画シリーズ
+                    </li>
+                    <li>
+                        <strong>コミュニティ機能</strong><br>
+                        攻略情報や自作マップを共有できるコミュニティ
+                    </li>
+                </ul>
+
+                <div class="quote-box">
+                    「ソロワーズを通じて、パズルゲームの新しい可能性を広げていきたい。プレイヤー一人ひとりがクリエイターとなり、無限の楽しさを生み出せる世界を目指します。」<br>
+                    <strong>- 開発者より</strong>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- フッターナビゲーション -->
+    <footer id="globalFooter" class="footer-nav">
+        <!-- ゲームをプレイボタン -->
+        <button id="footerPlayButton" class="footer-play-button" onclick="window.location.href='index.html'">
+            🎮 ゲームをプレイ
+        </button>
+        
+        <div class="footer-links">
+            <a href="tips.html" class="footer-link">
+                <span class="footer-icon">💡</span>
+                <span class="footer-text">攻略ガイド</span>
+            </a>
+            <a href="how-to-play-advanced.html" class="footer-link footer-link-primary" id="footerGuide">
+                <span class="footer-icon">📖</span>
+                <span class="footer-text">遊び方ガイド</span>
+            </a>
+            <button class="footer-link footer-link-primary" id="footerBackToMenu" style="display: none;">
+                <span class="footer-icon">🏠</span>
+                <span class="footer-text">メニューに戻る</span>
+            </button>
+            <a href="faq.html" class="footer-link" id="footerFaq">
+                <span class="footer-icon">❓</span>
+                <span class="footer-text">FAQ</span>
+            </a>
+        </div>
+    </footer>
+</body>
+</html>

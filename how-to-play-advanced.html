@@ -6,21 +6,8 @@
     <title>ソロワーズの遊び方 - 初心者向けガイド | 無料パズルゲーム</title>
     <meta name="description" content="ソロワーズの基本的な遊び方を分かりやすく解説。初心者でもすぐに楽しめる操作方法やクリアのコツをご紹介します。">
     <meta name="keywords" content="ソロワーズ,遊び方,初心者ガイド,パズルゲーム,攻略,コツ">
+    <link rel="stylesheet" href="style.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', 'Yu Gothic', 'Hiragino Sans', sans-serif;
-            line-height: 1.8;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #333;
-            padding: 20px;
-        }
-
         .how-to-play-container {
             max-width: 1000px;
             margin: 0 auto;
@@ -269,103 +256,6 @@
                 font-size: 1.5em;
             }
         }
-
-        /* フッターナビゲーション */
-        .footer-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-            padding: 8px 0;
-            z-index: 1000;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 0 10px;
-        }
-
-        .footer-link {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-decoration: none;
-            color: #667eea;
-            font-size: 0.75rem;
-            padding: 5px 10px;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            min-width: 50px;
-        }
-
-        .footer-link:hover,
-        .footer-link:active {
-            background: rgba(102, 126, 234, 0.1);
-            transform: translateY(-2px);
-        }
-
-        .footer-link-primary {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            font-weight: 600;
-            min-width: 80px;
-            padding: 8px 12px;
-            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
-        }
-
-        .footer-link-primary:hover,
-        .footer-link-primary:active {
-            background: linear-gradient(135deg, #5568d3 0%, #65408b 100%);
-            transform: translateY(-3px);
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
-        }
-
-        .footer-link-primary .footer-text {
-            font-weight: 600;
-        }
-
-        .footer-icon {
-            font-size: 1.3rem;
-            margin-bottom: 2px;
-        }
-
-        .footer-text {
-            font-size: 0.7rem;
-            font-weight: 500;
-            white-space: nowrap;
-        }
-
-        /* コンテンツの下余白を追加してフッターと重ならないように */
-        .how-to-play-container {
-            margin-bottom: 80px;
-        }
-
-        @media (max-width: 768px) {
-            .footer-link {
-                padding: 4px 6px;
-                min-width: 45px;
-            }
-
-            .footer-link-primary {
-                min-width: 70px;
-                padding: 6px 10px;
-            }
-
-            .footer-icon {
-                font-size: 1.2rem;
-            }
-
-            .footer-text {
-                font-size: 0.65rem;
-            }
-        }
     </style>
     <script>
         // ページ読み込み時に一番上にスクロール
@@ -551,7 +441,7 @@
     </div>
 
     <!-- フッターナビゲーション（コンテンツページ用） -->
-    <footer class="footer-nav content-footer">
+    <footer id="globalFooter" class="footer-nav">
         <div class="footer-links">
             <a href="tips.html" class="footer-link">
                 <span class="footer-icon">💡</span>

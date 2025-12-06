@@ -418,11 +418,121 @@
             </div>
 
             <div class="next-preview">
-                <p><strong>📅 次回予告:</strong> 開発の舞台裏はまだまだ続きます。駒の移動ロジック、デザインの試行錯誤、紙とデジタルの両立...こんな感じの開発秘話をどんどん配信していきますので、お楽しみに！</p>
+                <p><strong>📅 次回:</strong> 「斜め移動」をAIに理解させる戦いについてお話しします。見た目と内部処理のギャップ、トヨタ方式の「なぜ？」を10回以上...お楽しみに！</p>
             </div>
         </article>
 
-        <!-- 第2回以降: 予告（プレースホルダー） -->
+        <!-- 第2回: 駒の移動方向そっちじゃないよ問題 -->
+        <article class="blog-post">
+            <div class="blog-header">
+                <div class="blog-date">2025年12月6日</div>
+                <h2 class="blog-title">駒の移動方向そっちじゃないよ！斜め移動の実装に2週間</h2>
+                <div class="tag-list">
+                    <span class="tag">#AI開発</span>
+                    <span class="tag">#移動ロジック</span>
+                    <span class="tag">#トヨタ方式</span>
+                </div>
+            </div>
+
+            <div class="blog-section">
+                <h3>📍 前回のあらすじ</h3>
+                <p>第1回では、「菱形」が通じない問題と格闘し、なんとか「ダイヤモンド型マップ」の形状と駒の配置まで実装できました。</p>
+                <p>マップができた。駒も配置できた。さぁ次は...</p>
+            </div>
+
+            <div class="blog-section">
+                <h3>🎯 「斜め移動」って何？</h3>
+                <p>ソロワーズの駒は<strong>斜め方向に一直線に移動</strong>します。このシンプルなルールをAIに実装してもらおうとしたのですが...</p>
+
+                <div class="quote-box">
+                    「AIに斜め移動してなんて通じませんｗ」
+                </div>
+
+                <p>問題は、<strong>見た目の話をする開発者と、内部処理（配列）で考えるAI</strong>が全く噛み合わなかったことです。</p>
+
+                <ul style="margin-left: 30px; line-height: 2; color: #666;">
+                    <li>👨‍💻 <strong>開発者:</strong> 「画面上で斜めに動いて欲しい」</li>
+                    <li>🤖 <strong>AI:</strong> 「配列のインデックスをどう変更すれば？」</li>
+                    <li>👨‍💻 <strong>開発者:</strong> 「いや、見た目が斜めなんだって！」</li>
+                    <li>🤖 <strong>AI:</strong> 「配列の次元が...」</li>
+                </ul>
+
+                <p>完全に平行線でした。</p>
+            </div>
+
+            <div class="blog-section">
+                <h3>❓ トヨタ方式「なぜ？」を10回以上</h3>
+                <p>もうこうなったら<strong>根気よく「なぜできないの？」をAIに投げまくる</strong>しかありません。</p>
+
+                <div class="highlight-box">
+                    <h4 style="color: #667eea;">「なぜ？」の連打</h4>
+                    <p>🔍 なぜ斜めに動かないの？</p>
+                    <p>🔍 なぜその方向なの？</p>
+                    <p>🔍 なぜ配列の計算が合わないの？</p>
+                    <p>🔍 なぜ座標がずれるの？</p>
+                    <p>🔍 なぜ...（以下10回以上続く）</p>
+                </div>
+
+                <p>トヨタ方式の「なぜ？を5回」なんて生易しいものじゃありません。<strong>10回以上</strong>はやったでしょう。</p>
+
+                <p>でも重要なことは<strong>ただ「なぜできない？」だけを投げてもダメ</strong>なんです。</p>
+
+                <div class="quote-box">
+                    「ここがダメ、こうしてみて」<br>
+                    技術的な話も一緒にしないとAIは理解してくれませんでした。
+                </div>
+            </div>
+
+            <div class="blog-section">
+                <h3>🔄 原点回帰はAIには無理？</h3>
+                <p>開発中、何度も「<strong>そもそもこのやり方は正しいの？</strong>」という疑問が湧きました。</p>
+
+                <p>でも、AIにそういう根本的な問いを投げないと軌道修正はしないですね。AIは基本的に「<strong>これをこうしたい</strong>」という具体的な指示で開発を進めるのが得意と思ってます。</p>
+
+                <div class="highlight-box">
+                    <p>💡 <strong>学んだこと</strong><br>
+                    最初から「こうしたい」を明確にすれば、もっと早く開発できたかもしれません。でも、試行錯誤の中で方向性が見えてくることもあります。</p>
+                </div>
+
+                <p>結局、<strong>開発者のプログラミング経験と知識を総動員</strong>して、AIと二人三脚で進めていく形になりました。</p>
+            </div>
+
+            <div class="blog-section">
+                <h3>⏱️ 開発期間: 2週間の格闘</h3>
+                <p>この移動ロジックの実装だけで<strong>2週間くらい</strong>かかりました。</p>
+
+                <p>仕事終わりに開発しているので、時間はどうしてもかかります。まぁ、普通は「ゲーム作ろう！」ってなかなか起きないですよね。</p>
+
+                <div class="quote-box">
+                    「根気なのか、頭のねじを外しているのか、<br>そのどちらかですねｗ」
+                </div>
+
+                <p>でも、その執念（？）があったからこそ、動くゲームになったのだと思います。</p>
+            </div>
+
+            <div class="blog-section">
+                <h3>📚 今回の学び</h3>
+                <div class="highlight-box">
+                    <p>💡 <strong>見た目と内部処理の違い</strong><br>
+                    開発者が「見た目」で説明しても、AIは「配列の操作」で考える。両方の視点が必要</p>
+                    
+                    <p>💡 <strong>具体的な指示が鍵</strong><br>
+                    「なぜ？」だけでなく「ここがダメ、こうしてみて」という技術的な提案も一緒に</p>
+                    
+                    <p>💡 <strong>原点回帰は人間の仕事</strong><br>
+                    「そもそもこのやり方で正しい？」という根本的な問いは、AI任せにできない</p>
+
+                    <p>💡 <strong>根気と執念</strong><br>
+                    仕事終わりの2週間、トヨタ方式10回以上。これが個人開発のリアルでした</p>
+                </div>
+            </div>
+
+            <div class="next-preview">
+                <p><strong>📅 次回予告:</strong> 移動ロジックができた！...と思ったら、エッジケースの嵐が待っていました。バウンダリチェック、衝突判定、そして謎のバグ...続きます！</p>
+            </div>
+        </article>
+
+        <!-- 第3回以降: 予告（プレースホルダー） -->
         <article class="blog-post upcoming">
             <div class="blog-header">
                 <div class="blog-date">📅 続々更新予定</div>

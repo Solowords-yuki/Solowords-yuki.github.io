@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>教育要素の設計 - ソロワーズのコンセプト | 無料パズルゲーム</title>
+    <meta name="description" content="ソロワーズの教育要素の設計思想。クリエイターモード、広告配置の考え方、最終目標について詳しく解説します。">
+    <meta name="keywords" content="ソロワーズ,教育,クリエイターモード,設計思想,最終目標">
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', 'Yu Gothic', 'Hiragino Sans', sans-serif;
+            line-height: 1.9;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            padding: 20px;
+            margin: 0;
+        }
+
+        .concept-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            margin-bottom: 100px;
+        }
+
+        .page-title {
+            text-align: center;
+            font-size: 2.8em;
+            color: #667eea;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .page-subtitle {
+            text-align: center;
+            font-size: 1.2em;
+            color: #764ba2;
+            margin-bottom: 50px;
+            font-weight: bold;
+        }
+
+        .chapter {
+            margin: 60px 0;
+            padding: 40px;
+            background: rgba(102, 126, 234, 0.03);
+            border-radius: 15px;
+            border-left: 5px solid #667eea;
+        }
+
+        .chapter-title {
+            font-size: 2.2em;
+            color: #667eea;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .section {
+            margin: 40px 0;
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            color: #764ba2;
+            margin: 30px 0 20px 0;
+            padding-left: 15px;
+            border-left: 5px solid #764ba2;
+        }
+
+        .quote-box {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            border-left: 5px solid #667eea;
+            padding: 25px;
+            margin: 30px 0;
+            border-radius: 10px;
+            font-size: 1.15em;
+            font-weight: bold;
+            color: #667eea;
+            text-align: center;
+        }
+
+        .highlight-box {
+            background: #fff3cd;
+            border: 3px solid #ffc107;
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 12px;
+        }
+
+        .highlight-box h4 {
+            color: #856404;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .concept-container p {
+            margin: 20px 0;
+            font-size: 1.05em;
+            line-height: 2;
+        }
+
+        .concept-container ul {
+            margin: 20px 0 20px 40px;
+            line-height: 2;
+        }
+
+        .concept-container li {
+            margin: 10px 0;
+        }
+
+        .emphasis {
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 50px;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .back-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .divider {
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #667eea, transparent);
+            margin: 50px 0;
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 60px;
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .concept-container {
+                padding: 30px 20px;
+            }
+
+            .page-title {
+                font-size: 2.2em;
+            }
+
+            .chapter-title {
+                font-size: 1.8em;
+            }
+
+            .section-title {
+                font-size: 1.5em;
+            }
+
+            .nav-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="concept-container">
+        <h1 class="page-title">💡 教育要素の設計</h1>
+        <p class="page-subtitle">～ 第2章 ～</p>
+
+        <!-- 第2章: では、どう教育要素を盛り込むか -->
+        <div class="chapter">
+            <h2 class="chapter-title">第2章: では、どう教育要素を盛り込むか</h2>
+
+            <p>このゲームを発案した当初、<br>
+            正直に言えば「教育ゲーム」を作るつもりはなかった。</p>
+
+            <p>〇×ゲームと将棋を融合した、<br>
+            暇な時に遊ぶには最高のゲーム。<br>
+            それが最初のイメージだった。</p>
+
+            <p>初期配置についても、<br>
+            「なぜ45°傾けたのか」と聞かれれば、<br>
+            理屈より先に<br>
+            <span class="emphasis">こうした方が自分は好きだ</span><br>
+            という直感があった。</p>
+
+            <p>実際に、暇な時間に何度も遊ぶ中で見えてきたのは、<br>
+            このゲームの最大の強みが<br>
+            <span class="emphasis">とにかくシンプルであること</span>だ。</p>
+
+            <p>配置ルールも、ゲームルールも、<br>
+            幼稚園児でも理解できるだろう。<br>
+            テスト時間の余り時間に、<br>
+            さっと紙に盤面を描いて始められる。<br>
+            それでいて、長時間遊べる。</p>
+
+            <p>この点は、明らかに<span class="emphasis">学生向け</span>だと感じた。<br>
+            従来の〇×ゲームの上位互換とも言える、<br>
+            すぐには終わらないゲームだ。</p>
+
+            <!-- セクション1: 教育とは -->
+            <div class="section">
+                <h3 class="section-title">2.1 教育とは</h3>
+
+                <p>そこから徐々に、<br>
+                「教育」という観点にも重きを置くようになった。</p>
+
+                <p>さっと作れる一方で、<br>
+                遊び方をアレンジする余地が多い。</p>
+
+                <p>「こうしたらどうなるだろう」<br>
+                「別の解き方はないか」<br>
+                と考え始めると、<br>
+                遊び方はほぼ無限に広がる。</p>
+
+                <p>これは学生向けであると同時に、<br>
+                <span class="emphasis">頭を使いたい人向けのゲームでもある。</span></p>
+
+                <div class="divider"></div>
+
+                <p>さらに、<br>
+                頭を使いたい人、知識を増やしたい人に向けた要素として、<br>
+                <span class="emphasis">クリエイターモードの搭載</span>も検討した。</p>
+
+                <p>試行を重ねる中で、<br>
+                これは必要だと感じ、実装に至った。<br>
+                そして現在は、実際に実装している。</p>
+            </div>
+
+            <!-- セクション2: 情報を少しでも -->
+            <div class="section">
+                <h3 class="section-title">2.2 情報を少しでも</h3>
+
+                <p>ゲームそのもの以外にも、<br>
+                少しでも知識の糧になればと<br>
+                いくつかの小さな仕掛けを入れている。</p>
+
+                <p>今回このゲームは、無料で運用している。</p>
+
+                <ul>
+                    <li>Webページは <strong>GitHub の静的Webページ</strong>として公開<br>
+                    （あまり知られていないが、実はこれで十分成り立つ）</li>
+                    <li>ランキング機能には <strong>Firebase</strong> を使用</li>
+                </ul>
+
+                <p>これらは、開発当初ほとんど知識がなかった分野だ。<br>
+                AIに質問を重ねながら、この構成に辿り着いた。</p>
+
+                <p>URLについても、<br>
+                本来であれば独自ドメインを取得する選択肢もあった。<br>
+                しかし<br>
+                <span class="emphasis">「GitHubとは何か？」</span><br>
+                という小さな疑問につながる可能性も考え、<br>
+                現時点ではこのまま運用している。</p>
+
+                <p>もしかしたら、今後変更するかもしれない。<br>
+                だが、それはその時に考えればいい。</p>
+
+                <div class="divider"></div>
+
+                <p>そして、最後まで悩んだのが<span class="emphasis">「広告」</span>だ。</p>
+
+                <p>正直、収益性を第一に考えたゲームではない。<br>
+                仕組みは至ってシンプルで、<br>
+                紙媒体でも簡単に再現できる。<br>
+                真似しようと思えば、いくらでも真似できる。</p>
+
+                <p>それでも、<br>
+                考案・開発者として<br>
+                <span class="emphasis">「少しでも応援してもらえたら嬉しい」</span><br>
+                という気持ちはある。</p>
+
+                <div class="highlight-box">
+                    <h4>もう一つだけ、個人的な理由を言えば</h4>
+                    <p>おじいちゃんやおばあちゃんに、<br>
+                    「孫が作ったもの」を見せたかった。</p>
+                    <p>それもあって、<br>
+                    このゲームはかなりのスピードで形になった。</p>
+                </div>
+            </div>
+
+            <!-- セクション3: 最終目標 -->
+            <div class="section">
+                <h3 class="section-title">2.3 最終目標</h3>
+
+                <p>実は、このゲームには一つだけ、はっきりした最終目標がある。</p>
+
+                <div class="quote-box">
+                    このゲームを<br>
+                    〇×ゲームや将棋のような、<br>
+                    誰もが知っている国民的ゲームにしたい
+                </div>
+
+                <p>特別な知識がなくても遊べて、<br>
+                子どもから大人まで同じ盤面を囲める。<br>
+                そして、遊ぶほどに思考の深さが変わっていく。</p>
+
+                <p>そんなゲームとして、<br>
+                この「ソロワーズ」を育てていきたい。</p>
+
+                <p>もちろん、一人では無理だ。<br>
+                だからこそ、<br>
+                遊んでくれた人、<br>
+                応援してくれた人、<br>
+                <span class="emphasis">すべての力を借りたいと思っている。</span></p>
+            </div>
+
+            <!-- セクション4: 作者からのコメント -->
+            <div class="section">
+                <h3 class="section-title">2.4 作者からのコメント</h3>
+
+                <p>だからこそ、このゲームの価値を感じてくれた人にだけ、<br>
+                無理のない形でかかわってもらえたらと思っている。</p>
+
+                <p>投資ではない。</p>
+
+                <div class="quote-box">
+                    応援でいい。<br>
+                    一緒に盛り上げないか？
+                </div>
+
+                <div class="highlight-box">
+                    <h4>補足</h4>
+                    <p>初回ログイン時に年齢選択をしたはずだ。</p>
+                    <p><strong>大人には広告を表示する。<br>
+                    子どもとシニアには表示しない。</strong></p>
+                    <p>理由は単純だ。<br>
+                    間違えて広告を押しても対処できるのは大人だが、<br>
+                    そうでない人もいる。<br>
+                    だから、子ども・シニアは<br>
+                    安心して遊んでほしい。</p>
+                    <p>あくまで、善意に期待している。</p>
+                    <p>なお、動画広告は入れていない。<br>
+                    画面の四隅に、控えめな広告を置いただけだ。</p>
+                </div>
+
+                <div class="divider"></div>
+
+                <p>将来的には、<br>
+                学習系の出版社などから声がかかれば嬉しいと思っている。</p>
+
+                <p>もしそうなれば、<br>
+                野球場のフェンスに貼られるスポンサーのような形での<br>
+                展開も検討したい。</p>
+
+                <p>もし興味を持ってもらえたなら、<br>
+                <span class="emphasis">ぜひ連絡をもらえたら嬉しい。</span></p>
+            </div>
+        </div>
+
+        <div class="nav-buttons">
+            <a href="concept.html" class="back-link">← 第1章に戻る</a>
+            <a href="application.html" class="back-link">第3章を読む →</a>
+        </div>
+    </div>
+
+    <!-- フッターナビゲーション -->
+    <footer id="globalFooter" class="footer-nav">
+        <div class="footer-links">
+            <a href="../tips.html" class="footer-link">
+                <span class="footer-icon">💡</span>
+                <span class="footer-text">攻略ガイド</span>
+            </a>
+            <a href="../index.html" class="footer-link footer-link-primary">
+                <span class="footer-icon">🏠</span>
+                <span class="footer-text">ホームに戻る</span>
+            </a>
+            <a href="../faq.html" class="footer-link">
+                <span class="footer-icon">❓</span>
+                <span class="footer-text">FAQ</span>
+            </a>
+        </div>
+    </footer>
+</body>
+</html>

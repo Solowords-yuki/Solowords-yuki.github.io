@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ソロワーズのコンセプト - このゲームの本質 | 無料パズルゲーム</title>
+    <meta name="description" content="ソロワーズのコンセプトと設計思想。教育ゲームとしての側面、問題解決の思考プロセスを盤面に落とし込んだ理由を詳しく解説します。">
+    <meta name="keywords" content="ソロワーズ,コンセプト,教育,問題解決,思考プロセス,設計思想">
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', 'Yu Gothic', 'Hiragino Sans', sans-serif;
+            line-height: 1.9;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            padding: 20px;
+            margin: 0;
+        }
+
+        .concept-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            margin-bottom: 100px;
+        }
+
+        .page-title {
+            text-align: center;
+            font-size: 2.8em;
+            color: #667eea;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .page-subtitle {
+            text-align: center;
+            font-size: 1.2em;
+            color: #764ba2;
+            margin-bottom: 50px;
+            font-weight: bold;
+        }
+
+        .chapter {
+            margin: 60px 0;
+            padding: 40px;
+            background: rgba(102, 126, 234, 0.03);
+            border-radius: 15px;
+            border-left: 5px solid #667eea;
+        }
+
+        .chapter-title {
+            font-size: 2.2em;
+            color: #667eea;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .section {
+            margin: 40px 0;
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            color: #764ba2;
+            margin: 30px 0 20px 0;
+            padding-left: 15px;
+            border-left: 5px solid #764ba2;
+        }
+
+        .quote-box {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            border-left: 5px solid #667eea;
+            padding: 25px;
+            margin: 30px 0;
+            border-radius: 10px;
+            font-size: 1.15em;
+            font-weight: bold;
+            color: #667eea;
+            text-align: center;
+        }
+
+        .highlight-box {
+            background: #fff3cd;
+            border: 3px solid #ffc107;
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 12px;
+        }
+
+        .highlight-box h4 {
+            color: #856404;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .concept-container p {
+            margin: 20px 0;
+            font-size: 1.05em;
+            line-height: 2;
+        }
+
+        .concept-container ul {
+            margin: 20px 0 20px 40px;
+            line-height: 2;
+        }
+
+        .concept-container li {
+            margin: 10px 0;
+        }
+
+        .emphasis {
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 50px;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .back-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .divider {
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #667eea, transparent);
+            margin: 50px 0;
+        }
+
+        @media (max-width: 768px) {
+            .concept-container {
+                padding: 30px 20px;
+            }
+
+            .page-title {
+                font-size: 2.2em;
+            }
+
+            .chapter-title {
+                font-size: 1.8em;
+            }
+
+            .section-title {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="concept-container">
+        <h1 class="page-title">💡 ソロワーズのコンセプト</h1>
+        <p class="page-subtitle">～ このゲームの本質 ～</p>
+
+        <!-- 第1章: このゲームのコンセプト「教育」 -->
+        <div class="chapter">
+            <h2 class="chapter-title">第1章: このゲームのコンセプト「教育」</h2>
+
+            <div class="quote-box">
+                「ただのパズルゲームに見えるが、ただのパズルゲームではない」
+            </div>
+
+            <p>正直に言おう。<br>
+            このゲームは、開発者の頭の中の一部を具現化したものである。</p>
+
+            <p>では、どの部分を具現化したのか。<br>
+            それは<span class="emphasis">未知の問題に直面したとき、頭の中に広がる"思考の盤面"</span>だ。</p>
+
+            <p>少し引いたかもしれない。<br>
+            だが、もう少しだけ読んでほしい。<br>
+            学校では教えられない「考え方」が、ここにはある。</p>
+
+            <div class="divider"></div>
+
+            <p>まず、数人にしか刺さらない問いを投げてみる。</p>
+
+            <p>未知の問題を本気で解いたことがある人が、<br>
+            あとから自分の思考過程を振り返ったとき、<br>
+            頭の中は大体こんな盤面になっていなかっただろうか。</p>
+
+            <p>このゲームに登場する数字の駒は、<span class="emphasis">情報の塊</span>である。<br>
+            同じ数字同士を揃えるというルールは、<br>
+            情報と情報を突き合わせ、問題に対処する行為に相当する。</p>
+
+            <p>ここまでを整理すると流れはこうだ。</p>
+
+            <ul>
+                <li>問題が見える</li>
+                <li>情報（回答）をぶつける</li>
+                <li>ひとまず対処する</li>
+            </ul>
+
+            <p>では、次の問題に取りかかろう。</p>
+
+            <p>ここで一つ、考えてみてほしい。<br>
+            今解いた問題は、完全に消えるだろうか。<br>
+            それとも、形を変えて次に影響するだろうか。</p>
+
+            <div class="divider"></div>
+
+            <p>例を挙げよう。</p>
+
+            <div class="highlight-box">
+                <h4>例題</h4>
+                <p>「レジ袋を使って、100年もつ仏像を作ってください」</p>
+            </div>
+
+            <p>多くの人はまず「劣化する」と考えるはずだ。<br>
+            だが条件を満たそうとすると、<br>
+            次に現れる問題は<br>
+            <span class="emphasis">「劣化させない方法」</span>になる。</p>
+
+            <p>つまり、<br>
+            問題に対する回答は、<br>
+            次の問題を必ず生み出す。<br>
+            これは避けることができない。</p>
+
+            <p>この<span class="emphasis">問題が連鎖していく構造</span>を、<br>
+            そのままゲームに落とし込んだ。</p>
+
+            <!-- セクション1: 盤面が45°傾いている理由 -->
+            <div class="section">
+                <h3 class="section-title">1.1 盤面が45°傾いている理由</h3>
+
+                <p>次に、盤面を斜め45度に傾けた理由について。</p>
+
+                <p>先ほどの例をもう一度思い出してほしい。<br>
+                劣化という問題に気づいたとき、<br>
+                レジ袋という要素を分解し、<br>
+                一部を捨て、一部を活かそうとしなかっただろうか。</p>
+
+                <p>これは「直進」ではない。<br>
+                むしろ<span class="emphasis">斜めに進む感覚</span>に近い。</p>
+
+                <p>一直線で解ける問題は、<br>
+                そもそも問題にならないことが多い。</p>
+
+                <p>ここで言う「直進」とは、パターン的な解法があるということだ。教科書の公式等がこれに該当する。</p>
+
+                <p>たとえば材質を「紙」に変えたとしても、<br>
+                今度は水や湿気という制約が現れる。<br>
+                制約を避けるたび、視点は少しずつ斜めにずれていく。</p>
+
+                <p><span class="emphasis">問題とは、そういうものだ。</span></p>
+            </div>
+
+            <!-- セクション2: 中央が空いている理由 -->
+            <div class="section">
+                <h3 class="section-title">1.2 中央が空いている理由</h3>
+
+                <p>では、なぜゲーム開始時、中央が空いているのか。</p>
+
+                <p><span class="emphasis">空白は、動かせる余白である。</span><br>
+                問題を一度どかす場所であり、<br>
+                今、見えている問題の範囲でもある。</p>
+
+                <p>マップが大きくなるのは、<br>
+                情報量や未知の多さを表している。</p>
+
+                <p>実際の問題解決でも、<br>
+                最初から全体が見えることはない。<br>
+                進む中で、視野は広がったり、<br>
+                逆に絞られたりする。</p>
+
+                <p>この盤面は、それを模している。</p>
+
+                <p>また、手前と奥方向に<br>
+                数字の駒が広がる構造には、<br>
+                <span class="emphasis">原点へ戻ること、<br>
+                そして最終的に向き合う問題、<br>
+                その両方の意味を持たせている。</span></p>
+
+                <p>だからこのゲームは、<br>
+                どれだけ盤面を広げても<br>
+                ルールが破綻しない。</p>
+            </div>
+
+            <!-- セクション3: 問題解決にフォーカス -->
+            <div class="section">
+                <h3 class="section-title">1.3 問題解決にフォーカス</h3>
+
+                <p>ただし、<br>
+                同じルールを繰り返すだけでは、<br>
+                人はやがて飽きる。<br>
+                現実でもそれは、<br>
+                「諦め」や「放置」につながる。</p>
+
+                <p>だが、それも一つの選択だ。<br>
+                一歩引いて、別の方向を試す。<br>
+                それが最も解決に近いことも多い。</p>
+
+                <p>そして、突き抜けるために必要なのは、<br>
+                <span class="emphasis">視点と感性</span>である。</p>
+
+                <p>だからこそこのゲームは、<br>
+                ただマップを大きくすれば終わりではない。<br>
+                小さなマップであっても、<br>
+                解き方は一つではない。</p>
+
+                <p>複数の答え方を経験し、<br>
+                あえて中央を固定するなど、<br>
+                自分で制約を設ける。<br>
+                その行為そのものが、<br>
+                <span class="emphasis">視点と感性を鍛えることにつながる。</span></p>
+            </div>
+
+            <!-- セクション4: 作者からの意見 -->
+            <div class="section">
+                <h3 class="section-title">1.4 作者からの意見</h3>
+
+                <p>集中力、忍耐力、<br>
+                多角的に見る力。<br>
+                いわゆるクリティカルシンキング。</p>
+
+                <p>それらは、本を読んで理解するだけでは身につかない。<br>
+                <span class="emphasis">考え続ける体験の量が必要だ。</span></p>
+
+                <div class="divider"></div>
+
+                <p>ここまで読んでくれてありがとう。</p>
+
+                <p>共感しなくていい。<br>
+                ただ一つだけ覚えておいてほしい。</p>
+
+                <div class="quote-box">
+                    未知の問題を解くという行為は、大体パズルである。
+                </div>
+
+                <p>このゲームを通して、<br>
+                その感覚に触れてほしい。</p>
+
+                <p>これが、このゲーム<br>
+                <span class="emphasis" style="font-size: 1.3em;">「ソロワーズ」</span>である。</p>
+            </div>
+        </div>
+
+        <div class="nav-buttons" style="display: flex; justify-content: space-between; margin-top: 60px; gap: 20px;">
+            <a href="../blog.html" class="back-link">← ブログトップに戻る</a>
+            <a href="education.html" class="back-link">第2章を読む →</a>
+        </div>
+    </div>
+
+    <!-- フッターナビゲーション -->
+    <footer id="globalFooter" class="footer-nav">
+        <div class="footer-links">
+            <a href="../tips.html" class="footer-link">
+                <span class="footer-icon">💡</span>
+                <span class="footer-text">攻略ガイド</span>
+            </a>
+            <a href="../index.html" class="footer-link footer-link-primary">
+                <span class="footer-icon">🏠</span>
+                <span class="footer-text">ホームに戻る</span>
+            </a>
+            <a href="../faq.html" class="footer-link">
+                <span class="footer-icon">❓</span>
+                <span class="footer-text">FAQ</span>
+            </a>
+        </div>
+    </footer>
+</body>
+</html>

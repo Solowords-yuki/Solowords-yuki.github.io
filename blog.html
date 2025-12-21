@@ -295,15 +295,67 @@
         <h1 class="page-title">📝 開発ブログ</h1>
         <p class="page-subtitle">～ ソロワーズ制作の裏側 ～</p>
 
-        <div class="intro-text">
-            <p>ソロワーズの開発過程で直面した課題や試行錯誤の記録をお届けします。</p>
-            <p>AIとの格闘、技術的な壁、デザインの変遷など、制作の舞台裏をご紹介。</p>
-            <p><strong>定期的に更新していきますので、お楽しみに！</strong></p>
+        <div class="intro-text" style="line-height: 2.2; font-size: 1.15em; max-width: 700px; margin: 0 auto 60px;">
+            <p>ソロワーズは、<br>
+            一見するとシンプルなパズルゲームです。</p>
+            
+            <p>ルールは〇×ゲームのように直感的で、<br>
+            幼稚園児でも理解できます。</p>
+            
+            <p>しかし、遊び続けるうちに気づくはずです。<br>
+            このゲームは、<br>
+            <strong>「どう考えるか」そのものを試されている</strong>と。</p>
+            
+            <p style="margin-top: 30px;">ソロワーズには、<br>
+            正解を一つに決める仕組みがありません。<br>
+            同じ盤面でも、<br>
+            人によってまったく違う解き方が生まれます。</p>
+            
+            <p style="margin-top: 30px;">教育ゲームを作るつもりはありませんでした。<br>
+            ただ、暇な時間に遊べて、<br>
+            紙でも再現できて、<br>
+            それでいて何度でも考えたくなる。<br>
+            そんなゲームを作りたかった。</p>
+            
+            <p style="margin-top: 30px;">その結果、<br>
+            子どもから大人まで、<br>
+            同じ盤面を囲めるゲームになりました。</p>
+            
+            <p style="margin-top: 30px; font-weight: bold; color: #667eea;">このゲームの最終目標は一つだけ。<br>
+            〇×ゲームや将棋のような、<br>
+            国民的ゲームになること。</p>
+            
+            <p style="margin-top: 40px;">詳しい思想や設計については、<br>
+            興味のある方だけ、<br>
+            もう少し深いところを覗いてみてください。</p>
+            
+            <div style="text-align: center; margin-top: 50px;">
+                <a href="blog/concept.html" style="display: inline-block; padding: 20px 50px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; text-decoration: none; border-radius: 50px; font-size: 1.2em; font-weight: bold; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3); transition: all 0.3s;">
+                    詳しくはこちら →
+                </a>
+            </div>
         </div>
+    </div>
 
-        <!-- 第1回: 菱形マップとの格闘 -->
-        <article class="blog-post latest">
-            <div class="blog-header">
+    <!-- フッターナビゲーション -->
+    <footer id="globalFooter" class="footer-nav">
+        <div class="footer-links">
+            <a href="tips.html" class="footer-link">
+                <span class="footer-icon">💡</span>
+                <span class="footer-text">攻略ガイド</span>
+            </a>
+            <a href="index.html" class="footer-link footer-link-primary">
+                <span class="footer-icon">🏠</span>
+                <span class="footer-text">ホームに戻る</span>
+            </a>
+            <a href="faq.html" class="footer-link">
+                <span class="footer-icon">❓</span>
+                <span class="footer-text">FAQ</span>
+            </a>
+        </div>
+    </footer>
+</body>
+</html>
                 <div class="blog-date">📅 2025年7月</div>
                 <h2 class="blog-title">第1回: AIに「菱形」が伝わらない！ダイヤモンド型マップ開発秘話</h2>
                 <div class="tag-list">
@@ -528,11 +580,200 @@
             </div>
 
             <div class="next-preview">
-                <p><strong>📅 次回予告:</strong> 移動ロジックができた！...と思ったら、エッジケースの嵐が待っていました。バウンダリチェック、衝突判定、そして謎のバグ...続きます！</p>
+                <p><strong>📅 次回:</strong> 基本ゲームができた！でも本当に作りたかったのは...「クリエイトモード」誕生秘話をお届けします。</p>
             </div>
         </article>
 
-        <!-- 第3回以降: 予告（プレースホルダー） -->
+        <!-- 第3回: クリエイトモードのこだわり -->
+        <article class="blog-post">
+            <div class="blog-header">
+                <div class="blog-date">2025年12月8日</div>
+                <h2 class="blog-title">クリエイトモードのこだわりとは！このゲームの本質を公開</h2>
+                <div class="tag-list">
+                    <span class="tag">#クリエイトモード</span>
+                    <span class="tag">#教育</span>
+                    <span class="tag">#好奇心</span>
+                </div>
+            </div>
+
+            <div class="blog-section">
+                <h3>🎮 基本ゲーム完成...そして</h3>
+                <p>前回までで、なんとか「普通にこのゲームができる」ところまで辿り着きました。</p>
+                <p>マップも動く。駒も動く。ゲームとして遊べる。</p>
+                <p>でも、これだけでは終わりませんでした。</p>
+                
+                <div class="quote-box">
+                    「このゲームを発案した時点で、<br>クリエイトモードは構想にありました」
+                </div>
+            </div>
+
+            <div class="blog-section">
+                <h3>🤔 ランキング vs クリエイトモード</h3>
+                <p>開発を進める中で、大きな選択を迫られました。</p>
+
+                <div class="highlight-box">
+                    <p><strong>次に実装する機能は？</strong></p>
+                    <ul style="margin-left: 20px; line-height: 2;">
+                        <li>🏆 <strong>ランキング機能</strong> - 競争、達成感、やりこみ要素</li>
+                        <li>🎨 <strong>クリエイトモード</strong> - 自由な創造、試行錯誤、発見</li>
+                    </ul>
+                </div>
+
+                <p>どちらも魅力的な機能です。ランキングがあれば、プレイヤー同士で競い合えます。達成感も生まれます。</p>
+                
+                <p>でも...</p>
+            </div>
+
+            <div class="blog-section">
+                <h3>🎯 このゲームの本質は「教育」</h3>
+                <p>悩んだ末、私は<strong>クリエイトモードを最優先</strong>することにしました。</p>
+
+                <p>なぜなら、ソロワーズは最初から<strong>教育パズルゲーム</strong>として構想されていたからです。</p>
+
+                <div class="quote-box">
+                    「このゲームの本質は教育。<br>好奇心や創意工夫に繋がる所を最優先にしたい」
+                </div>
+
+                <p>「遊びながら学ぶ」「楽しみながら成長する」——これが、このゲームのコンセプトでした。</p>
+
+                <p>第1回でお話しした通り、ソロワーズは「<strong>ゲームであって本当はゲームではない。とある訓練</strong>」です。ただ楽しむだけでなく、<strong>考える力、体力を作る
+                </strong>場所としてまず初めの基礎設計しました。</p>
+
+                <p>そう考えた時、ランキングで「誰が一番速いか」を競うよりも、クリエイトモードで「自分で問題を作り、考える」体験の方が、このゲームの本質に合っていると確信しました。</p>
+            </div>
+
+            <div class="blog-section">
+                <h3>📖 教育ゲームとしての設計</h3>
+                <p>教育ゲームと聞くと、「お勉強」のイメージがあるかもしれません。でも、ソロワーズは違います。教育ゲームの本質は記憶に残ること、刻めるかどうか。</p>
+
+                <div class="highlight-box">
+                    <h4 style="color: #667eea;">目指したもの</h4>
+                    <p>✏️ 従来の勉強とは違う学び</p>
+                    <p>✏️ 遊んでいるうちに思考力が育つ</p>
+                    <p>✏️ 「できた！」という達成感</p>
+                    <p>✏️ 「できなかった、、それでも」という諦めない力</p>
+                    <p>✏️ 「こうしたらどうなるだろう？」という工夫力と発想力</p>
+                    <p>✏️ 自由な発想を制限しない</p>
+                </div>
+
+                <p>ランキング機能も素晴らしい教育要素を持っています。目標設定、努力、達成感...これらは確かに重要です。</p>
+
+                <p>でも、クリエイトモードはさらに深い学びを提供します。</p>
+
+                <ul style="margin-left: 30px; line-height: 2; color: #666;">
+                    <li>🎨 <strong>創造する喜び</strong> - 自分だけのマップを作る</li>
+                    <li>🔍 <strong>探究する面白さ</strong> - こうしたらどうなるかを考える</li>
+                    <li>🧩 <strong>問題解決の体験</strong> - クリア可能なマップを設計する</li>
+                    <li>💡 <strong>発見の瞬間</strong> - 難しくなる方法の発見・バグの発見</li>
+                </ul>
+
+                <p>これらは、学校では教えられない<strong>「思考力」</strong>に直結します。</p>
+                <p>見つけては終わりではなく、自らがその考えを試し、疑い、実行するこういうプロセスは学校では正直厳しいでしょう。</p>
+
+
+            </div>
+
+            <div class="blog-section">
+                <h3>💡 クリエイトモードで育むもの</h3>
+                <p>クリエイトモードを通じて、プレイヤーに体験してほしいことがあります。</p>
+
+                <div class="highlight-box">
+                    <h4 style="color: #667eea;">好奇心を刺激する</h4>
+                    <p>✨ 「こうしたらどうなるだろう？」<br>
+                    ✨ 「この配置だとクリア不可能？」<br>
+                    ✨ 「もっと難しいマップを作れないかな？」</p>
+                </div>
+
+                <div class="highlight-box">
+                    <h4 style="color: #667eea;">創意工夫を促す</h4>
+                    <p>🎨 自分だけのマップをデザインする<br>
+                    🎨 難易度を調整する試行錯誤<br>
+                    🎨 「面白い問題」を作る発想力</p>
+                </div>
+
+                <div class="highlight-box">
+                    <h4 style="color: #667eea;">バグを見つける視点</h4>
+                    <p>🔍 「このゲームのバグをどんどん考えて、見つけてみて欲しい」</p>
+                    <p>🔍 制約の中で限界を探る思考</p>
+                    <p>🔍 システムの仕組みを理解しようとする姿勢</p>
+                </div>
+
+                <p>これらは全て、<strong>「打開力」</strong>に繋がります。</p>
+                <p>制約やバグは否定するのではなく、このゲームのゲーム性のように受け入れて、どうすれば良いかを考えてみて欲しい。</p>
+            </div>
+
+            <div class="blog-section">
+                <h3>🧩 「打開力」とは</h3>
+                <p>このゲームが「訓練」として目指しているのは、<strong>困難な状況を突破する力</strong>です。</p>
+
+                <p>クリエイトモードで自分で問題を作り、バグという制約の中で解き方を考える。この過程は、まさに現実の問題解決そのものです。</p>
+
+                <ul style="margin-left: 30px; line-height: 2; color: #666;">
+                    <li>🔹 問題を見つける力</li>
+                    <li>🔹 制約の中で工夫する力</li>
+                    <li>🔹 試行錯誤を楽しむ姿勢</li>
+                    <li>🔹 「できない」を「できる」に変える発想</li>
+                </ul>
+
+                <p>ランキング機能は競争心を刺激しますが、クリエイトモードは<strong>創造性と探究心</strong>を育みます。</p>
+
+                <p>どちらも素晴らしい機能ですが、教育ゲームとしての本質を考えた時、私はクリエイトモードを選びました。</p>
+            </div>
+
+            <div class="blog-section">
+                <h3>🛠️ 実装への想い</h3>
+                <p>クリエイトモードの開発も、もちろん簡単ではありませんでした。</p>
+
+                <p>駒の配置、孤立駒チェック、保存機能、マップの検証...様々な機能を実装する必要がありました。</p>
+
+                <p>でも、「これがゲームの本質だ」という確信があったので、迷いなく開発を進められました。</p>
+
+                <div class="quote-box">
+                    「好奇心と創意工夫を育む場所を作りたい。<br>それがこのゲームの使命だから」
+                </div>
+            </div>
+
+            <div class="blog-section">
+                <h3>🎁 プレイヤーへのメッセージ</h3>
+                <p>クリエイトモードを使う皆さんへ。</p>
+
+                <div class="highlight-box">
+                    <p>💭 自由に実験してください<br>
+                    💭 「こうしたらどうなる？」を試してください<br>
+                    💭 バグを見つけたら、それも学びです<br>
+                    💭 失敗を恐れず、何度でも作り直してください</p>
+                </div>
+
+                <p>このモードは、<strong>あなたの創造性を解放するための場所</strong>です。</p>
+
+                <p>正解はありません。自由に、楽しく、そして時には「なぜ？」を追求しながら、オリジナルのマップを作ってください。</p>
+
+                <p>その過程で培われる「打開力」こそが、このゲームが本当に伝えたいものなのです。</p>
+            </div>
+
+            <div class="blog-section">
+                <h3>📚 今回の学び</h3>
+                <div class="highlight-box">
+                    <p>💡 <strong>本質を見極める</strong><br>
+                    機能の優先順位は、「面白そう」ではなく「ゲームの本質に合うか」で決める</p>
+                    
+                    <p>💡 <strong>教育とエンタメの両立</strong><br>
+                    楽しみながら学べる。それが教育ゲームの理想形</p>
+                    
+                    <p>💡 <strong>クリエイティビティの価値</strong><br>
+                    競争より創造。ランキングより探究心。それがこのゲームの選択</p>
+
+                    <p>💡 <strong>プレイヤーへの信頼</strong><br>
+                    「バグを見つけてみて」という挑戦は、プレイヤーの探究心への信頼の証</p>
+                </div>
+            </div>
+
+            <div class="next-preview">
+                <p><strong>📅 次回予告:</strong> クリエイトモードを作ると決めた。でも実装は地獄でした...孤立駒チェック、保存機能、そして予期せぬバグの連続。技術的な格闘の記録をお届けします！</p>
+            </div>
+        </article>
+
+        <!-- 第4回以降: 予告（プレースホルダー） -->
         <article class="blog-post upcoming">
             <div class="blog-header">
                 <div class="blog-date">📅 続々更新予定</div>

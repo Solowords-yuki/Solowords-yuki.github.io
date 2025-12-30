@@ -203,15 +203,19 @@
             <h1 class="game-title">ソロワーズ</h1>
         </div>
         
-        <!-- ★広告エリア1: タイトル下 -->
-        <div class="ad-container top-ad">
-            <div class="pc-ad">
-                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7962386569403379"
-     crossorigin="anonymous"></script>
+        <!-- ★広告エリア1: タイトル下（スクロール時に表示） -->
+        <div class="ad-container top-ad" id="menuAd" style="margin: 20px auto; max-width: 728px; text-align: center;">
+            <!-- PC用広告 -->
+            <div class="pc-ad" style="display: none;">
+                <!-- admax -->
+                <script src="https://adm.shinobi.jp/s/0cf40a834e34d70d995978d006a1516a"></script>
+                <!-- admax -->
             </div>
-            <div class="mobile-ad">
-                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7962386569403379"
-     crossorigin="anonymous"></script>
+            <!-- スマホ用広告 -->
+            <div class="mobile-ad" style="display: none;">
+                <!-- admax -->
+                <script src="https://adm.shinobi.jp/s/daa1e805beb7ed8cf37177077e910d9d"></script>
+                <!-- admax -->
             </div>
         </div>
         
@@ -258,6 +262,20 @@
                     <a href="privacy.html" style="color: #40CFFF;">プライバシーポリシー</a> | 
                     <a href="terms.html" style="color: #40CFFF;">利用規約</a>
                 </p>
+            </div>
+            
+            <!-- 広告: メインメニュー下部 -->
+            <div class="ad-container" id="menuBottomAd" style="margin: 30px auto 20px; max-width: 728px; text-align: center;">
+                <div class="pc-ad" style="display: none;">
+                    <!-- admax -->
+                    <script src="https://adm.shinobi.jp/s/0cf40a834e34d70d995978d006a1516a"></script>
+                    <!-- admax -->
+                </div>
+                <div class="mobile-ad" style="display: none;">
+                    <!-- admax -->
+                    <script src="https://adm.shinobi.jp/s/daa1e805beb7ed8cf37177077e910d9d"></script>
+                    <!-- admax -->
+                </div>
             </div>
         </div>
     </div>
@@ -311,15 +329,19 @@
             <h2>おめでとう！</h2>
             <div id="levelClearInfo">Level 1 クリア！</div>
             
-            <!-- ★広告エリア5: クリア後 -->
-            <div class="ad-container clear-ad">
-                <div class="pc-ad">
-                  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7962386569403379"
-     crossorigin="anonymous"></script>
+            <!-- ★広告エリア5: クリア後（インフィード広告） -->
+            <div class="ad-container clear-ad" id="clearAd" style="margin: 20px auto; max-width: 728px; text-align: center;">
+                <!-- PC用広告 -->
+                <div class="pc-ad" style="display: none;">
+                    <!-- admax -->
+                    <script src="https://adm.shinobi.jp/s/0cf40a834e34d70d995978d006a1516a"></script>
+                    <!-- admax -->
                 </div>
-                <div class="mobile-ad">
-                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7962386569403379"
-     crossorigin="anonymous"></script>
+                <!-- スマホ用広告 -->
+                <div class="mobile-ad" style="display: none;">
+                    <!-- admax -->
+                    <script src="https://adm.shinobi.jp/s/daa1e805beb7ed8cf37177077e910d9d"></script>
+                    <!-- admax -->
                 </div>
             </div>
             
@@ -567,6 +589,66 @@
             </a>
         </div>
     </footer>
+    
+    <!-- 広告レスポンシブ切り替えスクリプト -->
+    <script>
+    (function() {
+        // 広告表示の制御
+        function setupAds() {
+            const adContainers = document.querySelectorAll('.ad-container');
+            const isMobile = window.innerWidth <= 768;
+            
+            adContainers.forEach(container => {
+                const pcAd = container.querySelector('.pc-ad');
+                const mobileAd = container.querySelector('.mobile-ad');
+                
+                if (pcAd && mobileAd) {
+                    if (isMobile) {
+                        pcAd.style.display = 'none';
+                        mobileAd.style.display = 'block';
+                    } else {
+                        pcAd.style.display = 'block';
+                        mobileAd.style.display = 'none';
+                    }
+                }
+            });
+        }
+        
+        // Intersection Observer で広告を遅延表示
+        function initScrollAds() {
+            const adContainers = document.querySelectorAll('.ad-container');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !entry.target.dataset.loaded) {
+                        entry.target.style.opacity = '0';
+                        entry.target.style.transition = 'opacity 0.5s ease';
+                        setTimeout(() => {
+                            entry.target.style.opacity = '1';
+                        }, 100);
+                        entry.target.dataset.loaded = 'true';
+                    }
+                });
+            }, {
+                rootMargin: '50px'
+            });
+            
+            adContainers.forEach(container => {
+                observer.observe(container);
+            });
+        }
+        
+        // 初期化
+        document.addEventListener('DOMContentLoaded', function() {
+            setupAds();
+            initScrollAds();
+        });
+        
+        // リサイズ時に再設定
+        window.addEventListener('resize', setupAds);
+    })();
+    </script>
 </body>
 </html>
+
 

@@ -103,6 +103,20 @@
                 </div>
             </section>
 
+            <!-- 広告1: セクション間のインフィード広告 -->
+            <div class="ad-container" style="margin: 40px auto; max-width: 728px; text-align: center;">
+                <div class="pc-ad" style="display: none;">
+                    <!-- admax -->
+                    <script src="https://adm.shinobi.jp/s/0cf40a834e34d70d995978d006a1516a"></script>
+                    <!-- admax -->
+                </div>
+                <div class="mobile-ad" style="display: none;">
+                    <!-- admax -->
+                    <script src="https://adm.shinobi.jp/s/daa1e805beb7ed8cf37177077e910d9d"></script>
+                    <!-- admax -->
+                </div>
+            </div>
+
             <!-- マップサイズと駒数 -->
             <section class="guide-section">
                 <h2 class="section-title">📊 マップサイズと駒数</h2>
@@ -156,6 +170,20 @@
                     </div>
                 </div>
             </section>
+
+            <!-- 広告2: セクション間のインフィード広告 -->
+            <div class="ad-container" style="margin: 40px auto; max-width: 728px; text-align: center;">
+                <div class="pc-ad" style="display: none;">
+                    <!-- admax -->
+                    <script src="https://adm.shinobi.jp/s/0cf40a834e34d70d995978d006a1516a"></script>
+                    <!-- admax -->
+                </div>
+                <div class="mobile-ad" style="display: none;">
+                    <!-- admax -->
+                    <script src="https://adm.shinobi.jp/s/daa1e805beb7ed8cf37177077e910d9d"></script>
+                    <!-- admax -->
+                </div>
+            </div>
 
             <!-- 紙でも作れる -->
             <section class="guide-section">
@@ -406,5 +434,47 @@
             }
         }
     </style>
+    
+    <!-- 広告レスポンシブ切り替えスクリプト -->
+    <script>
+    (function() {
+        function setupAds() {
+            const adContainers = document.querySelectorAll('.ad-container');
+            const isMobile = window.innerWidth <= 768;
+            adContainers.forEach(container => {
+                const pcAd = container.querySelector('.pc-ad');
+                const mobileAd = container.querySelector('.mobile-ad');
+                if (pcAd && mobileAd) {
+                    if (isMobile) {
+                        pcAd.style.display = 'none';
+                        mobileAd.style.display = 'block';
+                    } else {
+                        pcAd.style.display = 'block';
+                        mobileAd.style.display = 'none';
+                    }
+                }
+            });
+        }
+        function initScrollAds() {
+            const adContainers = document.querySelectorAll('.ad-container');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !entry.target.dataset.loaded) {
+                        entry.target.style.opacity = '0';
+                        entry.target.style.transition = 'opacity 0.5s ease';
+                        setTimeout(() => { entry.target.style.opacity = '1'; }, 100);
+                        entry.target.dataset.loaded = 'true';
+                    }
+                });
+            }, { rootMargin: '50px' });
+            adContainers.forEach(container => observer.observe(container));
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+            setupAds();
+            initScrollAds();
+        });
+        window.addEventListener('resize', setupAds);
+    })();
+    </script>
 </body>
 </html>

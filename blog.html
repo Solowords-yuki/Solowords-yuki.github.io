@@ -474,6 +474,20 @@
             </div>
         </article>
 
+        <!-- 広告1: ブログ記事間のインフィード広告 -->
+        <div class="ad-container" style="margin: 60px auto; padding: 40px; max-width: 800px; text-align: center; background: #f8f9ff; border-radius: 15px; box-shadow: 0 2px 15px rgba(0,0,0,0.1);">
+            <div class="pc-ad" style="display: none;">
+                <!-- admax -->
+                <script src="https://adm.shinobi.jp/s/0cf40a834e34d70d995978d006a1516a"></script>
+                <!-- admax -->
+            </div>
+            <div class="mobile-ad" style="display: none;">
+                <!-- admax -->
+                <script src="https://adm.shinobi.jp/s/daa1e805beb7ed8cf37177077e910d9d"></script>
+                <!-- admax -->
+            </div>
+        </div>
+
         <!-- 第2回: 駒の移動方向そっちじゃないよ問題 -->
         <article class="blog-post">
             <div class="blog-header">
@@ -549,6 +563,20 @@
                 <p>結局、<strong>開発者のプログラミング経験と知識を総動員</strong>して、AIと二人三脚で進めていく形になりました。</p>
             </div>
 
+            <!-- 広告2: 記事内広告 -->
+            <div class="ad-container" style="margin: 40px auto; max-width: 728px; text-align: center;">
+                <div class="pc-ad" style="display: none;">
+                    <!-- admax -->
+                    <script src="https://adm.shinobi.jp/s/0cf40a834e34d70d995978d006a1516a"></script>
+                    <!-- admax -->
+                </div>
+                <div class="mobile-ad" style="display: none;">
+                    <!-- admax -->
+                    <script src="https://adm.shinobi.jp/s/daa1e805beb7ed8cf37177077e910d9d"></script>
+                    <!-- admax -->
+                </div>
+            </div>
+
             <div class="blog-section">
                 <h3>⏱️ 開発期間: 2週間の格闘</h3>
                 <p>この移動ロジックの実装だけで<strong>2週間くらい</strong>かかりました。</p>
@@ -583,6 +611,20 @@
                 <p><strong>📅 次回:</strong> 基本ゲームができた！でも本当に作りたかったのは...「クリエイトモード」誕生秘話をお届けします。</p>
             </div>
         </article>
+
+        <!-- 広告2: ブログ記事間のインフィード広告 -->
+        <div class="ad-container" style="margin: 60px auto; padding: 40px; max-width: 800px; text-align: center; background: #f8f9ff; border-radius: 15px; box-shadow: 0 2px 15px rgba(0,0,0,0.1);">
+            <div class="pc-ad" style="display: none;">
+                <!-- admax -->
+                <script src="https://adm.shinobi.jp/s/0cf40a834e34d70d995978d006a1516a"></script>
+                <!-- admax -->
+            </div>
+            <div class="mobile-ad" style="display: none;">
+                <!-- admax -->
+                <script src="https://adm.shinobi.jp/s/daa1e805beb7ed8cf37177077e910d9d"></script>
+                <!-- admax -->
+            </div>
+        </div>
 
         <!-- 第3回: クリエイトモードのこだわり -->
         <article class="blog-post">
@@ -773,6 +815,20 @@
             </div>
         </article>
 
+        <!-- 広告3: ブログ記事間のインフィード広告 -->
+        <div class="ad-container" style="margin: 60px auto; padding: 40px; max-width: 800px; text-align: center; background: #f8f9ff; border-radius: 15px; box-shadow: 0 2px 15px rgba(0,0,0,0.1);">
+            <div class="pc-ad" style="display: none;">
+                <!-- admax -->
+                <script src="https://adm.shinobi.jp/s/0cf40a834e34d70d995978d006a1516a"></script>
+                <!-- admax -->
+            </div>
+            <div class="mobile-ad" style="display: none;">
+                <!-- admax -->
+                <script src="https://adm.shinobi.jp/s/daa1e805beb7ed8cf37177077e910d9d"></script>
+                <!-- admax -->
+            </div>
+        </div>
+
         <!-- 第4回以降: 予告（プレースホルダー） -->
         <article class="blog-post upcoming">
             <div class="blog-header">
@@ -819,5 +875,42 @@
             </a>
         </div>
     </footer>
+    <script>
+    (function() {
+        function setupAds() {
+            const adContainers = document.querySelectorAll('.ad-container');
+            const isMobile = window.innerWidth <= 768;
+            adContainers.forEach(container => {
+                const pcAd = container.querySelector('.pc-ad');
+                const mobileAd = container.querySelector('.mobile-ad');
+                if (pcAd && mobileAd) {
+                    if (isMobile) {
+                        pcAd.style.display = 'none';
+                        mobileAd.style.display = 'block';
+                    } else {
+                        pcAd.style.display = 'block';
+                        mobileAd.style.display = 'none';
+                    }
+                }
+            });
+        }
+        function initScrollAds() {
+            const adContainers = document.querySelectorAll('.ad-container');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !entry.target.dataset.loaded) {
+                        entry.target.style.opacity = '0';
+                        entry.target.style.transition = 'opacity 0.5s ease';
+                        setTimeout(() => { entry.target.style.opacity = '1'; }, 100);
+                        entry.target.dataset.loaded = 'true';
+                    }
+                });
+            }, { rootMargin: '50px' });
+            adContainers.forEach(container => observer.observe(container));
+        }
+        document.addEventListener('DOMContentLoaded', function() { setupAds(); initScrollAds(); });
+        window.addEventListener('resize', setupAds);
+    })();
+    </script>
 </body>
 </html>

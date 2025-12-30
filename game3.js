@@ -79,7 +79,8 @@ class DOGame {
         } else {
             // console.log('初回訪問: 年齢選択画面を維持');
             // ★初回訪問時は現在のHTML状態（年齢選択画面がactive）を維持
-            // 何もしない（HTMLで既にageSelectScreenがactiveになっている）
+            // フッターを年齢選択画面用に初期化
+            this.updateFooter('ageSelect');
         }
     }
     

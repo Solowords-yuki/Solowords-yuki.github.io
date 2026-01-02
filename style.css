@@ -3315,6 +3315,7 @@ body {
 /* モバイル対応 */
 @media (max-width: 768px) {
     .footer-nav {
+        position: relative;
         padding: 10px 15px;
     }
     
@@ -3378,6 +3379,7 @@ body {
 /* 超小型デバイス対応 */
 @media (max-width: 480px) {
     .footer-nav {
+        position: relative;
         padding: 8px 10px;
     }
     

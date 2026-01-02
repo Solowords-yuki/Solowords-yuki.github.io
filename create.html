@@ -128,6 +128,18 @@
                 </label><br>
                 <button id="loadMapBtn" style="margin-top: 8px; background: #3498db; color: white; padding: 6px 12px; border: none; border-radius: 4px; cursor: pointer; font-size: 12px;">選択したマップを読み込み</button>
             </div>
+            
+            <!-- 共有コード読み込みセクション -->
+            <div style="margin-top: 20px;">
+                <div class="section-title">📥 共有コード読み込み</div>
+                <div id="shareCodeInputArea">
+                    <div id="shareCodeInputs"></div>
+                    <button id="loadShareCodeBtn" style="margin-top: 8px; background: #27ae60; color: white; padding: 8px 16px; border: none; border-radius: 5px; cursor: pointer; width: 100%; font-weight: bold;">📥 読み込み</button>
+                    <button id="resetShareCodeBtn" style="margin-top: 5px; background: #95a5a6; color: white; padding: 6px 12px; border: none; border-radius: 4px; cursor: pointer; width: 100%; font-size: 11px; display: none;">🔄 リセット</button>
+                    <div id="shareCodeStatus" style="margin-top: 8px; font-size: 11px; color: #666;"></div>
+                </div>
+            </div>
+            
             <div class="timer-settings">
                 <div class="section-title">タイマー設定</div>
                 <label><input type="radio" name="timerMode" value="none" checked> タイマーなし</label><br>
@@ -148,6 +160,13 @@
             <div id="colorList" class="hidden"></div>
             
             <button id="checkIsolatedBtn" style="margin-top: 10px; background: #3498db; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; width: 100%;">孤立駒確認</button>
+            
+            <!-- 共有コード生成セクション -->
+            <div style="margin-top: 20px;">
+                <div class="section-title">📤 共有コード生成</div>
+                <button id="generateShareCodeBtn" style="margin-top: 8px; background: #e67e22; color: white; padding: 8px 16px; border: none; border-radius: 5px; cursor: pointer; width: 100%; font-weight: bold;">📤 共有コード生成</button>
+                <div id="shareCodeOutputContainer" style="margin-top: 8px; display: none;"></div>
+            </div>
         </div>
         <div class="main-area">
             <!-- メインエリアの内容はそのまま -->
@@ -172,7 +191,9 @@
                         border: 2px solid rgba(255, 255, 255, 0.2);
                         min-width: 140px;
                         text-align: center;
-                    ">🎯 駒配置モード</div>
+                        cursor: pointer;
+                        transition: transform 0.2s;
+                    " onclick="toggleMode()" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">🎯 駒配置モード</div>
                 </div>
                 <canvas id="mainMap" width="500" height="700"></canvas>
             </div>

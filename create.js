@@ -64,6 +64,83 @@ document.addEventListener('DOMContentLoaded', () => {
         '#DDA0DD', '#FFA07A', '#98D8C8', '#F7DC6F', '#BB8FCE'
     ];
 
+    // 共有コード用の文字セット
+    const STRING_NUMBER = " 0123456789ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩαβγδεζηθικλμνξοπρστυφχψωАБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдежзийклмнопрстуфхцчшщъыьэюя○●◎◇◆△▲▽▼□■★☆✦✧✩✪✫✬✭✮✯✰ㄱㄲㄴㄷㄸㄹㅁㅂㅃㅅㅆㅇㅈㅉㅊㅋㅌㅍㅎกขคงจฉชซฌญฎฏฐฑฒณดตถทธนบปผฝพฟภมאבגדהוז";
+
+    // 共有コード読み込み用の変数
+    let shareCodeChunks = []; // 収集したチャンク
+    let currentInputIndex = 0; // 現在の入力番号
+
+    // 共有コード入力欄を追加
+    function addShareCodeInput(index) {
+        const inputsContainer = document.getElementById('shareCodeInputs');
+        if (!inputsContainer) return;
+        
+        const inputDiv = document.createElement('div');
+        inputDiv.id = `shareCodeInputDiv${index}`;
+        inputDiv.style.marginBottom = '10px';
+        
+        inputDiv.innerHTML = `
+            <label style="font-size: 12px; color: #666; font-weight: bold;">
+                ${index === 0 ? '共有コードを貼り付け:' : `【${index + 1}つ目】追加で貼り付け:`}
+            </label>
+            <textarea id="shareCodeInput${index}" style="width: 100%; height: 60px; margin-top: 5px; padding: 5px; border: 2px solid ${index === 0 ? '#3498db' : '#27ae60'}; border-radius: 4px; font-family: monospace; font-size: 11px;" placeholder="共有コードを貼り付け..."></textarea>
+        `;
+        
+        inputsContainer.appendChild(inputDiv);
+    }
+
+    // 共有コード読み込みをリセット
+    function resetShareCodeInput() {
+        shareCodeChunks = [];
+        currentInputIndex = 0;
+        
+        const inputsContainer = document.getElementById('shareCodeInputs');
+        if (inputsContainer) {
+            inputsContainer.innerHTML = '';
+        }
+        
+        const statusDiv = document.getElementById('shareCodeStatus');
+        if (statusDiv) {
+            statusDiv.textContent = '';
+        }
+        
+        const resetBtn = document.getElementById('resetShareCodeBtn');
+        if (resetBtn) {
+            resetBtn.style.display = 'none';
+        }
+        
+        // 最初の入力欄を追加
+        addShareCodeInput(0);
+    }
+
+    // モード切り替え関数（モード表示クリック時）
+    window.toggleMode = function() {
+        // 現在のモードから次のモードへ切り替え
+        if (!isColorMode && !isMoveMode) {
+            // 駒配置モード → 色変更モード
+            isColorMode = true;
+            isMoveMode = false;
+            selectedPieceValue = null; // 選択中の駒をリセット
+            isFollowing = false; // 追従をリセット
+        } else if (isColorMode && !isMoveMode) {
+            // 色変更モード → 駒入れ替えモード
+            isColorMode = false;
+            isMoveMode = true;
+            selectedColorIndex = null; // 選択中の色をリセット
+        } else if (!isColorMode && isMoveMode) {
+            // 駒入れ替えモード → 駒配置モード
+            isColorMode = false;
+            isMoveMode = false;
+            draggedPiece = null; // ドラッグ中の駒をリセット
+        }
+        
+        // 表示を更新
+        updateModeDisplay();
+        updateButtonStyles();
+        drawDiamondMap();
+    };
+
     // HTMLのモード表示を更新する関数
     function updateModeDisplay() {
         const modeDisplay = document.getElementById('modeDisplay');
@@ -1153,6 +1230,394 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // 共有コードデコード機能
+    function decodePuzzle(chunks) {
+        console.log('デコード開始:', chunks);
+        
+        // ヘッダー検証
+        const firstChunk = chunks[0];
+        if (!firstChunk || firstChunk.length < 2) {
+            throw new Error('共有コードが短すぎます');
+        }
+        
+        const modeIndex = STRING_NUMBER.indexOf(firstChunk[0]);
+        const sizeIndex = STRING_NUMBER.indexOf(firstChunk[1]);
+        
+        if (modeIndex === -1 || sizeIndex === -1) {
+            throw new Error('共有コードのヘッダーが不正です');
+        }
+        
+        // 全チャンクのヘッダーが一致するか確認
+        for (let chunk of chunks) {
+            if (chunk[0] !== firstChunk[0] || chunk[1] !== firstChunk[1]) {
+                throw new Error('分割データのヘッダーが一致しません');
+            }
+        }
+        
+        const colorMode = modeIndex === 1; // インデックス1='0'=色付き
+        const boardSize = sizeIndex;
+        
+        if (boardSize < 3 || boardSize > 15) {
+            throw new Error('マップサイズが不正です（3〜15のみ対応）');
+        }
+        
+        // 駒データを結合
+        let pieceData = '';
+        for (let chunk of chunks) {
+            pieceData += chunk.substring(2);
+        }
+        
+        console.log('デコード情報:', {
+            colorMode,
+            boardSize,
+            pieceDataLength: pieceData.length,
+            expectedLength: boardSize * boardSize
+        });
+        
+        // 必要なデータ数チェック
+        const requiredLength = boardSize * boardSize;
+        if (pieceData.length < requiredLength) {
+            // ★ チャンクの妥当性を確認
+            const CHUNK_MAX_LENGTH = 100; // チャンクの最大長
+            const CHUNK_DATA_LENGTH = CHUNK_MAX_LENGTH - 2; // ヘッダー2文字を除いたデータ部分
+            
+            // 必要なチャンク数を計算
+            const requiredChunks = Math.ceil(requiredLength / CHUNK_DATA_LENGTH);
+            const currentChunks = chunks.length;
+            
+            console.log('チャンク検証:', {
+                必要文字数: requiredLength,
+                現在文字数: pieceData.length,
+                必要チャンク数: requiredChunks,
+                現在チャンク数: currentChunks
+            });
+            
+            // 最後のチャンクを取得
+            const lastChunk = chunks[chunks.length - 1];
+            
+            // 必要なチャンク数に既に達している場合
+            if (currentChunks >= requiredChunks) {
+                // 必要数に達しているのにデータ不足 → 破損（文字が削除されている）
+                throw new Error(`コードが壊れています。もう一度さいしょからやりなおしてください。`);
+            }
+            
+            // まだ必要なチャンク数に達していない場合
+            if (currentChunks < requiredChunks) {
+                // 最後のチャンクが100文字（フル）かチェック
+                if (lastChunk.length === CHUNK_MAX_LENGTH) {
+                    // 100文字フルで、まだチャンクが必要 → 正常に次を要求
+                    throw new Error(`データが不足しています。必要: ${requiredLength}文字、現在: ${pieceData.length}文字`);
+                } else {
+                    // 100文字未満なのにまだチャンクが必要 → 破損（本来は最後のチャンクは100文字であるべき）
+                    throw new Error(`コードが壊れています。もう一度さいしょからやりなおしてください。`);
+                }
+            }
+        }
+        
+        // ボード復元
+        const newBoard = Array.from({ length: boardSize }, () => Array(boardSize).fill(null));
+        let index = 0;
+        
+        for (let y = 0; y < boardSize; y++) {
+            for (let x = 0; x < boardSize; x++) {
+                const valueChar = pieceData[index];
+                const charIndex = STRING_NUMBER.indexOf(valueChar);
+                
+                if (charIndex === -1) {
+                    throw new Error(`無効な文字が含まれています: ${valueChar}`);
+                }
+                
+                if (charIndex === 1) { // '0' = null
+                    newBoard[y][x] = null;
+                } else {
+                    // 駒の値 = インデックス - 1（インデックス2='1'が駒の値1）
+                    const pieceValue = charIndex - 1;
+                    
+                    // 色をランダムに割り当て（色付きモードの場合）
+                    const colorIndex = colorMode 
+                        ? Math.floor(Math.random() * (colorPalette.length - 1)) + 1  // 1〜10
+                        : 0; // グレーモード
+                    
+                    newBoard[y][x] = { value: pieceValue, colorIndex: colorIndex };
+                }
+                
+                index += 1;
+            }
+        }
+        
+        return {
+            size: boardSize,
+            board: newBoard,
+            colorMode: colorMode
+        };
+    }
+
+    // 共有コード読み込み処理
+    function loadFromShareCode() {
+        const currentInput = document.getElementById(`shareCodeInput${currentInputIndex}`);
+        const statusDiv = document.getElementById('shareCodeStatus');
+        const resetBtn = document.getElementById('resetShareCodeBtn');
+        
+        if (!currentInput || !currentInput.value.trim()) {
+            alert('共有コードを入力してください');
+            return;
+        }
+        
+        try {
+            // ★ 読み込み時に配列をクリア（重複防止）
+            shareCodeChunks = [];
+            
+            // ★ すべての入力欄からチャンクを収集
+            let maxInputIndex = currentInputIndex;
+            // 存在する最大のインデックスを探す
+            for (let i = 0; i <= 10; i++) {
+                if (document.getElementById(`shareCodeInput${i}`)) {
+                    maxInputIndex = Math.max(maxInputIndex, i);
+                }
+            }
+            
+            // すべての入力欄からチャンクを収集
+            for (let i = 0; i <= maxInputIndex; i++) {
+                const input = document.getElementById(`shareCodeInput${i}`);
+                if (input && input.value.trim()) {
+                    const inputText = input.value.trim();
+                    const lines = inputText.split(/\n+/).map(c => c.trim()).filter(c => {
+                        // 【1/3】などの番号行を除外
+                        return c.length > 0 && !c.match(/^【\d+\/\d+】$/);
+                    });
+                    
+                    for (const line of lines) {
+                        if (line.length >= 2) {
+                            shareCodeChunks.push(line);
+                        }
+                    }
+                }
+            }
+            
+            console.log('収集したチャンク:', shareCodeChunks);
+            
+            if (shareCodeChunks.length === 0) {
+                throw new Error('共有コードが短すぎます');
+            }
+            
+            // デコードを試行
+            try {
+                const puzzleData = decodePuzzle(shareCodeChunks);
+                
+                console.log('デコード成功:', puzzleData);
+                
+                // マップを適用
+                size = puzzleData.size;
+                document.getElementById('inputSize').value = size;
+                board = puzzleData.board;
+                document.getElementById('inputColorRandom').checked = !puzzleData.colorMode;
+                
+                // 選択状態をリセット
+                selectedPieceValue = null;
+                selectedColorIndex = null;
+                isColorMode = false;
+                isMoveMode = false;
+                
+                // 表示を更新
+                updateCanvasSize();
+                renderPieceList();
+                renderColorList();
+                updateButtonStyles();
+                drawDiamondMap();
+                
+                // 成功メッセージ
+                if (statusDiv) {
+                    statusDiv.textContent = `✅ ${size}×${size}のマップを読み込みました！`;
+                    statusDiv.style.color = '#27ae60';
+                }
+                
+                if (resetBtn) {
+                    resetBtn.style.display = 'block';
+                }
+                
+                alert(`共有コードから${size}×${size}のマップを読み込みました！`);
+                
+                // リセット
+                shareCodeChunks = [];
+                currentInputIndex = 0;
+                
+            } catch (error) {
+                // データ不足エラーの場合は次の入力欄を追加
+                if (error.message.includes('データが不足')) {
+                    currentInputIndex++;
+                    addShareCodeInput(currentInputIndex);
+                    
+                    if (statusDiv) {
+                        statusDiv.textContent = `⚠️ データ不足。【${currentInputIndex + 1}つ目】の共有コードを貼り付けてください。`;
+                        statusDiv.style.color = '#f39c12';
+                    }
+                    
+                    if (resetBtn) {
+                        resetBtn.style.display = 'block';
+                    }
+                    
+                    // 入力欄を無効化
+                    currentInput.disabled = true;
+                    currentInput.style.background = '#f0f0f0';
+                } else if (error.message.includes('コードが壊れています')) {
+                    // 破損コードエラー
+                    alert(`❌ ${error.message}`);
+                    
+                    // リセット
+                    shareCodeChunks = [];
+                    currentInputIndex = 0;
+                    
+                    if (statusDiv) {
+                        statusDiv.textContent = '❌ コードが壊れています。もう一度さいしょからやりなおしてください。';
+                        statusDiv.style.color = '#e74c3c';
+                    }
+                } else {
+                    // その他のエラー
+                    throw error;
+                }
+            }
+            
+        } catch (error) {
+            console.error('共有コード読み込みエラー:', error);
+            if (statusDiv) {
+                statusDiv.textContent = `❌ エラー: ${error.message}`;
+                statusDiv.style.color = '#e74c3c';
+            }
+            alert(`エラー: ${error.message}`);
+        }
+    }
+
+    // 共有コード生成機能
+    function encodePuzzle(puzzleData) {
+        // ヘッダー（2文字）
+        const mode = puzzleData.colorMode ? STRING_NUMBER[1] : STRING_NUMBER[2]; // 0=色付き, 1=グレー
+        const sizeChar = STRING_NUMBER[puzzleData.size];
+        
+        // 駒データ（1文字ずつ、色情報は省略）
+        let pieceData = '';
+        for (let y = 0; y < puzzleData.size; y++) {
+            for (let x = 0; x < puzzleData.size; x++) {
+                const cell = puzzleData.board[y][x];
+                if (cell === null) {
+                    pieceData += STRING_NUMBER[1]; // null = '0'
+                } else {
+                    pieceData += STRING_NUMBER[cell.value + 1]; // 駒の値1 = インデックス2 = '1'
+                }
+            }
+        }
+        
+        // 分割処理（100文字まで）
+        const MAX_LENGTH = 100;
+        const header = mode + sizeChar;
+        const chunks = [];
+        
+        for (let i = 0; i < pieceData.length; i += (MAX_LENGTH - 2)) {
+            chunks.push(header + pieceData.substring(i, i + (MAX_LENGTH - 2)));
+        }
+        
+        return chunks;
+    }
+
+    // 共有コード生成処理
+    function generateShareCode() {
+        try {
+            // 駒が配置されているか確認
+            let hasAnyPiece = false;
+            for (let y = 0; y < size; y++) {
+                for (let x = 0; x < size; x++) {
+                    if (board[y][x] !== null) {
+                        hasAnyPiece = true;
+                        break;
+                    }
+                }
+                if (hasAnyPiece) break;
+            }
+            
+            if (!hasAnyPiece) {
+                alert('駒が1つも配置されていません');
+                return;
+            }
+            
+            // パズルデータを作成
+            const puzzleData = {
+                size: size,
+                board: board,
+                colorMode: !inputColorRandom.checked
+            };
+            
+            // エンコード
+            const chunks = encodePuzzle(puzzleData);
+            
+            console.log('共有コード生成:', chunks);
+            
+            // 表示コンテナを取得
+            const container = document.getElementById('shareCodeOutputContainer');
+            if (!container) return;
+            
+            // コンテナをクリア
+            container.innerHTML = '';
+            
+            // 各チャンクごとにエリアを作成
+            chunks.forEach((chunk, index) => {
+                const chunkDiv = document.createElement('div');
+                chunkDiv.style.marginBottom = '10px';
+                
+                chunkDiv.innerHTML = `
+                    <label style="font-size: 12px; color: #666; font-weight: bold;">
+                        ${chunks.length > 1 ? `${index + 1}コード:` : '共有コード:'}
+                    </label>
+                    <textarea readonly style="width: 100%; height: 70px; margin-top: 5px; padding: 5px; border: 2px solid #e67e22; border-radius: 4px; font-family: monospace; font-size: 11px; background: #f8f9fa;">${chunk}</textarea>
+                    <button class="copy-chunk-btn" data-chunk="${chunk}" style="margin-top: 5px; background: #9b59b6; color: white; padding: 6px 12px; border: none; border-radius: 4px; cursor: pointer; width: 100%;">📋 コピー</button>
+                `;
+                
+                container.appendChild(chunkDiv);
+            });
+            
+            // コピーボタンのイベントリスナーを設定
+            document.querySelectorAll('.copy-chunk-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const chunk = this.getAttribute('data-chunk');
+                    navigator.clipboard.writeText(chunk).then(() => {
+                        const originalText = this.textContent;
+                        this.textContent = '✅ コピー完了!';
+                        setTimeout(() => {
+                            this.textContent = originalText;
+                        }, 2000);
+                    }).catch(() => {
+                        // フォールバック
+                        const textarea = document.createElement('textarea');
+                        textarea.value = chunk;
+                        document.body.appendChild(textarea);
+                        textarea.select();
+                        document.execCommand('copy');
+                        document.body.removeChild(textarea);
+                        
+                        const originalText = this.textContent;
+                        this.textContent = '✅ コピー完了!';
+                        setTimeout(() => {
+                            this.textContent = originalText;
+                        }, 2000);
+                    });
+                });
+            });
+            
+            container.style.display = 'block';
+            
+            const totalChars = chunks.reduce((sum, c) => sum + c.length, 0);
+            if (chunks.length > 1) {
+                alert(`共有コードを生成しました！\n\nサイズ: ${size}×${size}\n分割数: ${chunks.length}\n各コード: ${chunks[0].length}文字程度\n合計: ${totalChars}文字`);
+            } else {
+                alert(`共有コードを生成しました！\n\nサイズ: ${size}×${size}\n文字数: ${chunks[0].length}文字`);
+            }
+            
+        } catch (error) {
+            console.error('共有コード生成エラー:', error);
+            alert(`エラー: ${error.message}`);
+        }
+    }
+
+    // 共有コードコピー処理（削除 - 各ボタンで処理）
+
     // 初期化
     console.log('初期化開始...');
     updateCanvasSize();
@@ -1172,6 +1637,37 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // マップ読み込みボタンのイベントリスナー
     document.getElementById('loadMapBtn').addEventListener('click', loadSelectedMap);
+    
+    // 共有コード読み込みボタンのイベントリスナー
+    const loadShareCodeBtn = document.getElementById('loadShareCodeBtn');
+    if (loadShareCodeBtn) {
+        loadShareCodeBtn.addEventListener('click', loadFromShareCode);
+        console.log('共有コード読み込みボタンのイベントリスナー設定完了');
+    }
+    
+    // 共有コードリセットボタンのイベントリスナー
+    const resetShareCodeBtn = document.getElementById('resetShareCodeBtn');
+    if (resetShareCodeBtn) {
+        resetShareCodeBtn.addEventListener('click', resetShareCodeInput);
+        console.log('共有コードリセットボタンのイベントリスナー設定完了');
+    }
+    
+    // 共有コード生成ボタンのイベントリスナー
+    const generateShareCodeBtn = document.getElementById('generateShareCodeBtn');
+    if (generateShareCodeBtn) {
+        generateShareCodeBtn.addEventListener('click', generateShareCode);
+        console.log('共有コード生成ボタンのイベントリスナー設定完了');
+    }
+    
+    // 共有コードコピーボタンのイベントリスナー
+    const copyShareCodeBtn = document.getElementById('copyShareCodeBtn');
+    if (copyShareCodeBtn) {
+        copyShareCodeBtn.addEventListener('click', copyShareCode);
+        console.log('共有コードコピーボタンのイベントリスナー設定完了');
+    }
+    
+    // 共有コード入力欄を初期化
+    resetShareCodeInput();
     
     // アニメーションループを開始
     animationLoop();

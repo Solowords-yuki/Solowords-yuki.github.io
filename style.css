@@ -874,7 +874,7 @@ body {
 /* 超小型デバイス・LINEブラウザ対応（480px以下） */
 @media (max-width: 480px) {
     .age-select-container {
-        padding: 8px; /* 左右均等なパディング */
+        padding: 8px; /* 均等なパディング */
         margin: 0 auto; /* 中央配置 */
     }
     
@@ -3315,7 +3315,7 @@ body {
 /* モバイル対応 */
 @media (max-width: 768px) {
     .footer-nav {
-        position: relative;
+        position: fixed;
         padding: 10px 15px;
     }
     
@@ -3379,7 +3379,7 @@ body {
 /* 超小型デバイス対応 */
 @media (max-width: 480px) {
     .footer-nav {
-        position: relative;
+        position: fixed;
         padding: 8px 10px;
     }
     

@@ -570,8 +570,22 @@
         }
         
         document.addEventListener('DOMContentLoaded', function() {
-            setupAds();
-            initScrollAds();
+            // 年齢層設定を確認して広告表示を制御
+            const ageGroup = localStorage.getItem('gameAgeGroup');
+            const adsEnabled = (ageGroup === 'adult');
+            
+            if (!adsEnabled) {
+                // 広告を非表示
+                const adContainers = document.querySelectorAll('.ad-container');
+                adContainers.forEach(container => {
+                    container.style.display = 'none';
+                    container.style.visibility = 'hidden';
+                });
+            } else {
+                // 広告を表示
+                setupAds();
+                initScrollAds();
+            }
         });
         window.addEventListener('resize', setupAds);
     })();

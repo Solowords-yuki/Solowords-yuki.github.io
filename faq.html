@@ -445,11 +445,11 @@
     <footer class="footer-nav content-footer">
         <div class="footer-links">
             <a href="tips.html" class="footer-link">
-                <span class="footer-icon">�</span>
+                <span class="footer-icon">💡</span>
                 <span class="footer-text">攻略ガイド</span>
             </a>
             <a href="how-to-play-advanced.html" class="footer-link">
-                <span class="footer-icon">�</span>
+                <span class="footer-icon">📖</span>
                 <span class="footer-text">遊び方ガイド</span>
             </a>
             <a href="index.html" class="footer-link footer-link-primary">
@@ -494,8 +494,22 @@
             adContainers.forEach(container => observer.observe(container));
         }
         document.addEventListener('DOMContentLoaded', function() {
-            setupAds();
-            initScrollAds();
+            // 年齢層設定を確認して広告表示を制御
+            const ageGroup = localStorage.getItem('gameAgeGroup');
+            const adsEnabled = (ageGroup === 'adult');
+            
+            if (!adsEnabled) {
+                // 広告を非表示
+                const adContainers = document.querySelectorAll('.ad-container');
+                adContainers.forEach(container => {
+                    container.style.display = 'none';
+                    container.style.visibility = 'hidden';
+                });
+            } else {
+                // 広告を表示
+                setupAds();
+                initScrollAds();
+            }
         });
         window.addEventListener('resize', setupAds);
     })();

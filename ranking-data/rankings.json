@@ -1,9 +1,9 @@
 {
-  "lastUpdated": "2026-01-16T06:10:06.218Z",
+  "lastUpdated": "2026-01-16T07:09:40.204Z",
   "levels": {
     "level1": {
       "name": "Level 1",
-      "totalClears": 11,
+      "totalClears": 12,
       "rankings": {
         "time": [
           {
@@ -82,6 +82,13 @@
             "time": 15,
             "moves": 5,
             "timestamp": "2025-10-13T12:55:56.026Z"
+          },
+          {
+            "rank": 12,
+            "nickname": "labeneko",
+            "time": 26,
+            "moves": 11,
+            "timestamp": "2026-01-16T06:44:50.977Z"
           }
         ],
         "moves": [
@@ -161,38 +168,52 @@
             "time": 15,
             "moves": 5,
             "timestamp": "2025-10-13T12:55:56.026Z"
+          },
+          {
+            "rank": 12,
+            "nickname": "labeneko",
+            "time": 26,
+            "moves": 11,
+            "timestamp": "2026-01-16T06:44:50.977Z"
           }
         ]
       }
     },
     "level2": {
       "name": "Level 2",
-      "totalClears": 4,
+      "totalClears": 5,
       "rankings": {
         "time": [
           {
             "rank": 1,
+            "nickname": "labeneko",
+            "time": 15,
+            "moves": 5,
+            "timestamp": "2026-01-16T06:42:49.428Z"
+          },
+          {
+            "rank": 2,
             "nickname": "NAKAPOKA",
             "time": 20,
             "moves": 17,
             "timestamp": "2025-10-20T14:53:11.203Z"
           },
           {
-            "rank": 2,
+            "rank": 3,
             "nickname": "NAKAPOKA",
             "time": 21,
             "moves": 19,
             "timestamp": "2025-10-14T06:04:27.083Z"
           },
           {
-            "rank": 3,
+            "rank": 4,
             "nickname": "Yuki",
             "time": 23,
             "moves": 12,
             "timestamp": "2025-10-14T14:12:28.945Z"
           },
           {
-            "rank": 4,
+            "rank": 5,
             "nickname": "Yuki",
             "time": 30,
             "moves": 14,
@@ -202,27 +223,34 @@
         "moves": [
           {
             "rank": 1,
+            "nickname": "labeneko",
+            "time": 15,
+            "moves": 5,
+            "timestamp": "2026-01-16T06:42:49.428Z"
+          },
+          {
+            "rank": 2,
             "nickname": "Yuki",
             "time": 23,
             "moves": 12,
             "timestamp": "2025-10-14T14:12:28.945Z"
           },
           {
-            "rank": 2,
+            "rank": 3,
             "nickname": "Yuki",
             "time": 30,
             "moves": 14,
             "timestamp": "2025-10-14T14:11:32.446Z"
           },
           {
-            "rank": 3,
+            "rank": 4,
             "nickname": "NAKAPOKA",
             "time": 20,
             "moves": 17,
             "timestamp": "2025-10-20T14:53:11.203Z"
           },
           {
-            "rank": 4,
+            "rank": 5,
             "nickname": "NAKAPOKA",
             "time": 21,
             "moves": 19,
@@ -233,7 +261,7 @@
     },
     "level3": {
       "name": "Level 3",
-      "totalClears": 3,
+      "totalClears": 4,
       "rankings": {
         "time": [
           {
@@ -256,6 +284,13 @@
             "time": 85,
             "moves": 41,
             "timestamp": "2025-10-14T14:14:40.536Z"
+          },
+          {
+            "rank": 4,
+            "nickname": "labeneko",
+            "time": 217,
+            "moves": 92,
+            "timestamp": "2026-01-16T06:50:11.444Z"
           }
         ],
         "moves": [
@@ -279,6 +314,13 @@
             "time": 54,
             "moves": 46,
             "timestamp": "2025-10-20T14:55:24.727Z"
+          },
+          {
+            "rank": 4,
+            "nickname": "labeneko",
+            "time": 217,
+            "moves": 92,
+            "timestamp": "2026-01-16T06:50:11.444Z"
           }
         ]
       }

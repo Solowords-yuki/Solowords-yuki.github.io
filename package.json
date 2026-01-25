@@ -1,22 +1,33 @@
 {
-  "name": "solowords-ranking-exporter",
-  "version": "1.0.0",
-  "description": "Firebaseからランキングデータを取得してGitHubにエクスポートするスクリプト",
-  "main": "export-rankings.js",
+  "name": "solowords-ranking-system",
+  "version": "2.0.0",
+  "description": "Firebaseランキングシステム + HTTPサーバー(Cloudflare Workers + Hono)",
+  "main": "api/server.js",
+  "type": "module",
   "scripts": {
-    "export": "node export-rankings.js",
-    "export:auto": "node export-rankings.js --auto",
-    "test": "node export-rankings.js --test"
+    "export": "node export-rankings.cjs",
+    "export:auto": "node export-rankings.cjs --auto",
+    "test": "node export-rankings.cjs --test",
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "tail": "wrangler tail"
   },
   "keywords": [
     "firebase",
     "ranking",
     "github",
-    "cache"
+    "cache",
+    "cloudflare-workers",
+    "hono",
+    "serverless"
   ],
   "author": "Yuki",
   "license": "MIT",
   "dependencies": {
-    "firebase-admin": "^11.10.1"
+    "firebase-admin": "^13.6.0",
+    "hono": "^4.0.0"
+  },
+  "devDependencies": {
+    "wrangler": "^4.60.0"
   }
 }

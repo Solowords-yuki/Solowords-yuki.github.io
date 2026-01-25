@@ -308,28 +308,27 @@ class RankingManager {
         lastUpdateEl.textContent = `📅 最終更新: ${dateStr} (${timeText})`;
     }
 
-    // ランキング読み込み（GitHubキャッシュ優先）
+    // ランキング読み込み（HTTP API優先、フォールバックあり）
     async loadRanking() {
         try {
             const level = this.currentRankingLevel;
 
-            // レベル統計読み込み（GitHubキャッシュ経由）
             console.log(`📊 ランキング読み込み: Level ${level} (${this.currentRankingType})`);
             
-            // タイムランキングと手数ランキングの両方を取得
-            const timeRankings = await rankingCache.getTimeRanking(level, 10);
-            const movesRankings = await rankingCache.getMovesRanking(level, 10);
+            // ★ HTTP API経由でランキングを取得（フォールバック付き）
+            const timeRankings = await apiClient.getRanking(level, 'time', 10);
+            const movesRankings = await apiClient.getRanking(level, 'moves', 10);
             
             // 最速タイムと最小手数を取得（各ランキングの1位から）
-            const fastestTime = timeRankings.length > 0 ? timeRankings[0].time : null;
-            const fewestMoves = movesRankings.length > 0 ? movesRankings[0].moves : null;
+            const fastestTime = timeRankings.length > 0 ? timeRankings[0].score || timeRankings[0].time : null;
+            const fewestMoves = movesRankings.length > 0 ? movesRankings[0].score || movesRankings[0].moves : null;
             
-            // クリア回数を取得
-            const stats = await rankingCache.getLevelStats(level);
+            // ★ HTTP API経由で統計情報を取得（フォールバック付き）
+            const stats = await apiClient.getStats(level);
             
             // 統計情報を更新
             this.updateLevelStats({
-                clearCount: stats.clearCount,
+                clearCount: stats.totalClears || stats.clearCount || 0,
                 fastestTime: fastestTime,
                 fewestMoves: fewestMoves
             });
@@ -370,7 +369,7 @@ class RankingManager {
         }
     }
 
-    // ランキングテーブル更新
+    // ランキングテーブル更新（API/GitHubキャッシュ両対応）
     updateRankingTable(rankings) {
         const tbody = document.getElementById('rankingTableBody');
         tbody.innerHTML = '';
@@ -402,24 +401,28 @@ class RankingManager {
             playerCell.textContent = ranking.nickname;
 
             // スコア（タイム/手数 形式で表示）
+            // ★ API形式(score)とGitHubキャッシュ形式(time/moves)の両方に対応
             const valueCell = row.insertCell(2);
-            const time = ranking.time || '-';
-            const moves = ranking.moves || '-';
+            const time = ranking.time || ranking.score || '-';
+            const moves = ranking.moves || ranking.score || '-';
             valueCell.textContent = `${time}秒 / ${moves}手`;
         });
     }
 
-    // ゲームクリア時のスコア保存（自動・サイレント）
+    // ゲームクリア時のスコア保存（HTTP API経由、フォールバック付き）
     async saveGameScore(level, time, moves) {
         try {
             // ログイン済みの場合のみ自動保存
             if (firebaseAuth.isLoggedIn()) {
                 const uid = firebaseAuth.getCurrentUserId();
-                const result = await firebaseDB.saveScore(uid, level, time, moves);
+                
+                // ★ HTTP API経由でスコア送信（フォールバック付き）
+                const result = await apiClient.submitScore(uid, level, time, moves);
                 
                 // 記録更新時のみキャッシュクリア
                 if (result.isNewTimeRecord || result.isNewMovesRecord) {
                     this.clearCache();
+                    apiClient.clearCache(); // ★ APIキャッシュもクリア
                 }
                 
                 // クリア画面のUI更新（NEW表示用）

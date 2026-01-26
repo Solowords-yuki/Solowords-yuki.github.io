@@ -19,25 +19,30 @@ app.get('/api/ranking/:level/:type', async (c) => {
   const type = c.req.param('type');
   
   try {
-    // GitHub Pages上の静的JSONを取得
+    // GitHub Pages上の統合JSONを取得
     const baseURL = 'https://solowords-yuki.github.io/ranking-data';
-    const filename = type === 'time' 
-      ? `time-ranking-level${level}.json`
-      : `moves-ranking-level${level}.json`;
-    
-    const response = await fetch(`${baseURL}/${filename}`);
+    const response = await fetch(`${baseURL}/rankings.json`);
     
     if (!response.ok) {
       throw new Error(`Failed to fetch: ${response.status}`);
     }
     
-    const jsonData = await response.json();
-    // GitHub Pagesのデータは { rankings: [] } 形式
-    const rankings = jsonData.rankings || jsonData;
+    const allData = await response.json();
+    const levelKey = `level${level}`;
     const limit = parseInt(c.req.query('limit') || '10');
     
+    // 統合ファイルから該当レベルのランキングを抽出
+    if (allData?.levels?.[levelKey]?.rankings?.[type]) {
+      const rankings = allData.levels[levelKey].rankings[type];
+      return c.json({
+        data: rankings.slice(0, limit),
+        cached: false,
+        source: 'github'
+      });
+    }
+    
     return c.json({
-      data: Array.isArray(rankings) ? rankings.slice(0, limit) : [],
+      data: [],
       cached: false,
       source: 'github'
     });
@@ -53,16 +58,28 @@ app.get('/api/stats/:level', async (c) => {
   
   try {
     const baseURL = 'https://solowords-yuki.github.io/ranking-data';
-    const response = await fetch(`${baseURL}/level-stats-level${level}.json`);
+    const response = await fetch(`${baseURL}/rankings.json`);
     
     if (!response.ok) {
       throw new Error(`Failed to fetch stats: ${response.status}`);
     }
     
-    const stats = await response.json();
+    const allData = await response.json();
+    const levelKey = `level${level}`;
+    
+    // 統合ファイルから統計情報を抽出
+    if (allData?.levels?.[levelKey]) {
+      return c.json({
+        data: {
+          clearCount: allData.levels[levelKey].totalClears || 0
+        },
+        cached: false,
+        source: 'github'
+      });
+    }
     
     return c.json({
-      data: stats,
+      data: { clearCount: 0 },
       cached: false,
       source: 'github'
     });

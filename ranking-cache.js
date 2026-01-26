@@ -1,8 +1,13 @@
 // 統合型ランキングキャッシュクラス
 class RankingCache {
     constructor() {
-        // ✅ あなたのGitHub PagesのURL（Solowords-yuki用に設定済み）
-        this.githubBaseUrl = 'https://solowords-yuki.github.io/ranking-data/';
+        // ✅ ローカル/本番環境に応じてURLを切り替え
+        const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+        this.githubBaseUrl = isLocal 
+            ? './ranking-data/'  // ローカル: 相対パス
+            : 'https://solowords-yuki.github.io/ranking-data/';  // 本番: GitHub Pages
+        
+        console.log(`📂 ランキングデータ読み込み元: ${this.githubBaseUrl}`);
         
         // キャッシュの有効期限（ミリ秒）- デフォルト10分
         this.cacheExpiry = 10 * 60 * 1000;

@@ -324,7 +324,10 @@ class RankingManager {
             const fewestMoves = movesRankings.length > 0 ? movesRankings[0].score || movesRankings[0].moves : null;
             
             // ★ HTTP API経由で統計情報を取得（フォールバック付き）
-            const stats = await apiClient.getStats(level);
+            const statsResult = await apiClient.getStats(level);
+            
+            // データ構造を正規化（API形式とGitHub形式の両方に対応）
+            const stats = statsResult.stats || statsResult;
             
             // 統計情報を更新
             this.updateLevelStats({

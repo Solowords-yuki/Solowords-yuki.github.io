@@ -99,13 +99,10 @@ class APIClient {
             }
 
             const result = await response.json();
-            console.log('✅ スコア送信成功:', result);
-
-            // キャッシュクリア（更新されたため）
-            this.cache.rankings = {};
-            this.cache.stats = {};
-
-            return result;
+            
+            // APIはダミーなので、常にフォールバックを使用
+            throw new Error('API未実装 - Firebase直接書き込みを使用');
+            
         } catch (error) {
             console.error('❌ スコア送信エラー:', error);
             // フォールバック: Firebase直接書き込み

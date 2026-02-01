@@ -19,6 +19,9 @@ class DOGame {
         this.timerElement = null;
         this.moveCountElement = null; // 手数表示用
         
+        // ★リタイア回数カウンター
+        this.retireCount = 0;
+        
         // ★年齢層管理を追加
         this.ageGroup = null; // 'adult', 'senior-child'
         this.adsEnabled = false; // 広告表示フラグ
@@ -210,10 +213,20 @@ class DOGame {
             this.moveCountElement.id = 'moveCounter';
             this.moveCountElement.textContent = 'Moves: 0';
             this.moveCountElement.style.cssText = `
-                font-size: 1.5rem;
+                background: linear-gradient(135deg, #3498db, #2980b9);
+                color: white;
+                font-size: 20px;
                 font-weight: bold;
-                color: #333;
+                padding: 12px 24px;
+                border-radius: 25px;
+                text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+                box-shadow: 
+                    0 4px 15px rgba(52, 152, 219, 0.3),
+                    inset 0 1px 3px rgba(255, 255, 255, 0.2);
+                border: 2px solid rgba(255, 255, 255, 0.2);
                 margin-left: 20px;
+                min-width: 140px;
+                text-align: center;
             `;
             this.timerElement.parentElement.appendChild(this.moveCountElement);
         }
@@ -434,6 +447,19 @@ class DOGame {
     }
 
     showStuckConfirm() {
+        // ★リタイア回数をカウント
+        this.retireCount++;
+        
+        // ★メッセージを交互に表示
+        const stuckTitle = document.querySelector('#stuckConfirmScreen h2');
+        if (stuckTitle) {
+            if (this.retireCount % 2 === 1) {
+                stuckTitle.textContent = 'え、詰んだのw？？';
+            } else {
+                stuckTitle.textContent = 'あ、また会えたねｗ';
+            }
+        }
+        
         this.showScreen('stuckConfirm');
     }
 
@@ -1107,9 +1133,11 @@ class DOGame {
         
         if (highlight) {
             this.ctx.save();
-            this.ctx.strokeStyle = "#40CFFF";
+            
+            // ★すべての駒で濃い青色のエフェクトを使用（視認性向上）
+            this.ctx.strokeStyle = "#4080FF";
             this.ctx.lineWidth = 6;
-            this.ctx.shadowColor = "#40CFFF";
+            this.ctx.shadowColor = "#4080FF";
             this.ctx.shadowBlur = 15;
             this.ctx.stroke();
             this.ctx.restore();

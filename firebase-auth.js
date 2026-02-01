@@ -61,6 +61,38 @@ class FirebaseAuth {
         }
     }
 
+    // メール/パスワードで新規登録
+    async signUpWithEmail(email, password, nickname) {
+        try {
+            const result = await auth.createUserWithEmailAndPassword(email, password);
+            console.log('✅ メール新規登録成功:', result.user.uid);
+            
+            // ユーザードキュメント作成（ニックネーム付き）
+            await this.createUserDocumentWithNickname(result.user.uid, nickname, false);
+            
+            return result.user;
+        } catch (error) {
+            console.error('❌ メール新規登録失敗:', error);
+            throw error;
+        }
+    }
+
+    // メール/パスワードでログイン
+    async signInWithEmail(email, password) {
+        try {
+            const result = await auth.signInWithEmailAndPassword(email, password);
+            console.log('✅ メールログイン成功:', result.user.uid);
+            
+            // 初回ログイン時にユーザードキュメントがなければ作成
+            await this.createUserDocument(result.user.uid, false);
+            
+            return result.user;
+        } catch (error) {
+            console.error('❌ メールログイン失敗:', error);
+            throw error;
+        }
+    }
+
     // 匿名→Googleへアップグレード
     async upgradeAnonymousToGoogle() {
         try {
@@ -112,6 +144,30 @@ class FirebaseAuth {
                 });
                 
                 console.log('✅ ユーザードキュメント作成:', uid);
+            }
+        } catch (error) {
+            console.error('❌ ユーザードキュメント作成失敗:', error);
+        }
+    }
+
+    // ニックネーム指定でユーザードキュメント作成
+    async createUserDocumentWithNickname(uid, nickname, isAnonymous) {
+        try {
+            const userRef = db.collection('users').doc(uid);
+            const doc = await userRef.get();
+            
+            if (!doc.exists) {
+                await userRef.set({
+                    nickname: nickname || `ユーザー${uid.substring(0, 6)}`,
+                    clearedLevels: [],
+                    bestTimes: {},
+                    bestMoves: {},
+                    isAnonymous: isAnonymous,
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                    updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+                });
+                
+                console.log('✅ ユーザードキュメント作成（ニックネーム付き）:', uid, nickname);
             }
         } catch (error) {
             console.error('❌ ユーザードキュメント作成失敗:', error);

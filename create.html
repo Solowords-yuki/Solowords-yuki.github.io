@@ -93,6 +93,101 @@
             min-width: 120px;
             text-align: center;
         }
+        
+        /* YouTubeモーダルのスタイル */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            pointer-events: none;
+        }
+        
+        .modal-overlay.active {
+            display: flex;
+            pointer-events: auto;
+        }
+        
+        .modal-content {
+            position: relative;
+            width: 90%;
+            max-width: 900px;
+            aspect-ratio: 16 / 9;
+            background: #000;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            animation: modalFadeIn 0.3s ease-out;
+            pointer-events: auto;
+        }
+        
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 10000;
+        }
+        
+        .modal-close:hover {
+            background: #c0392b;
+            transform: rotate(90deg);
+        }
+        
+        .modal-content iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .youtube-btn {
+            background: #ff0000;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(255, 0, 0, 0.3);
+        }
+        
+        .youtube-btn:hover {
+            background: #cc0000;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(255, 0, 0, 0.4);
+        }
     </style>
 </head>
 <body>
@@ -176,6 +271,12 @@
                         <button id="saveButton" class="small-button" style="background: #e67e22;">💾 保存</button>
                         <button id="backToGameButton" class="small-button" style="background: #3498db;">🎮 ゲームに戻る</button>
                         <button onclick="window.location.href='create-mode-intro.html'" class="small-button" style="background: #9b59b6;">📖 参考例</button>
+                        <button class="youtube-btn" onclick="openYouTubeModal()">
+                            <svg width="20" height="14" viewBox="0 0 20 14" fill="currentColor">
+                                <path d="M19.615 2.18c-.23-.863-.908-1.54-1.771-1.771C16.268 0 10 0 10 0S3.732 0 2.156.409c-.863.23-1.54.908-1.771 1.771C0 3.756 0 7 0 7s0 3.244.385 4.82c.23.863.908 1.54 1.771 1.771C3.732 14 10 14 10 14s6.268 0 7.844-.409c.863-.23 1.54-.908 1.771-1.771C20 10.244 20 7 20 7s0-3.244-.385-4.82zM8 10V4l5.196 3L8 10z"/>
+                            </svg>
+                            機能紹介
+                        </button>
                     </div>
                     <div id="modeDisplay" style="
                         background: linear-gradient(135deg, #27ae60, #2ecc71);
@@ -199,6 +300,62 @@
             </div>
         </div>
     </div>
+    
+    <!-- YouTubeモーダル -->
+    <div id="youtubeModal" class="modal-overlay" onclick="closeYouTubeModal(event)">
+        <button class="modal-close" onclick="closeYouTubeModal(event)">×</button>
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <iframe id="youtubeIframe" 
+                    src="" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+            </iframe>
+        </div>
+    </div>
+    
+    <script>
+        // YouTubeモーダル関連の関数
+        function openYouTubeModal() {
+            // ここにYouTubeの動画IDを設定してください
+            // 例: https://www.youtube.com/watch?v=VIDEO_ID の場合、VIDEO_IDの部分を入力
+            const videoId = 'l2nd1SzDuxU'; // ←ここに実際の動画IDを入れてください
+            
+            const modal = document.getElementById('youtubeModal');
+            const iframe = document.getElementById('youtubeIframe');
+            
+            // YouTube埋め込みURLを設定（自動再生付き）
+            iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
+            
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // スクロール無効化
+        }
+        
+        function closeYouTubeModal(event) {
+            if (event) {
+                event.stopPropagation();
+            }
+            
+            const modal = document.getElementById('youtubeModal');
+            const iframe = document.getElementById('youtubeIframe');
+            
+            // iframeのsrcをクリアして動画を停止
+            iframe.src = '';
+            
+            modal.classList.remove('active');
+            document.body.style.overflow = ''; // スクロール有効化
+        }
+        
+        // ESCキーでモーダルを閉じる
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                const modal = document.getElementById('youtubeModal');
+                if (modal.classList.contains('active')) {
+                    closeYouTubeModal();
+                }
+            }
+        });
+    </script>
+    
     <script src="create.js"></script>
 </body>
 </html>

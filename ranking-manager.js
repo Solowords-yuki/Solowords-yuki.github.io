@@ -113,22 +113,406 @@ class RankingManager {
 
     // ログイン処理
     async handleLogin() {
-        try {
-            // 匿名ログインまたはGoogleログイン選択ダイアログ
-            const choice = confirm('Googleアカウントでログインしますか？\n\nOK: Googleログイン\nキャンセル: 匿名ログイン（端末変更時にデータ消失）');
+        // ログイン選択モーダルを表示
+        this.showLoginModal();
+    }
 
-            if (choice) {
-                // Googleログイン
-                await firebaseAuth.signInWithGoogle();
-                alert('✅ Googleログインに成功しました！');
-            } else {
-                // 匿名ログイン
-                await firebaseAuth.signInAnonymously();
-                alert('✅ 匿名ログインしました。端末変更時にデータが消失する点にご注意ください。');
+    // ログイン選択モーダル表示
+    showLoginModal() {
+        // 既存のモーダルがあれば削除
+        const existingModal = document.getElementById('loginModal');
+        if (existingModal) {
+            existingModal.remove();
+        }
+
+        // モーダルHTML作成
+        const modalHTML = `
+            <div id="loginModal" style="
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.7);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 10000;
+            ">
+                <div style="
+                    background: white;
+                    padding: 40px;
+                    border-radius: 15px;
+                    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+                    max-width: 400px;
+                    width: 90%;
+                ">
+                    <h2 style="margin: 0 0 30px 0; text-align: center; color: #333; font-size: 24px;">🔐 ログイン</h2>
+                    <button id="loginSignUpBtn" style="
+                        width: 100%;
+                        padding: 15px;
+                        margin-bottom: 15px;
+                        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                        color: white;
+                        border: none;
+                        border-radius: 8px;
+                        font-size: 16px;
+                        font-weight: bold;
+                        cursor: pointer;
+                        transition: transform 0.2s;
+                    " onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+                        📝 新規登録
+                    </button>
+                    <button id="loginSignInBtn" style="
+                        width: 100%;
+                        padding: 15px;
+                        margin-bottom: 20px;
+                        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+                        color: white;
+                        border: none;
+                        border-radius: 8px;
+                        font-size: 16px;
+                        font-weight: bold;
+                        cursor: pointer;
+                        transition: transform 0.2s;
+                    " onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+                        🔑 ログイン
+                    </button>
+                    <button id="loginCancelBtn" style="
+                        width: 100%;
+                        padding: 12px;
+                        background: #95a5a6;
+                        color: white;
+                        border: none;
+                        border-radius: 8px;
+                        font-size: 14px;
+                        cursor: pointer;
+                        transition: transform 0.2s;
+                    " onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+                        キャンセル
+                    </button>
+                </div>
+            </div>
+        `;
+
+        // モーダルをDOMに追加
+        document.body.insertAdjacentHTML('beforeend', modalHTML);
+
+        // イベントリスナー設定
+        document.getElementById('loginSignUpBtn').addEventListener('click', () => {
+            this.closeLoginModal();
+            this.handleEmailSignUp();
+        });
+
+        document.getElementById('loginSignInBtn').addEventListener('click', () => {
+            this.closeLoginModal();
+            this.handleEmailLogin();
+        });
+
+        document.getElementById('loginCancelBtn').addEventListener('click', () => {
+            this.closeLoginModal();
+        });
+
+        // 背景クリックで閉じる
+        document.getElementById('loginModal').addEventListener('click', (e) => {
+            if (e.target.id === 'loginModal') {
+                this.closeLoginModal();
             }
-        } catch (error) {
-            console.error('ログインエラー:', error);
-            alert('❌ ログインに失敗しました。もう一度お試しください。');
+        });
+    }
+
+    // ログインモーダルを閉じる
+    closeLoginModal() {
+        const modal = document.getElementById('loginModal');
+        if (modal) {
+            modal.remove();
+        }
+    }
+
+    // メール/パスワードログイン処理
+    async handleEmailLogin() {
+        // ログインフォームモーダルを表示
+        this.showLoginFormModal();
+    }
+
+    // メール/パスワード新規登録処理
+    async handleEmailSignUp() {
+        // 新規登録フォームモーダルを表示
+        this.showSignUpFormModal();
+    }
+
+    // ログインフォームモーダル表示
+    showLoginFormModal() {
+        const modalHTML = `
+            <div id="loginFormModal" style="
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.7);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 10000;
+            ">
+                <div style="
+                    background: white;
+                    padding: 40px;
+                    border-radius: 15px;
+                    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+                    max-width: 400px;
+                    width: 90%;
+                ">
+                    <h2 style="margin: 0 0 20px 0; text-align: center; color: #333; font-size: 24px;">🔑 ログイン</h2>
+                    <div style="margin-bottom: 20px; padding: 12px; background: #f0f8ff; border-left: 4px solid #3498db; border-radius: 5px; font-size: 13px; color: #555; line-height: 1.6;">
+                        💡 Google Firebase認証を使用しています。<br>
+                        メールアドレスは、アカウント管理と不正利用防止のために必要です。<br>
+                        <strong>上記以外の利用は一切ありません。</strong>健全なサービス運営にご協力ください。
+                    </div>
+                    <div style="margin-bottom: 20px;">
+                        <label style="display: block; margin-bottom: 8px; color: #555; font-weight: bold;">📧 メールアドレス</label>
+                        <input type="email" id="loginEmail" placeholder="example@email.com" style="
+                            width: 100%;
+                            padding: 12px;
+                            border: 2px solid #ddd;
+                            border-radius: 8px;
+                            font-size: 14px;
+                            box-sizing: border-box;
+                        ">
+                    </div>
+                    <div style="margin-bottom: 25px;">
+                        <label style="display: block; margin-bottom: 8px; color: #555; font-weight: bold;">🔒 パスワード</label>
+                        <input type="password" id="loginPassword" placeholder="パスワード" style="
+                            width: 100%;
+                            padding: 12px;
+                            border: 2px solid #ddd;
+                            border-radius: 8px;
+                            font-size: 14px;
+                            box-sizing: border-box;
+                        ">
+                    </div>
+                    <button id="loginFormSubmitBtn" style="
+                        width: 100%;
+                        padding: 15px;
+                        margin-bottom: 10px;
+                        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+                        color: white;
+                        border: none;
+                        border-radius: 8px;
+                        font-size: 16px;
+                        font-weight: bold;
+                        cursor: pointer;
+                        transition: transform 0.2s;
+                    " onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+                        ログイン
+                    </button>
+                    <button id="loginFormCancelBtn" style="
+                        width: 100%;
+                        padding: 12px;
+                        background: #95a5a6;
+                        color: white;
+                        border: none;
+                        border-radius: 8px;
+                        font-size: 14px;
+                        cursor: pointer;
+                        transition: transform 0.2s;
+                    " onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+                        キャンセル
+                    </button>
+                </div>
+            </div>
+        `;
+
+        document.body.insertAdjacentHTML('beforeend', modalHTML);
+
+        // イベントリスナー設定
+        document.getElementById('loginFormSubmitBtn').addEventListener('click', async () => {
+            const email = document.getElementById('loginEmail').value.trim();
+            const password = document.getElementById('loginPassword').value;
+
+            if (!email || !password) {
+                alert('❌ メールアドレスとパスワードを入力してください。');
+                return;
+            }
+
+            try {
+                await firebaseAuth.signInWithEmail(email, password);
+                this.closeFormModal('loginFormModal');
+                alert('✅ ログインに成功しました！');
+            } catch (error) {
+                console.error('メールログインエラー:', error);
+                if (error.code === 'auth/user-not-found') {
+                    alert('❌ このメールアドレスは登録されていません。');
+                } else if (error.code === 'auth/wrong-password') {
+                    alert('❌ パスワードが間違っています。');
+                } else if (error.code === 'auth/invalid-email') {
+                    alert('❌ メールアドレスの形式が正しくありません。');
+                } else {
+                    alert('❌ ログインに失敗しました。');
+                }
+            }
+        });
+
+        document.getElementById('loginFormCancelBtn').addEventListener('click', () => {
+            this.closeFormModal('loginFormModal');
+        });
+
+        // 背景クリックで閉じる
+        document.getElementById('loginFormModal').addEventListener('click', (e) => {
+            if (e.target.id === 'loginFormModal') {
+                this.closeFormModal('loginFormModal');
+            }
+        });
+    }
+
+    // 新規登録フォームモーダル表示
+    showSignUpFormModal() {
+        const modalHTML = `
+            <div id="signUpFormModal" style="
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.7);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 10000;
+            ">
+                <div style="
+                    background: white;
+                    padding: 40px;
+                    border-radius: 15px;
+                    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+                    max-width: 400px;
+                    width: 90%;
+                ">
+                    <h2 style="margin: 0 0 20px 0; text-align: center; color: #333; font-size: 24px;">📝 新規登録</h2>
+                    <div style="margin-bottom: 20px; padding: 12px; background: #f0f8ff; border-left: 4px solid #3498db; border-radius: 5px; font-size: 13px; color: #555; line-height: 1.6;">
+                        💡 Google Firebase認証を使用しています。<br>
+                        メールアドレスは、アカウント管理と不正利用防止のために必要です。<br>
+                        <strong>上記以外の利用は一切ありません。</strong>健全なサービス運営にご協力ください。
+                    </div>
+                    <div style="margin-bottom: 20px;">
+                        <label style="display: block; margin-bottom: 8px; color: #555; font-weight: bold;">📧 メールアドレス</label>
+                        <input type="email" id="signUpEmail" placeholder="example@email.com" style="
+                            width: 100%;
+                            padding: 12px;
+                            border: 2px solid #ddd;
+                            border-radius: 8px;
+                            font-size: 14px;
+                            box-sizing: border-box;
+                        ">
+                    </div>
+                    <div style="margin-bottom: 20px;">
+                        <label style="display: block; margin-bottom: 8px; color: #555; font-weight: bold;">🔒 パスワード（6文字以上）</label>
+                        <input type="password" id="signUpPassword" placeholder="パスワード" style="
+                            width: 100%;
+                            padding: 12px;
+                            border: 2px solid #ddd;
+                            border-radius: 8px;
+                            font-size: 14px;
+                            box-sizing: border-box;
+                        ">
+                    </div>
+                    <div style="margin-bottom: 25px;">
+                        <label style="display: block; margin-bottom: 8px; color: #555; font-weight: bold;">👤 ニックネーム</label>
+                        <input type="text" id="signUpNickname" placeholder="ランキングに表示される名前" style="
+                            width: 100%;
+                            padding: 12px;
+                            border: 2px solid #ddd;
+                            border-radius: 8px;
+                            font-size: 14px;
+                            box-sizing: border-box;
+                        ">
+                    </div>
+                    <button id="signUpFormSubmitBtn" style="
+                        width: 100%;
+                        padding: 15px;
+                        margin-bottom: 10px;
+                        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                        color: white;
+                        border: none;
+                        border-radius: 8px;
+                        font-size: 16px;
+                        font-weight: bold;
+                        cursor: pointer;
+                        transition: transform 0.2s;
+                    " onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+                        新規登録
+                    </button>
+                    <button id="signUpFormCancelBtn" style="
+                        width: 100%;
+                        padding: 12px;
+                        background: #95a5a6;
+                        color: white;
+                        border: none;
+                        border-radius: 8px;
+                        font-size: 14px;
+                        cursor: pointer;
+                        transition: transform 0.2s;
+                    " onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+                        キャンセル
+                    </button>
+                </div>
+            </div>
+        `;
+
+        document.body.insertAdjacentHTML('beforeend', modalHTML);
+
+        // イベントリスナー設定
+        document.getElementById('signUpFormSubmitBtn').addEventListener('click', async () => {
+            const email = document.getElementById('signUpEmail').value.trim();
+            const password = document.getElementById('signUpPassword').value;
+            const nickname = document.getElementById('signUpNickname').value.trim();
+
+            if (!email || !password || !nickname) {
+                alert('❌ すべての項目を入力してください。');
+                return;
+            }
+
+            if (password.length < 6) {
+                alert('❌ パスワードは6文字以上である必要があります。');
+                return;
+            }
+
+            try {
+                await firebaseAuth.signUpWithEmail(email, password, nickname);
+                this.closeFormModal('signUpFormModal');
+                alert('✅ 新規登録が完了しました！');
+            } catch (error) {
+                console.error('新規登録エラー:', error);
+                if (error.code === 'auth/email-already-in-use') {
+                    alert('❌ このメールアドレスは既に使用されています。');
+                } else if (error.code === 'auth/invalid-email') {
+                    alert('❌ メールアドレスの形式が正しくありません。');
+                } else if (error.code === 'auth/weak-password') {
+                    alert('❌ パスワードが弱すぎます。6文字以上を入力してください。');
+                } else {
+                    alert('❌ 新規登録に失敗しました。');
+                }
+            }
+        });
+
+        document.getElementById('signUpFormCancelBtn').addEventListener('click', () => {
+            this.closeFormModal('signUpFormModal');
+        });
+
+        // 背景クリックで閉じる
+        document.getElementById('signUpFormModal').addEventListener('click', (e) => {
+            if (e.target.id === 'signUpFormModal') {
+                this.closeFormModal('signUpFormModal');
+            }
+        });
+    }
+
+    // フォームモーダルを閉じる
+    closeFormModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if (modal) {
+            modal.remove();
         }
     }
 

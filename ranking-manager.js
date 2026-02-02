@@ -417,17 +417,6 @@ class RankingManager {
                             box-sizing: border-box;
                         ">
                     </div>
-                    <div style="margin-bottom: 25px;">
-                        <label style="display: block; margin-bottom: 8px; color: #555; font-weight: bold;">👤 ニックネーム</label>
-                        <input type="text" id="signUpNickname" placeholder="ランキングに表示される名前" style="
-                            width: 100%;
-                            padding: 12px;
-                            border: 2px solid #ddd;
-                            border-radius: 8px;
-                            font-size: 14px;
-                            box-sizing: border-box;
-                        ">
-                    </div>
                     <button id="signUpFormSubmitBtn" style="
                         width: 100%;
                         padding: 15px;
@@ -466,9 +455,8 @@ class RankingManager {
         document.getElementById('signUpFormSubmitBtn').addEventListener('click', async () => {
             const email = document.getElementById('signUpEmail').value.trim();
             const password = document.getElementById('signUpPassword').value;
-            const nickname = document.getElementById('signUpNickname').value.trim();
 
-            if (!email || !password || !nickname) {
+            if (!email || !password) {
                 alert('❌ すべての項目を入力してください。');
                 return;
             }
@@ -479,9 +467,9 @@ class RankingManager {
             }
 
             try {
-                await firebaseAuth.signUpWithEmail(email, password, nickname);
+                await firebaseAuth.signUpWithEmail(email, password);
                 this.closeFormModal('signUpFormModal');
-                alert('✅ 新規登録が完了しました！');
+                alert('✅ 新規登録が完了しました！ログイン後にニックネームを設定してください。');
             } catch (error) {
                 console.error('新規登録エラー:', error);
                 if (error.code === 'auth/email-already-in-use') {

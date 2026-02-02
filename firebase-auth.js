@@ -62,13 +62,13 @@ class FirebaseAuth {
     }
 
     // メール/パスワードで新規登録
-    async signUpWithEmail(email, password, nickname) {
+    async signUpWithEmail(email, password) {
         try {
             const result = await auth.createUserWithEmailAndPassword(email, password);
             console.log('✅ メール新規登録成功:', result.user.uid);
             
-            // ユーザードキュメント作成（ニックネーム付き）
-            await this.createUserDocumentWithNickname(result.user.uid, nickname, false);
+            // ユーザードキュメント作成（デフォルトニックネーム）
+            await this.createUserDocument(result.user.uid, false);
             
             return result.user;
         } catch (error) {

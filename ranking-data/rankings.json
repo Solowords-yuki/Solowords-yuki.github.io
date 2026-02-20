@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-20T06:23:40.523Z",
+  "lastUpdated": "2026-02-20T07:23:59.215Z",
   "levels": {
     "level1": {
       "name": "Level 1",
@@ -383,7 +383,7 @@
     },
     "level4": {
       "name": "Level 4",
-      "totalClears": 4,
+      "totalClears": 5,
       "rankings": {
         "time": [
           {
@@ -395,20 +395,27 @@
           },
           {
             "rank": 2,
+            "nickname": "kura",
+            "time": 147,
+            "moves": 135,
+            "timestamp": "2026-02-20T06:50:20.698Z"
+          },
+          {
+            "rank": 3,
             "nickname": "Yuki",
             "time": 157,
             "moves": 69,
             "timestamp": "2026-01-27T11:18:09.128Z"
           },
           {
-            "rank": 3,
+            "rank": 4,
             "nickname": "kura",
             "time": 182,
             "moves": 138,
             "timestamp": "2026-02-20T03:15:14.701Z"
           },
           {
-            "rank": 4,
+            "rank": 5,
             "nickname": "Yuki",
             "time": 271,
             "moves": 101,
@@ -439,6 +446,13 @@
           },
           {
             "rank": 4,
+            "nickname": "kura",
+            "time": 147,
+            "moves": 135,
+            "timestamp": "2026-02-20T06:50:20.698Z"
+          },
+          {
+            "rank": 5,
             "nickname": "kura",
             "time": 182,
             "moves": 138,
@@ -449,11 +463,18 @@
     },
     "level5": {
       "name": "Level 5",
-      "totalClears": 1,
+      "totalClears": 2,
       "rankings": {
         "time": [
           {
             "rank": 1,
+            "nickname": "kura",
+            "time": 274,
+            "moves": 195,
+            "timestamp": "2026-02-20T06:55:01.544Z"
+          },
+          {
+            "rank": 2,
             "nickname": "NAKAPOKA",
             "time": 295,
             "moves": 197,
@@ -463,6 +484,13 @@
         "moves": [
           {
             "rank": 1,
+            "nickname": "kura",
+            "time": 274,
+            "moves": 195,
+            "timestamp": "2026-02-20T06:55:01.544Z"
+          },
+          {
+            "rank": 2,
             "nickname": "NAKAPOKA",
             "time": 295,
             "moves": 197,

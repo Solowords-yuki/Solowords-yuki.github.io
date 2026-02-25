@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-25T17:26:30.320Z",
+  "lastUpdated": "2026-02-25T18:27:20.273Z",
   "levels": {
     "level1": {
       "name": "Level 1",
@@ -209,7 +209,7 @@
     },
     "level2": {
       "name": "Level 2",
-      "totalClears": 6,
+      "totalClears": 7,
       "rankings": {
         "time": [
           {
@@ -249,6 +249,13 @@
           },
           {
             "rank": 6,
+            "nickname": "20N",
+            "time": 26,
+            "moves": 19,
+            "timestamp": "2026-02-25T17:45:37.138Z"
+          },
+          {
+            "rank": 7,
             "nickname": "Yuki",
             "time": 30,
             "moves": 14,
@@ -293,6 +300,13 @@
           },
           {
             "rank": 6,
+            "nickname": "20N",
+            "time": 26,
+            "moves": 19,
+            "timestamp": "2026-02-25T17:45:37.138Z"
+          },
+          {
+            "rank": 7,
             "nickname": "NAKAPOKA",
             "time": 21,
             "moves": 19,
@@ -303,7 +317,7 @@
     },
     "level3": {
       "name": "Level 3",
-      "totalClears": 5,
+      "totalClears": 6,
       "rankings": {
         "time": [
           {
@@ -336,6 +350,13 @@
           },
           {
             "rank": 5,
+            "nickname": "20N",
+            "time": 108,
+            "moves": 80,
+            "timestamp": "2026-02-25T17:48:15.028Z"
+          },
+          {
+            "rank": 6,
             "nickname": "labeneko",
             "time": 217,
             "moves": 92,
@@ -373,6 +394,13 @@
           },
           {
             "rank": 5,
+            "nickname": "20N",
+            "time": 108,
+            "moves": 80,
+            "timestamp": "2026-02-25T17:48:15.028Z"
+          },
+          {
+            "rank": 6,
             "nickname": "labeneko",
             "time": 217,
             "moves": 92,
@@ -383,7 +411,7 @@
     },
     "level4": {
       "name": "Level 4",
-      "totalClears": 5,
+      "totalClears": 6,
       "rankings": {
         "time": [
           {
@@ -395,27 +423,34 @@
           },
           {
             "rank": 2,
+            "nickname": "20N",
+            "time": 137,
+            "moves": 90,
+            "timestamp": "2026-02-25T17:53:15.788Z"
+          },
+          {
+            "rank": 3,
             "nickname": "kura",
             "time": 147,
             "moves": 135,
             "timestamp": "2026-02-20T06:50:20.698Z"
           },
           {
-            "rank": 3,
+            "rank": 4,
             "nickname": "Yuki",
             "time": 157,
             "moves": 69,
             "timestamp": "2026-01-27T11:18:09.128Z"
           },
           {
-            "rank": 4,
+            "rank": 5,
             "nickname": "kura",
             "time": 182,
             "moves": 138,
             "timestamp": "2026-02-20T03:15:14.701Z"
           },
           {
-            "rank": 5,
+            "rank": 6,
             "nickname": "Yuki",
             "time": 271,
             "moves": 101,
@@ -439,20 +474,27 @@
           },
           {
             "rank": 3,
+            "nickname": "20N",
+            "time": 137,
+            "moves": 90,
+            "timestamp": "2026-02-25T17:53:15.788Z"
+          },
+          {
+            "rank": 4,
             "nickname": "Yuki",
             "time": 271,
             "moves": 101,
             "timestamp": "2025-10-14T14:19:36.101Z"
           },
           {
-            "rank": 4,
+            "rank": 5,
             "nickname": "kura",
             "time": 147,
             "moves": 135,
             "timestamp": "2026-02-20T06:50:20.698Z"
           },
           {
-            "rank": 5,
+            "rank": 6,
             "nickname": "kura",
             "time": 182,
             "moves": 138,
@@ -463,18 +505,25 @@
     },
     "level5": {
       "name": "Level 5",
-      "totalClears": 2,
+      "totalClears": 3,
       "rankings": {
         "time": [
           {
             "rank": 1,
+            "nickname": "20N",
+            "time": 247,
+            "moves": 196,
+            "timestamp": "2026-02-25T18:02:41.307Z"
+          },
+          {
+            "rank": 2,
             "nickname": "kura",
             "time": 274,
             "moves": 195,
             "timestamp": "2026-02-20T06:55:01.544Z"
           },
           {
-            "rank": 2,
+            "rank": 3,
             "nickname": "NAKAPOKA",
             "time": 295,
             "moves": 197,
@@ -491,6 +540,13 @@
           },
           {
             "rank": 2,
+            "nickname": "20N",
+            "time": 247,
+            "moves": 196,
+            "timestamp": "2026-02-25T18:02:41.307Z"
+          },
+          {
+            "rank": 3,
             "nickname": "NAKAPOKA",
             "time": 295,
             "moves": 197,
@@ -501,11 +557,18 @@
     },
     "level6": {
       "name": "Level 6",
-      "totalClears": 1,
+      "totalClears": 2,
       "rankings": {
         "time": [
           {
             "rank": 1,
+            "nickname": "20N",
+            "time": 396,
+            "moves": 300,
+            "timestamp": "2026-02-25T18:15:39.370Z"
+          },
+          {
+            "rank": 2,
             "nickname": "NAKAPOKA",
             "time": 410,
             "moves": 241,
@@ -519,16 +582,39 @@
             "time": 410,
             "moves": 241,
             "timestamp": "2025-10-25T14:46:05.794Z"
+          },
+          {
+            "rank": 2,
+            "nickname": "20N",
+            "time": 396,
+            "moves": 300,
+            "timestamp": "2026-02-25T18:15:39.370Z"
           }
         ]
       }
     },
     "level7": {
       "name": "Level 7",
-      "totalClears": 0,
+      "totalClears": 1,
       "rankings": {
-        "time": [],
-        "moves": []
+        "time": [
+          {
+            "rank": 1,
+            "nickname": "20N",
+            "time": 507,
+            "moves": 396,
+            "timestamp": "2026-02-25T18:25:50.371Z"
+          }
+        ],
+        "moves": [
+          {
+            "rank": 1,
+            "nickname": "20N",
+            "time": 507,
+            "moves": 396,
+            "timestamp": "2026-02-25T18:25:50.371Z"
+          }
+        ]
       }
     },
     "level8": {

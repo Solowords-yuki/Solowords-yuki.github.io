@@ -272,7 +272,7 @@ class DOGame {
         this.elements.createButton.addEventListener('click', () => this.openCreatePage());
         this.elements.rulesButton.addEventListener('click', () => this.showRules());
         this.elements.closeRulesButton.addEventListener('click', () => this.showMainMenu());
-        this.elements.gameRulesButton.addEventListener('click', () => this.showRules());
+        this.elements.gameRulesButton.addEventListener('click', () => openGameRulesModal());
         this.elements.retireButton.addEventListener('click', () => this.showRetireConfirm());
         this.elements.backToMenuButton.addEventListener('click', () => this.showMainMenu());
         

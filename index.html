@@ -222,6 +222,22 @@
         </div>
     </div>
 
+    <!-- ゲームルール用モーダル -->
+    <div id="gameRulesModal" class="modal-overlay" onclick="closeGameRulesModal(event)">
+        <button class="modal-close" onclick="closeGameRulesModal(event)">×</button>
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div class="rules-modal-content">
+                <h1>ゲームルール</h1>
+                <h2>１. 同じ数字の駒を全て隣接させてゲームクリアを目指そう!</h2>
+                <h2>２. 数字の駒は斜め方向に移動可能!</h2>
+                <h2>３. 同じ数字の駒が隣接した時、その駒はその場で固定（光る）!</h2>
+                <p>※駒は固定するまで何度でも移動可能。</p>
+                <p>※駒は直線上の空きマスに一気に移動可能。</p>
+                <p>※他の駒は飛び越えれない</p>
+            </div>
+        </div>
+    </div>
+
     <!-- 終了画面 -->
     <div id="endScreen" class="screen">
         <div class="end-content">
@@ -460,6 +476,36 @@
     </div>
 
     <script src="ranking-cache.js"></script>
+    
+    <!-- ゲームルール用モーダル関数 -->
+    <script>
+        function openGameRulesModal() {
+            const modal = document.getElementById('gameRulesModal');
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // スクロール無効化
+        }
+        
+        function closeGameRulesModal(event) {
+            if (event) {
+                event.stopPropagation();
+            }
+            
+            const modal = document.getElementById('gameRulesModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = ''; // スクロール有効化
+        }
+        
+        // ESCキーでモーダルを閉じる
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                const modal = document.getElementById('gameRulesModal');
+                if (modal.classList.contains('active')) {
+                    closeGameRulesModal();
+                }
+            }
+        });
+    </script>
+    
     <script src="game3.js"></script>
     <script src="api-client.js"></script>
     <script src="ranking-manager.js"></script>

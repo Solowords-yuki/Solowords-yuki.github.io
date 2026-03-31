@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-03-31T12:25:24.600Z",
+  "lastUpdated": "2026-03-31T13:07:28.034Z",
   "levels": {
     "level1": {
       "name": "Level 1",
@@ -43,7 +43,7 @@
           },
           {
             "rank": 6,
-            "nickname": "YUKI",
+            "nickname": "Yuki",
             "time": 7,
             "moves": 3,
             "timestamp": "2026-02-01T13:32:48.207Z"
@@ -92,7 +92,7 @@
           },
           {
             "rank": 13,
-            "nickname": "YUKI",
+            "nickname": "Yuki",
             "time": 13,
             "moves": 7,
             "timestamp": "2026-02-01T13:32:16.844Z"
@@ -115,7 +115,7 @@
         "moves": [
           {
             "rank": 1,
-            "nickname": "YUKI",
+            "nickname": "Yuki",
             "time": 7,
             "moves": 3,
             "timestamp": "2026-02-01T13:32:48.207Z"
@@ -206,7 +206,7 @@
           },
           {
             "rank": 14,
-            "nickname": "YUKI",
+            "nickname": "Yuki",
             "time": 13,
             "moves": 7,
             "timestamp": "2026-02-01T13:32:16.844Z"

@@ -33,6 +33,9 @@
     <script src="firebase-config.js"></script>
     <script src="firebase-auth.js"></script>
     <script src="firebase-db.js"></script>
+    
+    <!-- イベントマップ設定 -->
+    <script src="event-maps.js"></script>
 </head>
 <body>
     <!-- 年齢層選択画面 -->
@@ -83,6 +86,9 @@
                     <button id="logoutButton" class="logout-button" style="display: none;">
                         🚪 ログアウト
                     </button>
+                    <button id="accountSettingsButton" class="small-button" style="display: none; margin-top: 8px;">
+                        ⚙️ アカウント設定
+                    </button>
                 </div>
                 
                 <div class="age-note">
@@ -117,6 +123,9 @@
         <div class="menu-content">
             <h2>Level</h2>
             <select id="levelSelect">
+                <!-- イベントマップ（毎月手動で編集） -->
+                <option value="event1">2026/4 event</option>
+                
                 <option value="create1">Create1</option>
                 <option value="create2">Create2</option>
                 <option value="create3">Create3</option>
@@ -271,7 +280,10 @@
                 </div>
             </div>
             
-            <button id="backToMenuButton" class="menu-button">メニューに戻る</button>
+            <button id="backToMenuButton" class="menu-button">
+                次のレベルへ<br>
+                <span style="font-size: 0.8em;">（メインに戻る）</span>
+            </button>
             
             <!-- ★ランキング参加促進エリア -->
             <div id="rankingPrompt" class="ranking-prompt">
@@ -380,6 +392,9 @@
                         <option value="8">Level 8</option>
                         <option value="9">Level 9</option>
                         <option value="10">Level 10</option>
+                        
+                        <!-- イベントマップ（毎月手動で編集） -->
+                        <option value="event1">event</option>
                     </select>
                 </div>
                 
@@ -435,6 +450,46 @@
             
             <div class="records-buttons">
                 <button id="backToMenuFromRecords" class="menu-button">メニューに戻る</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- アカウント設定画面 -->
+    <div id="accountSettingsScreen" class="screen">
+        <div class="records-content">
+            <h2>⚙️ アカウント設定</h2>
+            
+            <!-- 現在のアカウント情報 -->
+            <div class="account-details">
+                <h3>アカウント情報</h3>
+                <div class="info-row">
+                    <span class="info-label">メールアドレス:</span>
+                    <span id="currentEmail" class="info-value">未設定</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">ニックネーム:</span>
+                    <span id="currentNickname" class="info-value">未設定</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">ログイン方法:</span>
+                    <span id="loginMethod" class="info-value">-</span>
+                </div>
+            </div>
+
+            <!-- パスワード変更 -->
+            <div id="passwordResetSection" class="settings-section" style="display: none;">
+                <h3>🔑 パスワード変更</h3>
+                <p style="font-size: 0.9em; color: #888; margin-bottom: 16px;">
+                    パスワード変更用のリンクをメールで送信します。<br>
+                    メールに記載されたリンクから安全に変更できます。
+                </p>
+                <button id="sendResetEmailButton" class="menu-button">
+                    📧 パスワード変更リンクを送信
+                </button>
+            </div>
+
+            <div class="records-buttons" style="margin-top: 24px;">
+                <button id="backToMenuFromSettings" class="menu-button">メニューに戻る</button>
             </div>
         </div>
     </div>

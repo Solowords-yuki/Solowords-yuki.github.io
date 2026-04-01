@@ -57,7 +57,8 @@ class RankingCache {
     async getTimeRanking(level, limit = 10) {
         try {
             const allData = await this.getAllRankings();
-            const levelKey = `level${level}`;
+            // イベントマップやクリエイトモードの場合は文字列のまま使用
+            const levelKey = typeof level === 'string' ? level : `level${level}`;
             
             if (allData && allData.levels && allData.levels[levelKey]) {
                 const rankings = allData.levels[levelKey].rankings.time || [];
@@ -75,7 +76,8 @@ class RankingCache {
     async getMovesRanking(level, limit = 10) {
         try {
             const allData = await this.getAllRankings();
-            const levelKey = `level${level}`;
+            // イベントマップやクリエイトモードの場合は文字列のまま使用
+            const levelKey = typeof level === 'string' ? level : `level${level}`;
             
             if (allData && allData.levels && allData.levels[levelKey]) {
                 const rankings = allData.levels[levelKey].rankings.moves || [];
@@ -93,7 +95,8 @@ class RankingCache {
     async getLevelStats(level) {
         try {
             const allData = await this.getAllRankings();
-            const levelKey = `level${level}`;
+            // イベントマップやクリエイトモードの場合は文字列のまま使用
+            const levelKey = typeof level === 'string' ? level : `level${level}`;
             
             if (allData && allData.levels && allData.levels[levelKey]) {
                 return {

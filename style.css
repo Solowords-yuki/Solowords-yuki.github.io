@@ -3527,3 +3527,118 @@ body {
     font-size: 0.95rem;
     line-height: 1.5;
 }
+
+/* ================ アカウント設定画面のスタイル ================ */
+#accountSettingsScreen {
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+#accountSettingsScreen h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: #2c3e50;
+    text-align: center;
+}
+
+.account-info {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.account-info p {
+    margin: 8px 0;
+    color: #34495e;
+}
+
+.account-info strong {
+    color: #2c3e50;
+    margin-right: 10px;
+}
+
+.settings-section {
+    background: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.settings-section h3 {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    color: #3498db;
+}
+
+.settings-section label {
+    display: block;
+    margin: 10px 0 5px 0;
+    color: #34495e;
+    font-weight: 500;
+}
+
+.settings-section input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+.settings-section button {
+    width: 100%;
+    padding: 12px;
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background 0.3s ease;
+}
+
+.settings-section button:hover {
+    background: #2980b9;
+}
+
+.settings-section button:active {
+    background: #1f618d;
+}
+
+#sendResetEmailButton {
+    background: #e67e22;
+}
+
+#sendResetEmailButton:hover {
+    background: #d35400;
+}
+
+#backToMenuFromSettings {
+    background: #95a5a6;
+    margin-top: 20px;
+}
+
+#backToMenuFromSettings:hover {
+    background: #7f8c8d;
+}
+
+#accountSettingsButton {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background: #9b59b6;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+#accountSettingsButton:hover {
+    background: #8e44ad;
+}

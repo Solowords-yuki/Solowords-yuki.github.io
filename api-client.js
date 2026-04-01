@@ -69,46 +69,16 @@ class APIClient {
         }
     }
 
-    // スコア送信
+    // スコア送信（Firebase直接書き込み）
     async submitScore(uid, level, time, moves) {
+        // ★ API未実装のため、直接Firebase書き込みを使用
+        // 将来API実装時は、この関数内でHTTP経由に切り替え可能
         try {
-            // Firebase ID Tokenを取得
-            const user = firebaseAuth.currentUser;
-            if (!user) {
-                throw new Error('ログインが必要です');
-            }
-
-            const idToken = await user.getIdToken();
-
-            const response = await fetch(`${this.baseURL}/api/score`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    uid,
-                    level,
-                    time,
-                    moves,
-                    idToken
-                })
-            });
-
-            if (!response.ok) {
-                throw new Error(`HTTP ${response.status}`);
-            }
-
-            const result = await response.json();
-            
-            // APIはダミーなので、常にフォールバックを使用
-            throw new Error('API未実装 - Firebase直接書き込みを使用');
-            
-        } catch (error) {
-            console.error('❌ スコア送信エラー:', error);
-            // フォールバック: Firebase直接書き込み
-            console.log('🔄 Firebase直接書き込みにフォールバック');
             const firebaseDB = new FirebaseDB();
             return await firebaseDB.saveScore(uid, level, time, moves);
+        } catch (error) {
+            console.error('❌ スコア保存エラー:', error);
+            throw error;
         }
     }
 

@@ -72,22 +72,26 @@ async function generateRankings(db) {
         for (let i = 1; i <= LEVELS; i++) {
             levelScores[`level${i}`] = [];
         }
+        // ★ イベントマップ（event202604形式）は動的に追加されるため初期化不要
 
         scoresSnapshot.forEach(doc => {
             const data = doc.data();
             const level = data.level;
             
-            if (levelScores[level]) {
-                const userData = usersMap[data.uid] || {};
-                levelScores[level].push({
-                    // UID を公開しない（セキュリティ向上）
-                    // uid: data.uid,  // ← 削除
-                    nickname: userData.nickname || 'ゲスト',
-                    time: data.time,
-                    moves: data.moves,
-                    timestamp: data.createdAt ? data.createdAt.toDate().toISOString() : new Date().toISOString()
-                });
+            // ★ level が存在しない場合は動的に追加（将来の拡張に対応）
+            if (!levelScores[level]) {
+                levelScores[level] = [];
             }
+            
+            const userData = usersMap[data.uid] || {};
+            levelScores[level].push({
+                // UID を公開しない（セキュリティ向上）
+                // uid: data.uid,  // ← 削除
+                nickname: userData.nickname || 'ゲスト',
+                time: data.time,
+                moves: data.moves,
+                timestamp: data.createdAt ? data.createdAt.toDate().toISOString() : new Date().toISOString()
+            });
         });
 
         // 統合データ構造を作成
@@ -96,12 +100,31 @@ async function generateRankings(db) {
             levels: {}
         };
 
-        // レベルごとにランキング生成
-        for (let i = 1; i <= LEVELS; i++) {
-            const levelKey = `level${i}`;
+        // ★ レベルごとにランキング生成（動的に全レベルを処理）
+        // 現在月を取得（イベント月フィルタリング用: event202604）
+        const now = new Date();
+        const currentYear = now.getFullYear();
+        const currentMonth = String(now.getMonth() + 1).padStart(2, '0');
+        const currentEventKey = `event${currentYear}${currentMonth}`;
+        
+        // イベントレベルは現在月のみに絞る
+        const allLevels = Object.keys(levelScores).filter(levelKey => {
+            if (levelKey.startsWith('event')) {
+                return levelKey === currentEventKey; // 現在月のイベントのみ
+            }
+            return true; // 通常レベルはすべて含める
+        });
+        console.log(`📊 処理対象レベル: ${allLevels.join(', ')}`);
+        console.log(`🗓️  現在月イベント: ${currentEventKey}`);
+        
+        for (const levelKey of allLevels) {
             const scores = levelScores[levelKey];
             
-            console.log(`📈 Level ${i} ランキング生成中... (${scores.length}件)`);
+            // レベル名を生成（event2026/4形式の場合は特別表示）
+            const levelName = levelKey.startsWith('event') ? 'イベントマップ' : 
+                              levelKey.replace('level', 'Level ');
+            
+            console.log(`📈 ${levelName} ランキング生成中... (${scores.length}件)`);
 
             // タイムランキング（昇順）
             const timeRanking = [...scores]
@@ -122,7 +145,7 @@ async function generateRankings(db) {
                 }));
 
             rankings.levels[levelKey] = {
-                name: `Level ${i}`,
+                name: levelName,
                 totalClears: scores.length,
                 rankings: {
                     time: timeRanking,
@@ -130,7 +153,7 @@ async function generateRankings(db) {
                 }
             };
 
-            console.log(`✅ Level ${i} 完了 (タイム: ${timeRanking.length}件, 手数: ${movesRanking.length}件)`);
+            console.log(`✅ ${levelName} 完了 (タイム: ${timeRanking.length}件, 手数: ${movesRanking.length}件)`);
         }
 
         return rankings;

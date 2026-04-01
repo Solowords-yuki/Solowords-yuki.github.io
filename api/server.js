@@ -28,7 +28,8 @@ app.get('/api/ranking/:level/:type', async (c) => {
     }
     
     const allData = await response.json();
-    const levelKey = `level${level}`;
+    // イベントマップやクリエイトモードの場合は文字列のまま使用
+    const levelKey = isNaN(level) ? level : `level${level}`;
     const limit = parseInt(c.req.query('limit') || '10');
     
     // 統合ファイルから該当レベルのランキングを抽出
@@ -65,7 +66,8 @@ app.get('/api/stats/:level', async (c) => {
     }
     
     const allData = await response.json();
-    const levelKey = `level${level}`;
+    // イベントマップやクリエイトモードの場合は文字列のまま使用
+    const levelKey = isNaN(level) ? level : `level${level}`;
     
     // 統合ファイルから統計情報を抽出
     if (allData?.levels?.[levelKey]) {

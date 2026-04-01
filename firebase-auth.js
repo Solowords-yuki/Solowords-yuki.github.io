@@ -215,6 +215,18 @@ class FirebaseAuth {
         }
     }
 
+    // ★パスワードリセットメール送信（変更リンク付き）
+    async sendPasswordResetEmail(email) {
+        try {
+            await auth.sendPasswordResetEmail(email);
+            console.log('✅ パスワード変更リンク送信:', email);
+            return true;
+        } catch (error) {
+            console.error('❌ パスワード変更リンク送信失敗:', error);
+            throw error;
+        }
+    }
+
     // 現在のユーザーID取得
     getCurrentUserId() {
         return this.currentUser ? this.currentUser.uid : null;

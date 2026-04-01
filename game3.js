@@ -101,6 +101,22 @@ class DOGame {
         // console.log(`年齢層設定: ${ageGroup}, 広告表示: ${this.adsEnabled}`);
     }
     
+    // ★カスタムレベル判定（create1-3, event1-N）
+    isCustomLevel(level) {
+        if (typeof level === 'string') {
+            return level.startsWith('create') || level.startsWith('event');
+        }
+        return false;
+    }
+    
+    // ★イベントマップ取得
+    getEventMapData(eventId) {
+        if (typeof getEventMapById === 'function') {
+            return getEventMapById(parseInt(eventId));
+        }
+        return null;
+    }
+    
     // ★デバッグ用：年齢設定をリセット
     resetAgeSelection() {
         localStorage.removeItem('gameAgeGroup');
@@ -159,7 +175,8 @@ class DOGame {
             end: document.getElementById('endScreen'),
             retireConfirm: document.getElementById('retireConfirmScreen'),
             stuckConfirm: document.getElementById('stuckConfirmScreen'),
-            records: document.getElementById('recordsScreen') // ★追加
+            records: document.getElementById('recordsScreen'), // ★追加
+            accountSettings: document.getElementById('accountSettingsScreen') // ★アカウント設定画面
         };
         
         this.elements = {
@@ -310,8 +327,8 @@ class DOGame {
             const value = e.target.value;
             if (value === 'custom') {
                 this.selectedLevel = 'custom';
-            } else if (['create1', 'create2', 'create3'].includes(value)) {
-                this.selectedLevel = value; // create1, create2, create3をそのまま設定
+            } else if(value.startsWith('create') || value.startsWith('event')) {
+                this.selectedLevel = value; // create1-3, event1-Nをそのまま設定
             } else {
                 this.selectedLevel = parseInt(value); // HTMLの値をそのまま保存（0, 1, 2, ...）
             }
@@ -390,6 +407,23 @@ class DOGame {
         this.elements.recordsButton.addEventListener('click', () => this.showRecords());
         this.elements.backToMenuFromRecords.addEventListener('click', () => this.showMainMenu());
         this.elements.clearRecordsButton.addEventListener('click', () => this.clearAllRecords());
+        
+        // ★アカウント設定関連
+        const accountSettingsButton = document.getElementById('accountSettingsButton');
+        const backToMenuFromSettings = document.getElementById('backToMenuFromSettings');
+        const sendResetEmailButton = document.getElementById('sendResetEmailButton');
+        
+        if (accountSettingsButton) {
+            accountSettingsButton.addEventListener('click', () => this.showAccountSettings());
+        }
+        
+        if (backToMenuFromSettings) {
+            backToMenuFromSettings.addEventListener('click', () => this.showMainMenu());
+        }
+        
+        if (sendResetEmailButton) {
+            sendResetEmailButton.addEventListener('click', () => this.sendPasswordResetEmail());
+        }
     }
     
     showScreen(screenName) {
@@ -509,7 +543,7 @@ class DOGame {
         //console.log('startGame開始 - 選択されたレベル:', this.selectedLevel);
         
         // Createレベルの場合、カスタムパズルの確認
-        if (['create1', 'create2', 'create3'].includes(this.selectedLevel)) {
+        if (typeof this.selectedLevel === 'string' && this.selectedLevel.startsWith('create')) {
             //console.log('Createレベルが選択されました:', this.selectedLevel);
             const customPuzzleData = localStorage.getItem(this.selectedLevel);
             //console.log('保存されたデータ:', customPuzzleData);
@@ -522,6 +556,17 @@ class DOGame {
             }
         }
         
+        // イベントマップの場合、データの確認
+        if (typeof this.selectedLevel === 'string' && this.selectedLevel.startsWith('event')) {
+            const eventId = parseInt(this.selectedLevel.replace('event', ''));
+            const eventMap = this.getEventMapData(eventId);
+            if (!eventMap || !eventMap.code || eventMap.code.length === 0) {
+                console.error(`${this.selectedLevel}のデータが見つかりません`);
+                alert(`イベントマップのデータが見つかりません。`);
+                return;
+            }
+        }
+        
         //console.log('ゲーム画面を表示します');
         this.showScreen('game');
         //console.log('ゲームを初期化します');
@@ -530,7 +575,7 @@ class DOGame {
         this.startTimer();
         
         // レベル1の場合のみルールボタンを表示
-        if (!['create1', 'create2', 'create3'].includes(this.selectedLevel)) {
+        if (!this.isCustomLevel(this.selectedLevel)) {
             const currentLevel = parseInt(this.selectedLevel) + 1;
             if (currentLevel === 1) {
                 this.elements.gameRulesButton.style.display = 'inline-block';
@@ -538,7 +583,7 @@ class DOGame {
                 this.elements.gameRulesButton.style.display = 'none';
             }
         } else {
-            // Createレベルの場合はルールボタンを非表示
+            // Createレベル・イベントマップの場合はルールボタンを非表示
             this.elements.gameRulesButton.style.display = 'none';
         }
         
@@ -553,7 +598,7 @@ class DOGame {
         
         //console.log('ゲーム初期化開始 - レベル:', this.selectedLevel, 'カスタムパズル使用:', useCustomPuzzle);
         
-        if (['create1', 'create2', 'create3'].includes(this.selectedLevel)) {
+        if (typeof this.selectedLevel === 'string' && this.selectedLevel.startsWith('create')) {
             //console.log('Createレベルが選択されました:', this.selectedLevel);
             customPuzzleData = localStorage.getItem(this.selectedLevel);
             //console.log(`${this.selectedLevel}データ:`, customPuzzleData);
@@ -572,6 +617,30 @@ class DOGame {
                     customPuzzleData = null;
                 }
             }
+        } else if (typeof this.selectedLevel === 'string' && this.selectedLevel.startsWith('event')) {
+            console.log('✅ イベントマップが選択されました:', this.selectedLevel);
+            const eventId = parseInt(this.selectedLevel.replace('event', ''));
+            console.log('✅ イベントID:', eventId);
+            const eventMap = this.getEventMapData(eventId);
+            console.log('✅ 取得したイベントマップ:', eventMap);
+            if (eventMap && eventMap.code && eventMap.code.length > 0) {
+                // 共有コードをデコード
+                const shareCode = eventMap.code.join(''); // 複数行の場合は結合
+                console.log('✅ 共有コード:', shareCode);
+                if (typeof decodeShareCode === 'function') {
+                    try {
+                        customPuzzleData = decodeShareCode(shareCode);
+                        console.log('✅ イベントマップのデコード成功:', customPuzzleData);
+                    } catch (error) {
+                        console.error('❌ イベントマップのデコードに失敗:', error);
+                        customPuzzleData = null;
+                    }
+                } else {
+                    console.error('❌ decodeShareCode関数が見つかりません');
+                }
+            } else {
+                console.error(`❌ イベントマップ${eventId}のデータが見つかりません`);
+            }
         } else if (useCustomPuzzle) {
             customPuzzleData = localStorage.getItem('customPuzzle');
             //console.log('カスタムパズルデータ:', customPuzzleData);
@@ -584,9 +653,9 @@ class DOGame {
             this.loadCustomPuzzle(puzzleDataToLoad);
             // カスタムパズル使用後はフラグをクリア
             localStorage.removeItem('useCustomPuzzle');
-        } else if (['create1', 'create2', 'create3'].includes(this.selectedLevel)) {
+        } else if (typeof this.selectedLevel === 'string' && (this.selectedLevel.startsWith('create') || this.selectedLevel.startsWith('event'))) {
             console.error(`${this.selectedLevel}のパズルデータが見つかりません`);
-            alert(`${this.selectedLevel.toUpperCase()}に保存されたパズルが見つかりません。先にクリエイトでパズルを作成してください。`);
+            alert(`${this.selectedLevel.toUpperCase()}のパズルデータが見つかりません。`);
             return;
         } else {
             //console.log('通常のレベル', this.selectedLevel, 'でゲームを開始');
@@ -603,8 +672,8 @@ class DOGame {
         this.drawGame();
         this.updateTimerDisplay(); // タイマー表示を更新
         
-        // ★通常レベルでも隣接チェックを実行
-        if (!['create1', 'create2', 'create3'].includes(this.selectedLevel)) {
+        // ★通常レベル（数値）のみ隣接チェックを実行（カスタムとイベントは除外）
+        if (typeof this.selectedLevel === 'number') {
             setTimeout(() => {
                 this.performInitialAdjacencyCheckAndFix();
             }, 100);
@@ -1553,18 +1622,39 @@ class DOGame {
             this.elements.clearMoves.textContent = `Moves: ${this.moveCount}`;
         }
         
-        const currentLevel = this.selectedLevel + 1; // selectedLevel=0はレベル1なので+1
-        this.elements.levelClearInfo.textContent = `Level ${currentLevel} クリア！`;
-        
-        // ★記録を保存（ローカル）
-        const isNewRecord = this.saveRecord(currentLevel, this.clearTimeSeconds || 0, this.moveCount);
-        if (isNewRecord) {
-            // 新記録アニメーション（オプション）
-           // console.log('🎉 新記録達成！');
+        // ★レベル判定：イベントマップか通常レベルか
+        let currentLevel;
+        let levelDisplayName;
+        if (typeof this.selectedLevel === 'string' && this.selectedLevel.startsWith('event')) {
+            // イベントマップの場合（年月形式で保存: event202604）
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0'); // 0-11 → 01-12
+            currentLevel = `event${year}${month}`;
+            levelDisplayName = 'event';
+        } else if (typeof this.selectedLevel === 'number') {
+            // 通常レベルの場合
+            currentLevel = this.selectedLevel + 1; // selectedLevel=0はレベル1なので+1
+            levelDisplayName = `Level ${currentLevel}`;
+        } else {
+            // カスタムレベルなど
+            currentLevel = null;
+            levelDisplayName = 'Custom';
         }
         
-        // ★オンラインランキングに保存（通常レベルのみ）
-        if (typeof this.selectedLevel === 'number' && typeof rankingManager !== 'undefined' && rankingManager) {
+        this.elements.levelClearInfo.textContent = `${levelDisplayName} クリア！`;
+        
+        // ★記録を保存（ローカル）- イベントと通常レベルのみ
+        if (currentLevel !== null) {
+            const isNewRecord = this.saveRecord(currentLevel, this.clearTimeSeconds || 0, this.moveCount);
+            if (isNewRecord) {
+                // 新記録アニメーション（オプション）
+               // console.log('🎉 新記録達成！');
+            }
+        }
+        
+        // ★オンラインランキングに保存（通常レベルとイベントマップ）
+        if (currentLevel !== null && typeof rankingManager !== 'undefined' && rankingManager) {
             // 非同期でランキングに保存（エラーが出ても続行）
             rankingManager.saveGameScore(currentLevel, this.clearTimeSeconds || 0, this.moveCount)
                 .catch(err => console.log('ランキング保存スキップ:', err));
@@ -1572,7 +1662,7 @@ class DOGame {
             // クリア画面のランキングUI更新
             setTimeout(() => {
                 if (typeof firebaseAuth !== 'undefined') {
-                    rankingManager.updateClearScreenRankingUI(firebaseAuth.currentUser);
+                    rankingManager.updateClearScreenRankingUI(firebaseAuth.currentUser, null, currentLevel);
                 }
             }, 100);
         }
@@ -1580,7 +1670,7 @@ class DOGame {
         // 自動レベルアップ（通常レベルのみ）
         if (typeof this.selectedLevel === 'number' && currentLevel < 10) { // レベル10まであるので、10未満の場合のみ繰り上げ
             const nextSelectedLevel = this.selectedLevel + 1; // selectedLevelを1つ上げる（0→1, 1→2）
-            this.elements.levelSelect.selectedIndex = nextSelectedLevel + 3; // Createオプション分をオフセット
+            this.elements.levelSelect.selectedIndex = nextSelectedLevel + 4; // イベント1個 + Create3個 = 4個オフセット
             this.selectedLevel = nextSelectedLevel; // 次のselectedLevelを設定
             //console.log(`レベル繰り上げ: Level${currentLevel} → Level${currentLevel+1} (selectedLevel: ${this.selectedLevel})`);
         }
@@ -1623,6 +1713,7 @@ class DOGame {
         
         tbody.innerHTML = '';
         
+        // 通常レベル（1-10）
         for (let level = 1; level <= 10; level++) {
             const record = this.getRecord(level);
             const row = tbody.insertRow();
@@ -1632,10 +1723,10 @@ class DOGame {
             levelCell.textContent = `Level ${level}`;
             levelCell.className = 'level-cell';
             
-            // クリア人数列
+            // クリア回数列
             const clearCountCell = row.insertCell(1);
             if (record.cleared) {
-                clearCountCell.textContent = '1人';
+                clearCountCell.textContent = `${record.clearCount || 1}回`;
                 clearCountCell.className = 'cleared-cell';
             } else {
                 clearCountCell.textContent = '未クリア';
@@ -1657,15 +1748,51 @@ class DOGame {
                 recordCell.className = 'not-cleared-cell';
             }
         }
+        
+        // イベントレベル
+        const eventRecord = this.getRecord('event');
+        const eventRow = tbody.insertRow();
+        
+        // レベル列
+        const eventLevelCell = eventRow.insertCell(0);
+        eventLevelCell.textContent = 'event';
+        eventLevelCell.className = 'level-cell';
+        
+        // クリア回数列
+        const eventClearCountCell = eventRow.insertCell(1);
+        if (eventRecord.cleared) {
+            eventClearCountCell.textContent = `${eventRecord.clearCount || 1}回`;
+            eventClearCountCell.className = 'cleared-cell';
+        } else {
+            eventClearCountCell.textContent = '未クリア';
+            eventClearCountCell.className = 'not-cleared-cell';
+        }
+        
+        // ベストタイム/手数列
+        const eventRecordCell = eventRow.insertCell(2);
+        if (eventRecord.cleared) {
+            eventRecordCell.textContent = `${eventRecord.bestTime}s / ${eventRecord.bestMoves}手`;
+            eventRecordCell.className = 'record-cell';
+            
+            if (this.isBestRecord('event', eventRecord)) {
+                eventRecordCell.classList.add('best-record');
+            }
+        } else {
+            eventRecordCell.textContent = '---';
+            eventRecordCell.className = 'not-cleared-cell';
+        }
     }
 
     getRecord(level) {
         const records = JSON.parse(localStorage.getItem('doGameRecords') || '{}');
-        return records[level] || { cleared: false, bestTime: 999, bestMoves: 999 };
+        return records[level] || { cleared: false, bestTime: 999, bestMoves: 999, clearCount: 0 };
     }
 
     saveRecord(level, time, moves) {
         const records = JSON.parse(localStorage.getItem('doGameRecords') || '{}');
+        
+        // 既存のクリア回数を取得（なければ0）
+        const currentClearCount = records[level] ? (records[level].clearCount || 0) : 0;
         
         if (!records[level] || time < records[level].bestTime || 
             (time === records[level].bestTime && moves < records[level].bestMoves)) {
@@ -1673,11 +1800,18 @@ class DOGame {
                 cleared: true,
                 bestTime: time,
                 bestMoves: moves,
-                clearDate: new Date().toISOString().split('T')[0]
+                clearDate: new Date().toISOString().split('T')[0],
+                clearCount: currentClearCount + 1  // クリア回数をインクリメント
             };
             localStorage.setItem('doGameRecords', JSON.stringify(records));
             // console.log(`新記録! Level ${level}: ${time}s / ${moves}手`);
             return true; // 新記録
+        } else {
+            // 新記録でなくてもクリア回数をインクリメント
+            if (records[level]) {
+                records[level].clearCount = currentClearCount + 1;
+                localStorage.setItem('doGameRecords', JSON.stringify(records));
+            }
         }
         return false; // 既存記録以下
     }
@@ -1734,6 +1868,96 @@ class DOGame {
             
             // ログアウトボタンを非表示
             this.elements.logoutButton.style.display = 'none';
+            
+            // アカウント設定ボタンも非表示
+            const accountSettingsButton = document.getElementById('accountSettingsButton');
+            if (accountSettingsButton) {
+                accountSettingsButton.style.display = 'none';
+            }
+        }
+        
+        // アカウント設定ボタンの表示/非表示
+        const accountSettingsButton = document.getElementById('accountSettingsButton');
+        if (accountSettingsButton) {
+            if (firebaseAuth.currentUser && !firebaseAuth.currentUser.isAnonymous) {
+                accountSettingsButton.style.display = 'block';
+            } else {
+                accountSettingsButton.style.display = 'none';
+            }
+        }
+    }
+    
+    // ★アカウント設定画面を表示
+    showAccountSettings() {
+        if (!firebaseAuth.currentUser) {
+            alert('ログインが必要です');
+            return;
+        }
+        
+        const user = firebaseAuth.currentUser;
+        const isAnonymous = user.isAnonymous;
+        
+        // 現在のアカウント情報を表示
+        const currentEmail = document.getElementById('currentEmail');
+        const currentNickname = document.getElementById('currentNickname');
+        const loginMethod = document.getElementById('loginMethod');
+        
+        if (currentEmail) {
+            currentEmail.textContent = user.email || '未設定';
+        }
+        
+        if (currentNickname) {
+            currentNickname.textContent = firebaseAuth.getNickname();
+        }
+        
+        if (loginMethod) {
+            if (isAnonymous) {
+                loginMethod.textContent = '匿名ログイン';
+            } else if (user.providerData && user.providerData.length > 0) {
+                const provider = user.providerData[0].providerId;
+                if (provider === 'google.com') {
+                    loginMethod.textContent = 'Google';
+                } else if (provider === 'password') {
+                    loginMethod.textContent = 'メール/パスワード';
+                } else {
+                    loginMethod.textContent = provider;
+                }
+            } else {
+                loginMethod.textContent = '不明';
+            }
+        }
+        
+        // メール/パスワードログインの場合のみパスワード変更を表示
+        const passwordResetSection = document.getElementById('passwordResetSection');
+        const isEmailPasswordUser = user.providerData && 
+                                     user.providerData.some(p => p.providerId === 'password');
+        
+        if (passwordResetSection) {
+            passwordResetSection.style.display = isEmailPasswordUser ? 'block' : 'none';
+        }
+        
+        this.showScreen('accountSettings');
+    }
+    
+    // ★パスワード変更リンク送信
+    async sendPasswordResetEmail() {
+        const user = firebaseAuth.currentUser;
+        
+        if (!user || !user.email) {
+            alert('メールアドレスが登録されていません');
+            return;
+        }
+        
+        if (!confirm(`${user.email} にパスワード変更用のリンクを送信しますか？`)) {
+            return;
+        }
+        
+        try {
+            await firebaseAuth.sendPasswordResetEmail(user.email);
+            alert('✅ パスワード変更リンクを送信しました。\n\nメールに記載されたリンクから安全にパスワードを変更できます。\nメールが届かない場合は、迷惑メールフォルダもご確認ください。');
+        } catch (error) {
+            console.error('パスワード変更リンク送信エラー:', error);
+            alert('❌ メール送信に失敗しました: ' + error.message);
         }
     }
 }

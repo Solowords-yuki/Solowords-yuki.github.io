@@ -19,6 +19,35 @@ class RankingManager {
         this.setupEventListeners();
         this.startAutoUpdate();
     }
+    
+    // ★ヘルパー：selectedLevelからレベル識別子を取得
+    getLevelIdentifier(selectedLevel) {
+        // 文字列の場合（event1, create1など）はそのまま
+        if (typeof selectedLevel === 'string') {
+            return selectedLevel;
+        }
+        // 数値の場合はlevel1, level2...に変換（selectedLevel 0 → level 1）
+        return `level${selectedLevel + 1}`;
+    }
+    
+    // ★ヘルパー：レベル表示名を取得
+    getLevelDisplayName(selectedLevel) {
+        if (typeof selectedLevel === 'string') {
+            // event1 → イベントマップのタイトルを取得
+            if (selectedLevel.startsWith('event')) {
+                // event-maps.jsから取得を試みる
+                if (typeof getEventMaps === 'function') {
+                    const eventId = parseInt(selectedLevel.replace('event', ''));
+                    const eventMaps = getEventMaps();
+                    const eventMap = eventMaps.find(m => m.id === eventId);
+                    return eventMap ? eventMap.title : selectedLevel;
+                }
+            }
+            return selectedLevel;
+        }
+        // 数値の場合
+        return selectedLevel + 1;
+    }
 
     setupEventListeners() {
         // タブ切り替え
@@ -50,7 +79,19 @@ class RankingManager {
         const rankingLevelSelect = document.getElementById('rankingLevelSelect');
         if (rankingLevelSelect) {
             rankingLevelSelect.addEventListener('change', (e) => {
-                this.currentRankingLevel = parseInt(e.target.value);
+                // イベントマップやクリエイトモードの場合は文字列のまま保持
+                const value = e.target.value;
+                if (value.startsWith('event')) {
+                    // イベントの場合は現在月を追加（event202604形式）
+                    const now = new Date();
+                    const year = now.getFullYear();
+                    const month = String(now.getMonth() + 1).padStart(2, '0');
+                    this.currentRankingLevel = `event${year}${month}`;
+                } else if (value.startsWith('create')) {
+                    this.currentRankingLevel = value;
+                } else {
+                    this.currentRankingLevel = parseInt(value);
+                }
                 this.loadRanking();
             });
         }
@@ -320,6 +361,17 @@ class RankingManager {
                     " onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
                         キャンセル
                     </button>
+                    <div style="text-align: center; margin-top: 15px;">
+                        <a id="forgotPasswordLink" style="
+                            color: #3498db;
+                            font-size: 13px;
+                            text-decoration: none;
+                            cursor: pointer;
+                            transition: color 0.2s;
+                        " onmouseover="this.style.color='#2980b9'" onmouseout="this.style.color='#3498db'">
+                            🔑 パスワードを忘れた場合
+                        </a>
+                    </div>
                 </div>
             </div>
         `;
@@ -356,6 +408,12 @@ class RankingManager {
 
         document.getElementById('loginFormCancelBtn').addEventListener('click', () => {
             this.closeFormModal('loginFormModal');
+        });
+
+        // パスワードを忘れた場合のリンク
+        document.getElementById('forgotPasswordLink').addEventListener('click', () => {
+            this.closeFormModal('loginFormModal');
+            this.showPasswordResetModal();
         });
 
         // 背景クリックで閉じる
@@ -492,6 +550,116 @@ class RankingManager {
         document.getElementById('signUpFormModal').addEventListener('click', (e) => {
             if (e.target.id === 'signUpFormModal') {
                 this.closeFormModal('signUpFormModal');
+            }
+        });
+    }
+
+    // パスワードリセットモーダル表示
+    showPasswordResetModal() {
+        const modalHTML = `
+            <div id="passwordResetModal" style="
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.7);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 10000;
+            ">
+                <div style="
+                    background: white;
+                    padding: 40px;
+                    border-radius: 15px;
+                    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+                    max-width: 400px;
+                    width: 90%;
+                ">
+                    <h2 style="margin: 0 0 20px 0; text-align: center; color: #333; font-size: 24px;">🔑 パスワードリセット</h2>
+                    <p style="margin-bottom: 20px; color: #666; font-size: 14px; line-height: 1.6;">
+                        登録したメールアドレスを入力してください。<br>
+                        パスワード変更用のリンクを送信します。
+                    </p>
+                    <div style="margin-bottom: 25px;">
+                        <label style="display: block; margin-bottom: 8px; color: #555; font-weight: bold;">📧 メールアドレス</label>
+                        <input type="email" id="resetEmail" placeholder="example@email.com" style="
+                            width: 100%;
+                            padding: 12px;
+                            border: 2px solid #ddd;
+                            border-radius: 8px;
+                            font-size: 14px;
+                            box-sizing: border-box;
+                        ">
+                    </div>
+                    <button id="resetPasswordSubmitBtn" style="
+                        width: 100%;
+                        padding: 15px;
+                        margin-bottom: 10px;
+                        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+                        color: white;
+                        border: none;
+                        border-radius: 8px;
+                        font-size: 16px;
+                        font-weight: bold;
+                        cursor: pointer;
+                        transition: transform 0.2s;
+                    " onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+                        📧 リセットメールを送信
+                    </button>
+                    <button id="resetPasswordCancelBtn" style="
+                        width: 100%;
+                        padding: 12px;
+                        background: #95a5a6;
+                        color: white;
+                        border: none;
+                        border-radius: 8px;
+                        font-size: 14px;
+                        cursor: pointer;
+                        transition: transform 0.2s;
+                    " onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+                        キャンセル
+                    </button>
+                </div>
+            </div>
+        `;
+
+        document.body.insertAdjacentHTML('beforeend', modalHTML);
+
+        // イベントリスナー設定
+        document.getElementById('resetPasswordSubmitBtn').addEventListener('click', async () => {
+            const email = document.getElementById('resetEmail').value.trim();
+
+            if (!email) {
+                alert('❌ メールアドレスを入力してください。');
+                return;
+            }
+
+            try {
+                await firebaseAuth.sendPasswordResetEmail(email);
+                this.closeFormModal('passwordResetModal');
+                alert('✅ パスワード変更用のリンクを送信しました。\n\nメールに記載されたリンクから安全にパスワードを変更できます。\nメールが届かない場合は、迷惑メールフォルダもご確認ください。');
+            } catch (error) {
+                console.error('パスワードリセットエラー:', error);
+                if (error.code === 'auth/user-not-found') {
+                    alert('❌ このメールアドレスは登録されていません。');
+                } else if (error.code === 'auth/invalid-email') {
+                    alert('❌ メールアドレスの形式が正しくありません。');
+                } else {
+                    alert('❌ メール送信に失敗しました: ' + error.message);
+                }
+            }
+        });
+
+        document.getElementById('resetPasswordCancelBtn').addEventListener('click', () => {
+            this.closeFormModal('passwordResetModal');
+        });
+
+        // 背景クリックで閉じる
+        document.getElementById('passwordResetModal').addEventListener('click', (e) => {
+            if (e.target.id === 'passwordResetModal') {
+                this.closeFormModal('passwordResetModal');
             }
         });
     }
@@ -784,14 +952,14 @@ class RankingManager {
         });
     }
 
-    // ゲームクリア時のスコア保存（HTTP API経由、フォールバック付き）
+    // ゲームクリア時のスコア保存（Firebase直接書き込み）
     async saveGameScore(level, time, moves) {
         try {
             // ログイン済みの場合のみ自動保存
             if (firebaseAuth.isLoggedIn()) {
                 const uid = firebaseAuth.getCurrentUserId();
                 
-                // ★ HTTP API経由でスコア送信（フォールバック付き）
+                // ★ Firebase直接書き込みでスコア送信
                 const result = await apiClient.submitScore(uid, level, time, moves);
                 
                 // 記録更新時のみキャッシュクリア
@@ -801,15 +969,22 @@ class RankingManager {
                 }
                 
                 // クリア画面のUI更新（NEW表示用）
-                this.updateClearScreenRankingUI(firebaseAuth.currentUser, result);
+                this.updateClearScreenRankingUI(firebaseAuth.currentUser, result, level);
                 
                 return result;
+            } else {
+                // 未ログインの場合：ログイン促進画面を表示
+                this.updateClearScreenRankingUI(null, null, level);
+                return { isNewTimeRecord: false, isNewMovesRecord: false };
             }
-            
-            // 未ログインの場合は何もしない（クリア画面でログインを促す）
-            return { isNewTimeRecord: false, isNewMovesRecord: false };
         } catch (error) {
             console.error('スコア保存エラー:', error);
+            // エラーが発生してもUIは更新する
+            if (firebaseAuth.isLoggedIn()) {
+                this.updateClearScreenRankingUI(firebaseAuth.currentUser, { isNewTimeRecord: false, isNewMovesRecord: false }, level);
+            } else {
+                this.updateClearScreenRankingUI(null, null, level);
+            }
             return { isNewTimeRecord: false, isNewMovesRecord: false };
         }
     }
@@ -832,7 +1007,7 @@ class RankingManager {
             
             // ログイン成功後、スコアを保存
             if (this.game && firebaseAuth.isLoggedIn()) {
-                const currentLevel = this.game.selectedLevel + 1;
+                const currentLevel = this.getLevelIdentifier(this.game.selectedLevel);
                 const time = this.game.clearTimeSeconds || 0;
                 const moves = this.game.moveCount || 0;
                 
@@ -863,7 +1038,7 @@ class RankingManager {
     }
 
     // クリア画面のランキングUI更新
-    async updateClearScreenRankingUI(user, result = null) {
+    async updateClearScreenRankingUI(user, result = null, clearedLevel = null) {
         const rankingPrompt = document.getElementById('rankingPrompt');
         const rankingSaved = document.getElementById('rankingSaved');
         const savedUserNickname = document.getElementById('savedUserNickname');
@@ -891,13 +1066,27 @@ class RankingManager {
                 }
             }
             
-            // クリア回数を表示
-            if (clearCountDisplay && this.game.selectedLevel) {
-                const uid = firebaseAuth.getCurrentUserId();
-                const userData = await firebaseDB.getUserData(uid);
-                const levelStr = `level${this.game.selectedLevel}`;
-                const clearCount = userData?.clearCounts?.[levelStr] || 0;
-                clearCountDisplay.textContent = clearCount;
+            // ★クリア回数を表示（clearedLevelを優先使用）
+            if (clearCountDisplay) {
+                let localLevelKey = clearedLevel; // saveGameScoreから渡されたレベルを使用
+                
+                // clearedLevelがnullの場合は、従来通りselectedLevelから計算
+                if (localLevelKey === null && this.game && this.game.selectedLevel !== undefined) {
+                    if (typeof this.game.selectedLevel === 'string' && this.game.selectedLevel.startsWith('event')) {
+                        const now = new Date();
+                        const year = now.getFullYear();
+                        const month = String(now.getMonth() + 1).padStart(2, '0');
+                        localLevelKey = `event${year}${month}`;
+                    } else if (typeof this.game.selectedLevel === 'number') {
+                        localLevelKey = this.game.selectedLevel + 1;
+                    }
+                }
+                
+                if (localLevelKey !== null) {
+                    const records = JSON.parse(localStorage.getItem('doGameRecords') || '{}');
+                    const clearCount = records[localLevelKey]?.clearCount || 0;
+                    clearCountDisplay.textContent = clearCount;
+                }
             }
         } else {
             // 未ログイン：ログイン促進メッセージを表示

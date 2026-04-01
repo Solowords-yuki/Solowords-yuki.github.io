@@ -35,41 +35,48 @@ class FirebaseDB {
                 throw new Error('ユーザーデータが見つかりません');
             }
 
-            const levelStr = `level${level}`;
+            // イベントマップやクリエイトモードの場合は文字列のまま使用
+            const levelStr = typeof level === 'string' ? level : `level${level}`;
             let isNewTimeRecord = false;
             let isNewMovesRecord = false;
-            let updateData = {
-                updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-            };
-
-            // クリア回数をカウント
-            const currentClearCount = userData.clearCounts?.[levelStr] || 0;
-            updateData[`clearCounts.${levelStr}`] = currentClearCount + 1;
-
-            // クリア済みレベルに追加
-            if (!userData.clearedLevels || !userData.clearedLevels.includes(levelStr)) {
-                updateData.clearedLevels = firebase.firestore.FieldValue.arrayUnion(levelStr);
-            }
 
             // ベストタイム更新チェック
             const currentBestTime = userData.bestTimes?.[levelStr];
             if (!currentBestTime || time < currentBestTime) {
-                updateData[`bestTimes.${levelStr}`] = time;
                 isNewTimeRecord = true;
             }
 
             // ベスト手数更新チェック
             const currentBestMoves = userData.bestMoves?.[levelStr];
             if (!currentBestMoves || moves < currentBestMoves) {
-                updateData[`bestMoves.${levelStr}`] = moves;
                 isNewMovesRecord = true;
             }
 
-            // ユーザーデータ更新（常に実行）
-            await userRef.update(updateData);
-
-            // 記録更新時のみスコアコレクションに保存
+            // ★新記録時のみFirebaseに書き込み（コスト削減）
             if (isNewTimeRecord || isNewMovesRecord) {
+                const updateData = {
+                    updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+                };
+
+                // クリア済みレベルに追加
+                if (!userData.clearedLevels || !userData.clearedLevels.includes(levelStr)) {
+                    updateData.clearedLevels = firebase.firestore.FieldValue.arrayUnion(levelStr);
+                }
+
+                // ベストタイム更新
+                if (isNewTimeRecord) {
+                    updateData[`bestTimes.${levelStr}`] = time;
+                }
+
+                // ベスト手数更新
+                if (isNewMovesRecord) {
+                    updateData[`bestMoves.${levelStr}`] = moves;
+                }
+
+                // ユーザーデータ更新
+                await userRef.update(updateData);
+
+                // スコアコレクションに保存（ランキング用）
                 await this.db.collection('scores').add({
                     uid: uid,
                     level: levelStr,
@@ -77,16 +84,21 @@ class FirebaseDB {
                     moves: moves,
                     createdAt: firebase.firestore.FieldValue.serverTimestamp()
                 });
-            }
 
-            console.log('✅ スコア処理完了:', { 
-                level: levelStr, 
-                time, 
-                moves, 
-                isNewTimeRecord, 
-                isNewMovesRecord,
-                clearCount: currentClearCount + 1
-            });
+                console.log('✅ 新記録を保存:', { 
+                    level: levelStr, 
+                    time, 
+                    moves, 
+                    isNewTimeRecord, 
+                    isNewMovesRecord
+                });
+            } else {
+                console.log('ℹ️ 新記録なし（Firebase書き込みスキップ）:', { 
+                    level: levelStr, 
+                    time, 
+                    moves 
+                });
+            }
             
             return { isNewTimeRecord, isNewMovesRecord };
         } catch (error) {
@@ -98,7 +110,8 @@ class FirebaseDB {
     // タイムランキング取得
     async getTimeRanking(level, limit = 10) {
         try {
-            const levelStr = `level${level}`;
+            // イベントマップやクリエイトモードの場合は文字列のまま使用
+            const levelStr = typeof level === 'string' ? level : `level${level}`;
             const snapshot = await this.db.collection('scores')
                 .where('level', '==', levelStr)
                 .orderBy('time', 'asc')
@@ -129,7 +142,8 @@ class FirebaseDB {
     // 手数ランキング取得
     async getMovesRanking(level, limit = 10) {
         try {
-            const levelStr = `level${level}`;
+            // イベントマップやクリエイトモードの場合は文字列のまま使用
+            const levelStr = typeof level === 'string' ? level : `level${level}`;
             const snapshot = await this.db.collection('scores')
                 .where('level', '==', levelStr)
                 .orderBy('moves', 'asc')
@@ -160,7 +174,8 @@ class FirebaseDB {
     // レベル統計取得
     async getLevelStats(level) {
         try {
-            const levelStr = `level${level}`;
+            // イベントマップやクリエイトモードの場合は文字列のまま使用
+            const levelStr = typeof level === 'string' ? level : `level${level}`;
             const doc = await this.db.collection('levelStats').doc(levelStr).get();
             
             if (doc.exists) {

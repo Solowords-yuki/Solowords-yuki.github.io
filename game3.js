@@ -1749,13 +1749,17 @@ class DOGame {
             }
         }
         
-        // イベントレベル
-        const eventRecord = this.getRecord('event');
+        // イベントレベル（現在月のデータを表示）
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const currentEventKey = `event${year}${month}`;
+        const eventRecord = this.getRecord(currentEventKey);
         const eventRow = tbody.insertRow();
         
         // レベル列
         const eventLevelCell = eventRow.insertCell(0);
-        eventLevelCell.textContent = 'event';
+        eventLevelCell.textContent = 'イベント';
         eventLevelCell.className = 'level-cell';
         
         // クリア回数列
@@ -1774,7 +1778,7 @@ class DOGame {
             eventRecordCell.textContent = `${eventRecord.bestTime}s / ${eventRecord.bestMoves}手`;
             eventRecordCell.className = 'record-cell';
             
-            if (this.isBestRecord('event', eventRecord)) {
+            if (this.isBestRecord(currentEventKey, eventRecord)) {
                 eventRecordCell.classList.add('best-record');
             }
         } else {

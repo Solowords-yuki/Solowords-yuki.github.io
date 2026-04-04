@@ -1,10 +1,8 @@
 // API Client - HTTPリクエスト処理層
 class APIClient {
     constructor() {
-        // 環境に応じてAPIのベースURLを設定
-        this.baseURL = window.location.hostname === 'localhost' 
-            ? 'http://localhost:8787'
-            : 'https://solowords-ranking-api.yu-yamasaki.workers.dev';
+        // GitHub Pagesから直接取得
+        this.rankingsURL = 'https://solowords-yuki.github.io/ranking-data/rankings.json';
         
         this.cache = {
             rankings: {},
@@ -41,26 +39,27 @@ class APIClient {
         if (cached) return cached;
 
         try {
-            const response = await fetch(
-                `${this.baseURL}/api/ranking/${level}/${type}?limit=${limit}`
-            );
+            // ★ GitHub Pagesから直接取得
+            const response = await fetch(this.rankingsURL);
             
             if (!response.ok) {
                 throw new Error(`HTTP ${response.status}`);
             }
 
-            const result = await response.json();
-            const rankings = result.data;
+            const allData = await response.json();
+            const levelKey = typeof level === 'string' ? level : `level${level}`;
+            const rankings = allData?.levels?.[levelKey]?.rankings?.[type] || [];
+            const result = rankings.slice(0, limit);
 
             // キャッシュ保存
-            this.setCached(cacheKey, rankings, 'rankings');
+            this.setCached(cacheKey, result, 'rankings');
 
-            console.log(`📡 API取得成功: ${cacheKey} (${rankings.length}件)`);
-            return rankings;
+            console.log(`📡 ランキング取得成功: ${cacheKey} (${result.length}件)`);
+            return result;
         } catch (error) {
-            console.error('❌ API取得エラー:', error);
-            // フォールバック: GitHubキャッシュを使用
-            console.log('🔄 GitHubキャッシュにフォールバック');
+            console.error('❌ ランキング取得エラー:', error);
+            // フォールバック: Firebaseキャッシュを使用
+            console.log('🔄 Firebaseキャッシュにフォールバック');
             if (type === 'time') {
                 return await rankingCache.getTimeRanking(level, limit);
             } else {
@@ -91,14 +90,18 @@ class APIClient {
         if (cached) return cached;
 
         try {
-            const response = await fetch(`${this.baseURL}/api/stats/${level}`);
+            // ★ GitHub Pagesから直接取得
+            const response = await fetch(this.rankingsURL);
             
             if (!response.ok) {
                 throw new Error(`HTTP ${response.status}`);
             }
 
-            const result = await response.json();
-            const stats = result.data;
+            const allData = await response.json();
+            const levelKey = typeof level === 'string' ? level : `level${level}`;
+            const stats = {
+                clearCount: allData?.levels?.[levelKey]?.totalClears || 0
+            };
 
             // キャッシュ保存
             this.setCached(cacheKey, stats, 'stats');
@@ -107,8 +110,8 @@ class APIClient {
             return stats;
         } catch (error) {
             console.error('❌ 統計情報取得エラー:', error);
-            // フォールバック: GitHubキャッシュを使用
-            console.log('🔄 GitHubキャッシュにフォールバック');
+            // フォールバック: Firebaseキャッシュを使用
+            console.log('🔄 Firebaseキャッシュにフォールバック');
             return await rankingCache.getLevelStats(level);
         }
     }
@@ -117,36 +120,10 @@ class APIClient {
     clearCache() {
         this.cache.rankings = {};
         this.cache.stats = {};
-        console.log('🗑️ APIキャッシュをクリアしました');
-    }
-
-    // ヘルスチェック
-    async healthCheck() {
-        try {
-            const response = await fetch(`${this.baseURL}/health`);
-            if (response.ok) {
-                const data = await response.json();
-                console.log('✅ APIサーバー正常:', data);
-                return true;
-            }
-            return false;
-        } catch (error) {
-            console.error('❌ APIサーバー接続失敗:', error);
-            return false;
-        }
+        console.log('🗑️ キャッシュをクリアしました');
     }
 }
 
 // グローバルインスタンス作成
 const apiClient = new APIClient();
-
-// 起動時にヘルスチェック
-window.addEventListener('load', () => {
-    apiClient.healthCheck().then(isHealthy => {
-        if (isHealthy) {
-            console.log('🚀 HTTPサーバー接続成功 - API経由でランキング取得します');
-        } else {
-            console.log('⚠️ HTTPサーバー未接続 - GitHubキャッシュを使用します');
-        }
-    });
-});
+console.log('🚀 GitHub Pagesから直接ランキングを取得します');

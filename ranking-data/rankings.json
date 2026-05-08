@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-05-08T13:38:06.138Z",
+  "lastUpdated": "2026-05-08T14:40:00.534Z",
   "levels": {
     "level1": {
       "name": "Level 1",
@@ -15,7 +15,7 @@
           },
           {
             "rank": 2,
-            "nickname": "Yuki",
+            "nickname": "yuki",
             "time": 4,
             "moves": 3,
             "timestamp": "2026-03-31T13:18:43.823Z"
@@ -50,7 +50,7 @@
           },
           {
             "rank": 7,
-            "nickname": "Yuki",
+            "nickname": "yuki",
             "time": 7,
             "moves": 3,
             "timestamp": "2026-02-01T13:32:48.207Z"
@@ -99,7 +99,7 @@
           },
           {
             "rank": 14,
-            "nickname": "Yuki",
+            "nickname": "yuki",
             "time": 13,
             "moves": 7,
             "timestamp": "2026-02-01T13:32:16.844Z"
@@ -122,14 +122,14 @@
         "moves": [
           {
             "rank": 1,
-            "nickname": "Yuki",
+            "nickname": "yuki",
             "time": 7,
             "moves": 3,
             "timestamp": "2026-02-01T13:32:48.207Z"
           },
           {
             "rank": 2,
-            "nickname": "Yuki",
+            "nickname": "yuki",
             "time": 4,
             "moves": 3,
             "timestamp": "2026-03-31T13:18:43.823Z"
@@ -220,7 +220,7 @@
           },
           {
             "rank": 15,
-            "nickname": "Yuki",
+            "nickname": "yuki",
             "time": 13,
             "moves": 7,
             "timestamp": "2026-02-01T13:32:16.844Z"
@@ -667,6 +667,30 @@
       "rankings": {
         "time": [],
         "moves": []
+      }
+    },
+    "event202605": {
+      "name": "イベントマップ",
+      "totalClears": 1,
+      "rankings": {
+        "time": [
+          {
+            "rank": 1,
+            "nickname": "yuki",
+            "time": 24,
+            "moves": 11,
+            "timestamp": "2026-05-08T13:45:34.289Z"
+          }
+        ],
+        "moves": [
+          {
+            "rank": 1,
+            "nickname": "yuki",
+            "time": 24,
+            "moves": 11,
+            "timestamp": "2026-05-08T13:45:34.289Z"
+          }
+        ]
       }
     }
   }

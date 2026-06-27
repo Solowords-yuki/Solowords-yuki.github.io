@@ -40,6 +40,9 @@ class DOGame {
         this.initializeElements();
         this.setupEventListeners();
         
+        // ★LOCK！エフェクト要素を保持
+        this.lockEffectElement = document.getElementById('lockEffect');
+        
         // ★即座に年齢選択を初期化（DOM要素の初期状態を保持）
         this.initializeAgeSelection();
     }
@@ -1500,6 +1503,7 @@ class DOGame {
         
         const currentValue = this.mapData[y][x];
         let hasAdjacent = false;
+        let lockTriggered = false;  // ★エフェクト表示フラグ
         
         //console.log(`updateMouseRuRuAfterMove: 位置(${x},${y}) 値:${currentValue}`);
         
@@ -1527,6 +1531,7 @@ class DOGame {
                 if (!currentTile?.isFixed && this.mouseRuRu[y][x] === 0) { 
                     this.mouseRuRu[y][x] = 1; 
                     this.sumMouseRuRu++; 
+                    lockTriggered = true;  // ★エフェクト表示フラグをON
                     //console.log(`位置(${x},${y})をmouseRuRu=1に設定, 合計:${this.sumMouseRuRu}`);
                     
                     // ★カスタムパズルの場合、固定配列に1を設定
@@ -1538,6 +1543,7 @@ class DOGame {
                 if (!adjacentTile?.isFixed && this.mouseRuRu[ny][nx] === 0) { 
                     this.mouseRuRu[ny][nx] = 1; 
                     this.sumMouseRuRu++; 
+                    lockTriggered = true;  // ★エフェクト表示フラグをON
                     //console.log(`位置(${nx},${ny})をmouseRuRu=1に設定, 合計:${this.sumMouseRuRu}`);
                     
                     // ★カスタムパズルの場合、固定配列に1を設定
@@ -1549,8 +1555,10 @@ class DOGame {
             }
         }
         
-        // ★動的クリア条件用の古いシステムは削除
-        // 新しい 固定配列システム を使用するため不要
+        // ★駒がそろって固定されたときにLOCK！エフェクト表示
+        if (lockTriggered) {
+            this.showLockEffect();
+        }
     }
     
     checkWin() {
@@ -1586,6 +1594,22 @@ class DOGame {
         //console.log(`通常レベル - mouseRuRu判定: ${this.sumMouseRuRu}/${this.countPiece}`);
         //console.log('mouseRuRu配列の状態:', this.mouseRuRu);
         return this.sumMouseRuRu === this.countPiece;
+    }
+
+    // ★LOCK！エフェクトを表示
+    showLockEffect() {
+        if (this.lockEffectElement) {
+            // アニメーションをリセット（複数回表示に対応）
+            this.lockEffectElement.style.display = 'none';
+            // リフロー強制（アニメーションリセット）
+            void this.lockEffectElement.offsetWidth;
+            // アニメーション実行
+            this.lockEffectElement.style.display = 'block';
+            // アニメーション終了後に非表示
+            setTimeout(() => {
+                this.lockEffectElement.style.display = 'none';
+            }, 1200);
+        }
     }
 
     startTimer() {

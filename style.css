@@ -931,6 +931,38 @@ body {
     }
 }
 
+/* ★LOCK！エフェクト用スタイル */
+@keyframes lockPopIn {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.3);
+    }
+    50% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.15);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+}
+
+#lockEffect {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    font-size: 5rem;
+    font-weight: bold;
+    color: #FFD700;
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 0 40px rgba(255, 215, 0, 0.5);
+    pointer-events: none;
+    z-index: 9999;
+    display: none;
+    animation: lockPopIn 1.2s ease-out forwards;
+    font-family: 'Arial Black', sans-serif;
+    letter-spacing: 3px;
+}
+
 /* 極小型デバイス・LINEブラウザの狭い画面対応（360px以下） */
 @media (max-width: 360px) {
     .age-select-container {

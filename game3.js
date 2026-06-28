@@ -28,6 +28,7 @@ class DOGame {
         
         // ★タイマー設定管理を追加
         this.timerEnabled = true; // タイマーON/OFF設定
+        this.lockEffectEnabled = true; // LOCK!エフェクトON/OFF設定
         this.gameTimer = null; // タイマーのインターバルID
         this.isTimerRunning = false; // タイマー動作状態
         
@@ -63,6 +64,7 @@ class DOGame {
         // ローカルストレージから設定を読み込み
         const savedAgeGroup = localStorage.getItem('gameAgeGroup');
         const savedTimerEnabled = localStorage.getItem('gameTimerEnabled');
+        const savedLockEffectEnabled = localStorage.getItem('gameLockEffectEnabled');
 
         // console.log('保存された年齢層設定:', savedAgeGroup);
         // console.log('保存されたタイマー設定:', savedTimerEnabled);
@@ -72,6 +74,14 @@ class DOGame {
             this.timerEnabled = savedTimerEnabled === 'true';
             if (this.elements.timerEnabled) {
                 this.elements.timerEnabled.checked = this.timerEnabled;
+            }
+        }
+
+        // LOCK!エフェクト設定を復元
+        if (savedLockEffectEnabled !== null) {
+            this.lockEffectEnabled = savedLockEffectEnabled === 'true';
+            if (this.elements.lockEffectEnabled) {
+                this.elements.lockEffectEnabled.checked = this.lockEffectEnabled;
             }
         }
         
@@ -124,9 +134,11 @@ class DOGame {
     resetAgeSelection() {
         localStorage.removeItem('gameAgeGroup');
         localStorage.removeItem('gameTimerEnabled');
+        localStorage.removeItem('gameLockEffectEnabled');
         this.ageGroup = null;
         this.adsEnabled = false;
         this.timerEnabled = true;
+        this.lockEffectEnabled = true;
         // console.log('年齢設定をリセットしました');
         location.reload(); // ページをリロード
     }
@@ -141,6 +153,13 @@ class DOGame {
         if (this.screens.game.classList.contains('active')) {
             this.updateTimerDisplay();
         }
+    }
+
+    // ★LOCK!エフェクト設定を変更
+    setLockEffectEnabled(enabled) {
+        this.lockEffectEnabled = enabled;
+        localStorage.setItem('gameLockEffectEnabled', enabled.toString());
+        // console.log(`LOCK!エフェクト設定: ${enabled ? 'ON' : 'OFF'}`);
     }
     
     // ★広告の表示制御
@@ -190,6 +209,7 @@ class DOGame {
             
             // ★タイマー設定の要素
             timerEnabled: document.getElementById('timerEnabled'),
+            lockEffectEnabled: document.getElementById('lockEffectEnabled'),
             
             // ★アカウント設定の要素
             accountInfo: document.getElementById('accountInfo'),
@@ -273,6 +293,13 @@ class DOGame {
         this.elements.timerEnabled.addEventListener('change', (e) => {
             this.setTimerEnabled(e.target.checked);
         });
+
+        // ★LOCK!エフェクト設定のイベントリスナー
+        if (this.elements.lockEffectEnabled) {
+            this.elements.lockEffectEnabled.addEventListener('change', (e) => {
+                this.setLockEffectEnabled(e.target.checked);
+            });
+        }
         
         // ★ログアウトボタンのイベントリスナー
         this.elements.logoutButton.addEventListener('click', async () => {
@@ -1429,7 +1456,10 @@ class DOGame {
                     if (this.checkWin()) {
                         this.isCleared = true;
                         this.stopTimer();
-                        const elapsed = Math.floor((Date.now() - this.startTime) / 1000);
+                        // タイマーOFF時はクリア時間を計算しない
+                        const elapsed = (this.timerEnabled && this.startTime)
+                            ? Math.floor((Date.now() - this.startTime) / 1000)
+                            : undefined;
                         this.clearTimeSeconds = elapsed;
                         this.heldTile = null;
                         this.heldTileMousePos = null;
@@ -1598,6 +1628,8 @@ class DOGame {
 
     // ★LOCK！エフェクトを表示
     showLockEffect() {
+        if (!this.lockEffectEnabled) return;
+
         if (this.lockEffectElement) {
             // アニメーションをリセット（複数回表示に対応）
             this.lockEffectElement.style.display = 'none';
@@ -1636,9 +1668,17 @@ class DOGame {
     }
     
     endGame() {
+        const clearTimeItem = this.elements.clearTime
+            ? this.elements.clearTime.closest('.stat-item')
+            : null;
+
         // クリア時間を設定
-        if (this.clearTimeSeconds !== undefined) {
+        if (this.timerEnabled && this.clearTimeSeconds !== undefined) {
+            if (clearTimeItem) clearTimeItem.style.display = '';
             this.elements.clearTime.textContent = `Time: ${this.clearTimeSeconds}s`;
+        } else {
+            // タイマーOFF時は時間表示を隠す
+            if (clearTimeItem) clearTimeItem.style.display = 'none';
         }
         
         // ★手数を設定

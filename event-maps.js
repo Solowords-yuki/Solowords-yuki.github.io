@@ -26,7 +26,7 @@
 const eventMaps = [
    {
      id: 1,  // ← idは常に1で固定
-     title: "2026/8 event",
+     title: "2026/10 event",
      code: [
        // ここに共有コードを貼り付け
        // 1行の場合：

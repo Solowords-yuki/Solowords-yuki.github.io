@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-10-18T11:10:27.235Z",
+  "lastUpdated": "2026-10-18T12:17:29.184Z",
   "levels": {
     "level1": {
       "name": "Level 1",
@@ -893,7 +893,7 @@
     },
     "level6": {
       "name": "Level 6",
-      "totalClears": 3,
+      "totalClears": 4,
       "rankings": {
         "time": [
           {
@@ -912,6 +912,13 @@
           },
           {
             "rank": 3,
+            "nickname": "HORIKING",
+            "time": 592,
+            "moves": 292,
+            "timestamp": "2026-10-18T11:19:31.491Z"
+          },
+          {
+            "rank": 4,
             "nickname": "kameyon",
             "time": 660,
             "moves": 177,
@@ -935,6 +942,13 @@
           },
           {
             "rank": 3,
+            "nickname": "HORIKING",
+            "time": 592,
+            "moves": 292,
+            "timestamp": "2026-10-18T11:19:31.491Z"
+          },
+          {
+            "rank": 4,
             "nickname": "20N",
             "time": 396,
             "moves": 300,

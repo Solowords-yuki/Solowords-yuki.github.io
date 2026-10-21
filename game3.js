@@ -435,7 +435,9 @@ class DOGame {
 
         // ★新たに追加
         this.elements.recordsButton.addEventListener('click', () => this.showRecords());
-        this.elements.backToMenuFromRecords.addEventListener('click', () => this.showMainMenu());
+        if (this.elements.backToMenuFromRecords) {
+            this.elements.backToMenuFromRecords.addEventListener('click', () => this.showMainMenu());
+        }
         this.elements.clearRecordsButton.addEventListener('click', () => this.clearAllRecords());
         
         // ★アカウント設定関連

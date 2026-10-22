@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-10-22T11:12:19.063Z",
+  "lastUpdated": "2026-10-22T12:20:50.162Z",
   "levels": {
     "level1": {
       "name": "Level 1",
@@ -405,7 +405,7 @@
     },
     "level2": {
       "name": "Level 2",
-      "totalClears": 11,
+      "totalClears": 12,
       "rankings": {
         "time": [
           {
@@ -474,12 +474,19 @@
           {
             "rank": 10,
             "nickname": "yuki",
+            "time": 52,
+            "moves": 18,
+            "timestamp": "2026-10-22T11:45:34.736Z"
+          },
+          {
+            "rank": 11,
+            "nickname": "yuki",
             "time": 60,
             "moves": 13,
             "timestamp": "2026-07-21T12:43:21.659Z"
           },
           {
-            "rank": 11,
+            "rank": 12,
             "nickname": "yuki",
             "time": 72,
             "moves": 17,
@@ -545,20 +552,27 @@
           },
           {
             "rank": 9,
+            "nickname": "yuki",
+            "time": 52,
+            "moves": 18,
+            "timestamp": "2026-10-22T11:45:34.736Z"
+          },
+          {
+            "rank": 10,
             "nickname": "kura",
             "time": 24,
             "moves": 18,
             "timestamp": "2026-02-20T03:09:50.059Z"
           },
           {
-            "rank": 10,
+            "rank": 11,
             "nickname": "20N",
             "time": 26,
             "moves": 19,
             "timestamp": "2026-02-25T17:45:37.138Z"
           },
           {
-            "rank": 11,
+            "rank": 12,
             "nickname": "NAKAPOKA",
             "time": 21,
             "moves": 19,

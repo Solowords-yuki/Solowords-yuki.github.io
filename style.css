@@ -1586,7 +1586,7 @@ body {
 }
 
 #timer::before {
-    content: '⏰';
+    
     position: absolute;
     left: 8px;
     top: 50%;
@@ -1620,7 +1620,7 @@ body {
 }
 
 .small-button::before {
-    content: '🚪';
+
     position: absolute;
     left: 8px;
     top: 50%;
@@ -1677,7 +1677,7 @@ body {
 }
 
 #endScreen::before {
-    content: '🎉';
+
     position: absolute;
     top: 10%;
     left: 10%;
@@ -1686,7 +1686,6 @@ body {
 }
 
 #endScreen::after {
-    content: '🎊';
     position: absolute;
     top: 20%;
     right: 15%;
@@ -4175,4 +4174,84 @@ a.menu-button[href="blog.html"]:hover { background: #7F63B8 !important; box-shad
 #ageSelectScreen {
     padding-bottom: 200px !important;
     box-sizing: border-box;
+}
+
+/* クリア画面: 幅をメニューと揃え、ボタンを明るく大きく */
+.end-content {
+    max-width: 480px !important;
+    width: 90% !important;
+    margin-left: auto;
+    margin-right: auto;
+}
+.end-content .ranking-prompt,
+.end-content .ranking-saved {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 18px !important;
+}
+.end-content .ranking-prompt-content h3 { font-size: 1.3rem; }
+.end-content .ranking-prompt-text { font-size: 0.95rem; }
+.end-content .ranking-prompt-icon { font-size: 2.5rem; }
+#backToMenuButton.menu-button {
+    background: #FF8A1F !important;
+    border: 2px solid #FFD2A0 !important;
+    box-shadow: 0 4px 0 #B85A10 !important;
+    color: #fff !important;
+    font-size: 1.3rem !important;
+    font-weight: bold;
+    padding: 18px 24px !important;
+    width: 100%;
+    box-sizing: border-box;
+}
+#backToMenuButton.menu-button:hover { background: #FFA040 !important; }
+.end-content .ranking-login-button {
+    background: #FF8A1F !important;
+    border: 2px solid #FFD2A0 !important;
+    box-shadow: 0 4px 0 #B85A10 !important;
+    font-size: 1.1rem !important;
+    padding: 16px 20px !important;
+}
+.end-content .ranking-view-button {
+    background: #2FA8E8 !important;
+    border: 2px solid #BFE8FF !important;
+    box-shadow: 0 4px 0 #1A78AD !important;
+    font-size: 1.1rem !important;
+    padding: 16px 20px !important;
+}
+
+/* スマホ: タイトルを大きく、広告有無選択の隙間を詰める */
+@media (max-width: 600px) {
+    #ageSelectScreen .game-title,
+    #mainMenu .game-title {
+        font-size: 2.6rem !important;
+        letter-spacing: 1px !important;
+        white-space: nowrap !important;
+    }
+    .age-choice-box {
+        padding: 12px 10px 8px !important;
+        margin-bottom: 16px !important;
+    }
+    .age-choice-box h2 {
+        font-size: 1.15rem !important;
+        margin: 0 0 4px !important;
+    }
+    .age-choice-box .age-description {
+        margin: 0 0 6px !important;
+        font-size: 0.9rem !important;
+    }
+    .age-choice-box .age-button-container {
+        gap: 10px !important;
+        margin: 8px 0 6px !important;
+    }
+    .age-choice-box .age-button {
+        padding: 12px 10px !important;
+        margin: 0 !important;
+    }
+    .age-choice-box .age-subtitle {
+        margin: 0 0 2px !important;
+        font-size: 1.15rem !important;
+    }
+    .age-choice-box .age-title {
+        margin: 0 !important;
+    }
 }

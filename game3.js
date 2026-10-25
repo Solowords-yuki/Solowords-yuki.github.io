@@ -1089,12 +1089,12 @@ class DOGame {
             // 次へボタン（右上に配置）
             const btnX = this.canvas.width - 100;
             const btnY = 80;
-            const btnW = 160, btnH = 50;
+            const btnW = 150, btnH = 56;
 
             this.ctx.save();
             const buttonGradient = this.ctx.createLinearGradient(btnX - btnW/2, btnY - btnH/2, btnX + btnW/2, btnY + btnH/2);
-            buttonGradient.addColorStop(0, '#1F4E79');
-            buttonGradient.addColorStop(1, '#1F4E79');
+            buttonGradient.addColorStop(0, '#FFA53D');
+            buttonGradient.addColorStop(1, '#FF7A00');
 
             this.drawRoundedRect(btnX - btnW / 2, btnY - btnH / 2, btnW, btnH, 6);
             this.ctx.fillStyle = buttonGradient;
@@ -1102,7 +1102,7 @@ class DOGame {
             this.ctx.strokeStyle = "#FFFDF8";
             this.ctx.lineWidth = 2;
             this.ctx.stroke();
-            this.ctx.font = "bold 18px Arial";
+            this.ctx.font = "bold 16px Arial";
             this.ctx.fillStyle = "#fff";
             this.ctx.textAlign = "center";
             this.ctx.textBaseline = "middle";
@@ -1128,8 +1128,10 @@ class DOGame {
                 const cy = cell.screenY;
                 
                 // 移動可能な位置を青く光らせる
-                this.ctx.globalAlpha = 0.4;
-                this.ctx.fillStyle = '#1F4E79';
+                this.ctx.globalAlpha = 0.9;
+                this.ctx.fillStyle = '#7FE3FF';
+                this.ctx.shadowColor = '#40CFFF';
+                this.ctx.shadowBlur = 18;
                 this.ctx.beginPath();
                 this.ctx.moveTo(cx, cy - s / 2);
                 this.ctx.lineTo(cx + s / 2, cy);
@@ -1139,8 +1141,8 @@ class DOGame {
                 this.ctx.fill();
                 
                 // 枠線も追加
-                this.ctx.globalAlpha = 0.8;
-                this.ctx.strokeStyle = '#1F4E79';
+                this.ctx.globalAlpha = 1;
+                this.ctx.strokeStyle = '#00A8E8';
                 this.ctx.lineWidth = 3;
                 this.ctx.stroke();
             }
@@ -1224,8 +1226,16 @@ class DOGame {
             this.ctx.save();
             
             // ★すべての駒で濃い青色のエフェクトを使用（視認性向上）
-            this.ctx.strokeStyle = "#1F4E79";
-            this.ctx.lineWidth = 6;
+            // 水色系の駒は青い縁だと見えにくいので別色にする
+            const isBlueTile = this.colorMode && [3, 9].includes(((tile.value - 1) % colors.length) + 1);
+            this.ctx.shadowColor = isBlueTile ? '#FF1A1A' : '#00E5FF';
+            this.ctx.shadowBlur = 25;
+            this.ctx.strokeStyle = isBlueTile ? '#FF1A1A' : '#00E5FF';
+            this.ctx.lineWidth = 7;
+            this.ctx.stroke();
+            this.ctx.shadowBlur = 0;
+            this.ctx.strokeStyle = '#FFFFFF';
+            this.ctx.lineWidth = 3;
             this.ctx.stroke();
             this.ctx.restore();
         }

@@ -748,7 +748,7 @@ body {
 
 /* ゲームサブタイトル */
 .game-subtitle {
-    color: rgba(255, 255, 255, 0.9);
+    color:  #40CFFF;
     font-size: 1.1rem;
     text-align: center;
     margin-top: 10px;
@@ -1115,7 +1115,7 @@ body {
 .game-title {
     font-size: clamp(2.5rem, 8vw, 4rem);
     font-weight: bold;
-    color: #fff;
+    color:  #40CFFF;
     text-shadow: 
         0 0 10px rgba(255, 255, 255, 0.8),
         0 0 20px rgba(64, 207, 255, 0.6),
@@ -1845,7 +1845,7 @@ body {
 }
 
 .records-content h2 {
-    color: #2c3e50;
+    color: #fff;
     font-size: 2.5rem;
     margin-bottom: 30px;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
@@ -3812,4 +3812,367 @@ body {
         max-width: 100% !important;
         box-sizing: border-box;
     }
+}
+
+/* ========================================
+   テーマ: 和紙と墨（案A）
+   元に戻す場合はこのブロックを削除
+   ======================================== */
+:root {
+    --washi: #1F2D3D;
+    --paper: #FFFDF8;
+    --sumi: #2B2B2B;
+    --sumi-panel: #2E2A26;
+    --ai: #1F4E79;
+    --ai-dark: #173B5C;
+    --shu: #C8442B;
+}
+
+body,
+#ageSelectScreen,
+#endScreen,
+#gameScreen,
+#rulesScreen,
+#recordsScreen,
+#accountSettingsScreen {
+    background: var(--washi) !important;
+    background-image: none !important;
+}
+
+#ageSelectScreen::before,
+#endScreen::before,
+#endScreen::after {
+    display: none !important;
+}
+
+h1, h2, h3,
+.menu-content h2,
+.end-content h2,
+.records-content h2,
+.page-title {
+    font-family: 'Noto Serif JP', 'Yu Mincho', 'Hiragino Mincho ProN', serif;
+}
+
+.menu-content,
+.end-content,
+.rules-content,
+.records-content,
+.game-info {
+    background: var(--sumi-panel) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border: 1px solid #5A4F44 !important;
+    border-radius: 8px !important;
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.25) !important;
+    color: var(--paper);
+}
+
+.records-content h2 {
+    color: var(--paper) !important;
+    text-shadow: none !important;
+}
+
+.menu-content h2,
+.end-content h2 {
+    color: var(--paper) !important;
+    text-shadow: none !important;
+    animation: none !important;
+}
+
+.end-content h2 {
+    color: #F0A58F !important;
+}
+
+.menu-button {
+    background: var(--ai) !important;
+    border: 1px solid var(--ai-dark) !important;
+    border-radius: 6px !important;
+    box-shadow: 0 3px 0 var(--ai-dark) !important;
+    text-transform: none !important;
+    letter-spacing: 0.05em !important;
+    color: var(--paper) !important;
+}
+
+.menu-button::before {
+    display: none !important;
+}
+
+.menu-button:hover {
+    background: #2A6296 !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 0 var(--ai-dark) !important;
+}
+
+.menu-button:active {
+    transform: translateY(2px) !important;
+    box-shadow: 0 1px 0 var(--ai-dark) !important;
+}
+
+.stat-item {
+    background: var(--paper) !important;
+    border: 1px solid #D8CDB6;
+    border-radius: 6px !important;
+}
+
+.stat-value { color: var(--sumi) !important; }
+.stat-label { color: #6B6358 !important; }
+
+.records-table-container {
+    background: var(--sumi-panel) !important;
+    border-radius: 8px !important;
+    box-shadow: none !important;
+}
+
+.ranking-prompt,
+.ranking-saved {
+    background: var(--paper) !important;
+    border: 2px solid var(--ai) !important;
+    border-radius: 8px !important;
+    box-shadow: none !important;
+}
+
+.ranking-saved-content h3 { color: var(--ai) !important; }
+
+.ranking-login-button,
+.ranking-view-button,
+.footer-play-button,
+.footer-link-primary {
+    background: var(--ai) !important;
+    border: 1px solid var(--ai-dark) !important;
+    border-radius: 6px !important;
+    box-shadow: 0 2px 0 var(--ai-dark) !important;
+    color: var(--paper) !important;
+}
+
+.footer-nav {
+    background: var(--sumi-panel) !important;
+    backdrop-filter: none !important;
+    border-top: 3px solid var(--shu) !important;
+    box-shadow: none !important;
+}
+
+.footer-link {
+    border-radius: 6px !important;
+    background: transparent !important;
+    border: 1px solid #5A4F44 !important;
+}
+
+.footer-link:hover {
+    background: rgba(255, 253, 248, 0.1) !important;
+    border-color: var(--shu) !important;
+    color: var(--paper) !important;
+    box-shadow: none !important;
+}
+
+.ad-container,
+.clear-ad {
+    background: var(--paper) !important;
+    border: 1px solid #D8CDB6 !important;
+    border-radius: 6px !important;
+}
+
+.ad-container::before,
+.clear-ad::before {
+    color: #8A8070 !important;
+}
+
+/* テーマ追加: タイトル・年齢選択・設定 */
+.title-container,
+.age-select-content {
+    background: var(--sumi-panel) !important;
+    backdrop-filter: none !important;
+    border: 1px solid #5A4F44 !important;
+    border-radius: 8px !important;
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.25) !important;
+}
+
+.game-title {
+    background: none !important;
+    -webkit-text-fill-color: var(--paper) !important;
+    color: var(--paper) !important;
+    text-shadow: none !important;
+    animation: none !important;
+    font-family: 'Noto Serif JP', 'Yu Mincho', 'Hiragino Mincho ProN', serif;
+}
+
+.age-select-content h2,
+.timer-setting h3,
+.account-setting h3,
+.account-status.logged-in {
+    color: #F0A58F !important;
+    text-shadow: none !important;
+}
+
+.age-button {
+    background: rgba(255, 253, 248, 0.06) !important;
+    border: 1px solid #6B5F52 !important;
+    border-radius: 8px !important;
+    backdrop-filter: none !important;
+}
+
+.age-button::before { display: none !important; }
+
+.age-button:hover,
+.age-button.senior-child:hover,
+.age-button.adult:hover {
+    border-color: var(--shu) !important;
+    box-shadow: none !important;
+    transform: translateY(-2px);
+}
+
+.age-note,
+.timer-setting,
+.account-setting {
+    background: rgba(255, 253, 248, 0.05) !important;
+    border: 1px solid #5A4F44 !important;
+    border-radius: 8px !important;
+}
+
+.age-select-play-button {
+    background: var(--ai) !important;
+    border: 1px solid var(--ai-dark) !important;
+    border-radius: 6px !important;
+    box-shadow: 0 3px 0 var(--ai-dark) !important;
+}
+
+.timer-toggle input:checked + .toggle-slider {
+    background: var(--shu) !important;
+    border-color: var(--shu) !important;
+}
+
+.timer-toggle:hover .toggle-slider { box-shadow: none !important; }
+
+/* テーマ追加: 紫の除去 */
+#mainMenu,
+#rulesScreen {
+    background: var(--washi) !important;
+    background-image: none !important;
+}
+
+.policy-container,
+.stat-box,
+.ranking-table thead,
+.contact-btn,
+.contact-button,
+.back-button,
+.rankings-container {
+    background: var(--sumi-panel) !important;
+    background-image: none !important;
+    box-shadow: none !important;
+}
+
+.contact-btn,
+.contact-button,
+.back-button {
+    background: var(--ai) !important;
+    color: var(--paper) !important;
+    border-radius: 6px !important;
+}
+
+/* 紫を使う静的ページ（FAQ・攻略・ブログ等）の背景と主な見出し */
+body {
+    background: var(--washi) !important;
+    background-image: none !important;
+}
+
+.page-title,
+.section-title,
+.category-title,
+.faq-question {
+    color: var(--ai) !important;
+}
+
+.category-title { border-bottom-color: var(--shu) !important; }
+.faq-item { border-left-color: var(--shu) !important; }
+.faq-question::before { background: var(--ai) !important; }
+.faq-answer::before { background: var(--shu) !important; }
+
+.game-info > * {
+    background: var(--ai) !important;
+    border: 1px solid var(--ai-dark) !important;
+    border-radius: 6px !important;
+    box-shadow: 0 2px 0 var(--ai-dark) !important;
+    text-shadow: none !important;
+    animation: none !important;
+}
+
+.game-info > button:nth-of-type(2) {
+    background: var(--shu) !important;
+    border-color: #9E3220 !important;
+    box-shadow: 0 2px 0 #9E3220 !important;
+}
+
+/* ホームのボタン色分け */
+#playButton.menu-button {
+    background: #E8751A !important;
+    border-color: #B85A10 !important;
+    box-shadow: 0 3px 0 #B85A10 !important;
+}
+#playButton.menu-button:hover { background: #F28A33 !important; box-shadow: 0 4px 0 #B85A10 !important; }
+
+.menu-button.guide-btn,
+a.menu-button[href="blog.html"] {
+    background: #6B4FA0 !important;
+    border-color: #4E3880 !important;
+    box-shadow: 0 3px 0 #4E3880 !important;
+}
+.menu-button.guide-btn:hover,
+a.menu-button[href="blog.html"]:hover { background: #7F63B8 !important; box-shadow: 0 4px 0 #4E3880 !important; }
+
+/* タイトルを水色に */
+.game-title {
+    -webkit-text-fill-color: #5CCBF0 !important;
+    color: #5CCBF0 !important;
+}
+
+/* 広告あり/なし選択: 説明文を大きく */
+.age-subtitle {
+    font-size: 1.35rem !important;
+    font-weight: bold;
+    opacity: 1 !important;
+    color: #F0A58F;
+}
+
+/* 広告有無の選択を枠で囲って視線誘導 */
+.age-choice-box {
+    border: 3px solid #E8751A;
+    border-radius: 10px;
+    padding: 20px 16px 10px;
+    margin-bottom: 30px;
+    background: rgba(232, 117, 26, 0.08);
+}
+
+.age-choice-box .age-button-container {
+    margin: 20px 0 10px;
+}
+
+.age-choice-box .age-description {
+    margin-bottom: 10px;
+}
+
+/* 固定フッターと重ならないよう下に余白 */
+#recordsScreen,
+#accountSettingsScreen,
+#rulesScreen {
+    padding-bottom: 140px !important;
+}
+
+.records-content {
+    padding-bottom: 60px;
+}
+
+/* 記録画面: 暗いパネル上でタブ・表を読みやすく */
+.records-tabs { border-bottom-color: #6B5F52; }
+.tab-button { color: #CFC6B5; }
+.tab-button:hover { color: var(--paper); }
+.tab-button.active {
+    color: var(--paper);
+    border-bottom-color: var(--shu);
+}
+.records-table thead { background: var(--ai) !important; }
+
+/* 設定・広告画面（年齢選択画面）の下がフッターに隠れないように */
+#ageSelectScreen {
+    padding-bottom: 200px !important;
+    box-sizing: border-box;
 }

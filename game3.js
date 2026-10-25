@@ -979,10 +979,8 @@ class DOGame {
 
         // ベースのグラデーション
         const baseGradient = this.ctx.createLinearGradient(0, 0, this.canvas.width, this.canvas.height);
-        baseGradient.addColorStop(0, '#f8f9fa');
-        baseGradient.addColorStop(0.3, '#e9ecef');
-        baseGradient.addColorStop(0.7, '#dee2e6');
-        baseGradient.addColorStop(1, '#ced4da');
+        baseGradient.addColorStop(0, '#EFE7D6');
+        baseGradient.addColorStop(1, '#EFE7D6');
         this.ctx.fillStyle = baseGradient;
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
@@ -991,15 +989,15 @@ class DOGame {
             this.centerX, this.centerY, 0,
             this.centerX, this.centerY, this.boardSize * this.tileSize * 1.5
         );
-        centerGradient.addColorStop(0, 'rgba(255, 255, 255, 0.6)');
-        centerGradient.addColorStop(0.5, 'rgba(255, 255, 255, 0.3)');
+        centerGradient.addColorStop(0, 'rgba(255, 253, 248, 0.5)');
+        centerGradient.addColorStop(0.5, 'rgba(255, 253, 248, 0.2)');
         centerGradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
         this.ctx.fillStyle = centerGradient;
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
         // 装飾的な円
         this.ctx.globalAlpha = 0.1;
-        for (let i = 0; i < 8; i++) {
+        for (let i = 0; i < 0; i++) {
             const angle = (i / 8) * Math.PI * 2;
             const radius = this.boardSize * this.tileSize * 0.8;
             const x = this.centerX + Math.cos(angle) * radius;
@@ -1017,7 +1015,7 @@ class DOGame {
 
         // 波紋効果
         this.ctx.globalAlpha = 0.08;
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < 0; i++) {
             const waveRadius = (this.boardSize * this.tileSize * 0.3) + (i * 20);
             this.ctx.beginPath();
             this.ctx.arc(this.centerX, this.centerY, waveRadius, 0, Math.PI * 2);
@@ -1029,10 +1027,7 @@ class DOGame {
 
         // 四隅の装飾
         this.ctx.globalAlpha = 0.15;
-        const corners = [
-            {x: 0, y: 0}, {x: this.canvas.width, y: 0},
-            {x: 0, y: this.canvas.height}, {x: this.canvas.width, y: this.canvas.height}
-        ];
+        const corners = [];
         corners.forEach(corner => {
             const cornerGradient = this.ctx.createRadialGradient(
                 corner.x, corner.y, 0,
@@ -1083,14 +1078,12 @@ class DOGame {
         if (this.isCleared) {
             this.ctx.save();
             this.ctx.font = "bold 32px Arial";
-            this.ctx.fillStyle = "#40CFFF";
-            this.ctx.strokeStyle = "#fff";
-            this.ctx.lineWidth = 2;
+            this.ctx.fillStyle = "#C8442B";
+            this.ctx.strokeStyle = "#FFFDF8";
+            this.ctx.lineWidth = 3;
             this.ctx.textAlign = "center";
-            this.ctx.shadowColor = "rgba(64, 207, 255, 0.5)";
-            this.ctx.shadowBlur = 20;
-            this.ctx.strokeText("🎉 CLEAR! 🎉", this.canvas.width / 2, 50);
-            this.ctx.fillText("🎉 CLEAR! 🎉", this.canvas.width / 2, 50);
+            this.ctx.strokeText("CLEAR!", this.canvas.width / 2, 50);
+            this.ctx.fillText("CLEAR!", this.canvas.width / 2, 50);
             this.ctx.restore();
 
             // 次へボタン（右上に配置）
@@ -1100,23 +1093,20 @@ class DOGame {
 
             this.ctx.save();
             const buttonGradient = this.ctx.createLinearGradient(btnX - btnW/2, btnY - btnH/2, btnX + btnW/2, btnY + btnH/2);
-            buttonGradient.addColorStop(0, '#40CFFF');
-            buttonGradient.addColorStop(1, '#5555FF');
+            buttonGradient.addColorStop(0, '#1F4E79');
+            buttonGradient.addColorStop(1, '#1F4E79');
 
-            // ★roundRectの代わりに手動で角丸四角形を描画
-            this.drawRoundedRect(btnX - btnW / 2, btnY - btnH / 2, btnW, btnH, 15);
+            this.drawRoundedRect(btnX - btnW / 2, btnY - btnH / 2, btnW, btnH, 6);
             this.ctx.fillStyle = buttonGradient;
-            this.ctx.shadowColor = "rgba(64, 207, 255, 0.4)";
-            this.ctx.shadowBlur = 15;
             this.ctx.fill();
-            this.ctx.strokeStyle = "#fff";
+            this.ctx.strokeStyle = "#FFFDF8";
             this.ctx.lineWidth = 2;
             this.ctx.stroke();
             this.ctx.font = "bold 18px Arial";
             this.ctx.fillStyle = "#fff";
             this.ctx.textAlign = "center";
             this.ctx.textBaseline = "middle";
-            this.ctx.fillText("✨ 次へ ✨", btnX, btnY);
+            this.ctx.fillText("次へ", btnX, btnY);
             this.ctx.restore();
             
             this.clearButtonRect = { x: btnX - btnW / 2, y: btnY - btnH / 2, w: btnW, h: btnH };
@@ -1139,7 +1129,7 @@ class DOGame {
                 
                 // 移動可能な位置を青く光らせる
                 this.ctx.globalAlpha = 0.4;
-                this.ctx.fillStyle = '#40CFFF';
+                this.ctx.fillStyle = '#1F4E79';
                 this.ctx.beginPath();
                 this.ctx.moveTo(cx, cy - s / 2);
                 this.ctx.lineTo(cx + s / 2, cy);
@@ -1150,7 +1140,7 @@ class DOGame {
                 
                 // 枠線も追加
                 this.ctx.globalAlpha = 0.8;
-                this.ctx.strokeStyle = '#40CFFF';
+                this.ctx.strokeStyle = '#1F4E79';
                 this.ctx.lineWidth = 3;
                 this.ctx.stroke();
             }
@@ -1207,7 +1197,7 @@ class DOGame {
     
     drawDiamondTile(tile, highlight = false) {
         const s = this.tileSize * 0.8, cx = tile.screenX, cy = tile.screenY;
-        const colors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A', '#98D8C8', '#F7DC6F', '#E95D72', '#66B933', '#A575F5', '#FF9D32'];
+        const colors = ['#F0524F', '#2EB5A5', '#4DA3FF', '#FF9F1C', '#8BC34A', '#FFD23F', '#F06292', '#A58AE8', '#26C6DA', '#C98A4B'];
         this.ctx.save();
         this.ctx.beginPath();
         this.ctx.moveTo(cx, cy - s / 2);
@@ -1226,8 +1216,6 @@ class DOGame {
             const opacity = (Math.sin(time) + 1) / 2 * 0.6 + 0.4;
             this.ctx.strokeStyle = `rgba(255, 215, 0, ${opacity})`;
             this.ctx.lineWidth = 8;
-            this.ctx.shadowColor = `rgba(255, 215, 0, ${opacity})`;
-            this.ctx.shadowBlur = 20;
             this.ctx.stroke();
             this.ctx.restore();
         }
@@ -1236,10 +1224,8 @@ class DOGame {
             this.ctx.save();
             
             // ★すべての駒で濃い青色のエフェクトを使用（視認性向上）
-            this.ctx.strokeStyle = "#4080FF";
+            this.ctx.strokeStyle = "#1F4E79";
             this.ctx.lineWidth = 6;
-            this.ctx.shadowColor = "#4080FF";
-            this.ctx.shadowBlur = 15;
             this.ctx.stroke();
             this.ctx.restore();
         }

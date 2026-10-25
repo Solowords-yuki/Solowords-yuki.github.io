@@ -21,6 +21,8 @@
     </script>
     
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@600;700&display=swap" rel="stylesheet">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7962386569403379"
      crossorigin="anonymous"></script>
     
@@ -44,24 +46,29 @@
             <div class="title-container">
                 <h1 class="game-title">ソロワーズ</h1>
                 <p class="game-subtitle">同じ数字を隣接させてクリアを目指すパズルゲーム</p>
+                <p class="game-subtitle">〇×ゲーム　✕　将棋　の融合</p>
             </div>
             
             <div class="age-select-content">
-                <h2>🎯 ユーザー層を選択してください</h2>
-                <p class="age-description">あなたの年齢層に適したゲーム体験を提供します</p>
+                <div class="age-choice-box">
+                <h2>初めての方は↓</h2>
+                <h2>ユーザー層選択</h2>
+                <p class="age-description">※広告有無を選択</p>
                 
                 <div class="age-button-container">
                     <button id="seniorChildButton" class="age-button senior-child">
-                        <div class="age-icon">👶👴</div>
-                        <div class="age-title">シニア・お子様</div>
-                        <div class="age-subtitle">広告なしで安心</div>
+
+
+                        <div class="age-subtitle">広告なし（安心）</div>
+                        <div class="age-title">推奨：シニア・お子様</div>
                     </button>
                     
                     <button id="adultButton" class="age-button adult">
-                        <div class="age-icon">👨‍💼👩‍💼</div>
-                        <div class="age-title">成人</div>
-                        <div class="age-subtitle">広告表示して応援する</div>
+
+                        <div class="age-subtitle">広告表示（開発者支援）</div>
+                        <div class="age-title">推奨：大人</div>
                     </button>
+                </div>
                 </div>
 
                 <!-- ★LOCK！エフェクト設定を追加 -->
@@ -79,7 +86,7 @@
                 
                 <!-- ★タイマー設定を追加 -->
                 <div class="timer-setting">
-                    <h3>⏰ タイマー設定</h3>
+                    <h3>タイマー設定</h3>
                     <div class="timer-toggle-container">
                         <label class="timer-toggle">
                             <input type="checkbox" id="timerEnabled" checked>
@@ -92,20 +99,20 @@
 
                 <!-- ★アカウント設定を追加 -->
                 <div class="account-setting">
-                    <h3>👤 アカウント</h3>
+                    <h3>アカウント</h3>
                     <div id="accountInfo" class="account-info">
                         <p class="account-status">ログインしていません</p>
                     </div>
                     <button id="logoutButton" class="logout-button" style="display: none;">
-                        🚪 ログアウト
+                        ログアウト
                     </button>
                     <button id="accountSettingsButton" class="small-button" style="display: none; margin-top: 8px;">
-                        ⚙️ アカウント設定
+                        アカウント設定
                     </button>
                 </div>
                 
                 <div class="age-note">
-                    <p>💡 この設定は保存され、次回以降は自動的に適用されます</p>
+                    <p>この設定は保存され、次回以降は自動的に適用されます</p>
                 </div>
             </div>
         </div>
@@ -161,13 +168,13 @@
             </div>
             <div class="button-container">
                 <button id="playButton" class="menu-button">プレイ</button>
-                <button id="createButton" class="menu-button">🎨 クリエイト</button>
-                <button id="rulesButton" class="menu-button">ルール</button>
-                <button id="recordsButton" class="menu-button">📊 記録</button>
-                <button id="settingsButton" class="menu-button settings-btn">⚙️ 設定</button>
-                <a href="how-to-play-advanced.html" class="menu-button guide-btn" style="text-decoration: none; display: inline-block;">📚 ゲーム紹介</a>
+                <button id="createButton" class="menu-button">クリエイト</button>
+                <button id="rulesButton" class="menu-button">ルール説明</button>
+                <button id="recordsButton" class="menu-button">ランキング・記録</button>
+                <button id="settingsButton" class="menu-button settings-btn">設定・広告</button>
+                <a href="how-to-play-advanced.html" class="menu-button guide-btn" style="text-decoration: none; display: inline-block;">ゲーム紹介</a>
                 <a href="blog.html" class="menu-button" style="text-decoration: none; display: inline-block; background: linear-gradient(135deg, #FF6B6B, #FF8E53);">裏コンセプト</a>
-                <a href="contact.html" class="menu-button contact-btn" style="text-decoration: none; display: inline-block;">📞 お問い合わせ</a>
+                <a href="contact.html" class="menu-button contact-btn" style="text-decoration: none; display: inline-block;">お問い合わせ</a>
             </div>
             
             <div class="copyright-notice">
@@ -183,26 +190,27 @@
             
             <!-- 開発者コメント -->
             <div class="developer-comment">
-                <div class="comment-header">📢 開発者からのお知らせ</div>
+                <div class="comment-header">開発者からのお知らせ</div>
                 <div class="comment-body">
-                    <p>🎉 <strong>毎月変わるeventマップ開催中！</strong></p>
+                    <p><strong>毎月変わるeventマップ開催中！</strong></p>
                    
                     <p>～難易度中～</p>
                 </div>
             </div>
             
-            <!-- 広告: メインメニュー下部 -->
-            <div class="ad-container" id="menuBottomAd" style="margin: 30px auto 20px; max-width: 728px; text-align: center;">
-                <div class="pc-ad" style="display: none;">
-                    <!-- admax -->
-                    <script src="https://adm.shinobi.jp/s/0cf40a834e34d70d995978d006a1516a"></script>
-                    <!-- admax -->
-                </div>
-                <div class="mobile-ad" style="display: none;">
-                    <!-- admax -->
-                    <script src="https://adm.shinobi.jp/s/daa1e805beb7ed8cf37177077e910d9d"></script>
-                    <!-- admax -->
-                </div>
+        </div>
+
+        <!-- 広告: メインメニュー下部（上部広告と同じ構造：menu-contentの外） -->
+        <div class="ad-container" id="menuBottomAd" style="margin: 20px auto 80px; max-width: 728px; text-align: center;">
+            <div class="pc-ad" style="display: none;">
+                <!-- admax -->
+                <script src="https://adm.shinobi.jp/s/0cf40a834e34d70d995978d006a1516a"></script>
+                <!-- admax -->
+            </div>
+            <div class="mobile-ad" style="display: none;">
+                <!-- admax -->
+                <script src="https://adm.shinobi.jp/s/daa1e805beb7ed8cf37177077e910d9d"></script>
+                <!-- admax -->
             </div>
         </div>
     </div>
@@ -359,7 +367,7 @@
     <!-- 記録表画面 -->
     <div id="recordsScreen" class="screen">
         <div class="records-content">
-            <h2>📊 プレイ記録</h2>
+            <h2>プレイ記録</h2>
             
             <!-- タブ切り替え -->
             <div class="records-tabs">
@@ -469,8 +477,8 @@
                 </div>
                 
                 <div class="ranking-note">
-                    <p>💡 ログインして記録を保存すると、ランキングに参加できます</p>
-                    <p>⚠️ 匿名ログインは端末変更時に記録がリセットされます</p>
+                    <p>ログインして記録を保存すると、ランキングに参加できます</p>
+                    <p>匿名ログインは端末変更時に記録がリセットされます</p>
                 </div>
             </div>
             
@@ -501,13 +509,13 @@
 
             <!-- パスワード変更 -->
             <div id="passwordResetSection" class="settings-section" style="display: none;">
-                <h3>🔑 パスワード変更</h3>
+                <h3>パスワード変更</h3>
                 <p style="font-size: 0.9em; color: #888; margin-bottom: 16px;">
                     パスワード変更用のリンクをメールで送信します。<br>
                     メールに記載されたリンクから安全に変更できます。
                 </p>
                 <button id="sendResetEmailButton" class="menu-button">
-                    📧 パスワード変更リンクを送信
+                    パスワード変更リンクを送信
                 </button>
             </div>
 
@@ -597,19 +605,17 @@
         
         <div class="footer-links">
             <a href="tips.html" class="footer-link">
-                <span class="footer-icon">💡</span>
                 <span class="footer-text">攻略ガイド</span>
             </a>
             <a href="how-to-play-advanced.html" class="footer-link footer-link-primary" id="footerGuide">
-                <span class="footer-icon">📖</span>
                 <span class="footer-text">遊び方ガイド</span>
             </a>
             <button class="footer-link footer-link-primary" id="footerBackToMenu" style="display: none;">
-                <span class="footer-icon">🏠</span>
+
                 <span class="footer-text">メニューに戻る</span>
             </button>
             <a href="faq.html" class="footer-link" id="footerFaq">
-                <span class="footer-icon">❓</span>
+
                 <span class="footer-text">FAQ</span>
             </a>
         </div>

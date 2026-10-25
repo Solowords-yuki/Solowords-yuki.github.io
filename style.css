@@ -4255,3 +4255,32 @@ a.menu-button[href="blog.html"]:hover { background: #7F63B8 !important; box-shad
         margin: 0 !important;
     }
 }
+
+/* オンラインランキング: 暗いパネル上で文字が消えないように */
+#rankingTab .ranking-level-select label {
+    color: var(--paper) !important;
+}
+#rankingTab .ranking-level-select select {
+    color: var(--sumi) !important;
+    background: var(--paper) !important;
+}
+#rankingTab .ranking-type-button {
+    background: #4A4238 !important;
+    border: 2px solid #6B5F52 !important;
+    color: #E8DFCE !important;
+}
+#rankingTab .ranking-type-button.active {
+    background: var(--ai) !important;
+    border-color: #5E9BD1 !important;
+    color: #fff !important;
+}
+#rankingTab .stat-box .stat-label { color: #CFC6B5 !important; }
+#rankingTab .stat-box .stat-value { color: #FFD54A !important; }
+#rankingTab .ranking-table tbody tr,
+#rankingTab .ranking-table tbody tr:nth-child(odd) { background: var(--paper) !important; }
+#rankingTab .ranking-table tbody tr:nth-child(even) { background: #EFE7D6 !important; }
+#rankingTab .ranking-table td { color: var(--sumi) !important; }
+#rankingTab .ranking-table tbody tr:nth-child(1) td:first-child { color: #B8860B !important; }
+#rankingTab .ranking-table tbody tr:nth-child(2) td:first-child { color: #707070 !important; }
+#rankingTab .ranking-table tbody tr:nth-child(3) td:first-child { color: #A0612A !important; }
+#rankingTab .ranking-table th { color: #fff !important; }

@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-11-13T07:09:02.660Z",
+  "lastUpdated": "2026-11-13T08:11:21.518Z",
   "levels": {
     "level1": {
       "name": "Level 1",
@@ -1045,6 +1045,30 @@
             "time": 1944,
             "moves": 1099,
             "timestamp": "2026-10-18T09:59:05.125Z"
+          }
+        ]
+      }
+    },
+    "event202611": {
+      "name": "イベントマップ",
+      "totalClears": 1,
+      "rankings": {
+        "time": [
+          {
+            "rank": 1,
+            "nickname": "yuki",
+            "time": 79,
+            "moves": 19,
+            "timestamp": "2026-11-13T07:55:58.654Z"
+          }
+        ],
+        "moves": [
+          {
+            "rank": 1,
+            "nickname": "yuki",
+            "time": 79,
+            "moves": 19,
+            "timestamp": "2026-11-13T07:55:58.654Z"
           }
         ]
       }
